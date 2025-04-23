@@ -51,6 +51,8 @@ biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hus
 + 全角标点的引入。
 
 
+
+
 ## Update history
 
 + 20250423 add option gbpunctwidth to implement fullwidth punctuation. (增加选项gbpunctwidth实现全角的标点)
@@ -62,6 +64,18 @@ biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hus
 + gbT7714-2025-halfwidth.pdf 使用半角标点的标准的完整复现文件
 + tgbcitation.pdf        标准复现的顺序编码制部分
 + tngbcitationaynew.pdf  标准复现的著者年份制部分
+
+
+## Compile introduction
+
+上述文件是编译后合并得到的，提供了一个完整的bat脚本 makefileGBT2025.bat，其中ghostscript的路径用户可根据实际情况切换。
+
+文件中，tgbcitation.pdf 由tgbcitation.tex编译得到。
+
+tngbcitationaynew.pdf 由 tngbcitationaynew.tex 编译得到。
+
+gbT7714-2025.pdf由上述两个pdf合并得到。
+
 
 
 ---------------------------------------------------------
