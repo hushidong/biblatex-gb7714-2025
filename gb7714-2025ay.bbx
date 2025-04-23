@@ -108,6 +108,69 @@
 %   设置宏包选项
 %=====================================================================
     %
+    %   增加一个控制全角和半角标点的选项gbpunctwidth
+    %   20250423,v1.1t,hzz
+    %   三个选项值为：half全部半角，full全部全角，mixed全角半角混合
+    \DeclareBibliographyOption[string]{gbpunctwidth}[half]{%
+    \ifstrequal{#1}{full}{\execgbpunctwidthfull\execgbpunctfullwidth}%
+        {\ifstrequal{#1}{mixed}{\execgbpunctwidthmixed\execgbpunctfullwidth}{\execgbpunctwidthhalf}}%
+    }
+
+    %定义一些标点为中文全角标点
+    \def\execgbpunctwidthmixed{%
+    \def\gbpunctcommacite{，}
+    \def\gbpunctmarkcite{，}%
+    \def\gbpunctsemicoloncite{，}
+    \def\gbpunctdot{\adddot}%
+    \def\gbpunctdotlanen{\adddot}%
+    \def\gbpunctmark{，}%
+    \def\gbpunctcomma{，}%
+    \def\gbpunctcommalanen{，}%\addcomma\addspace
+    \def\gbpunctcolon{：}%
+    \def\gbpunctcolonlanen{：}%
+    \def\gbpunctsemicolon{；}%
+    \def\gbpunctttl{《}%
+    \def\gbpunctttr{》}
+    \def\gbpunctprl{（}%
+    \def\gbpunctprr{）}%
+    \def\CharParenLeft{\allowbreak （}
+    \def\CharParenRight{）}%
+    }
+
+    \def\execgbpunctwidthfull{%
+    \def\gbpunctcommacite{，}
+    \def\gbpunctmarkcite{，}%
+    \def\gbpunctsemicoloncite{，}
+    \def\gbpunctdot{。}%
+    \def\gbpunctdotlanen{。}%
+    \def\gbpunctmark{，}%
+    \def\gbpunctcomma{，}%
+    \def\gbpunctcommalanen{，}%\addcomma\addspace
+    \def\gbpunctcolon{：}%
+    \def\gbpunctcolonlanen{：}%
+    \def\gbpunctsemicolon{；}%
+    \def\gbpunctttl{《}%
+    \def\gbpunctttr{》}
+    \def\gbpunctprl{（}%
+    \def\gbpunctprr{）}%
+    \def\CharParenLeft{（}%
+    \def\CharParenRight{）}%
+    }
+
+    \def\execgbpunctwidthhalf{%
+    \def\gbpunctdot{\adddot}%
+    \def\gbpunctdotlanen{\adddot}%
+    \def\gbpunctmark{\addcomma\addspace}%
+    \def\gbpunctcomma{\addcomma\addspace}%
+    \def\gbpunctcommalanen{\addcomma\addspace}%
+    \def\gbpunctcolon{\addcolon\addspace}%
+    \def\gbpunctcolonlanen{\addcolon\addspace}%
+    \def\gbpunctsemicolon{\addsemicolon\addspace}%
+    %\def\gbpunctttl{《}%
+    %\def\gbpunctttr{》}%
+    }
+
+    %
     %   增加一个控制是否输出与author相同的editor或bookauthor的选项
     %   20240517,v1.1r,hzz
     \newtoggle{bbx:gbnosameeditor}
@@ -556,8 +619,8 @@
     \newrobustcmd*{\blx@gbdate}[3][]{%
       \dateeraprintpre{#2#3year}%
       \blx@imc@forcezerosy{\thefield{#2#3year}}\ifblank{#1}{}{\printfield{#1}}%
-        \iffieldundef{#2#3month}{}{\hyphen\blx@imc@forcezerosmdt{\thefield{#2#3month}}}%
-         \iffieldundef{#2#3day}{}{\hyphen\blx@imc@forcezerosmdt{\thefield{#2#3day}}}}
+        \iffieldundef{#2#3month}{}{\bibdatesep\blx@imc@forcezerosmdt{\thefield{#2#3month}}}%
+         \iffieldundef{#2#3day}{}{\bibdatesep\blx@imc@forcezerosmdt{\thefield{#2#3day}}}}
 
     %为姓名格式选择增加的计数器
     \newcounter{gbnamefmtcase}
@@ -3004,6 +3067,8 @@ incollection,proceedings,inproceedings]{number}{%
 %   v1.0k,20180425,增加了字体控制命令，hzz
 %   v1.1j,20220527,修复期刊名不存在时多余的标点
 %   v1.1q,20240514,修复卷不存在时期刊名与期之间引入的标点(并考虑mergedate选项的问题)
+\newcommand{\journaldatedelim}{\addcomma\addspace}
+\newcommand{\jourdatevoldelim}{\addcomma\addspace}
 \renewbibmacro*{journal+issuetitle}{\bibpubfont%源来自standard.bbx
   \usebibmacro{journal}%
   \iffieldundef{series}%
@@ -3013,15 +3078,15 @@ incollection,proceedings,inproceedings]{number}{%
      \setunit{\addspace}}%
   \iftoggle{bbx:gbmergedate}{%year提到前面作为extrayear
         \iffieldundef{entrysubtype}{}%判断是否为报纸
-            {\iffieldequalstr{entrysubtype}{news}{\setunit*{\addcomma\addspace}}{}}%%
+            {\iffieldequalstr{entrysubtype}{news}{\setunit*{\journaldatedelim}}{}}%%
         \printtext{\usebibmacro{issue+date}}%
-        \iffieldundef{volume}{}{\setunit*{\addcomma\addspace}}%
+        \iffieldundef{volume}{}{\setunit*{\jourdatevoldelim}}%
     }%反之则，期刊也要求输出year
     {\iffieldundef{journaltitle}{}%若存在期刊，那么就加入逗号
-        {\setunit*{\addcomma\addspace}}\printtext{\usebibmacro{issue+date}}%
+        {\setunit*{\journaldatedelim}}\printtext{\usebibmacro{issue+date}}%
       \iffieldundef{volume}{}%若不存在卷则要考虑前面是否存在期刊和year，若存在加入逗号，否则不加入
         {\ifboolexpr{test {\iffieldundef{journaltitle}} and test {\iffieldundef{year}}}%
-            {}{\setunit*{\addcomma\addspace}}}%
+            {}{\setunit*{\jourdatevoldelim}}}%
     }%
   \usebibmacro{volume+number+eid}%把卷期放到年份后面
   }
@@ -3302,6 +3367,7 @@ test {\ifentrytype{conference}}
 %
 %   期刊的标题做修改
 %
+\newcommand{\periodicaldatevoldelim}{\addcomma\space}
 \renewbibmacro*{title+issuetitle}{%源来自standard.BBX
   \usebibmacro{periodical}%
   %\setunit*{\addspace}%
@@ -3322,13 +3388,13 @@ test {\ifentrytype{conference}}
   }%
   {\multivolparser{\thefield{volume}}%
   \printfield{year}%
-  \setunit{\addcomma\space}%将冒号修改为逗号
+  \setunit{\periodicaldatevoldelim}%将冒号修改为逗号
   \printtext{\multivolfirst}%
   \printtext{\mkbibparens{\multinumberfirst}}%
   \bibrangedash%
   \iffieldundef{endyear}{}{%
   \printfield{endyear}%
-  \setunit{\addcomma\space}%将冒号修改为逗号
+  \setunit{\periodicaldatevoldelim}%将冒号修改为逗号
   \printtext{\multivolsecond}%
   \printtext{\mkbibparens{\multinumbersecond}}}%
   }%
@@ -3889,3 +3955,95 @@ test {\ifentrytype{conference}}
      \usebibmacro{related}}
     {}%
   \usebibmacro{annotation}\usebibmacro{finentry}}
+
+
+%--------------------------------
+%利用命令的重定义来实现全角标点
+%   20250423,v1.1t,hzz
+%--------------------------------
+\def\execgbpunctfullwidth{%
+%地化字符串
+\DefineBibliographyStrings{english}{
+    and         = {\gbpunctmark\unspace},%
+    andcn       = {\gbpunctmark\unspace},%
+}
+\DefineBibliographyExtras{english}{\renewcommand*{\bibrangedash}{--}}%将页码间隔符替换会endash
+\DefineBibliographyExtras{russian}{\renewcommand*{\bibrangedash}{--}}%将页码间隔符替换会endash
+\DefineBibliographyExtras{english}{\renewcommand*{\bibdatesep}{--}}%将页码间隔符替换会endash
+\DefineBibliographyExtras{russian}{\renewcommand*{\bibdatesep}{--}}%将页码间隔符替换会endash
+%域中的部分标点
+\renewcommand*{\revsdnamepunct}{%
+    \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
+\DeclareDelimFormat{multinamedelim}{%
+    \iffieldequalstr{userd}{chinese}{\gbpunctmark}{\gbpunctcommalanen}}
+\DeclareDelimFormat{finalnamedelim}{%
+  %\ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+  \edef\userfieldabcde{userd}%
+  \ifcurrentname{translator}{\edef\userfieldabcde{usere}}{}%
+  \ifcurrentname{editor}{\edef\userfieldabcde{userc}}{}%
+  \ifcurrentname{author}{\edef\userfieldabcde{userf}}{}%
+  \ifcurrentname{bookauthor}{\edef\userfieldabcde{userb}}{}%
+  \ifcase\value{gbcitelocalcase}%
+    \iffieldequalstr{\userfieldabcde}{chinese}{\bibstring{andincitecn}}{}%
+    \iffieldequalstr{\userfieldabcde}{korean}{\bibstring{andkr}}{}%
+    \iffieldequalstr{\userfieldabcde}{japanese}{\bibstring{andjp}}{}%
+    \iffieldequalstr{\userfieldabcde}{english}{\space\bibstring{andincite}\space}{}%
+    \iffieldequalstr{\userfieldabcde}{french}{\bibstring{and}}{}%
+    \iffieldequalstr{\userfieldabcde}{russian}{\bibstring{and}}{}%
+  \or%
+  \bibstring{andincitecn}\space%
+  \or%
+  \bibstring{andincite}\space%
+  \fi}
+\DeclareDelimFormat[bib,biblist]{finalnamedelim}{%
+  %\ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+  \edef\userfieldabcde{userd}%
+  \ifcurrentname{translator}{\edef\userfieldabcde{usere}}{}%
+  \ifcurrentname{editor}{\edef\userfieldabcde{userc}}{}%
+  \ifcurrentname{author}{\edef\userfieldabcde{userf}}{}%
+  \ifcurrentname{bookauthor}{\edef\userfieldabcde{userb}}{}%
+  \ifcase\value{gbbiblocalcase}%
+    \iffieldequalstr{\userfieldabcde}{chinese}{\bibstring{andcn}}{}%
+    \iffieldequalstr{\userfieldabcde}{korean}{\bibstring{andkr}}{}%
+    \iffieldequalstr{\userfieldabcde}{japanese}{\bibstring{andjp}}{}%
+    \iffieldequalstr{\userfieldabcde}{english}{\bibstring{and}}{}%
+    \iffieldequalstr{\userfieldabcde}{french}{\bibstring{and}}{}%
+    \iffieldequalstr{\userfieldabcde}{russian}{\bibstring{and}}{}%
+   \space%
+  \or%
+  \bibstring{andcn}\space%
+  \or%
+  \bibstring{and}\space%
+  \fi}
+\DeclareDelimFormat{nameyeardelim}{%
+    \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
+\DeclareDelimFormat[bib,biblist]{nameyeardelim}{%
+    \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
+\DeclareDelimFormat[bib,biblist]{andothersdelim}{%
+    \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
+\DeclareDelimFormat{bibpagespunct}{%
+    \iffieldequalstr{userd}{chinese}{\unspace\gbpunctcolon}{\unspace\gbpunctcolonlanen}}
+\renewcommand{\aftertransdelim}{\gbpunctcomma\addspace}
+%著录项间的部分标点
+\renewcommand*{\newunitpunct}{%
+  \iffieldequalstr{userd}{chinese}{\gbpunctdot\space}{\gbpunctdotlanen\space}}
+\renewcommand{\journaldatedelim}{%
+  \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
+\renewcommand{\jourdatevoldelim}{%
+  \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
+\renewcommand{\periodicaldatevoldelim}{%
+  \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
+%出版项中：出版社地址后面的标点
+\renewcommand{\publocpunct}{%
+  \iffieldequalstr{userd}{chinese}{\gbpunctcolon}{\gbpunctcolonlanen}}
+%调整出版社与年份之间的标点
+\renewcommand{\pubdatadelim}{%
+  \iffieldequalstr{userd}{chinese}%
+    {\iffieldundef{year}{}{\setunit*{\gbpunctcomma}}}{\setunit*{\gbpunctcommalanen}}}
+\renewcommand{\locnopubdelim}{%
+  \iffieldequalstr{userd}{chinese}
+    {\iffieldundef{year}{}{\setunit*{\gbpunctcomma}}}{\setunit*{\gbpunctcommalanen}}}
+%子标题前的标点
+\renewcommand*{\subtitlepunct}{%
+  \iffieldequalstr{userd}{chinese}{\gbpunctcolon}{\gbpunctcolonlanen}}
+}

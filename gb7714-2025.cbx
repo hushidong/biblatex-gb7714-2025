@@ -165,11 +165,12 @@
 %设置标注中各篇文献之间的标点
 %20210530,v1.0y,hzz
 %textcite标注命令中的标点设置
+\def\gbpunctcommacite{\addcomma}
 %\DeclareDelimFormat[textcite]{andothersdelim}{\addspace}%
-\renewcommand*{\compcitedelim}{\addcomma}%\addcomma\addthinspace
-\renewcommand*{\supercitedelim}{\addcomma}
-\DeclareDelimFormat{multicitedelimiter}{\addcomma}%新定义一个multicitedelim来区分不同标注命令下的空格处理
-\DeclareDelimFormat[parencite]{multicitedelimiter}{\addcomma\addthinspace}%太窄则用addspace
+\renewcommand*{\compcitedelim}{\gbpunctcommacite}%\addcomma\addthinspace
+\renewcommand*{\supercitedelim}{\gbpunctcommacite}
+\DeclareDelimFormat{multicitedelimiter}{\gbpunctcommacite}%新定义一个multicitedelim来区分不同标注命令下的空格处理
+\DeclareDelimFormat[parencite]{multicitedelimiter}{\gbpunctcommacite\addthinspace}%太窄则用addspace
 \renewcommand*{\multicitedelim}{\printdelim{multicitedelimiter}}
 
 %

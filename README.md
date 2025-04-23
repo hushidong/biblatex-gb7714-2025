@@ -21,7 +21,7 @@ A biblatex implementation of the `GB/T 7714-2025` bibliography style for Chinese
 
 The biblatex-gb7714-2025 package provides an implementation of the bibliography style of the `GB/T 7714-2025` bibliography style. This implementation follows `GB/T 7714-2025` standard, and can be used simply by loading biblatex with the appropriate option
 
-biblatex-gb7714-2025 is similar to biblatex-gb7714-2015, all the options and useages are the same.
+biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015), all the options and useages are the same.
 
 
 
@@ -30,7 +30,7 @@ biblatex-gb7714-2025 is similar to biblatex-gb7714-2015, all the options and use
 ## Need to do:
 
 > [!Note]
-> **注意**: 标点选项实现，需要进一步测试。
+> **待处理**: 需要进一步测试。
 
 
 ## Star History:
@@ -50,6 +50,10 @@ biblatex-gb7714-2025 is similar to biblatex-gb7714-2015, all the options and use
 
 + 全角标点的引入。
 
+
+## Update history
+
++ 20250423 add option gbpunctwidth to implement fullwidth punctuation. (增加选项gbpunctwidth实现全角的标点)
 
 
 ## Test files

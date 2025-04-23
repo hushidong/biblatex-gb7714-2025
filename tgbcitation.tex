@@ -28,7 +28,7 @@
 
 \usepackage{xltxtra,mflogo,texnames}
 %%注意:这里使用other*来使得babel切换环境时忽略空白，使得条目集中各文献间的标点正确
-\usepackage[backend=biber,style=gb7714-2025,gbpub=true,
+\usepackage[backend=biber,style=gb7714-2025,gbpub=true,gbpunctwidth=mixed,
 gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 \setlength{\bibitemsep}{1pt}
 \setlength{\bibnamesep}{0ex}
@@ -105,7 +105,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 
 \DeclareBibliographyDriver{dvnpexample}{%
 \usebibmacro{issue+date}%
-\iffieldundef{volume}{}{\setunit{\addcomma\space}}%
+\iffieldundef{volume}{}{\setunit{\jourdatevoldelim}}%
 \usebibmacro{volume+number+eid}%把卷期放到年份后面
 \usebibmacro{note+pages}\par%
 }
@@ -326,11 +326,11 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 - 用于起讫序号和起讫页码间。
 
-注： “.”“[ ]”用半角符号，其他标识符号用全角符号。
+注： “.”“[ ]”用半角符号，其他标识符号用全角符号。\footnote{为方便考虑，在实现上考虑三种实现，一种是全部半角，一种是全部全角，一种是全角半角混合。当前标准对应的就是最后这一种。三种方式通过选项 gbpunctwidth 来切换。gbpunctwidth=half，full，mixed 分别对应这三种方式。}
 
-\begin{tcolorbox}[colback=yellow!80,boxrule=0pt]
-注意：标点符号要按照全半角、部分全角、全全角的方式以选项方式设置。
-\end{tcolorbox}
+%\begin{tcolorbox}[colback=yellow!80,boxrule=0pt]
+%注意：标点符号要按照全半角、部分全角、全全角的方式以选项方式设置。
+%\end{tcolorbox}
 
 
 
@@ -807,11 +807,11 @@ egdatevolnumpagee--}
 \end{refsection}
 
 凡是在同一期刊上连载的文献，其后续部分不必另行著录，可在原参考文献后直接注明后续部分的
-年、卷、期、页码等。
+年、卷、期、页码等。\footnote{这里这种复杂的年卷期形式不便于自动化处理，所以可以直接在year域中给出需要复杂信息形式，下面的示例中给出了半角符号和全局符号下的两种示例。}
 
 \begin{refsection}
 
-\nocite{egdatevolnumpagef--}
+\nocite{egdatevolnumpagef--,egdatevolnumpagefull--}
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
 \end{refsection}
@@ -1354,7 +1354,7 @@ Zotero2024,仉尚航2024}
 
 \begin{refsection}
 
-裴伟提出\cite{Humphrey1971--,CRANE1972--}......
+裴伟提出\cite{Humphrey1971--,KENNEDY1975-311-386}......
 
 莫拉德对稳定区的研究
 \cite{CRANE1972--,Weinstein1974-745-772,KENNEDY1975-311-386}......
