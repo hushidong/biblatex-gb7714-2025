@@ -59,6 +59,7 @@ biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hus
 ## Test files
 
 + gbT7714-2025.pdf       标准的完整复现文件
++ gbT7714-2025-halfwidth.pdf 使用半角标点的标准的完整复现文件
 + tgbcitation.pdf        标准复现的顺序编码制部分
 + tngbcitationaynew.pdf  标准复现的著者年份制部分
 
