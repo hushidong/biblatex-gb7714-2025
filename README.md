@@ -55,6 +55,7 @@ biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hus
 
 ## Update history
 
++ 20250516 fix some flaws. (修正一些错误)
 + 20250423 add option gbpunctwidth to implement fullwidth punctuation. (增加选项gbpunctwidth实现全角的标点)
 
 

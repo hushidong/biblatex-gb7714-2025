@@ -4,6 +4,14 @@
 
 title %date% %time% makefileGBT2025
 
+
+xelatex.exe  testeg.tex
+
+biber testeg
+
+xelatex.exe  testeg.tex
+
+
 xelatex.exe  tgbcitation.tex
 
 biber tgbcitation

@@ -121,39 +121,39 @@
 
     %定义一些标点为中文全角标点
     \def\execgbpunctwidthmixed{%
-    \def\gbpunctcommacite{，}
+    \def\gbpunctcommacite{\mbox{，}\allowbreak}
     \def\gbpunctdot{\adddot}%
     \def\gbpunctdotlanen{\adddot}%
-    \def\gbpunctmark{，}%
-    \def\gbpunctcomma{，}%
-    \def\gbpunctcommalanen{，}%\addcomma\addspace
-    \def\gbpunctcolon{：}%
-    \def\gbpunctcolonlanen{：}%
-    \def\gbpunctsemicolon{；}%
+    \def\gbpunctmark{\mbox{，}\allowbreak}%
+    \def\gbpunctcomma{\mbox{，}\allowbreak}%
+    \def\gbpunctcommalanen{\mbox{，}\allowbreak}%\addcomma\addspace
+    \def\gbpunctcolon{\mbox{：}\allowbreak}%
+    \def\gbpunctcolonlanen{\mbox{：}\allowbreak}%
+    \def\gbpunctsemicolon{\mbox{；}\allowbreak}%
     \def\gbpunctttl{《}%
-    \def\gbpunctttr{》}
+    \def\gbpunctttr{》\allowbreak}
     \def\gbpunctprl{（}%
-    \def\gbpunctprr{）}%
+    \def\gbpunctprr{）\allowbreak}%
     \def\CharParenLeft{\allowbreak （}
-    \def\CharParenRight{）}%
+    \def\CharParenRight{）\allowbreak}%
     }
 
     \def\execgbpunctwidthfull{%
-    \def\gbpunctcommacite{，}
+    \def\gbpunctcommacite{\mbox{，}\allowbreak}
     \def\gbpunctdot{。}%
     \def\gbpunctdotlanen{。}%
-    \def\gbpunctmark{，}%
-    \def\gbpunctcomma{，}%
-    \def\gbpunctcommalanen{，}%\addcomma\addspace
-    \def\gbpunctcolon{：}%
-    \def\gbpunctcolonlanen{：}%
-    \def\gbpunctsemicolon{；}%
+    \def\gbpunctmark{\mbox{，}\allowbreak}%
+    \def\gbpunctcomma{\mbox{，}\allowbreak}%
+    \def\gbpunctcommalanen{\mbox{，}\allowbreak}%\addcomma\addspace
+    \def\gbpunctcolon{\mbox{：}\allowbreak}%
+    \def\gbpunctcolonlanen{\mbox{：}\allowbreak}%
+    \def\gbpunctsemicolon{\mbox{；}\allowbreak}%
     \def\gbpunctttl{《}%
-    \def\gbpunctttr{》}
+    \def\gbpunctttr{》\allowbreak}
     \def\gbpunctprl{（}%
-    \def\gbpunctprr{）}%
+    \def\gbpunctprr{）\allowbreak}%
     \def\CharParenLeft{（}%
-    \def\CharParenRight{）}%
+    \def\CharParenRight{）\allowbreak}%
     }
 
     \def\execgbpunctwidthhalf{%
@@ -2038,9 +2038,15 @@
   [inbook,incollection,inproceedings]
   {title}{#1}%\nopunct\unspace
 \DeclareFieldFormat{url}{\url{#1}} %%url相关输出，url域修改如本行，源来自biblatex.def
-\def\UrlFont{\rmfamily}%设置url字体为roman字体%\ttfamily
-\def\SlashFont{\ttfamily}%设置斜杠的字体，比如：[J/OL]中的斜杠;\rmfamily
-%\urlstyle{rm} %使用这句也一样
+%\def\UrlFont{\rmfamily}%设置url字体为roman字体%\ttfamily
+\urlstyle{same} %使用这句也一样
+\def\slashstyle#1{\expandafter\protect\csname slash@#1style\endcsname}
+\def\slash@ttstyle{\def\SlashFont{\ttfamily}}
+\def\slash@rmstyle{\def\SlashFont{\rmfamily}}
+\def\slash@sfstyle{\def\SlashFont{\sffamily}}
+\def\slash@samestyle{\def\SlashFont{}}
+%\def\SlashFont{}%设置斜杠的字体，比如：[J/OL]中的斜杠;\rmfamily
+\slashstyle{same}
 \setcounter{biburlnumpenalty}{100} %让url可以在数字后断行
 \setcounter{biburlucpenalty}{100} %让url可以在大写字母后断行
 \setcounter{biburllcpenalty}{100} %让url可以在小写字母后断行
@@ -2733,8 +2739,8 @@
 {\testCJKfirst{userd}%
 \ifboolexpr{%
 test {\iflistundef{location}} and test {\iflistundef{institution}}%
-}{\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@noaddress}\space :\space\str@nopublisher\gbrightbracket}%
-{\printtext{\gbleftbracket S.l.\space :\space s.n.\adddot\gbrightbracket}}%
+}{\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@noaddress}\gbpunctcolon\str@nopublisher\gbrightbracket}%
+{\printtext{\gbleftbracket S.l.\gbpunctcolon s.n.\adddot\gbrightbracket}}%
 }{%
 \iflistundef{location}{\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@noaddress\gbrightbracket}}%
     {\printtext{\gbleftbracket S.l.\adddot\gbrightbracket}}}%
@@ -2769,8 +2775,8 @@ test {\iflistundef{location}} and test {\iflistundef{institution}}%
 {\testCJKfirst{userd}%
     \ifboolexpr{ test {\iflistundef{location}} and test {\iflistundef{publisher}} }%
     {\iffieldequalstr{entrysubtype}{standard}{}
-        {\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@noaddress}\space :\space\str@nopublisher\gbrightbracket}
-            {\printtext{\gbleftbracket S.l.\space :\space s.n.\adddot\gbrightbracket}}}}%
+        {\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@noaddress}\gbpunctcolon\str@nopublisher\gbrightbracket}
+            {\printtext{\gbleftbracket S.l.\gbpunctcolon s.n.\adddot\gbrightbracket}}}}%
     {\iflistundef{location}{%\adddot
         \iffieldequalstr{entrysubtype}{standard}{}%%从gbt7714-2015标准第19页看到，标准存在出版项时输出，没有时完全省略。
         {\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@noaddress\gbrightbracket}\addcolon\addspace}%
@@ -3730,8 +3736,8 @@ incollection,proceedings,inproceedings]{number}{%
 \def\execgbpunctfullwidth{%
 %地化字符串
 \DefineBibliographyStrings{english}{
-    and         = {\gbpunctmark\unspace},%
-    andcn       = {\gbpunctmark\unspace},%
+    and         = {\gbpunctmark},%
+    andcn       = {\gbpunctmark},%
 }
 \DefineBibliographyExtras{english}{\renewcommand*{\bibrangedash}{--}}%将页码间隔符替换会endash
 \DefineBibliographyExtras{russian}{\renewcommand*{\bibrangedash}{--}}%将页码间隔符替换会endash
@@ -3757,9 +3763,9 @@ incollection,proceedings,inproceedings]{number}{%
     \iffieldequalstr{\userfieldabcde}{french}{\bibstring{and}}{}%
     \iffieldequalstr{\userfieldabcde}{russian}{\bibstring{and}}{}%
   \or%
-  \bibstring{andincitecn}\space%
+  \bibstring{andincitecn}%\space%
   \or%
-  \bibstring{andincite}\space%
+  \bibstring{andincite}%\space%
   \fi}
 \DeclareDelimFormat[bib,biblist]{finalnamedelim}{%
   %\ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
@@ -3775,11 +3781,11 @@ incollection,proceedings,inproceedings]{number}{%
     \iffieldequalstr{\userfieldabcde}{english}{\bibstring{and}}{}%
     \iffieldequalstr{\userfieldabcde}{french}{\bibstring{and}}{}%
     \iffieldequalstr{\userfieldabcde}{russian}{\bibstring{and}}{}%
-   \space%
+   %\space%
   \or%
-  \bibstring{andcn}\space%
+  \bibstring{andcn}%\space%
   \or%
-  \bibstring{and}\space%
+  \bibstring{and}%\space%
   \fi}
 \DeclareDelimFormat{nameyeardelim}{%
     \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}

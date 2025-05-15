@@ -6,7 +6,7 @@
 \usepackage[fontset=windows]{ctex}
 \usepackage[russian,french,english]{babel}
 \setmainfont{cmunrm.otf}
-\IfFileExists{SourceHanSerifSC-Regular.otf}
+\IfFontExistsTF{SourceHanSerifSC-Regular.otf}%\IfFileExists
     {\setCJKmainfont[BoldFont={simhei.ttf}]{SourceHanSerifSC-Regular.otf}
 \setCJKsansfont{simhei.ttf}}{}
 %\IfFontExistsTF{font name}{true branch}{false branch}
@@ -65,16 +65,44 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
         {\setunit{\subtitlepunct}\printfield{titleaddon}}%
 }}}
 
+
+\DeclareFieldFormat{titleb}{#1}
+\renewbibmacro*{titleb}{%
+\ifboolexpr{%
+    test{\iffieldundef{title}}%
+    and
+    test{\iffieldundef{subtitle}}}%
+    {}%
+    {\printtext[titleb]{\bibtitlefont%增加字体控制命令
+       \printfield[titlecase]{title}%
+       \ifboolexpr{test {\iffieldundef{subtitle}}}%增加了对子标题的判断
+            {}{\setunit{\subtitlepunct}\printfield[titlecase]{subtitle}}%
+       \iffieldundef{titleaddon}{}{\setunit{\subtitlepunct}\printfield{titleaddon}}%判断一下titleaddon
+       \ifboolexpr{test{\ifentrytype{book}} and (not test{\iffieldundef{volume}})}%判断一下book类有没有volume
+            {\setunit{\subtitlepunct}\printfield{volume}}{}%
+       \ifboolexpr{(test{\ifentrytype{archive}} or  test{\ifentrytype{online}}) and (not test{\iffieldundef{number}})}%判断一下archive类有没有number
+            {\setunit{\subtitlepunct}\printfield{number}}{}%
+       \iftoggle{bbx:gbtype}%
+            {\iffieldundef{entrysubtype}{\printfield[gbtypeflag]{usera}}%在标题后直接给出文献标识字母，判断一下，是否是报纸和标准
+            {\iffieldequalstr{entrysubtype}{standard}{\printfield[gbtypeflags]{usera}}%判断是否为标准
+                  {\iffieldequalstr{entrysubtype}{news}{\printfield[gbtypeflagn]{usera}}% 判断是否为报纸
+                  {\printfield[gbtypeflag]{usera}}}}}{}%%其它
+       }%
+    }%
+}
+
 \DeclareBibliographyDriver{titlexamplea}{%
 \usebibmacro{begentry}%
 \iffieldundef{title}{\usebibmacro{journal}}{\usebibmacro{titlea}}
+\renewcommand*{\finentrypunct}{}%
 \usebibmacro{finentry}
 }
 
 
 \DeclareBibliographyDriver{titlexample}{%
 \usebibmacro{begentry}%
-\iffieldundef{title}{\usebibmacro{journal+issuetitle}}{\usebibmacro{title}}
+\iffieldundef{title}{\usebibmacro{journal+issuetitle}}{\usebibmacro{titleb}}%
+\renewcommand*{\finentrypunct}{}%
 \usebibmacro{finentry}
 }
 
@@ -91,16 +119,20 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 \ifentrytype{online}{\usebibmacro{institution+location+date}}{\usebibmacro{publisher+location+date}}%\par
 \usebibmacro{chapter+pages}%
 \usebibmacro{doi+eprint+url}%从下面移动到上面来，因为gbt2015的url需直接放在页码后面。
+\renewcommand*{\finentrypunct}{}%
 \usebibmacro{finentry}
 }
 
 \DeclareBibliographyDriver{dateexample}{%
 \usebibmacro{begentry}%
-\ifentrytype{online}{\usebibmacro{modifydate}}{%
-\ifkeyword{news}{\usebibmacro{newsdate}}{\usebibmacro{institution+location+date}}}%\par
+\ifentrytype{online}{\usebibmacro{modifydate}\usebibmacro{online:url+urldate}}{%
+\ifboolexpr{test {\ifkeyword{news}} or test {\ifentrytype{patent}}}
+    {\usebibmacro{newsdate}}
+    {\usebibmacro{institution+location+date}}}%\par
 \usebibmacro{chapter+pages}%
 \usebibmacro{doi+eprint+url}%从下面移动到上面来，因为gbt2015的url需直接放在页码后面。
-\usebibmacro{finentry}
+\renewcommand*{\finentrypunct}{}%
+\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{dvnpexample}{%
@@ -358,8 +390,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 {\printbiblist[heading=none,env=exampleenv]{authorexample}}
 \end{refsection}
 
-\subsubsection{}  著作方式相同的责任者不超过 3 个时，全部照录。超过 3 个时，著录前 3 个责任者，其后加“，
-等”或与之相应的词。
+\subsubsection{}  著作方式相同的责任者不超过 3 个时，全部照录。超过 3 个时，著录前 3 个责任者，其后加“，等”或与之相应的词。
 \begin{refsection}
 \nocite{钱学森--}
 \nocite{李四光--}
@@ -583,7 +614,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 \paragraph{} 专利文献的公告日期或公开日期按照“ YYYY-MM-DD”格式，用阿拉伯数字著录。
 
 \begin{refsection}
-\nocite{egbookpubdateg--}
+\nocite{egbookpubdateh--}
 
 {\printbiblist[heading=none, env=exampleenv]{dateexample}}
 \end{refsection}
