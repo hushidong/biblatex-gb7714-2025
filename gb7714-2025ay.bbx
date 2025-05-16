@@ -2799,8 +2799,8 @@ test {\iflistundef{location}} and test {\iflistundef{institution}}%
         {\printlist{location}\publocpunct}%%\addcolon\addspace%
     \iflistundef{publisher}{%
         \iffieldequalstr{entrysubtype}{standard}{}%
-        {\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@nopublisher\gbrightbracket}\setunit{\adddot\addspace}\setunit*{\addcomma\addspace}}%
-        {\printtext{\mkbibbrackets{s.n.}}\setunit{\adddot\addspace}\setunit*{\addcomma\addspace}}}}%
+        {\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@nopublisher\gbrightbracket}}%\setunit{\adddot\addspace}\setunit*{\addcomma\addspace}
+        {\printtext{\mkbibbrackets{s.n.}}}}}%\setunit{\adddot\addspace}\setunit*{\addcomma\addspace}
         {\printlist{publisher}}}%
 \pubdatadelim%%\addcomma\addspace%
 \usebibmacro{date}%%\newunit %去掉这个标点
@@ -3820,7 +3820,8 @@ test {\ifentrytype{conference}}
   %\newunit\newblock
   \usebibmacro{chapter+pages}%
   \iffieldundef{url}{}{%当没有网址时也不输出修改或更新日期
-  \usebibmacro{modifydate}}%修改或更新日期为带括号的时间
+  \ifboolexpr{test {\ifentrytype{archive}} or test {\ifentrytype{thesis}}}%
+    {}{\usebibmacro{modifydate}}}%修改或更新日期为带括号的时间
   \usebibmacro{doi+eprint+url}%
   \newunit
   \printfield{pagetotal}%

@@ -2,12 +2,15 @@
 % !Mode:: "TeX:UTF-8"
 % 用于测试gb7714-2015ay样式，实现GB/T 7714-2015 标准说明中给出的著者年份制示例
 \documentclass{article}
-\usepackage{ctex}
+\usepackage[10pt]{ctex}
+\setmainfont[BoldFont={cmunsx.otf}]{cmunrm.otf}
+\setmonofont{cmuntt.otf}
+\setsansfont{cmunsx.otf}
 \usepackage{xcolor}
 \usepackage{toolbox}
 \usepackage[colorlinks]{hyperref}
 \usepackage{lipsum}
-\usepackage[a4paper,top=3cm,bottom=2cm,left=2.54cm,right=2.54cm]{geometry}
+\usepackage[a4paper,top=3cm,bottom=2.5cm,left=2.5cm,right=2cm]{geometry}
 \usepackage{xltxtra,mflogo,texnames}
 \usepackage[backend=biber,style=gb7714-2025ay,gbnoauthor,gbpunctwidth=mixed,
 gbpub=true,
@@ -15,7 +18,7 @@ sorting=none
 %mergedate=none
 %,sortlocale=zh__stroke,nosortothers=true,nohashothers=true,
 ]{biblatex}%sorting=nyt
-
+\renewcommand{\bibfont}{\zihao{-5}}
 
 \addbibresource{example2025.bib}
 
@@ -23,7 +26,7 @@ sorting=none
 \usepackage{titlesec}
 \titleformat{\section}{\color{white}}{\thesection}{1em}{}
 %\titlespacing{\section}{-6pc}{3.5ex plus .1ex minus .2ex}{1.5ex minus .1ex}
-\titleformat{\paragraph}[runin]{\bfseries}{\theparagraph}{1em}{}[\hspace{1em}]
+\titleformat{\paragraph}[runin]{\zihao{5}\bfseries}{\theparagraph}{1em}{}[\hspace{1em}]
 \titlespacing{\paragraph}{0pt}{0pt}{0pt}
 
 \usepackage{calc}

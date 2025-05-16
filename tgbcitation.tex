@@ -3,9 +3,11 @@
 % 用于测试gb7714-2015样式，实现GB/T 7714-2015 标准说明中给出的顺序编码制示例
 %测试实现GB/T 7714-2015 标准2-10节给出的顺序编码制示例
 \documentclass{article}
-\usepackage[fontset=windows]{ctex}
+\usepackage[fontset=windows,10pt]{ctex}
 \usepackage[russian,french,english]{babel}
-\setmainfont{cmunrm.otf}
+\setmainfont[BoldFont={cmunsx.otf}]{cmunrm.otf}
+\setmonofont{cmuntt.otf}
+\setsansfont{cmunsx.otf}
 \IfFontExistsTF{SourceHanSerifSC-Regular.otf}%\IfFileExists
     {\setCJKmainfont[BoldFont={simhei.ttf}]{SourceHanSerifSC-Regular.otf}
 \setCJKsansfont{simhei.ttf}}{}
@@ -14,14 +16,14 @@
 \usepackage{toolbox}
 \usepackage[colorlinks,CJKbookmarks,bookmarksnumbered=true]{hyperref}
 \usepackage{lipsum}
-\usepackage[a4paper,top=3cm,bottom=2cm,left=2.54cm,right=2.54cm]{geometry}
+\usepackage[a4paper,top=3cm,bottom=2.5cm,left=2.5cm,right=2cm]{geometry}
 \usepackage{tcolorbox}
 
 \setcounter{secnumdepth}{4}
 \usepackage[nostruts]{titlesec}
-\titleformat{\section}{\bfseries}{\thesection}{1em}{}
-\titlespacing{\section}{0pt}{2pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
-\titleformat{\paragraph}[runin]{\bfseries}{\theparagraph}{1em}{}
+\titleformat{\section}{\zihao{5}\bfseries}{\thesection}{1em}{}
+\titlespacing{\section}{0pt}{1.5ex plus 1pt minus 1pt}{1.5ex plus 1pt minus 1pt}
+\titleformat{\paragraph}[runin]{\zihao{5}\bfseries}{\theparagraph}{1em}{}
 %\titlespacing{\paragraph}{5pc}{1.5ex minus .1 ex}{1pc}
 
 
@@ -34,6 +36,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 \setlength{\bibnamesep}{0ex}
 \setlength{\bibinitsep}{0ex}
 \setlength{\bibparsep}{0ex}
+\renewcommand{\bibfont}{\zihao{-5}}
 
 
 
@@ -116,7 +119,8 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 
 \DeclareBibliographyDriver{pubexample}{%
 \usebibmacro{begentry}%
-\ifentrytype{online}{\usebibmacro{institution+location+date}}{\usebibmacro{publisher+location+date}}%\par
+\ifboolexpr{test {\ifentrytype{online}} or test {\ifentrytype{archive}}}%
+{\usebibmacro{institution+location+date}}{\usebibmacro{publisher+location+date}}%\par
 \usebibmacro{chapter+pages}%
 \usebibmacro{doi+eprint+url}%从下面移动到上面来，因为gbt2015的url需直接放在页码后面。
 \renewcommand*{\finentrypunct}{}%
@@ -145,14 +149,15 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 
 \usepackage{calc}
 
+\setlength{\biblabelsep}{0.5em}
 \defbibenvironment{exampleenv}
   {\list
-     {示例\printfield{labelnumber}:\space}
+     {\textbf{示例\printfield{labelnumber}：}}
      {\setlength{\topsep}{0ex}%
       \setlength{\partopsep}{0ex}%
       \setlength{\parskip}{0ex}%
-      \setlength{\labelwidth}{1.5cm}%
-      \setlength{\leftmargin}{\labelwidth+2em}%
+      \setlength{\labelwidth}{4em}%
+      \setlength{\leftmargin}{\labelwidth+20pt}%
       \setlength{\labelsep}{\biblabelsep}%
       \addtolength{\leftmargin}{\labelsep}%
       \setlength{\itemsep}{\bibitemsep}%
@@ -168,7 +173,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
       \setlength{\partopsep}{0ex}%
       \setlength{\parskip}{0ex}%
      \setlength{\labelwidth}{1.5em}%
-      \setlength{\leftmargin}{\labelwidth+2em}%
+      \setlength{\leftmargin}{\labelwidth+20pt}%
       \setlength{\labelsep}{\biblabelsep}%
       \addtolength{\leftmargin}{\labelsep}%
       \setlength{\itemsep}{\bibitemsep}%
@@ -191,7 +196,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 
 \maketitle
 \vspace{-1cm}%
-\titleformat{\subsection}[display]{\bfseries}
+\titleformat{\subsection}[display]{\zihao{5}\bfseries}
 {\thesubsection}{1em}{\vspace{-2ex}\hspace{2em}}
 \titlespacing{\subsection}{0pt}{2pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
 
@@ -278,7 +283,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 版年排序。
 
 
-\titleformat{\subsection}[runin]{\bfseries}{\thesubsection}{1em}{\hspace{1em}}
+\titleformat{\subsection}[runin]{\zihao{5}\bfseries}{\thesubsection}{1em}{\hspace{1em}}
 \section{著录信息源}
 
 参考文献的著录信息源是被著录的信息资源本身。图书、连续出版物、会议录、学位论文、报告、
@@ -366,8 +371,9 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 
 
-\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}[runin]{\bfseries}{\thesubsubsection}{1em}{}%\hspace{1em}
+\titleformat{\subsection}[hang]{\zihao{5}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[runin]{\zihao{5}\bfseries}{\thesubsubsection}{1em}{}%\hspace{1em}
+\titlespacing{\subsubsection}{0pt}{2pt plus 1pt minus 1pt}{5pt plus 1pt minus 1pt}
 \section{著录规则}
 \subsection{主要责任者或其他责任者}
 \subsubsection{} 个人责任者采用姓在前名在后的著录形式。欧美责任者的名可用缩写字母，缩写名后省略缩写点。
@@ -593,7 +599,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 \subsubsection{出版日期}
 
-\paragraph{} 出版年采用公元纪年，并用阿拉伯数字著录。如有其他纪年形式时，将原有的纪年形式置于“（ ）”内。
+\paragraph{} 出版年采用公元纪年，并用阿拉伯数字著录。如有其他纪年形式时，将原有的纪年形式置于“（\space  ）”内。
 
 \begin{refsection}
 \nocite{egbookpubdatea--}
@@ -655,7 +661,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 \nocite{DUBAR2013--}
 \nocite{MAURYA2023}
 
-{\printbibliography[heading=none,env=indentegenv]}
+{\printbibliography[heading=none,env=exampleenv]}
 \end{refsection}
 
 
@@ -666,7 +672,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 \nocite{储大同2010-721-724,weiner2010-38}
 
-{\printbibliography[heading=none,env=indentegenv]}
+{\printbibliography[heading=none,env=exampleenv]}
 \end{refsection}
 
 \subsection{永久识别符}
@@ -677,11 +683,11 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 \nocite{刘乃安2000-17-18,Deverell2013-21-22,GROSS2016LM}
 
-{\printbibliography[heading=none,env=indentegenv]}
+{\printbibliography[heading=none,env=exampleenv]}
 \end{refsection}
 
 
-\titleformat{\subsubsection}[hang]{\bfseries}{\thesubsubsection}{1em}{}%\hspace{1em}
+\titleformat{\subsubsection}[hang]{\zihao{5}\bfseries}{\thesubsubsection}{1em}{}%\hspace{1em}
 \section{各文献类型著录项目与著录格式}
 \subsection{概述}
 
@@ -1361,7 +1367,7 @@ Zotero2024,仉尚航2024}
 
 
 \begin{refsection}
-示例1：
+\textbf{示例1：}引用单篇文献，序号置于方括号中
 
 所谓移情，就是“说话人将自己认同于......他用句子所描述的时间或状态中的一个参与者”
 \cite{Sunstein1996-903-903}。《汉语大词典》和张相
@@ -1369,7 +1375,7 @@ Zotero2024,仉尚航2024}
 候精一认为是“减轻”\cite{罗杰斯2011-15-16}。......另外，根据候精一，表示病痛程度减轻的形容词“可”和表示逆转否定的副词“可”
 是兼类词\cite{陈登原2000-29-29}，这也说明二者应该存在着源流关系。
 
-示例2：
+\textbf{示例2：}引用单篇文献，序号由计算机自动生成圈码
 
 所谓移情，就是“说话人将自己认同于......他用句子所描述的时间或状态中的一个参与者”\footfullcite{Sunstein1996-903-903}。《汉语大词典》和张相
 \footfullcite{Morri2010--}都认为“可”是“痊愈”，
@@ -1382,8 +1388,8 @@ Zotero2024,仉尚航2024}
 \paragraph{} 同一处引用多篇文献时，应将各篇文献的序号在方括号内全部列出，各序号间用“，”。
 如遇连续序号，起讫序号间用短横线连接。此规则不适用于用计算机自动编码的序号。
 
-
 \begin{refsection}
+\textbf{示例：}引用多篇文献
 
 裴伟提出\cite{Humphrey1971--,KENNEDY1975-311-386}......
 
@@ -1397,7 +1403,7 @@ Zotero2024,仉尚航2024}
 \paragraph{} 多次引用同一著者的同一文献时，在正文中标注首次引用的文献序号，并在序号的“ []”外著录引文页码。如果用计算机自动编序号时，应重复著录参考文献，但参考文献表中的著录项目可简化为文献序号及引文页码，参见本条款的示例 2
 
 \begin{refsection}
-示例1：多次引用同一著者的同一文献的序号
+\textbf{示例1：}多次引用同一著者的同一文献的序号
 
 ……改变社会规范也可能存在类似的“二阶囚徒困境”问题：尽管改变旧的规范对所有人都好，
 但个人理性选择使得没有人愿意率先违反旧的规范\cite{Sunstein1996-903-903}。
@@ -1408,11 +1414,13 @@ Zotero2024,仉尚航2024}
 佛教受到极大的打击\pagescite[326-329]{Morri2010--}。
 ……陈登原先生的考证是非常精确的，他印证了《春秋说题辞》“黍者绪也，故其立字，禾入米为黍，为酒以扶老，为酒以序尊卑，禾为柔物，亦宜养老”，指出：“以上谓等威之辨，尊卑之序，由于饮食荣辱。”\cite{陈登原2000-29-29}
 
-\printbibliography[heading=subbibliography,title={参考文献：}]
+\textbf{参考文献：}
+
+\printbibliography[heading=none,env=indentegenv]
 \end{refsection}
 
 \begin{refsection}
-示例2：多次引用同一著者的同一文献的脚注序号
+\textbf{示例2：}多次引用同一著者的同一文献的脚注序号
 
 ……改变社会规范也可能存在类似的“二阶囚徒困境”问题：尽管改变旧的规范对所有人都好，但个人理性选择使得没有人愿意率先违反旧的规范
 \footfullcite{Sunstein1996-903-903}。
@@ -1429,10 +1437,11 @@ Zotero2024,仉尚航2024}
 参考文献表采用顺序编码制组织时，各篇文献应按正文部分标注的序号依次列出（参见 A.2.1）。
 
 \begin{refsection}
+\textbf{示例：}
 
 \nocite{Baker1995--,Chernik1982--,尼葛洛庞帝1996--,汪冰1997-16-16,杨宗英1996-24-29,Dowler1995-5-26}
 
-\printbibliography[heading=subbibliography,title={示例}]
+\printbibliography[heading=none,env=indentegenv]
 \end{refsection}
 
 \end{document}
