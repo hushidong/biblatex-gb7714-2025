@@ -125,8 +125,8 @@
     %定义一些标点为中文全角标点
     \def\execgbpunctwidthmixed{%
     \def\gbpunctcommacite{\mbox{，}\allowbreak}
-    \def\gbpunctdot{\adddot}%
-    \def\gbpunctdotlanen{\adddot}%
+    \def\gbpunctdot{\adddot\addspace}%
+    \def\gbpunctdotlanen{\adddot\addspace}%
     \def\gbpunctmark{\mbox{，}\allowbreak}%
     \def\gbpunctmarklanen{\mbox{，}\allowbreak}%
     \def\gbpunctcomma{\mbox{，}\allowbreak}%
@@ -145,8 +145,8 @@
     %引用的标注标签中不按语言区分，因为会存在混杂(英文、中文在同一处出现)的情况。
     \def\execgbpunctwidthbylan{%
     \def\gbpunctcommacite{\mbox{，}\allowbreak}
-    \def\gbpunctdot{\adddot}%
-    \def\gbpunctdotlanen{\adddot}%
+    \def\gbpunctdot{\mbox{．}\allowbreak}%
+    \def\gbpunctdotlanen{\adddot\addspace}%
     \def\gbpunctmark{\mbox{，}\allowbreak}%
     \def\gbpunctmarklanen{\addcomma\addspace}%
     \def\gbpunctcomma{\mbox{，}\allowbreak}%
@@ -164,8 +164,8 @@
 
     \def\execgbpunctwidthfull{%
     \def\gbpunctcommacite{\mbox{，}\allowbreak}
-    \def\gbpunctdot{。}%
-    \def\gbpunctdotlanen{。}%
+    \def\gbpunctdot{\mbox{．}\allowbreak}%
+    \def\gbpunctdotlanen{\mbox{．}\allowbreak}%
     \def\gbpunctmark{\mbox{，}\allowbreak}%
     \def\gbpunctmarklanen{\mbox{，}\allowbreak}%
     \def\gbpunctcomma{\mbox{，}\allowbreak}%
@@ -183,8 +183,8 @@
 
     \def\execgbpunctwidthhalf{%
     \def\gbpunctcommacite{\addcomma}
-    \def\gbpunctdot{\adddot}%
-    \def\gbpunctdotlanen{\adddot}%
+    \def\gbpunctdot{\adddot\addspace}%
+    \def\gbpunctdotlanen{\adddot\addspace}%
     \def\gbpunctmark{\addcomma\addspace}%
     \def\gbpunctmarklanen{\addcomma\addspace}%
     \def\gbpunctcomma{\addcomma\addspace}%
@@ -3839,7 +3839,7 @@ incollection,proceedings,inproceedings]{number}{%
 \renewcommand{\aftertransdelim}{\gbpunctcomma\addspace}
 %著录项间的部分标点
 \renewcommand*{\newunitpunct}{%
-  \iffieldequalstr{userd}{chinese}{\gbpunctdot\space}{\gbpunctdotlanen\space}}
+  \iffieldequalstr{userd}{chinese}{\gbpunctdot}{\gbpunctdotlanen}}
 \renewcommand{\journaldatedelim}{%
   \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
 \renewcommand{\jourdatevoldelim}{%
