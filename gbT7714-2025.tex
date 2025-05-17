@@ -2,7 +2,7 @@
 % !Mode:: "TeX:UTF-8"
 % 用于测试gb7714-2015样式，实现GB/T 7714-2015 标准说明中给出的顺序编码制示例
 %测试实现GB/T 7714-2015 标准2-10节给出的顺序编码制示例
-\documentclass{article}
+\documentclass[twoside]{article}%[twoside]
 \usepackage[fontset=windows,10pt]{ctex}
 \usepackage[russian,french,english]{babel}
 \setmainfont[BoldFont={cmunsx.otf}]{cmunrm.otf}
@@ -11,21 +11,35 @@
 \IfFontExistsTF{SourceHanSerifSC-Regular.otf}%\IfFileExists
     {\setCJKmainfont[BoldFont={simhei.ttf}]{SourceHanSerifSC-Regular.otf}
 \setCJKsansfont{simhei.ttf}}{}
-%\IfFontExistsTF{font name}{true branch}{false branch}
 \usepackage{xcolor}
 \usepackage{toolbox}
 \usepackage[colorlinks,CJKbookmarks,bookmarksnumbered=true]{hyperref}
 \usepackage{lipsum}
-\usepackage[a4paper,top=3cm,bottom=2.5cm,left=2.5cm,right=2cm]{geometry}
 \usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage[a4paper]{geometry}%,showframe
+\geometry{asymmetric,top=3cm,bottom=2.5cm,left=2.5cm,right=2cm}%twoside=false,
 
 \setcounter{secnumdepth}{4}
-\usepackage[nostruts]{titlesec}
+\usepackage[pagestyles,nostruts]{titlesec}
 \titleformat{\section}{\zihao{5}\bfseries}{\thesection}{1em}{}
 \titlespacing{\section}{0pt}{1.5ex plus 1pt minus 1pt}{1.5ex plus 1pt minus 1pt}
 \titleformat{\paragraph}[runin]{\zihao{5}\bfseries}{\theparagraph}{1em}{}
 %\titlespacing{\paragraph}{5pc}{1.5ex minus .1 ex}{1pc}
 
+\newpagestyle{main}{%%内容奇数页左,偶数页右
+\sethead[GB/T 7714—××××]%偶数页左
+[]%偶数页中left\sectiontitle|\subsectiontitle
+[]%偶数页右
+{}%奇数页左
+{}%奇数页中right\sectiontitle|\subsectiontitle
+{GB/T 7714—××××}%奇数页右
+\setfoot[\thepage][][]{}{}{\thepage}%
+%\headrule%
+%\footrule
+}
+
+\pagestyle{main}
 
 
 \usepackage{xltxtra,mflogo,texnames}
@@ -52,7 +66,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 
 \DeclareFieldFormat{titlea}{#1}
 
-\renewbibmacro*{titlea}{%
+\newbibmacro*{titlea}{%
   \ifboolexpr{%
     test{\iffieldundef{title}}%
     and
@@ -70,7 +84,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 
 
 \DeclareFieldFormat{titleb}{#1}
-\renewbibmacro*{titleb}{%
+\newbibmacro*{titleb}{%
 \ifboolexpr{%
     test{\iffieldundef{title}}%
     and
@@ -188,13 +202,154 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt
 
 \addbibresource{example2025.bib}
 
-\title{信息与文献 参考文献著录规则\footnote{说明：本文档为GB/T 7714-2025的简单复现版本，作为GB/T 7714-2025 中的著录标准和顺序编码制示例，用于gb7714-2025样式更新后与GB/T 7714-2025标准文档的内容进行比较，以确定更新没有引入样式方面的BUG，对比文档为stdgbT7714-2025.pdf，该文档经过多次比较，明确与GB/T 7714-2025中的示例完全一致。}}
+
+\usepackage{tikz}
+% ----- Parameters
+\newcommand*{\ICS}[1]{\newcommand*{\useICS}{#1}}
+\newcommand*{\fenlei}[1]{\newcommand*{\usefenlei}{#1}}
+\newcommand*{\biaozhunhao}[1]{\newcommand*{\usebiaozhunhao}{#1}}
+\newcommand*{\daitibiaozhunhao}[1]{\newcommand*{\usedaitibiaozhunhao}{#1}}
+\newcommand*{\name}[1]{\newcommand*{\usename}{#1}}
+\newcommand*{\enname}[1]{\newcommand*{\useenname}{#1}}
+\newcommand*{\conformity}[1]{\newcommand*{\useconformity}{#1}}
+\newcommand*{\department}[1]{\newcommand*{\usedepartment}{#1}}
+\newcommand*{\fabudate}[1]{\newcommand*{\usefabudate}{#1}}
+\newcommand*{\shishidate}[1]{\newcommand*{\useshishidate}{#1}}
+
+% ----- Title Page
+\newcommand*{\titlefont}{\CJKfontspec{FandolSong-Regular.otf}}
+\newcommand*{\autoclearpage}{\if@openright\clearpage\else\clearpage\fi}
+\newcommand{\maketitlepage}{%
+    \pagestyle{empty}
+    \begingroup
+    \setlength{\parindent}{0pt}
+    \hskip-1.2mm\begin{tikzpicture}
+    \node at (0, 0) {\setlength{\fboxsep}{0pt}\makebox[0pt][l]{\parbox[t][0pt]{170mm}{\zihao{5}\bfseries ICS \useICS\\\usefenlei}}};
+    \node at (85mm, -36mm) {\resizebox{170mm}{8mm}{\titlefont\zihao{2} 中~华~人~民~共~和~国~国~家~标~准}};
+    % \draw[fill] (119mm, -23mm) rectangle (159mm, -3mm);
+    \node at (139mm, -13mm) {\includegraphics[width = 40mm, height = 20mm]{GB-LOGO.jpg}};
+    \node at (170mm, -52.5mm) {\setlength{\fboxsep}{0pt}\makebox[0pt][r]
+    {\parbox{170mm}{\raggedleft\zihao{4}\heiti\usebiaozhunhao\\\zihao{5}\songti\usedaitibiaozhunhao}}};
+    \draw (0mm, -65mm) -- (170mm, -65mm);
+    \node at (85mm, -105mm) {\parbox{150mm}{\centering\zihao{1}\heiti\usename}};
+    \node at (85mm, -121mm) {\parbox{150mm}{\centering\zihao{4}\heiti\useenname}};
+    \node at (85mm, -133mm) {\makebox[0pt][c]{\zihao{4}\heiti\useconformity}};
+    \end{tikzpicture}
+    \vfill
+    % \hskip-1.2mm%
+    \begin{tikzpicture}
+    \node at (85mm, 21mm) {\makebox[0pt][c]{\parbox[b][0pt]{170mm}{\zihao{4}\heiti\usefabudate{}发布
+    \hfill\useshishidate{}实施}}};
+    \draw (0, 20mm) -- (170mm, 20mm);
+    \node at (85mm, 0mm) {\makebox[0pt][c]{\parbox[b][0pt]{170mm}
+    {\centerline{\zihao{4}{\CJKfontspec[AutoFakeBold]{SimSun}\bfseries\usedepartment}\hskip 5mm\heiti 发\hskip 3mm布}}}};
+    \end{tikzpicture}
+    \endgroup
+    \autoclearpage
+}
+
+
+\title{信息与文献\ \ 参考文献著录规则\footnote{说明：本文档为GB/T 7714-2025的简单复现版本，作为GB/T 7714-2025 中的著录标准和顺序编码制示例，用于gb7714-2025样式更新后与GB/T 7714-2025标准文档的内容进行比较，以确定更新没有引入样式方面的BUG，对比文档为stdgbT7714-2025.pdf，该文档经过多次比较，明确与GB/T 7714-2025中的示例完全一致。}}
 \author{}
 \date{}
 
+% use parameters
+\ICS{ICS 01.140.20}
+\fenlei{CCS A 14}
+\biaozhunhao{GB/T 7714~\rule[.3\ccwd]{.8em}{.5pt}~2025}
+\daitibiaozhunhao{代替：GB/T 7714~\rule[.3\ccwd]{.8em}{.5pt}~2015}
+\name{信息与文献\ \ 参考文献著录规则}
+\enname{Information and documentation--Rules for bibliographic references
+and citations to information resources}
+\conformity{}
+\department{\parbox{11\ccwd}{国家市场监督管理总局\\
+国家标准化管理委员会}}
+\fabudate{xxxx-xx-xx}
+\shishidate{xxxx-xx-xx}
+\setcounter{tocdepth}{2}
+\addto\captionsenglish{%
+\renewcommand\contentsname{\centerline{\Large\textbf{目\qquad{}次}}}
+}
+
+\makeatletter
+\pretocmd{\section}{\addtocontents{toc}{\protect\vspace{-2ex}}}{}{}
+\makeatother
+\newenvironment{preamble}[1]{\bgroup\vspace*{1.5cm}\centerline{\Large\textbf{#1}}\vspace{1cm}}{\clearpage\egroup}
+\setlist[enumerate]{nosep, label={\alph*）},left=2\ccwd}
 \begin{document}
 
+
+\pagenumbering{Roman}
+\thispagestyle{main}
+\maketitlepage%
+\thispagestyle{main}
+\tableofcontents%\listoffigures\listoftables%
+\pagestyle{main}
+\clearpage
+
+\addcontentsline{toc}{section}{前言}
+\begin{preamble}{前\qquad{}言}
+\zihao{5}
+本文件按照GB/T 1.1—2020《标准化工作导则 第1部分：标准化文件的结构和起草规则》的规定
+起草。
+
+本文件代替GB/T 7714—2015《信息与文献 参考文献著录规则》，与GB/T 7714—2015相比，除结
+构调整和编辑性改动外，主要技术变化如下：
+
+\begin{enumerate}
+  \item
+更改了“范围”的部分表述（见第 1 章， 2015 年版的第 1 章）；
+  \item 删除了术语“专著”“数字对象唯一标识符”，增加了术语“会议录”“数据集”“永久标识
+符”“预印本”，更改了术语“参考文献”“连续出版物”“顺序编码制”“析出文献”“责
+任者”“著者-出版年制”（见第3章， 2015年版的第3章）；
+  \item 更改了“著录信息源”的部分表述（见第4章， 2015年版的第5章）；
+  \item 更改了“著录用符号”的部分表述（见第6章， 2015年版的第7章）；
+  \item 将“ 著录细则”更名为“著录通则”（见第7章， 2015年版的第8章）；
+  \item 增加二级条目“文献类型标识和文献载体标识”“创建或修改日期、引用日期”（见7.3、 7.6，2015年版的8.2.2、 8.4.4）；
+  \item 将“数字对象唯一标识符”更改为“永久标识符”（见7.9， 2015年版的8.7）；
+  \item 将“专著”“专著中的析出文献”分别更名为“图书”“图书中的析出文献” （见8.2、 8.3，
+2015年版的4.1， 4.2）；
+  \item 增加了“ 会议录”“学位论文”“报告”“标准”“网站和网页”“档案”“地图”“数据集”
+“预印本” 的著录项目和著录格式，删除了电子资源的著录项目和著录格式（见8.6、 8.7、 8.8、
+8.9、 8.11、 8.12、 8.13、 8.14、 8.15， 2015年版的4.6）；
+  \item 更改了“著录项目”的元素，新增了“著录项目”的状态和关联条目（见第8章），将“附录A”
+并入“各文献类型著录项目与著录格式”（见第8章， 2015年版的第4章和附录A）；
+  \item 将“析出文献”相关内容拆分纳入“各文献类型著录项目与著录格式”（见8.3、 8.5， 2015 年
+版的8.8）；
+  \item 将 “参考文献表”“参考文献标注法”合并为规范性附录“参考文献标引体系编制法”（见附
+录A， 2015年版的第9章、第10章）；
+  \item “著录用文字” “ 著录通则” “各文献类型著录项目与著录格式” “参考文献标引体系编制
+法” 均更改或增加了示例（见第5章、第7章、第8章、附录A）；
+  \item 增加了文献类型“预印本”及其标识代码“ PP”，增加了电子资源载体“缩微资料”及其标识
+代码“ MM”，将“ EB”代表的文献类型更改为“网站和网页”（见附录B， 2015年版的附录B）。
+\end{enumerate}
+
+本文件参考“ ISO 690： 2021《信息和文献 参考文献和信息资源引用指南》”起草，一致性程度
+为非等效。
+
+请注意本文件的某些内容可能涉及专利。本文件的发布机构不承担识别专利的责任。
+
+本文件由全国信息与文献标准化技术委员会（ SAC/TC 4）提出并归口。
+
+本文件起草单位：武汉大学、中国科学院文献情报中心、中国科学技术信息研究所、北京师范大学
+出版社（集团）有限公司、北京大学、华中师范大学、中国科学院计算机网络信息中心、《中华医学杂志》社有限责任公司、中国科学技术期刊编辑学会、中国标准化研究院、北京万方数据股份有限公司、同方知网数字出版技术股份有限公司。
+
+本文件主要起草人：黄如花、刘霞、曾燕、刘孝平、张耀蕾、郭红梅、陈浩元、刘曙光、曾建勋、
+胡良霖、周力虹、魏均民、郭德华、谢振峰、张旭。
+
+本文件及其所代替文件的历次版本发布情况为：
+
+——1987年首次发布为GB/T 7714—1987， 2005年第一次修订， 2015年第二次修订；
+
+——本次为第三次修订。\footnote{封面和前言部分的latex代码实现借用自 GB-T-7713.2-2022 库，
+地址：\url{https://github.com/latexstudio/GB-T-7713.2-2022}。}
+\end{preamble}
+
+
+\pagenumbering{arabic}
 \maketitle
+\thispagestyle{main}
+\pagestyle{main}
 \vspace{-1cm}%
 \titleformat{\subsection}[display]{\zihao{5}\bfseries}
 {\thesubsection}{1em}{\vspace{-2ex}\hspace{2em}}
@@ -224,6 +379,8 @@ abbreviation of title words and titles of publications）
 
 \section{术语和定义}
 
+{
+\renewcommand\addcontentsline[3]{}
 GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 \subsection{参考文献 reference}
@@ -239,11 +396,13 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 \subsection{会议录 proceedings； transactions}
 包含向大会提交的论文、通常还有论文的讨论和与论文相关事务等内容报道的文献。
+
 [来源： GB/T 4894-2024， 3.4.7.34]
 
-\subsection{连续出版物 serial； serial publication}
+\subsection{连续出版物 serial； serial publication}\label{sec:concept:serial}
 以连续的各个部分发行的、通常具有数字或年代标识的、计划无限期发行，不论周期长短的印刷文
 献或非印刷形式的出版物。
+
 注：包括：期刊、报纸等。
 
 [来源： GB/T 4894-2024， 3.4.1.28.1]
@@ -252,13 +411,14 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 相似或相关数据合乎逻辑的集合或分组，通常用作记录或用于研究。
 
 \subsection{顺序编码制 numeric system}
-一种引文参考文献（ 3.9）的标注体系，即引文采用序号标注，参考文献表按引文的序号排序。
+一种引文参考文献（\ref{sec:concept:citeref}）的标注体系，即引文采用序号标注，参考文献表按引文的序号排序。
 
 \subsection{析出文献 component part}
-由某个责任者（ 3.13）提供的、构成可能涉及多个责任者（ 3.13）的主文献一部分的文献。
-注：析出文献可以是连续出版物（ 3.5）中的论文，图书中具有独立作者、独立篇名的文献等。
+由某个责任者（\ref{sec:concept:creator}）提供的、构成可能涉及多个责任者
+（\ref{sec:concept:creator}）的主文献一部分的文献。
+注：析出文献可以是连续出版物（\ref{sec:concept:serial}）中的论文，图书中具有独立作者、独立篇名的文献等。
 
-\subsection{引文参考文献 cited reference}
+\subsection{引文参考文献 cited reference}\label{sec:concept:citeref}
 著者为撰写或编辑作品而引用的信息资源。
 
 \subsection{永久标识符 persistent identifier； PID}
@@ -274,14 +434,15 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 \subsection{阅读型参考文献 reading reference}
 著者为撰写或编辑作品而阅读过的信息资源，或供读者进一步阅读的信息资源。
 
-\subsection{责任者 creator}
+\subsection{责任者 creator}\label{sec:concept:creator}
 在开展个人或团体活动时负责创造、积累和/或保管信息资源的任何实体（法人团体、家族或个人） 。
 
 
 \subsection{著者-出版年制 name and data system}
-一种引文参考文献（ 3.9）的标注体系，即引文采用著者-出版年标注，参考文献表按著者字顺和出
+一种引文参考文献（\ref{sec:concept:citeref}）的标注体系，即引文采用著者-出版年标注，参考文献表按著者字顺和出
 版年排序。
 
+}
 
 \titleformat{\subsection}[runin]{\zihao{5}\bfseries}{\thesubsection}{1em}{\hspace{1em}}
 \section{著录信息源}
@@ -290,6 +451,9 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 标准、专利、网站和网页、档案、地图、数据集、预印本可依据题名页、版权页、封面等主要信息源著录各个著录项目；图书、连续出版物中的析出文献依据参考文献本身著录析出文献的信息，并依据主要信息源著录析出文献的出处；电子资源依据其存储介质上提供的主要信息源著录各个著录项目。
 
 \section{著录用文字}
+
+{
+\renewcommand\addcontentsline[3]{}
 \subsection{} 参考文献原则上要求用信息资源本身的语种著录。必要时，可采用双语著录。用双语著录参考文
 献时，首先应用信息资源的原语种著录，然后用其他语种著录。
 
@@ -331,11 +495,15 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 \subsection{} 使用汉语拼音著录中国人名，按照GB/T 28039的有关规定拼写。
 
-\subsection{} 作为集体责任者的机关团体名称（见7.1.4， A.3.1.1）、出版项中附在出版地之后的省名、州名、国名等（见7.5.2.1）以及出版者（见7.5.3.1）可按国际公认的方法缩写。
+\subsection{} 作为集体责任者的机关团体名称（见 \ref{sec:author:group}， \ref{sec:ay:citename}）、出版项中附在出版地之后的省名、州名、国名等（见 \ref{sec:addr:city}）
+以及出版者（见 \ref{sec:pub:short}）可按国际公认的方法缩写。
 
 \subsection{} 西文期刊刊名的缩写可参照 ISO 4 的规定。
 
 \subsection{} 著录西文文献时，大写字母的使用应符合信息资源本身文种的习惯用法。
+
+
+}
 
 \section{著录用符号}
 
@@ -406,15 +574,17 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 {\printbiblist[heading=none,env=exampleenv]{authorexample}}
 \end{refsection}
 
-\subsubsection{} 无责任者或者责任者情况不明的文献，“主要责任者”项应注明“佚名”或与之相应的词。凡采用顺序编码制（见 A.2）组织的参考文献可省略此项，直接著录题名。\footnote{注意：佚名的处理是全局的，也就是一个文档统一的，所以这里的示例与整个文档是一致的，而不是单独局部化处理的，所以没有给出佚名，若要给出则可以设置选项 gbnoauthor=true。}
+\subsubsection{} 无责任者或者责任者情况不明的文献，“主要责任者”项应注明“佚名”或与之相应的词。凡采用顺序编码制（见 \ref{sec:ref:numeric}）组织的参考文献可省略此项，直接著录题名。
+\footnote{注意：佚名的处理是全局的，而不能单独局部化处理，所以在一个文档内是统一的。若要给出佚名，则可以设置选项 gbnoauthor=true。为避免影响文档其他部分不给出佚名的情况，这里使用的技巧是直接在bib文件中给出佚名信息。}
 
 \begin{refsection}
-\nocite{帛画2023,anon1981-628}
+\nocite{帛画2023给出佚名,anon1981-628givenanon}
+%\nocite{帛画2023,anon1981-628}
 
-{\printbibliography[heading=none,env=indentegenv]}
+{\printbibliography[heading=none,env=exampleenv]}
 \end{refsection}
 
-\subsubsection{} 凡是对文献负责的机关团体名称，通常根据著录信息源著录。机关团体名称应由上至下分级著录，上下级间用“ .”分隔，用汉字书写的机关团体名称除外。
+\subsubsection{}\label{sec:author:group} 凡是对文献负责的机关团体名称，通常根据著录信息源著录。机关团体名称应由上至下分级著录，上下级间用“ .”分隔，用汉字书写的机关团体名称除外。
 
 \begin{refsection}
 \nocite{中国科学院物理研究所--}
@@ -506,19 +676,19 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 本文件中的以下项目也应按照出版项的要求著录：
 
-——会议录中的会议地点、会议名称、会议年份（见8.6）；
+——会议录中的会议地点、会议名称、会议年份（见 \ref{sec:entrytype:proceed}）；
 
-——学位论文中的学位授予单位所在地、学位论文授予单位、学位授予年（见8.7）；
+——学位论文中的学位授予单位所在地、学位论文授予单位、学位授予年（见 \ref{sec:entrytype:thesis}）；
 
-——档案中的收藏地、收藏者、档案形成日期（见8.12）；
+——档案中的收藏地、收藏者、档案形成日期（见 \ref{sec:entrytype:archive}）；
 
-——报告发布日期（见8.8）；
+——报告发布日期（见 \ref{sec:entrytype:report}）；
 
-——专利公告（公开）日期（见8.10）；
+——专利公告（公开）日期（见 \ref{sec:entrytype:patent}）；
 
-——数据集中的创建机构（见8.14）；
+——数据集中的创建机构（见 \ref{sec:entrytype:dataset}）；
 
-——预印本中的出版平台（见8.15）。
+——预印本中的出版平台（见 \ref{sec:entrytype:preprint}）。
 
 \begin{refsection}
 \nocite{egbookpuba--}
@@ -529,11 +699,13 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 {\printbiblist[heading=none, env=exampleenv]{pubexample}}
 \end{refsection}
 
+\titlespacing{\paragraph}{0pt}{2pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
 \subsubsection{出版地}
 
-\paragraph{} 出版地应著录出版者所在地的城市名称。对同名异地或不为人们熟悉的城市名，宜在城市名后附省、州名或国名等限定语。
+\paragraph{}\label{sec:addr:city} 出版地应著录出版者所在地的城市名称。对同名异地或不为人们熟悉的城市名，宜在城市名后附省、州名或国名等限定语。
 
 \begin{refsection}
+\togglefalse{bbx:gbpub}
 \nocite{egbookpubaddressa--}
 \nocite{egbookpubaddressb--}
 
@@ -566,7 +738,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 
 \subsubsection{出版者}
 
-\paragraph{} 出版者可以按著录信息源所载的形式著录，也可以按国际公认的简化形式或缩写形式著录。
+\paragraph{}\label{sec:pub:short} 出版者可以按著录信息源所载的形式著录，也可以按国际公认的简化形式或缩写形式著录。
 
 \begin{refsection}
 \nocite{egbookpubpublishera--}
@@ -650,7 +822,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 \end{refsection}
 
 \subsection{页码}
-析出文献的页码或引文页码，应采用阿拉伯数字著录（参见8.5、 A.2.1.3、 A.3.1.4）。引自序言
+析出文献的页码或引文页码，应采用阿拉伯数字著录（参见 \ref{sec:entrytype:article}、 \ref{sec:numeric:multic}、 \ref{sec:ay:multicites}）。引自序言
 或扉页题词的页码，可按实际情况著录。无页码有文章编号的，应将文章编号按页码著录。
 
 \begin{refsection}
@@ -694,23 +866,23 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 本文件分别规定了图书、图书中的析出文献、连续出版物、连续出版物中的析出文献、会议录、学
 位论文、报告、标准、专利、网站和网页、档案、地图、数据集、预印本的著录项目和著录格式。著录项目（元素）设必备状态与可选状态。
 
-\subsection{图书}
+\subsection{图书}\label{sec:entrytype:book}
 
 \subsubsection{著录项目}
 
-主要责任者：有则必备；
-题名；必备；
-其他题名信息：有则必备；
-文献类型标识：必备；
-文献载体标识：电子资源必备；
-其他责任者：可选；
-版本：有则必备；
-出版地：有则必备；
-出版者：有则必备；
-出版年：有则必备；
-引文页码：有则必备；
-获取和访问路径：电子资源必备；
-永久标识符：电子资源可选。
+主要责任者 有则必备；
+题名 必备；
+其他题名信息 有则必备；
+文献类型标识 必备；
+文献载体标识 电子资源必备；
+其他责任者 可选；
+版本 有则必备；
+出版地 有则必备；
+出版者 有则必备；
+出版年 有则必备；
+引文页码 有则必备；
+获取和访问路径 电子资源必备；
+永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
 
@@ -743,7 +915,7 @@ Praetzellis2011-13-13}
 \end{refsection}
 
 
-\subsection{图书中的析出文献}
+\subsection{图书中的析出文献}\label{sec:entrytype:inbook}
 
 \subsubsection{著录项目}
 
@@ -772,8 +944,7 @@ Praetzellis2011-13-13}
 
 \begin{refsection}
 
-\nocite{
-1988-590-590,
+\nocite{1988-590-590,
 阿扬2023,
 王夫之2011-1109-1109,
 程根伟1999-32-36,
@@ -781,8 +952,7 @@ Praetzellis2011-13-13}
 马克思2013-302-302,
 楼梦麟2011-11-12,
 Weinstein1974-745-772,
-Roberson2011-1-36
-}
+Roberson2011-1-36}
 
 
 \textbf{示例：}
@@ -827,21 +997,30 @@ Publiclibrary1979}
 {\printbibliography[heading=none,env=indentegenv]}
 \end{refsection}
 
-\subsection{连续出版物中的析出文献}
+\subsection{连续出版物中的析出文献}\label{sec:entrytype:article}
 
-\subsubsection{通用要求}
+\subsubsection{通用要求}\label{sec:article:request}
 
 凡是从期刊中析出的文章，应在刊名之后注明其年、卷、期、页码等。阅读型参考文献的页码著录
-文章的起讫页或起始页，引文参考文献的页码著录引用信息所在页。
+文章的起讫页或起始页，引文参考文献的页码著录引用信息所在页。\footnote{注意：当前存在一些期刊文献的引用信息是提供文章编号而不是页码。由于编号的格式与页码类似，所以可以直接将文章编号放在 pages 域中。比如，下面的示例5，只需在bib中给出：pages=\{147370\}。}
 
 \begin{refsection}
 
 \nocite{egdatevolnumpagea--,egdatevolnumpageb--,%
-egdatevolnumpagec--,egdatevolnumpaged--,%
-egdatevolnumpagee--}
+egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageg--,egdatevolnumpageh--}
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
 \end{refsection}
+
+对从合期中析出的文献，遵循上述规则著录，并在圆括号内注明合期号。
+
+\begin{refsection}
+\nocite{egdatevolnumpagee--}
+
+{\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
+\end{refsection}
+
+
 
 凡是在同一期刊上连载的文献，其后续部分不必另行著录，可在原参考文献后直接注明后续部分的
 年、卷、期、页码等。\footnote{这里这种复杂的年卷期形式不便于自动化处理，所以可以直接在year域中给出需要复杂信息形式，下面的示例中给出了半角符号和全局符号下的两种示例。}
@@ -881,7 +1060,7 @@ egdatevolnumpagee--}
 \subsubsection{著录格式}
 
 析出文献主要责任者. 析出文献题名[文献类型标识/文献载体标识]. 连续出版物题名：其他题名
-信息，年，卷（期）：页码. 获取和访问路径. 永久标识符.\footnote{相比前版的关键差别是不输出urldate了，也没有修改或更新日期，同时示例中给出一个在线文档的要求，要求给出详细日期。因为其他文献也可能带有网址，所以只用网址无法区分。因此考虑利用url存在且卷期都不存在这一条件进行区分，比如示例中的第8条文献。}
+信息，年，卷（期）：页码. 获取和访问路径. 永久标识符.\footnote{相比前版的关键差别是不输出urldate了，也没有修改或更新日期，同时示例中给出一个\textbf{在线文档}的要求，要求给出详细日期。因为其他文献也可能带有网址，所以只用网址无法区分。因此考虑利用url存在且卷期都不存在这一条件进行区分，比如示例中的第8条文献，比如 \ref{sec:article:request} 节中示例6。}
 
 \begin{refsection}
 
@@ -911,12 +1090,12 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 {\printbibliography[heading=none,env=indentegenv]}
 \end{refsection}
 
-\subsection{会议录}
+\subsection{会议录}\label{sec:entrytype:proceed}
 
 \subsubsection{通用要求}
 
 凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献形式出现的会议录，其著录
-项目与著录格式分别按8.2-8.5中的有关规则处理。除此之外的会议录根据本规则著录。
+项目与著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的会议录根据本规则著录。
 
 \subsubsection{著录项目}
 
@@ -954,7 +1133,7 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 \end{refsection}
 
 
-\subsection{学位论文}
+\subsection{学位论文}\label{sec:entrytype:thesis}
 
 \subsubsection{著录项目}
 
@@ -986,12 +1165,12 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 \end{refsection}
 
 
-\subsection{报告}
+\subsection{报告}\label{sec:entrytype:report}
 
 \subsubsection{通用要求}
 
 凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献出现的报告，其著录项目与
-著录格式分别按 8.2-8.5 中的有关规则处理。除此之外的报告根据本规则著录
+著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的报告根据本规则著录。
 
 \subsubsection{著录项目}
 
@@ -1033,7 +1212,7 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 
 \subsubsection{通用要求}
 
-凡以图书、图书中的析出文献出现的标准，其著录项目与著录格式分别按 8.2-8.3 中的有关规则处
+凡以图书、图书中的析出文献出现的标准，其著录项目与著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:inbook} 中的有关规则处
 理。除此之外的标准根据本规则著录。
 
 \subsubsection{著录项目}
@@ -1074,12 +1253,12 @@ Explosiveatmospheres2016,Atmospheresexplosives2016}
 \end{refsection}
 
 
-\subsection{专利}
+\subsection{专利}\label{sec:entrytype:patent}
 
 \subsubsection{通用要求}
 
 凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献出现的专利，其著录项目与
-著录格式分别按 8.2-8.5 中的有关规则处理。除此之外的专利根据本规则著录。
+著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的专利根据本规则著录。
 
 \subsubsection{著录项目}
 
@@ -1127,7 +1306,7 @@ Explosiveatmospheres2016,Atmospheresexplosives2016}
 \subsubsection{通用要求}
 
 凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献出现的专利，其著录项目与
-著录格式分别按 8.2-8.5 中的有关规则处理。除此之外的专利根据本规则著录。
+著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的专利根据本规则著录。
 
 \subsubsection{著录项目}
 
@@ -1194,11 +1373,11 @@ Zotero2024,仉尚航2024}
 \end{refsection}
 
 
-\subsection{档案}
+\subsection{档案}\label{sec:entrytype:archive}
 
 \subsubsection{通用要求}
 
-凡以图书、图书中的析出文献出现的档案，其著录项目与著录格式分别按 8.2-8.3 中的有关规则处
+凡以图书、图书中的析出文献出现的档案，其著录项目与著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:inbook} 中的有关规则处
 理。除此之外的档案根据本规则著录。
 
 \subsubsection{著录项目}
@@ -1242,7 +1421,7 @@ Zotero2024,仉尚航2024}
 
 \subsubsection{通用要求}
 
-凡以图书、图书中的析出文献出现的地图册、地图集等，其著录项目与著录格式分别按8.2-8.3中
+凡以图书、图书中的析出文献出现的地图册、地图集等，其著录项目与著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:inbook} 中
 的有关规则处理。除此之外的地图根据本规则著录。
 
 \subsubsection{著录项目}
@@ -1280,12 +1459,12 @@ Zotero2024,仉尚航2024}
 \end{refsection}
 
 
-\subsection{数据集}
+\subsection{数据集}\label{sec:entrytype:dataset}
 
 \subsubsection{通用要求}
 
 凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献形式出现的数据集，其著录
-项目与著录格式分别按8.2-8.5中的有关规则处理。除此之外的数据集根据本规则著录。
+项目与著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的数据集根据本规则著录。
 
 \subsubsection{著录项目}
 
@@ -1316,7 +1495,7 @@ Zotero2024,仉尚航2024}
 \end{refsection}
 
 
-\subsection{预印本}
+\subsection{预印本}\label{sec:entrytype:preprint}
 
 
 \subsubsection{著录项目}
@@ -1351,38 +1530,39 @@ Zotero2024,仉尚航2024}
 \newpage
 \appendix
 
-
-\section{参考文献标引体系编制法}
+\titleformat{\section}[display]
+{\centering\zihao{5}\bfseries}{附录 \thesection}{0pt}{\centering}
+\titlespacing{\section}{0pt}{1.5ex plus 1pt minus 1pt}{1.5ex plus 1pt minus 1pt}
+\section[参考文献标引体系编制法]{（规范性）\\参考文献标引体系编制法}
 
 \subsection{通用要求}
 
 参考文献的引用体系可以按顺序编码制组织，也可以按著者-出版年制组织。引文参考文献既可以集中著录在文后或书末，也可以分散著录在页下端。阅读型参考文献著录在文后、书的各章节后或书末。
 
-\subsection{顺序编码制}
+\subsection{顺序编码制}\label{sec:ref:numeric}
 
-\subsubsection{正文中的引用}
+\subsubsection{正文中的引用}\label{sec:numeric:cite}
 
 \paragraph{} 顺序编码制是按正文中引用的文献出现的先后顺序连续编码，将序号置于方括号中。如果顺序编码制用脚注方式时，序号可由计算机自动生成圈码
-
-
 
 \begin{refsection}
 \textbf{示例1：}引用单篇文献，序号置于方括号中
 
-所谓移情，就是“说话人将自己认同于......他用句子所描述的时间或状态中的一个参与者”
-\cite{Sunstein1996-903-903}。《汉语大词典》和张相
-\cite{Morri2010--}都认为“可”是“痊愈”，
-候精一认为是“减轻”\cite{罗杰斯2011-15-16}。......另外，根据候精一，表示病痛程度减轻的形容词“可”和表示逆转否定的副词“可”
-是兼类词\cite{陈登原2000-29-29}，这也说明二者应该存在着源流关系。
+……德国学者 N.克罗斯研究了瑞士巴塞尔市附近侏罗山中老第三纪断裂对第三系摺皱的控制
+\cite{Sunstein1996-903-903}； 之后，他又描述
+了西里西亚第 3 条大型的近南北向构造带，并提出地槽是在不均一的块体的基底上发展的思想\cite{Morri2010--}。
+
+…………
 
 \textbf{示例2：}引用单篇文献，序号由计算机自动生成圈码
 
-所谓移情，就是“说话人将自己认同于......他用句子所描述的时间或状态中的一个参与者”\footfullcite{Sunstein1996-903-903}。《汉语大词典》和张相
+……所谓移情，就是“说话人将自己认同于......他用句子所描述的时间或状态中的一个参与者”
+\footfullcite{Sunstein1996-903-903}。《汉语大词典》和张相
 \footfullcite{Morri2010--}都认为“可”是“痊愈”，
 候精一认为是“减轻”\footfullcite{罗杰斯2011-15-16}。......另外，根据候精一，表示病痛程度减轻的形容词“可”和表示逆转否定的副词“可”
 是兼类词\footfullcite{陈登原2000-29-29}，这也说明二者应该存在着源流关系。
 
-
+…………
 \end{refsection}
 
 \paragraph{} 同一处引用多篇文献时，应将各篇文献的序号在方括号内全部列出，各序号间用“，”。
@@ -1400,7 +1580,7 @@ Zotero2024,仉尚航2024}
 \end{refsection}
 
 
-\paragraph{} 多次引用同一著者的同一文献时，在正文中标注首次引用的文献序号，并在序号的“ []”外著录引文页码。如果用计算机自动编序号时，应重复著录参考文献，但参考文献表中的著录项目可简化为文献序号及引文页码，参见本条款的示例 2
+\paragraph{}\label{sec:numeric:multic} 多次引用同一著者的同一文献时，在正文中标注首次引用的文献序号，并在序号的“ []”外著录引文页码。如果用计算机自动编序号时，应重复著录参考文献，但参考文献表中的著录项目可简化为文献序号及引文页码，参见本条款的示例 2
 
 \begin{refsection}
 \textbf{示例1：}多次引用同一著者的同一文献的序号
@@ -1422,7 +1602,9 @@ Zotero2024,仉尚航2024}
 \begin{refsection}
 \textbf{示例2：}多次引用同一著者的同一文献的脚注序号
 
-……改变社会规范也可能存在类似的“二阶囚徒困境”问题：尽管改变旧的规范对所有人都好，但个人理性选择使得没有人愿意率先违反旧的规范
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+\smallskip\noindent\begin{minipage}{\textwidth}\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+\hspace{2em}……改变社会规范也可能存在类似的“二阶囚徒困境”问题：尽管改变旧的规范对所有人都好，但个人理性选择使得没有人愿意率先违反旧的规范
 \footfullcite{Sunstein1996-903-903}。
 ……事实上，古希腊对轴心时代思想真正的贡献不是来自对民主的赞扬，而是来自对民主制度的批评，苏格拉底、柏拉图和亚里士多德3位贤圣
 都是民主制度的坚决反对者\footfullcite[260]{Morri2010--}。
@@ -1430,11 +1612,12 @@ Zotero2024,仉尚航2024}
 ……据《唐会要》记载，当时拆毁的寺院有4 600余所，招提、兰若等佛教建筑4万余所，没收寺产，并强迫僧尼还俗达260 500人。
 佛教受到极大的打击\footfullcite[326-329]{Morri2010--}。
 ……陈登原先生的考证是非常精确的，他印证了《春秋说题辞》“黍者绪也，故其立字，禾入米为黍，为酒以扶老，为酒以序尊卑，禾为柔物，亦宜养老”，指出：“以上谓等威之辨，尊卑之序，由于饮食荣辱。”\footfullcite{陈登原2000-29-29}
+\end{minipage}
 \end{refsection}
 
 \subsubsection{参考文献表编制示例}
 
-参考文献表采用顺序编码制组织时，各篇文献应按正文部分标注的序号依次列出（参见 A.2.1）。
+参考文献表采用顺序编码制组织时，各篇文献应按正文部分标注的序号依次列出（参见 \ref{sec:numeric:cite}）。
 
 \begin{refsection}
 \textbf{示例：}
@@ -1443,5 +1626,127 @@ Zotero2024,仉尚航2024}
 
 \printbibliography[heading=none,env=indentegenv]
 \end{refsection}
+
+
+\subsection{著者-出版年制}
+\subsubsection{正文中的引用}\label{sec:ay:citation}
+\paragraph{}\label{sec:ay:citename} 正文引用的文献采用著者-出版年制时，各篇文献的标注内容由著者姓氏与出版年构成，并置于“（）”内。倘若只标注著者姓氏无法识别该人名时，可标注著者姓名，例如中国人、韩国人、日本人用汉字书写的姓名。集体著者著述的文献可标注机关团体名称。倘若正文中已提及著者姓名，则在其后的“（）”内只著录出版年。
+
+\textbf{示例：}引用单篇文献
+
+\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=1]{tngbcitationaynew.pdf}
+%\begin{refsection}
+%\textbf{示例：}引用单篇文献
+%
+%the notion of an invisible college has been explored in thesciences\cite{CRANE1972--}.Its absence among historians was noted by Stieg\yearcite{STIEG1981-549-560} ...
+%
+%\textbf{参考文献：}
+%
+%\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+%\end{refsection}
+
+\paragraph{} 正文中引用多著者文献时，对欧美著者只需标注第一个著者的姓，其后附“ et al.”；对于中国著者应标注第一著者的姓名，其后附“等”字。姓氏与“ et al.”“等”之间留适当空隙。
+
+\paragraph{} 在参考文献表中著录同一著者在同一年出版的多篇文献时，出版年后应用小写字母 a， b， c…区别。
+
+\textbf{示例 1：}引用同一著者同年出版的多篇中文文献
+
+\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=2]{tngbcitationaynew.pdf}
+%\begin{refsection}
+%\textbf{示例 1：}引用同一著者同年出版的多篇中文文献
+%\nocite{贾君枝2023编目,贾君枝2023短评}
+%
+%\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+%\end{refsection}
+
+\textbf{示例 2：}引用同一著者同年出版的多篇英文文献
+
+\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=3]{tngbcitationaynew.pdf}
+
+%\begin{refsection}
+%\textbf{示例 2：}引用同一著者同年出版的多篇英文文献
+%\nocite{KENNEDY1975-311-386,KENNEDY1975-339-360}
+%
+%\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+%\end{refsection}
+
+
+\paragraph{}\label{sec:ay:multicites} 多次引用同一著者的同一文献，在正文中标注著者与出版年，并在“（）”外以角标的形式著录引文页码。
+
+\textbf{示例：}多次引用同一著者的同一文献
+
+\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=4]{tngbcitationaynew.pdf}
+
+%\begin{refsection}
+%\textbf{示例：}多次引用同一著者的同一文献
+%
+%主编靠编辑思想指挥全局已是编辑界的共识\cite{张忠智1997-33-34}，然而对编辑思想至今没有一个明确的界定，故不妨提出一个构架……参与讨论。
+%由于“思想”的内涵是“客观存在反映在人的意识中经过思维活动而产生的结果”
+%\pagescite[1194]{中国社会科学院语言研究所词典编辑室1996--}，所以“编辑思想”的内涵就是编辑实践反映在编辑工作者
+%的意识中，“经过思维活动而产生的结果”。
+%……《中国青年》杂志创办人追求的高格调-
+%理性的成熟与热点的凝聚\cite{刘彻东1998-38-39}，表明其读者群的文化的品位的高层次……“方针”指“引导事业前进的方向和目标”
+%\pagescite[235]{中国社会科学院语言研究所词典编辑室1996--}。
+%……对编辑方针，1981年中国科协副主席裴丽生曾有过科学的论断—“自然科学学术期刊必须坚持以马列主义、毛泽东思想为指导，贯彻为国民经济发展服务，理论与实践相结合，普及与提高相结合，‘百花齐放，百家争鸣’的方针。” \cite{裴丽生1981-2-10}它完整地回答了为谁服务怎样服务，如何服务得更好的间题。
+%
+%…………
+%
+%
+%\textbf{参考文献：}
+%
+%\newrefcontext[sorting=gb7714-2015]{}
+%\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+%\end{refsection}
+
+
+\subsubsection{参考文献表示例}
+
+参考文献表采用著者-出版年制组织时，各篇文献首先按文种集中，可分为中文、日文、西文、俄文、其他文种 5 部分；然后按著者字顺和出版年排列。中文文献可以按著者汉语拼音字顺排列（参见 \ref{sec:ay:citation}），也可以按著者的笔画笔顺排列。
+
+\textbf{示例：}
+
+\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=5]{tngbcitationaynew.pdf}
+%\begin{refsection}
+%\textbf{示例：}
+%
+%\nocite{尼葛洛庞帝1996--,汪冰1997-16-16,杨宗英1996-24-29,Baker1995--,Chernik1982--,Dowler1995-5-26}
+%
+%
+%\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+%\end{refsection}
+
+\newpage
+\section[文献类型和文献载体标识代码]{（规范性）\\文献类型和文献载体标识代码}
+
+\subsection{文献类型和标识代码}
+
+参考文献类型对应的文献类型标识代码为：
+图书 M；
+会议录 C；
+汇编 G；
+报纸 N；
+期刊 J；
+学位论文 D；
+报告 R；
+标准 S；
+专利 P；
+数据库 DB；
+计算机程序 CP；
+网站和网页 EB；
+档案 A；
+地图 CM；
+数据集 DS；
+预印本 PP；
+其他 Z。
+
+\subsection{电子资源载体和标识代码}
+
+
+电子资源的载体类型对应的载体类型标识代码为：
+磁带（ magnetic tape） MT；
+磁盘（ disk） DK；
+光盘（ CD-ROM） CD；
+缩微资料（ microform materials） MM；
+联机网络（ online） OL。
 
 \end{document}

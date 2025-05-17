@@ -6,11 +6,14 @@
 \setmainfont[BoldFont={cmunsx.otf}]{cmunrm.otf}
 \setmonofont{cmuntt.otf}
 \setsansfont{cmunsx.otf}
+\IfFontExistsTF{SourceHanSerifSC-Regular.otf}%\IfFileExists
+    {\setCJKmainfont[BoldFont={simhei.ttf}]{SourceHanSerifSC-Regular.otf}
+\setCJKsansfont{simhei.ttf}}{}
 \usepackage{xcolor}
 \usepackage{toolbox}
 \usepackage[colorlinks]{hyperref}
 \usepackage{lipsum}
-\usepackage[a4paper,top=3cm,bottom=2.5cm,left=2.5cm,right=2cm]{geometry}
+\usepackage[paperwidth=21cm,paperheight=3.0cm,top=0cm,bottom=0cm,left=2.5cm,right=2cm]{geometry}%,showframe
 \usepackage{xltxtra,mflogo,texnames}
 \usepackage[backend=biber,style=gb7714-2025ay,gbnoauthor,gbpunctwidth=mixed,
 gbpub=true,
@@ -22,30 +25,22 @@ sorting=none
 
 \addbibresource{example2025.bib}
 
-\setcounter{secnumdepth}{4}
-\usepackage{titlesec}
-\titleformat{\section}{\color{white}}{\thesection}{1em}{}
-%\titlespacing{\section}{-6pc}{3.5ex plus .1ex minus .2ex}{1.5ex minus .1ex}
-\titleformat{\paragraph}[runin]{\zihao{5}\bfseries}{\theparagraph}{1em}{}[\hspace{1em}]
-\titlespacing{\paragraph}{0pt}{0pt}{0pt}
+%\setcounter{secnumdepth}{4}
+%\usepackage{titlesec}
+%\titleformat{\section}{\color{white}}{\thesection}{1em}{}
+%%\titlespacing{\section}{-6pc}{3.5ex plus .1ex minus .2ex}{1.5ex minus .1ex}
+%\titleformat{\paragraph}[runin]{\zihao{5}\bfseries}{\theparagraph}{1em}{}[\hspace{1em}]
+%\titlespacing{\paragraph}{0pt}{0pt}{0pt}
 
 \usepackage{calc}
 \newlength{\indentedpara}
-
+\pagestyle{empty}
 
 \begin{document}
 \setlength{\indentedpara}{\linewidth-2em}
-\appendix
-\section{参考文献标引体系编制法}
-\stepcounter{subsection}
-\stepcounter{subsection}
-\subsection{著者-出版年制}
-\subsubsection{正文中的引用}
-\paragraph{} 正文引用的文献采用著者-出版年制时，各篇文献的标注内容由著者姓氏与出版年构成，并置于“（）”内。倘若只标注著者姓氏无法识别该人名时，可标注著者姓名，例如中国人、韩国人、日本人用汉字书写的姓名。集体著者著述的文献可标注机关团体名称。倘若正文中已提及著者姓名，则在其后的“（）”内只著录出版年。
-
+\newgeometry{layoutwidth=21cm,layoutheight=3.5cm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
-\textbf{示例：}引用单篇文献
-
+%\textbf{示例：}引用单篇文献
 the notion of an invisible college has been explored in thesciences\cite{CRANE1972--}.Its absence among historians was noted by Stieg\yearcite{STIEG1981-549-560} ...
 
 \textbf{参考文献：}
@@ -53,29 +48,36 @@ the notion of an invisible college has been explored in thesciences\cite{CRANE19
 \parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
 \end{refsection}
 
-\paragraph{} 正文中引用多著者文献时，对欧美著者只需标注第一个著者的姓，其后附“ et al.”；对于中国著者应标注第一著者的姓名，其后附“等”字。姓氏与“ et al.”“等”之间留适当空隙。
+\eject
 
-\paragraph{} 在参考文献表中著录同一著者在同一年出版的多篇文献时，出版年后应用小写字母 a， b， c…区别。
-
+\pdfpagewidth=21cm \pdfpageheight=1.7cm
+\newgeometry{layoutwidth=21cm,layoutheight=2.3cm,layoutvoffset=-2mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
-\textbf{示例 1：}引用同一著者同年出版的多篇中文文献
+%\textbf{示例 1：}引用同一著者同年出版的多篇中文文献
 \nocite{贾君枝2023编目,贾君枝2023短评}
-
+\vspace{-5mm}
 \parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
 \end{refsection}
 
+
+\eject
+
+\pdfpagewidth=21cm \pdfpageheight=2.2cm
+\newgeometry{layoutwidth=21cm,layoutheight=2.8cm,layoutvoffset=-1.5mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
-\textbf{示例 2：}引用同一著者同年出版的多篇英文文献
+%\textbf{示例 2：}引用同一著者同年出版的多篇英文文献
 \nocite{KENNEDY1975-311-386,KENNEDY1975-339-360}
 
 \parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
 \end{refsection}
 
 
-\paragraph{} 多次引用同一著者的同一文献，在正文中标注著者与出版年，并在“（）”外以角标的形式著录引文页码。
+\eject
 
+\pdfpagewidth=21cm \pdfpageheight=9.8cm
+\newgeometry{layoutwidth=21cm,layoutheight=10cm,layoutvoffset=1.5mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
-\textbf{示例：}多次引用同一著者的同一文献
+%\textbf{示例：}多次引用同一著者的同一文献
 
 主编靠编辑思想指挥全局已是编辑界的共识\cite{张忠智1997-33-34}，然而对编辑思想至今没有一个明确的界定，故不妨提出一个构架……参与讨论。
 由于“思想”的内涵是“客观存在反映在人的意识中经过思维活动而产生的结果”
@@ -96,13 +98,15 @@ the notion of an invisible college has been explored in thesciences\cite{CRANE19
 \end{refsection}
 
 
-\subsubsection{参考文献表示例}
+\eject
+
+\pdfpagewidth=21cm \pdfpageheight=4.9cm
+\newgeometry{layoutwidth=21cm,layoutheight=5.4cm,layoutvoffset=-2mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
-参考文献表采用著者-出版年制组织时，各篇文献首先按文种集中，可分为中文、日文、西文、俄文、其他文种 5 部分；然后按著者字顺和出版年排列。中文文献可以按著者汉语拼音字顺排列（参见 A.3.1），也可以按著者的笔画笔顺排列。
+%参考文献表采用著者-出版年制组织时，各篇文献首先按文种集中，可分为中文、日文、西文、俄文、其他文种 5 部分；然后按著者字顺和出版年排列。中文文献可以按著者汉语拼音字顺排列（参见 A.3.1），也可以按著者的笔画笔顺排列。
+%\textbf{示例：}
 
 \nocite{尼葛洛庞帝1996--,汪冰1997-16-16,杨宗英1996-24-29,Baker1995--,Chernik1982--,Dowler1995-5-26}
-
-\textbf{示例：}
 
 \parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
 \end{refsection}

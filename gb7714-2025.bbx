@@ -418,11 +418,11 @@
     \@makefnmark%
             }}%
             {\csxdef{sec\arabic{refsection}\arabic{page}et\thefield{entrykey}}{%
-            \ifcsstring{@mpfn}{mpfootnote}{\@alph\c@mpfootnote}{\thefootnote}%
+            \ifcsstring{@mpfn}{mpfootnote}{\thempfootnote}{\thefootnote}%\@alph
             }}%
         }%
         {\csxdef{sec\arabic{refsection}\arabic{page}et\thefield{entrykey}}{%
-        \ifcsstring{@mpfn}{mpfootnote}{\@alph\c@mpfootnote}{\thefootnote}%
+        \ifcsstring{@mpfn}{mpfootnote}{\thempfootnote}{\thefootnote}%\@alph
         %判断在minipage中比较麻烦，这里使用\@mpfn的定义进行判断
         }}%
     }
@@ -2597,7 +2597,7 @@
      \usebibmacro{url}}
 \renewbibmacro*{url}{\printfield{url}}
 
-\renewbibmacro*{online:url+urldate}{%
+\newbibmacro*{online:url+urldate}{%
   %\usebibmacro{url}%%更换url的位置，放到下面
   \iffieldundef{urlyear}%
     {}{%\setunit*{\addspace}%

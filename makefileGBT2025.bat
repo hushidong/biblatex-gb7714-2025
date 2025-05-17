@@ -12,14 +12,6 @@ biber testeg
 xelatex.exe  testeg.tex
 
 
-xelatex.exe  tgbcitation.tex
-
-biber tgbcitation
-
-xelatex.exe  tgbcitation.tex
-
-
-
 xelatex.exe  tngbcitationaynew.tex
 
 biber tngbcitationaynew
@@ -27,5 +19,9 @@ biber tngbcitationaynew
 xelatex.exe  tngbcitationaynew.tex
 
 
-D:\mingw64\gs10.01.2\bin\gswin64c.exe -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=gbT7714-2025.pdf tgbcitation.pdf tngbcitationaynew.pdf
+xelatex.exe  gbT7714-2025.tex
+
+biber gbT7714-2025
+
+xelatex.exe  gbT7714-2025.tex
 
