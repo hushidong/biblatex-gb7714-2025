@@ -74,6 +74,8 @@
     \DeclareDatamodelFields[type=field,datatype=literal]{lansortorder}
     \DeclareDatamodelFields[type=field,datatype=literal]{languageid}
     \DeclareDatamodelFields[type=field,datatype=integer]{refnumber}
+    \DeclareDatamodelFields[type=field,datatype=literal]{scale}%表示地图比例
+    \DeclareDatamodelFields[type=field,datatype=literal]{dimensions}%表示地图大小
 
     %因为biblatex更新3.14版本以后，biber对于为声明数据模型的条目类型
     %不再默认读取，而是以空字符串作为条目类型名，自然在条目定义alias时
@@ -113,7 +115,8 @@
     %   三个选项值为：half全部半角，full全部全角，mixed全角半角混合
     \DeclareBibliographyOption[string]{gbpunctwidth}[half]{%
     \ifstrequal{#1}{full}{\execgbpunctwidthfull\execgbpunctfullwidth}%
-        {\ifstrequal{#1}{mixed}{\execgbpunctwidthmixed\execgbpunctfullwidth}{\execgbpunctwidthhalf}}%
+        {\ifstrequal{#1}{mixed}{\execgbpunctwidthmixed\execgbpunctfullwidth}
+          {\ifstrequal{#1}{bylan}{\execgbpunctwidthbylan\execgbpunctfullwidth}{\execgbpunctwidthhalf}}}%
     }
 
     %定义一些标点为中文全角标点
@@ -124,6 +127,7 @@
     \def\gbpunctdot{\adddot}%
     \def\gbpunctdotlanen{\adddot}%
     \def\gbpunctmark{\mbox{，}\allowbreak}%
+    \def\gbpunctmarklanen{\mbox{，}\allowbreak}%
     \def\gbpunctcomma{\mbox{，}\allowbreak}%
     \def\gbpunctcommalanen{\mbox{，}\allowbreak}%\addcomma\addspace
     \def\gbpunctcolon{\mbox{：}\allowbreak}%
@@ -137,6 +141,28 @@
     \def\CharParenRight{）\allowbreak}%
     }
 
+    %引用的标注标签中不按语言区分，因为会存在混杂(英文、中文在同一处出现)的情况。
+    \def\execgbpunctwidthbylan{%
+    \def\gbpunctcommacite{\mbox{，}\allowbreak}
+    \def\gbpunctmarkcite{\mbox{，}\allowbreak}%
+    \def\gbpunctsemicoloncite{\mbox{，}\allowbreak}
+    \def\gbpunctdot{\adddot}%
+    \def\gbpunctdotlanen{\adddot}%
+    \def\gbpunctmark{\mbox{，}\allowbreak}%
+    \def\gbpunctmarklanen{\addcomma\addspace}%
+    \def\gbpunctcomma{\mbox{，}\allowbreak}%
+    \def\gbpunctcommalanen{\addcomma\addspace}%\addcomma\addspace
+    \def\gbpunctcolon{\mbox{：}\allowbreak}%
+    \def\gbpunctcolonlanen{\addcolon\addspace}%
+    \def\gbpunctsemicolon{\mbox{；}\allowbreak}%
+    \def\gbpunctttl{《}%
+    \def\gbpunctttr{》\allowbreak}
+    \def\gbpunctprl{（}%
+    \def\gbpunctprr{）\allowbreak}%
+    \def\CharParenLeft{\iffieldequalstr{userd}{chinese}{\allowbreak （}{(}}
+    \def\CharParenRight{\iffieldequalstr{userd}{chinese}{）\allowbreak}{)}}%
+    }
+
     \def\execgbpunctwidthfull{%
     \def\gbpunctcommacite{\mbox{，}\allowbreak}
     \def\gbpunctmarkcite{\mbox{，}\allowbreak}%
@@ -144,6 +170,7 @@
     \def\gbpunctdot{。}%
     \def\gbpunctdotlanen{。}%
     \def\gbpunctmark{\mbox{，}\allowbreak}%
+    \def\gbpunctmarklanen{\mbox{，}\allowbreak}%
     \def\gbpunctcomma{\mbox{，}\allowbreak}%
     \def\gbpunctcommalanen{\mbox{，}\allowbreak}%\addcomma\addspace
     \def\gbpunctcolon{\mbox{：}\allowbreak}%
@@ -161,6 +188,7 @@
     \def\gbpunctdot{\adddot}%
     \def\gbpunctdotlanen{\adddot}%
     \def\gbpunctmark{\addcomma\addspace}%
+    \def\gbpunctmarklanen{\addcomma\addspace}%
     \def\gbpunctcomma{\addcomma\addspace}%
     \def\gbpunctcommalanen{\addcomma\addspace}%
     \def\gbpunctcolon{\addcolon\addspace}%
@@ -939,8 +967,15 @@
         }
         \map{%eventtitle映射为booktitle
             \pertype{inproceedings}
+            \pertype{collection}
             \step[fieldsource=eventtitle,final]
-            \step[fieldsource=techreport, fieldtarget=booktitle]
+            \step[fieldsource=eventtitle, fieldtarget=booktitle]
+        }
+        \map{%eventtitle映射为publisher
+            \pertype{proceedings}
+            \pertype{collection}
+            \step[fieldsource=eventtitle,final]
+            \step[fieldsource=eventtitle, fieldtarget=publisher]
         }
         \map{%处理在bib文件用mark标记文献类型标识符的情况
             \step[fieldsource=mark,final]
@@ -1030,6 +1065,16 @@
             \step[fieldset=usera, fieldvalue={CM}]%
             \step[fieldsource=publisher] %有时会把publisher和institution混淆，处理后使用institution
             \step[fieldset=institution, origfieldval]
+            }
+        \map{%舆图类型map的scale表示尺寸
+            \pertype{map}
+            \step[fieldsource=scale,final] %有时会把publisher和institution混淆，处理后使用institution
+            \step[fieldset=addendum, origfieldval]
+            }
+        \map{%舆图类型map的dimensions表示尺寸
+            \pertype{map}
+            \step[fieldsource=dimensions,final] %有时会把publisher和institution混淆，处理后使用institution
+            \step[fieldset=addendum, origfieldval]
             }
         \map{%对应增加的一个预印本类型preprint确定文献类型标识符
             \pertype{preprint}
@@ -2351,6 +2396,8 @@
        \ifboolexpr{test {\iffieldundef{subtitle}}}%增加了对子标题的判断
             {}{\setunit{\subtitlepunct}\printfield[titlecase]{subtitle}}%
        \iffieldundef{titleaddon}{}{\setunit{\subtitlepunct}\printfield{titleaddon}}%判断一下titleaddon
+       \ifboolexpr{test{\ifentrytype{map}} and (not test{\iffieldundef{scale}})}%判断一下map类有没有scale
+            {\newunit\printfield{scale}}{}%
        \ifboolexpr{test{\ifentrytype{book}} and (not test{\iffieldundef{volume}})}%判断一下book类有没有volume
             {\setunit{\subtitlepunct}\printfield{volume}}{}%
        \ifboolexpr{(test{\ifentrytype{archive}} or  test{\ifentrytype{online}}) and (not test{\iffieldundef{number}})}%判断一下archive类有没有number
@@ -3971,7 +4018,7 @@ test {\ifentrytype{conference}}
 \def\execgbpunctfullwidth{%
 %地化字符串
 \DefineBibliographyStrings{english}{
-    and         = {\gbpunctmark},%
+    and         = {\gbpunctmarklanen},%
     andcn       = {\gbpunctmark},%
 }
 \DefineBibliographyExtras{english}{\renewcommand*{\bibrangedash}{--}}%将页码间隔符替换会endash

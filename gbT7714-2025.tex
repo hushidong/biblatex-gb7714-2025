@@ -13,7 +13,7 @@
 \setCJKsansfont{simhei.ttf}}{}
 \usepackage{xcolor}
 \usepackage{toolbox}
-\usepackage[colorlinks,CJKbookmarks,bookmarksnumbered=true]{hyperref}
+\usepackage[colorlinks,CJKbookmarks,bookmarksnumbered=true,bookmarksopen=true]{hyperref}
 \usepackage{lipsum}
 \usepackage{tcolorbox}
 \usepackage{enumitem}
@@ -1113,7 +1113,7 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 
 \subsubsection{著录格式}
 主要责任者. 题名：其他题名信息[文献类型标识/文献载体标识]. 会议地点：会议名称，会议年
-份：引文页码. 获取和访问路径. 永久标识符.
+份：引文页码. 获取和访问路径. 永久标识符.\footnote{未正式出版的会议录使用了会议名称，由于其格式与publisher类似，可以直接将会议名称填入publisher，也可以填入eventitle，即用eventitle来描述会议名称。由于eventitle也可用来描述会议录名即booktitle，所以在实现中 eventitle 根据如下逻辑转化：当是inproceedings时，eventitle转为booktitle。当是proceedings时，eventitle转为publisher。}
 
 
 \begin{refsection}
@@ -1443,7 +1443,7 @@ Zotero2024,仉尚航2024}
 \subsubsection{著录格式}
 
 主要责任者. 题名：其他题名信息. 比例尺[文献类型标识/文献载体标识]. 版本. 出版地：出版
-者，出版年. 尺寸. 获取和访问路径. 永久标识符.\footnote{由于地图尺寸在biblatex中没有专门的域描述，所以用addendum域描述。版本则用version描述，而不是edition。}
+者，出版年. 尺寸. 获取和访问路径. 永久标识符.\footnote{由于地图比例尺和大小尺寸在biblatex中没有专门的域描述，所以比例尺直接在标题中写入或者利用新增的 scale 域表示，大小尺寸则用新增的 dimensions 或原有的 addendum 域描述。版本则用version描述，而不是edition。}
 
 
 

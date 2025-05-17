@@ -55,28 +55,28 @@ biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hus
 
 ## Update history
 
++ 20250517 add field scale, dimensions. (增加域：scale, dimensions)
 + 20250516 fix some flaws. (修正一些错误)
-+ 20250423 add option gbpunctwidth to implement fullwidth punctuation. (增加选项gbpunctwidth实现全角的标点)
++ 20250423 add option gbpunctwidth to implement fullwidth punctuation, where option values: half, mixed, full, and bylan represent all punctuations are halfwidth, partial punctuations are fullwidth, all punctuations are fullwidth, and punctuations for Chinese references are fullwidth whereas punctuations for English references are halfwidth. (增加选项gbpunctwidth实现全角的标点，选项值 half, mixed, full, bylan 分别表示全半角，部分全角，全部全角，中文全角英文半角)
 
 
 ## Test files
 
 + gbT7714-2025.pdf       标准的完整复现文件
 + gbT7714-2025-halfwidth.pdf 使用半角标点的标准的完整复现文件
-+ tgbcitation.pdf        标准复现的顺序编码制部分
 + tngbcitationaynew.pdf  标准复现的著者年份制部分
++ testeg.pdf 一个简单的示例文件
 
 
 ## Compile introduction
 
-上述文件是编译后合并得到的，提供了一个完整的bat脚本 makefileGBT2025.bat，其中ghostscript的路径用户可根据实际情况切换。
+上述文件是编译后合并得到的，提供了一个完整的bat脚本 makefileGBT2025.bat。
 
-文件中，tgbcitation.pdf 由tgbcitation.tex编译得到。
+文件中，gbT7714-2025.pdf 由gbT7714-2025.tex编译得到。
 
 tngbcitationaynew.pdf 由 tngbcitationaynew.tex 编译得到。
 
-gbT7714-2025.pdf由上述两个pdf合并得到。
-
+testeg.pdf 由 testeg.tex 编译得到。
 
 
 ---------------------------------------------------------
