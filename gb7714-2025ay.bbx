@@ -77,6 +77,7 @@
     \DeclareDatamodelFields[type=field,datatype=literal]{scale}%表示地图比例
     \DeclareDatamodelFields[type=field,datatype=literal]{dimensions}%表示地图大小
 
+
     %因为biblatex更新3.14版本以后，biber对于为声明数据模型的条目类型
     %不再默认读取，而是以空字符串作为条目类型名，自然在条目定义alias时
     %就会出现问题，因此显式的声明一下newspaper，然后保留后面采用alias的方式
@@ -1004,6 +1005,11 @@
         \map{%根据article确定文献类型标识符
             \pertype{article}
             \step[fieldset=usera, fieldvalue={J}]
+            }
+        \map{%article给出eid时做pages处理
+            \pertype{article}
+            \step[fieldsource=eid,final]
+            \step[fieldset=pages, origfieldval]
             }
         \map{%根据periodical确定文献类型标识符
             \pertype{periodical}
@@ -3173,15 +3179,18 @@ incollection,proceedings,inproceedings]{number}{%
   \printfield{volume}%
   \setunit*{\adddot}%
   \printfield{number}%
-  \setunit{\addcomma\space}%
-  \printfield{eid}}{%
+  %\setunit{\addcomma\space}%
+  %\printfield{eid}%
+  }%
+  {%
   \printfield{volume}%
   %\setunit*{\adddot}%去掉点号
   %\printfield{number}%
   \iffieldundef{number}{}{\printfield[addnumflag]{number}}%区别于顺序编码制
-  \iffieldundef{eid}{}{%
-  \setunit{\addcomma\space}%
-  \printfield{eid}}}}
+  %\iffieldundef{eid}{}{%
+  %\setunit{\addcomma\space}%
+  %\printfield{eid}}%
+  }}
 
 %
 %   调整期刊年份的格式
@@ -3451,9 +3460,9 @@ test {\ifentrytype{conference}}
   \printtext{\multivolsecond}%
   \printtext{\mkbibparens{\multinumbersecond}}}%
   }%
-  \setunit{\addcomma\space}%
-  \printfield{eid}%
-  \setunit{\addspace}%
+  %\setunit{\addcomma\space}%
+  %\printfield{eid}%
+  %\setunit{\addspace}%
   %\usebibmacro{issue+date}%
   %\setunit{\addcolon\space}%
   \usebibmacro{issue}%

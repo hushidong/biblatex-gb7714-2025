@@ -1021,6 +1021,11 @@
             \pertype{article}
             \step[fieldset=usera, fieldvalue={J}]
             }
+        \map{%article给出eid时做pages处理
+            \pertype{article}
+            \step[fieldsource=eid,final]
+            \step[fieldset=pages, origfieldval]
+            }
         \map{%根据periodical确定文献类型标识符
             \pertype{periodical}
             \step[fieldset=usera, fieldvalue={J}]
@@ -2970,15 +2975,18 @@ incollection,proceedings,inproceedings]{number}{%
   \printfield{volume}%
   \setunit*{\adddot}%
   \printfield{number}%
-  \setunit{\addcomma\space}%
-  \printfield{eid}}{%
+  %\setunit{\addcomma\space}%
+  %\printfield{eid}
+  }%
+  {%
   \printfield{volume}%
   %\setunit*{\adddot}%去掉点号
   %\printfield{number}%
   \iffieldundef{number}{}{\printtext{\gbleftparen\printfield{number}\gbrightparen}}%增加一个圆括号
-  \iffieldundef{eid}{}{%
-  \setunit{\addcomma\space}%
-  \printfield{eid}}}}
+  %\iffieldundef{eid}{}{%
+  %\setunit{\addcomma\space}%
+  %\printfield{eid}}%
+  }}
 
 %
 %   调整期刊年份的格式
@@ -3219,9 +3227,9 @@ incollection,proceedings,inproceedings]{number}{%
   \printtext{\multivolsecond}%
   \printtext{\mkbibparens{\multinumbersecond}}}%
   }%
-  \setunit{\addcomma\space}%
-  \printfield{eid}%
-  \setunit{\addspace}%
+  %\setunit{\addcomma\space}%
+  %\printfield{eid}%
+  %\setunit{\addspace}%
   %\usebibmacro{issue+date}%
   %\setunit{\addcolon\space}%
   \usebibmacro{issue}%

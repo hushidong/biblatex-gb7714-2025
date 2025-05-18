@@ -416,14 +416,27 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 \subsection{析出文献 component part}
 由某个责任者（\ref{sec:concept:creator}）提供的、构成可能涉及多个责任者
 （\ref{sec:concept:creator}）的主文献一部分的文献。
+
 注：析出文献可以是连续出版物（\ref{sec:concept:serial}）中的论文，图书中具有独立作者、独立篇名的文献等。
 
 \subsection{引文参考文献 cited reference}\label{sec:concept:citeref}
 著者为撰写或编辑作品而引用的信息资源。
 
-\subsection{永久标识符 persistent identifier； PID}
+\subsection{永久标识符 persistent identifier； PID}\label{sec:concept:pid}
 数字对象的唯一标识符，通过独立于其物理位置或当前所有权提供访问，确保对其的永久存取。
-注：永久标识符包括数字对象标识符（ DOI）、统一资源名称（ URN）等。
+
+注：永久标识符包括数字对象标识符（DOI）、统一资源名称（URN）等。
+\footnote{永久标识符 (PID) 用于对数字资源的长期引用。DOI (Digital Object Unique Identifier) 是数字对象标识符。URN (Uniform Resource Name) 是统一资源名。这三个概念实际是从不同角度提出的概念。\newline
+PID 强调引用的持久不变性，不论这种持久不变性是什么形式，由什么组织或机构实现。PID 是联合国教科文组织（United Nations Educational, Scientific and Cultural Organization, UNESCO）"开放科学建议"（RECOMMENDATION on OPEN SCIENCE）的开放科学重要基础设施之一。\\
+URN 是从互联网资源角度强调资源名的统一性和唯一性，也就是同一资源无论放到哪里(访问网址是否相同，是否有效)都有相同的名称，也可以看做是一种身份证信息。URN 由NID (Namespace Identifier) 和 NSS (Namespace Specific String) 构成，NID 由参与URN计划的组织和单位在 IANA ( Internet Assigned Numbers Authority ) 注册，NSS 由这些单位自行决定命名方式。\newline
+DOI 强调对象标识的唯一性，可以看做是由 International DOI Foundation 组织提供的资源身份证信息，该组织维护DOI系统来为数字资源提供唯一的、永久的标识符，以方便资源的检索、引用和链接。\newline
+注意到：
+DOI 实际上也在URN的
+\href{https://www.iana.org/assignments/urn-namespaces/urn-namespaces.xhtml}{注册列表}中，所以 DOI 也可以看做是URN的一种实现。同时因为 DOI 也支持对数字资源的长期引用，所以DOI也视作 PID 的一种具体实现。\\
+无论是URN 和 PID 都存在不同的实现。在PID 中，CSTR (Common Science and Technology Resources) 就是与 DOI 类似的这样一种实现，它是全球通用科技资源标识符，也是全球科技资源唯一标识的贡献者与全球开放科学的实践者。除此之外，ISBN (International Standard Book Number)、ArXiv 等都可以视作是PID的实现。
+DOI、ISBN等既被视作支持PID的
+\href{https://pub.orcid.org/v3.0/identifiers}{永久标识符}，实际上也在 URN Namespaces 中。\\
+因此，从这一关系看，上述概念可理解为：PID 和 URN 是更高层的面向唯一资源描述与访问的某些计划或目标实现的载体，只是前者主要面向科技资源，后者面向互联网资源，前者强调永久存取，后者强调统一命名。而 DOI 、CSTR、ISBN 等可以看做是支撑这些高层目标的底层实现。这种实现可能带有多功能性，比如既支持永久存取，也支持统一命名，使其可以作为不同计划的具体实现。}
 
 [来源： GB/T 4894-2024， 3.2.5.25，有修改]
 
@@ -821,7 +834,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 {\printbiblist[heading=none, env=exampleenv]{dateexample}}
 \end{refsection}
 
-\subsection{页码}
+\subsection{页码}\label{sec:item:pages}
 析出文献的页码或引文页码，应采用阿拉伯数字著录（参见 \ref{sec:entrytype:article}、 \ref{sec:numeric:multic}、 \ref{sec:ay:multicites}）。引自序言
 或扉页题词的页码，可按实际情况著录。无页码有文章编号的，应将文章编号按页码著录。
 
@@ -1002,7 +1015,7 @@ Publiclibrary1979}
 \subsubsection{通用要求}\label{sec:article:request}
 
 凡是从期刊中析出的文章，应在刊名之后注明其年、卷、期、页码等。阅读型参考文献的页码著录
-文章的起讫页或起始页，引文参考文献的页码著录引用信息所在页。\footnote{注意：当前存在一些期刊文献的引用信息是提供文章编号而不是页码。由于编号的格式与页码类似，所以可以直接将文章编号放在 pages 域中。比如，下面的示例5，只需在bib中给出：pages=\{147370\}。}
+文章的起讫页或起始页，引文参考文献的页码著录引用信息所在页。\footnote{注意：当前存在一些期刊文献的引用信息是提供文章编号而不是页码。由于编号的格式与页码类似(见 \ref{sec:item:pages} 节)，所以可以直接将文章编号放在 pages 域中或者 eid 域中。比如，下面的示例5，可以在bib中给出：pages=\{147370\} 或  eid =\{147370\}。}
 
 \begin{refsection}
 
@@ -1443,7 +1456,7 @@ Zotero2024,仉尚航2024}
 \subsubsection{著录格式}
 
 主要责任者. 题名：其他题名信息. 比例尺[文献类型标识/文献载体标识]. 版本. 出版地：出版
-者，出版年. 尺寸. 获取和访问路径. 永久标识符.\footnote{由于地图比例尺和大小尺寸在biblatex中没有专门的域描述，所以比例尺直接在标题中写入或者利用新增的 scale 域表示，大小尺寸则用新增的 dimensions 或原有的 addendum 域描述。版本则用version描述，而不是edition。}
+者，出版年. 尺寸. 获取和访问路径. 永久标识符.\footnote{由于地图比例尺和大小尺寸在biblatex中没有专门的域描述，所以比例尺直接在标题中写入或者利用新增的 scale 域表示，大小尺寸则用新增的 dimensions 或原有的 addendum 域描述。版本则用version描述，而不是edition。两个新增域的信息见\url{https://aurimasv.github.io/z2csl/typeMap.xml}。}
 
 
 
@@ -1514,7 +1527,9 @@ Zotero2024,仉尚航2024}
 \subsubsection{著录格式}
 
 主要责任者. 题名[文献类型标识/文献载体标识]. 版本. 预印本出版平台（创建或修改日期） [引
-用日期]. 获取和访问路径. 永久标识符.\footnote{预印本通常是在线的，所以一般转为online处理，同时考虑一般的预印平台放在archiveprefix域中，将其转化为institution。并且根据该域信息设置misc类的标识符为PP。}
+用日期]. 获取和访问路径. 永久标识符.\footnote{预印本通常是在线的，所以一般转为online处理，同时考虑一般的预印平台放在archiveprefix域中，将其转化为institution。并且根据该域信息设置misc类的标识符为PP。PID 可以是URN，也可以是DOI，或是其他的标识，如CSTR(全球通用科技资源标识符)，PID一般不用专门的域来保存，所以可以直接将其放在URL中，所以 URL 可以是带有网络协议、主机端口信息的网址，也可以是单纯的 PID 信息。而DOI域仅用于保存纯粹的DOI信息。示例中的文献3中的URL保存了 PID 信息(这里是CSTR)。文献1和4中的URL则保存了带有网络协议信息和PID信息的网址，只是文献1中的PID信息是CSTR，而文献4中的是DOI信息。关于 PID 这些概念的解释见 \ref{sec:concept:pid} 节。}
+
+
 
 \begin{refsection}
 \nocite{方向明2023元宇宙,肖玲2024数据,山东一医大2025,BLOSS2025trial,JENKINS2012light}
