@@ -461,7 +461,7 @@
        \usebibmacro{prenote}%
         \renewbibmacro*{postnote}{%
             \iffieldundef{postnote}%
-            {}{\setunit{\addcolon\addspace}\printfield{postnote}}}%与ay样式不同，由于已修改postnote域格式，直接用printfield
+            {}{\setunit{\subtitlepunct}\printfield{postnote}}}%与ay样式不同，由于已修改postnote域格式，直接用printfield
        }%
       {\usebibmacro{citesavefn}%
           \ifcsdef{labelsec\arabic{refsection}\arabic{page}et\thefield{entrykey}}%
@@ -647,6 +647,7 @@
       minitems     = 1, %设置缩减后的列表最小数量
       isbn=false,
       usetranslator=true,
+      sortcase=false,
     }
 
     %
@@ -2103,13 +2104,20 @@
 %
 %   注意:修改标题的字母大小写，不能用前面的title的格式而要用titlecase
 %   因为titlecase is applied to the contents of the field directly，title is not
-%\DeclareFieldFormat{titlecase}{\MakeCapital#1}%重设标题格式，将其修改为首字母大写
+%   利用\mktitlecase、\mkbooktitlecase、\mkjournaltitlecase三个接口调整不同项大小写
+\newcommand\mktitlecase[1]{#1}%用于调整titlecase
+\newcommand\mkbooktitlecase[1]{#1}%用于调整booktitlecase
+\newcommand\mkjournaltitlecase[1]{#1}%用于调整journaltitlecase
 \DeclareFieldFormat{titlecase}{\iftoggle{bbx:titlelink}{%
-\iffieldundef{url}{#1}{%
-\href{\thefield{url}}{#1}}}{#1}}%重设标题格式，将其修改为首字母大写
+\iffieldundef{url}{\mktitlecase{#1}}{%
+\href{\thefield{url}}{\mktitlecase{#1}}}}{\mktitlecase{#1}}}%重设一般标题格式，将其修改为首字母大写
+\DeclareFieldFormat{booktitlecase}{\mkbooktitlecase{#1}}%重设booktitle标题格式
+\DeclareFieldFormat{journaltitlecase}{\mkjournaltitlecase{#1}}%重设journaltitle格式
 \DeclareFieldFormat{pages}{#1}%去掉前面引导页码的pp.等字符，\mkpageprefix[bookpagination]{#1}
 \DefineBibliographyExtras{english}{\renewcommand*{\bibrangedash}{-}}%将页码间隔符替换会英文的短横线
 \DefineBibliographyExtras{russian}{\renewcommand*{\bibrangedash}{-}}%将页码间隔符替换会英文的短横线
+\newcommand{\innerspacedelim}{\addspace}%用于项内的空格
+\newcommand{\innercommadelim}{\addcomma\addspace}%用于项内的逗号
 
 \def\execgbfdfmtstd{%恢复到标准样式的设置
 \DeclareFieldFormat{title}{\mkbibemph{##1}}
@@ -2125,6 +2133,8 @@
 \DeclareFieldFormat{booktitle}{\mkbibemph{##1}}
 \DeclareFieldFormat{url}{\mkbibacro{URL}\addcolon\space\url{##1}}
 \DeclareFieldFormat{titlecase}{##1}
+\DeclareFieldFormat{booktitlecase}{##1}
+\DeclareFieldFormat{journaltitlecase}{##1}
 \DeclareFieldFormat{pages}{\mkpageprefix[bookpagination]{##1}}
 }
 
@@ -2148,7 +2158,8 @@
   \ifnameundef{editor}
     {}
     {\iffieldequalstr{userd}{chinese}{}{\usebibmacro{byeditor+othersstrg}%
-     \setunit{\addspace}}%
+     \setunit{\innerspacedelim}%
+     }%
      \printnames[byeditor]{editor}%
      \iffieldequalstr{userd}{chinese}{\usebibmacro{byeditor+othersstrg}}{}%
      \clearname{editor}%
@@ -2163,15 +2174,12 @@
 %   原理方法:修改来自biblatex.def文件的bytranslator+others宏的格式
 \renewbibmacro*{bytranslator+others}{\bibauthorfont%
   \ifnameundef{translator}
-    {}
-    {\iffieldequalstr{usere}{chinese}{}{\usebibmacro{bytranslator+othersstrg}\setunit{\addspace}}%
-     \printnames[bytranslator]{translator}%
+    {}%
+    {\printnames[bytranslator]{translator}%
      \clearname{translator}%
      %从macro*{bytranslator+othersstrg}%中可以看到当地化字符串格式的引用前的代码处理
      %比如生成cotranslator等用于调用cotranslator所代表的当地化字符串
      \iffieldequalstr{usere}{chinese}{\usebibmacro{bytranslator+othersstrg}}{}%“译”的位置换到下面来，即放到译者后面。
-     %\setunit{\addspace}%
-     %\newunit%
      }%
   %\usebibmacro{withothers}
   }
@@ -2185,17 +2193,17 @@
        {\appto\abx@tempa{an}%
         \clearname{annotator}}
        {}}%
-  \ifnamesequal{translator}{introduction}
+  \ifnamesequal{translator}{introduction}%
     {\appto\abx@tempa{in}%
-     \clearname{introduction}}
-    {\ifnamesequal{translator}{foreword}
+     \clearname{introduction}}%
+    {\ifnamesequal{translator}{foreword}%
        {\appto\abx@tempa{fo}%
-        \clearname{foreword}}
-       {\ifnamesequal{translator}{afterword}
+        \clearname{foreword}}%
+       {\ifnamesequal{translator}{afterword}%
           {\appto\abx@tempa{af}%
-           \clearname{afterword}}
+           \clearname{afterword}}%
           {}}}%
-\iffieldequalstr{usere}{chinese}{\bibstring{bytranslatorcn}}
+\iffieldequalstr{usere}{chinese}{\bibstring{bytranslatorcn}}%
   {\bibstring{\abx@tempa}}}
 
 
@@ -2483,70 +2491,110 @@
 \DeclareNameAlias{citename}{default}% Default used by \citename
 \DeclareNameAlias{bytranslator}{default}
 
+
 \DeclareDelimFormat[bib,biblist]{andothersdelim}{\addcomma\addspace}
 %\DeclareDelimFormat[textcite]{andothersdelim}{\addspace}%
 
 %GB/T 7714-2015 风格，全部大写
+\newcommand{\presuffixdelim}{\addcomma\space}
 \def\gbcaselocalset{\renewrobustcmd*{\bibinitperiod}{}%将名字简写后的点去掉
 \renewcommand*{\revsdnamepunct}{}%%%来源biblatex.def
 }
 \newbibmacro*{name:gbuppercase}[4]{\bibauthorfont%
   \gbcaselocalset%
-  \ifuseprefix%
+    \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
-     \ifdefvoid{#3}{}{%
-       \ifcapital%
-         {\mkbibnameprefix{\MakeCapital{#3}}\isdot}%
-         {\mkbibnameprefix{#3}\isdot}%
-       \ifprefchar{}{\bibnamedelimc}}%
-     \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeUppercase{#1}}}\isdot%
-     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibnamegiven{\MakeUppercase{#2}}\isdot}%\MakeCapital
-     \ifdefvoid{#4}{}{\addcomma\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}%后缀前加逗号
+     \mkbibcompletenamefamilygiven{%
+       \ifdefvoid{#3}
+         {}
+         {\ifcapital
+            {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
+            {\mkbibnameprefix{#3}\isdot}%
+          \ifprefchar{}{\bibnamedelimc}}%
+       %区分是否是团体责任者做处理
+       \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeUppercase{#1}}}\isdot%
+       \ifdefvoid{#2}
+         {}
+         {\revsdnamepunct\bibnamedelimd\mkbibnamegiven{\MakeUppercase{#2}}\isdot}}%
+       \ifdefvoid{#4}
+         {}
+         {\presuffixdelim\mkbibnamesuffix{#4}\isdot}%
+         }
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeUppercase{#1}}}\isdot%
-     \ifboolexpe{%
-       test {\ifdefvoid{#2}}
-       and
-       test {\ifdefvoid{#3}}}
-       {}{\revsdnamepunct}%
-     \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{\MakeUppercase{#2}}\isdot}%\MakeCapital
-     \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}%
-     \ifdefvoid{#4}{}{\addcomma\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}%%后缀前加逗号
+     \mkbibcompletenamefamilygiven{%
+       %区分是否是团体责任者做处理
+       \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeUppercase{#1}}}\isdot%
+       \ifboolexpe{%
+         test {\ifdefvoid{#2}}
+         and
+         test {\ifdefvoid{#3}}}
+         {}
+         {\revsdnamepunct}%
+       \ifdefvoid{#2}
+         {}
+         {\bibnamedelimd\mkbibnamegiven{\MakeUppercase{#2}}\isdot}%
+       \ifdefvoid{#3}
+         {}
+         {\bibnamedelimd\mkbibnameprefix{#3}\isdot}}%
+       \ifdefvoid{#4}
+         {}
+         {\presuffixdelim\mkbibnamesuffix{#4}\isdot}%
+         }%
 }
 
 %GB/T 7714-2015 风格，大小写不变，根据bib文件内输入原样输出
 \newbibmacro*{name:gblowercase}[4]{\bibauthorfont%
   \gbcaselocalset%
-  \ifuseprefix
+    \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
-     \ifdefvoid{#3}{}{%
-       \ifcapital
-         {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
-         {\mkbibnameprefix{#3}\isdot}%
-       \ifprefchar{}{\bibnamedelimc}}%
-     \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{{#1}}}\isdot%
-     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibnamegiven{{#2}}\isdot}%\MakeCapital
-     \ifdefvoid{#4}{}{\addcomma\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}%后缀前加逗号
+     \mkbibcompletenamefamilygiven{%
+       \ifdefvoid{#3}
+         {}
+         {\ifcapital
+            {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
+            {\mkbibnameprefix{#3}\isdot}%
+          \ifprefchar{}{\bibnamedelimc}}%
+       %区分是否是团体责任者做处理
+       \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeSentenceCase{#1}}}\isdot%
+       \ifdefvoid{#2}
+         {}
+         {\revsdnamepunct\bibnamedelimd\mkbibnamegiven{\MakeUppercase{#2}}\isdot}}%
+       \ifdefvoid{#4}
+         {}
+         {\presuffixdelim\mkbibnamesuffix{#4}\isdot}%
+         }
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{{#1}}}\isdot%
-     \ifboolexpe{%
-       test {\ifdefvoid{#2}}
-       and
-       test {\ifdefvoid{#3}}}
-       {}{\revsdnamepunct}%
-     \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{{#2}}\isdot}%\MakeCapital
-     \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}
-     \ifdefvoid{#4}{}{\addcomma\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}%%后缀前加逗号
+     \mkbibcompletenamefamilygiven{%
+       %区分是否是团体责任者做处理
+       \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeSentenceCase{#1}}}\isdot%
+       \ifboolexpe{%
+         test {\ifdefvoid{#2}}
+         and
+         test {\ifdefvoid{#3}}}
+         {}
+         {\revsdnamepunct}%
+       \ifdefvoid{#2}
+         {}
+         {\bibnamedelimd\mkbibnamegiven{\MakeUppercase{#2}}\isdot}%
+       \ifdefvoid{#3}
+         {}
+         {\bibnamedelimd\mkbibnameprefix{#3}\isdot}}%
+       \ifdefvoid{#4}
+         {}
+         {\presuffixdelim\mkbibnamesuffix{#4}\isdot}%
+         }%
 }
 
 %中文常见风格，汉语拼音全拼模式
 \def\gbpinyinlocalset{\renewrobustcmd*{\bibinitperiod}{}%将名字简写后的点去掉，%来源biblatex2.STY
 \renewcommand*{\revsdnamepunct}{}%%来源biblatex.def
-\renewrobustcmd*{\bibnamedelima}{\mbox{-}}}
+\renewrobustcmd*{\bibnamedelima}{\mbox{-}}%
+\renewrobustcmd*{\bibnamedelimi}{\mbox{-}}%
+}
 \newbibmacro*{name:gbpinyin}[4]{\bibauthorfont%
 \gbpinyinlocalset%
   \ifuseprefix
@@ -2557,12 +2605,15 @@
          {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
          {\mkbibnameprefix{#3}\isdot}%
        \ifprefchar{}{\bibnamedelimc}}%
-     \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeUppercase{#1}}}\isdot%
-     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibnamegiven{\MakeSentenceCase{#2}}\isdot}%\MakeCapital
-     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}
+     %区分是否是团体责任者做处理
+       \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeUppercase{#1}}}\isdot%
+     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibnamegiven{\MakeCapital{#2}}\isdot}%\MakeCapital
+     \ifdefvoid{#4}{}{\presuffixdelim\mkbibnamesuffix{#4}\isdot}%
+     }
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeUppercase{#1}}}\isdot%
+     %区分是否是团体责任者做处理
+       \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeUppercase{#1}}}\isdot%
      \ifboolexpe{%
        test {\ifdefvoid{#2}}
        and
@@ -2570,13 +2621,17 @@
        {}
        {\revsdnamepunct}%
      \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{\MakeCapital{#2}}\isdot}%\MakeCapital
-     \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}
-     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}%
+     \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}%
+     \ifdefvoid{#4}{}{\presuffixdelim\mkbibnamesuffix{#4}\isdot}%
+     }%
 }
+
 %中文常见风格，汉语拼音全拼模式
 \def\gbquanpinlocalset{\renewrobustcmd*{\bibinitperiod}{}%将名字简写后的点去掉，%来源biblatex2.STY
 \renewcommand*{\revsdnamepunct}{}%%来源biblatex.def
-\renewrobustcmd*{\bibnamedelima}{}}
+\renewrobustcmd*{\bibnamedelima}{}%
+\renewrobustcmd*{\bibnamedelimi}{}%
+}
 \newbibmacro*{name:gbquanpin}[4]{\bibauthorfont%
 \gbquanpinlocalset%
   \ifuseprefix
@@ -2587,12 +2642,15 @@
          {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
          {\mkbibnameprefix{#3}\isdot}%
        \ifprefchar{}{\bibnamedelimc}}%
-     \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeCapital{#1}}}\isdot%
-     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibnamegiven{\MakeSentenceCase{#2}}\isdot}%\MakeCapital
-     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}
+       %区分是否是团体责任者做处理
+       \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeSentenceCase{#1}}}\isdot%
+     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibnamegiven{\MakeCapital{#2}}\isdot}%\MakeCapital
+     \ifdefvoid{#4}{}{\presuffixdelim\mkbibnamesuffix{#4}\isdot}%
+     }
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeCapital{#1}}}\isdot%
+     %区分是否是团体责任者做处理
+       \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeSentenceCase{#1}}}\isdot%
      \ifboolexpe{%
        test {\ifdefvoid{#2}}
        and
@@ -2600,32 +2658,37 @@
        {}
        {\revsdnamepunct}%
      \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{\MakeCapital{#2}}\isdot}%\MakeCapital
-     \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}
-     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}%
+     \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}%
+     \ifdefvoid{#4}{}{\presuffixdelim\mkbibnamesuffix{#4}\isdot}%
+     }%
 }
 
 %英文风格，全名模式
 \def\gbfullnamelocalset{\renewrobustcmd*{\bibinitperiod}{}%将名字简写后的点去掉，%来源biblatex2.STY
 \renewcommand*{\revsdnamepunct}{}%%来源biblatex.def
-\renewrobustcmd*{\bibnamedelima}{}}
+\renewrobustcmd*{\bibnamedelima}{}%
+\renewrobustcmd*{\bibnamedelimi}{}%
+}
 \newbibmacro*{name:gbfullname}[4]{\bibauthorfont%
 \gbfullnamelocalset%
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
-     \ifdefvoid{#2}{}{\mkbibnamegiven{\MakeSentenceCase{#2}}\isdot\bibnamedelimd}%\MakeCapital
+     \ifdefvoid{#2}{}{\mkbibnamegiven{\MakeCapital{#2}}\isdot\bibnamedelimd}%\MakeCapital
      \ifdefvoid{#3}{}{%
        \ifcapital
          {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
          {\mkbibnameprefix{#3}\isdot}%
        \ifprefchar{}{\bibnamedelimc}}%
+       %是否是团体责任者不做区分
      \mkbibnamefamily{\MakeCapital{#1}}\isdot%
-     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}
+     \ifdefvoid{#4}{}{\presuffixdelim\mkbibnamesuffix{#4}\isdot}}
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
      \ifdefvoid{#2}{}{\mkbibnamegiven{\MakeCapital{#2}}\isdot\bibnamedelimd}%\MakeCapital
-     \ifdefvoid{#2}{\mkbibnamefamily{\MakeCapital{#1}}}{\mkbibnamefamily{\MakeUppercase{#1}}}\isdot%
-     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}%
+     %是否是团体责任者不做区分
+     \mkbibnamefamily{\MakeCapital{#1}}\isdot%
+     \ifdefvoid{#4}{}{\presuffixdelim\mkbibnamesuffix{#4}\isdot}}%
 }
 
 
@@ -2633,21 +2696,14 @@
 %
 %   url和url日期格式
 %
-\renewbibmacro*{url+urldate}{%
-  %\usebibmacro{url}%%更换url的位置，放到下面
-%  \iffieldundef{urlyear}%
-%    {}{%\setunit*{\addspace}%
-%    \usebibmacro{urldate}}%
-     \setunit{\addperiod\addspace}%
-     \usebibmacro{url}}
 \renewbibmacro*{url}{\printfield{url}}
-
+\renewbibmacro*{url+urldate}{%
+     \newunit%
+     \usebibmacro{url}}
 \newbibmacro*{online:url+urldate}{%
-  %\usebibmacro{url}%%更换url的位置，放到下面
   \iffieldundef{urlyear}%
-    {}{%\setunit*{\addspace}%
-    \usebibmacro{urldate}}%
-     \setunit{\addperiod\addspace}%
+    {}{\usebibmacro{urldate}}%
+     \newunit%
      \usebibmacro{url}}
 
 %
@@ -2733,18 +2789,13 @@
 %    2019.05.01 byhzz 在eprint前增加一个空格
 %   原理方法:源来自standard.bbx，因为页码后面直接跟引用日期，没有标点所以去掉其中的标点。
 \renewbibmacro*{doi+eprint+url}{%
-%  \iftoggle{bbx:doi}%把doi的位置放到url后面
-%    {\printfield{doi}}
-%    {}%
-  %\newunit\newblock
   \iftoggle{bbx:eprint}
     {\iffieldundef{eprint}{}{\newunit\usebibmacro{eprint}}}
     {}%
-  %\newunit\newblock
   \iftoggle{bbx:url}
     {\usebibmacro{url+urldate}}
-    {}
-  \newunit\newblock
+    {}%
+  \newunit\newblock%
   \iftoggle{bbx:doi}
     {\printfield{doi}}
     {}}
@@ -2758,7 +2809,6 @@
   \iffieldundef{pages}{}{%这里增加一个判断，当没有页码时就不输出
   \setunit{\bibpagespunct}%
   \printfield{pages}}%
-  %\newunit %这里的标点去掉
 }
 
 %
@@ -2829,11 +2879,11 @@ test {\iflistundef{location}} and test {\iflistundef{institution}}%
         {\printlist{location}\publocpunct}%%\addcolon\addspace%
     \iflistundef{publisher}{%
         \iffieldequalstr{entrysubtype}{standard}{}%
-        {\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@nopublisher\gbrightbracket}}%\setunit{\adddot\addspace}\setunit*{\addcomma\addspace}
-        {\printtext{\mkbibbrackets{s.n.}}}}}%\setunit{\adddot\addspace}\setunit*{\addcomma\addspace}
+        {\iftoggle{ifCJKforgbt}{\printtext{\gbleftbracket\str@nopublisher\gbrightbracket}}%
+        {\printtext{\mkbibbrackets{s.n.}}}}}%
         {\printlist{publisher}}}%
-\pubdatadelim%\addcomma\addspace%
-\usebibmacro{date}%%\newunit %去掉这个标点
+\pubdatadelim%
+\usebibmacro{date}%
 }%
 {\printlist{location}%
   \iflistundef{publisher}
@@ -2841,7 +2891,7 @@ test {\iflistundef{location}} and test {\iflistundef{institution}}%
     {\setunit*{\publocpunct}}%
   \printlist{publisher}%
   \pubdatadelim%
-  \usebibmacro{date}%%\newunit
+  \usebibmacro{date}%
   }%
 }
 
@@ -2853,13 +2903,12 @@ test {\iflistundef{location}} and test {\iflistundef{institution}}%
 \renewbibmacro*{institution+location+date}{\bibpubfont%当没有institution时不处理。
 {\printlist{location}%%加了一个编组避免\usebibmacro{date}把month和day信息去掉
   \iflistundef{institution}
-    {\setunit*{\addcomma\space}}
+    {\locnopubdelim}
     {\setunit*{\publocpunct}}%
   \printlist{institution}%
   \pubdatadelim%
   \ifentrytype{archive}{\usebibmacro{newsdate}}%
   {\usebibmacro{date}}%
-  %\newunit
   }}
 
 %
@@ -2923,19 +2972,21 @@ incollection,proceedings,inproceedings]{number}{%
 %   修改析出文献的文集的标题与附加标题间的符号
 %
 \renewbibmacro*{booktitle}{%
-  \ifboolexpr{
+  \ifboolexpr{%
     test {\iffieldundef{booktitle}}
     and
     test {\iffieldundef{booksubtitle}}
-  }
-    {}
+  }%
+    {}%
     {\printtext[booktitle]{\bibtitlefont%
-       \printfield[titlecase]{booktitle}%
-       \setunit{\subtitlepunct}%
-       \printfield[titlecase]{booksubtitle}}%
-     \newunit%标点换成下一句
-     \setunit{\subtitlepunct}}%
-  \printfield{booktitleaddon}}
+       \printfield[booktitlecase]{booktitle}%
+       \iffieldundef{booksubtitle}{}%
+          {\setunit{\subtitlepunct}\printfield[booktitlecase]{booksubtitle}}%
+       \iffieldundef{booktitleaddon}{}%
+          {\setunit{\subtitlepunct}\printfield[booktitlecase]{booktitleaddon}}%
+       }%
+     }%
+}
 
 
 %
@@ -2943,26 +2994,32 @@ incollection,proceedings,inproceedings]{number}{%
 %
 %   v1.0k,20180425,增加了字体控制命令，hzz
 %   v1.1j,20220527,修复期刊名不存在时多余的标点
+\renewbibmacro*{journal}{%
+  \iffieldundef{journaltitle}%
+    {}%
+    {\printtext[journaltitle]%
+       {\printfield[journaltitlecase]{journaltitle}%
+       \iffieldundef{journalsubtitle}{}%
+            {\setunit{\subtitlepunct}\printfield[journaltitlecase]{journalsubtitle}}%
+       \iffieldundef{journaltitleaddon}{}%
+            {\setunit{\subtitlepunct}\printfield[journaltitlecase]{journaltitleaddon}}%
+       }%
+    }%
+}
 \newcommand{\journaldatedelim}{\addcomma\addspace}
 \newcommand{\jourdatevoldelim}{\addcomma\addspace}
 \renewbibmacro*{journal+issuetitle}{\bibpubfont%源来自standard.bbx
   \usebibmacro{journal}%
-  %\setunit*{\addspace}%
   \iffieldundef{journaltitle}{}{\setunit*{\journaldatedelim}}%修改为增加一个逗号
   \iffieldundef{series}
     {}
     {\newunit
      \printfield{series}%
-     \setunit{\addspace}}%
-  %\usebibmacro{volume+number+eid}%
-  %\setunit{\addspace}%
+     }%
   \printtext{\usebibmacro{issue+date}}%使用printtext配合后面的\setunit*来实现后面的逗号的自动处理
-  %\setunit{\addcolon\space}%
   \iffieldundef{volume}{}{\setunit*{\jourdatevoldelim}}%
-  %换成逗号和空格
   \usebibmacro{issue}%
   \usebibmacro{volume+number+eid}%把卷期放到年份后面
-  %\newunit
   }
 
 
@@ -2975,13 +3032,10 @@ incollection,proceedings,inproceedings]{number}{%
   \printfield{volume}%
   \setunit*{\adddot}%
   \printfield{number}%
-  %\setunit{\addcomma\space}%
   %\printfield{eid}
   }%
   {%
   \printfield{volume}%
-  %\setunit*{\adddot}%去掉点号
-  %\printfield{number}%
   \iffieldundef{number}{}{\printtext{\gbleftparen\printfield{number}\gbrightparen}}%增加一个圆括号
   %\iffieldundef{eid}{}{%
   %\setunit{\addcomma\space}%
@@ -2994,7 +3048,7 @@ incollection,proceedings,inproceedings]{number}{%
 \renewbibmacro*{issue+date}{%去掉括号
   \printtext{%去掉了[parens]
     \iffieldundef{issue}
-      {%\usebibmacro{date}
+      {%
         \iffieldundef{entrysubtype}{\ifboolexpr{test {\iffieldundef{volume}} and test {\iffieldundef{number}} and not test {\iffieldundef{url}} }
              {\usebibmacro{newsdate}}{\usebibmacro{date}}}%判断一下，是否是报纸
         {\iffieldequalstr{entrysubtype}{news}{\usebibmacro{newsdate}}%判断是否为报纸
@@ -3002,15 +3056,13 @@ incollection,proceedings,inproceedings]{number}{%
              {\usebibmacro{newsdate}}{\usebibmacro{date}}}%
       }}%
       {\iftoggle{bbx:gbstrict}{}{\printfield{issue}%
-       \setunit*{\addspace}}%
-       %\usebibmacro{date}
+       \setunit*{\innerspacedelim}}%
          \iffieldundef{entrysubtype}{\ifboolexpr{test {\iffieldundef{volume}} and test {\iffieldundef{number}} and not test {\iffieldundef{url}} }
              {\usebibmacro{newsdate}}{\usebibmacro{date}}}%判断一下，是否是报纸
         {\iffieldequalstr{entrysubtype}{news}{\usebibmacro{newsdate}}%判断是否为报纸
            {\ifboolexpr{test {\iffieldundef{volume}} and test {\iffieldundef{number}} and not test {\iffieldundef{url}} }
              {\usebibmacro{newsdate}}{\usebibmacro{date}}}%
         }}}%
-  %\newunit
   }
 
 %
@@ -3035,7 +3087,6 @@ incollection,proceedings,inproceedings]{number}{%
             \printfield{pages}}%
         }%
       }%
-  %\newunit
   }
 
 
@@ -3052,9 +3103,8 @@ incollection,proceedings,inproceedings]{number}{%
   }
     {\printnames{editor}%
     \iffieldundef{editortype}%增加一个类型判断，用于存在editortype的情况
-    {\setunit\addspace}%当没有editortype时，直接用句点
-    {%\setunit{\addcomma\space}%
-     \usebibmacro{editorstrg}}%
+    {\setunit{\innerspacedelim}}%当没有editortype时，直接用句点
+    {\usebibmacro{editorstrg}}%
      %\clearname{editor}
      }%
     {}}
@@ -3170,7 +3220,7 @@ incollection,proceedings,inproceedings]{number}{%
     and
     not test {\ifnameundef{translator}}
   }
-    {\renewcommand{\aftertransdelim}{\adddot\addspace}\printnames{translator}%
+    {\printnames{translator}%\renewcommand{\aftertransdelim}{\adddot\addspace}
      \clearname{translator}}
     {}}
 
@@ -3183,15 +3233,13 @@ incollection,proceedings,inproceedings]{number}{%
     {}
     {\printtext[title]{\bibtitlefont%
        \printfield[titlecase]{title}%
-       %\setunit{\subtitlepunct}%
        \ifboolexpr{test {\iffieldundef{subtitle}}}%这里增加了对子标题的判断，解决不判断多一个点的问题
-       {}{\setunit{\subtitlepunct}%
-       \printfield[titlecase]{subtitle}}%
+       {}{\setunit{\subtitlepunct}\printfield[titlecase]{subtitle}}%
        \iftoggle{bbx:gbtype}{%
        \iffieldundef{usera}{}{%在标题后直接给出文献标识字母
         \printfield[gbtypeflag]{usera}}}{}
-       }}
-       }
+       }}%
+}
 
 %
 %   期刊的标题做修改
@@ -3199,13 +3247,12 @@ incollection,proceedings,inproceedings]{number}{%
 \newcommand{\periodicaldatevoldelim}{\addcomma\space}
 \renewbibmacro*{title+issuetitle}{%源来自standard.BBX
   \usebibmacro{periodical}%
-  %\setunit*{\addspace}%
-  \setunit*{\adddot\addspace}%标点修改为句点
+  \newunit%
   \iffieldundef{series}
     {}
     {\newunit
      \printfield{series}%
-     \setunit{\addspace}}%
+    }%
   \usebibmacro{periodical+issue}%将issue调整到上面来，并修改
 \iffieldundef{number}{}{%%进一步处理有范围的数字
   \multinumberparser{\thefield{number}}}%
@@ -3227,11 +3274,6 @@ incollection,proceedings,inproceedings]{number}{%
   \printtext{\multivolsecond}%
   \printtext{\mkbibparens{\multinumbersecond}}}%
   }%
-  %\setunit{\addcomma\space}%
-  %\printfield{eid}%
-  %\setunit{\addspace}%
-  %\usebibmacro{issue+date}%
-  %\setunit{\addcolon\space}%
   \usebibmacro{issue}%
   \newunit}
 
@@ -3244,8 +3286,6 @@ incollection,proceedings,inproceedings]{number}{%
       {%\usebibmacro{date}%修改为下一句
       }%
       {\printfield{issue}%
-       \setunit*{\addspace}%
-       %\usebibmacro{date}%修改为下一句
        }%
        }%
 }
@@ -3269,8 +3309,6 @@ incollection,proceedings,inproceedings]{number}{%
         {\setunit{\subtitlepunct}\printfield{titleaddon}}%
         \iffieldundef{number}{}{\setunit{\subtitlepunct}\printfield{number}}%写专利号
         \iftoggle{bbx:gbtype}{\printfield[gbtypeflag]{usera}}{}%
-     %\iffieldundef{booktitle}{\newunit}{}%当title是析出时，不要标点
-     %\newunit
      }%
 }%
 }
@@ -3286,11 +3324,11 @@ incollection,proceedings,inproceedings]{number}{%
 %   需要注意\bibstring命令会把首字母大写的。
 \renewbibmacro*{in:}{%
  \iftoggle{bbx:gbpunctin}{\printtext{\allowbreak{\SlashFont//}\allowbreak}}%\addthinspace
-                         {\setunit{\adddot\addspace}%
+                         {\newunit%
                          \iffieldequalstr{userd}{chinese}%
                          {\printtext{\bibstring{incn}}}%
                          {\printtext{\bibstring{in}}}%
-                         }}%\newunit\newblock\intitlepunct
+                         }}
 
 %
 %   修改type域的输出格式
@@ -3307,9 +3345,6 @@ incollection,proceedings,inproceedings]{number}{%
 %   2019.05.01，v1.0r，byhzz
 \renewbibmacro*{series+number}{%
   \printfield{series}%
-  %\setunit*{\addspace}%
-  %\printfield{number}%
-  %\newunit
   }
 
 %=====================================================================
@@ -3345,9 +3380,7 @@ incollection,proceedings,inproceedings]{number}{%
 \usebibmacro{series+number}}%
 \newunit\newblock%
 %\printfield{note}%
-%\newunit\newblock%
 \usebibmacro{publisher+location+date}%
-%\newunit\newblock %这里标点去掉
 \usebibmacro{chapter+pages}%
 \newunit%
 %  \iffieldundef{url}{}{%当没有网址时也不输出
@@ -3360,8 +3393,6 @@ incollection,proceedings,inproceedings]{number}{%
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-  %\usebibmacro{doi+eprint+url}%
-  %\newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
@@ -3392,11 +3423,7 @@ incollection,proceedings,inproceedings]{number}{%
   \newunit\newblock
   \printfield{version}}%
   \newunit\newblock
-  %\usebibmacro{in:}% 不使用in来表示期刊等连续出版物
   \usebibmacro{journal+issuetitle}%
-  %\newunit
-%  \usebibmacro{byeditor+others}%
-%  \newunit
   \usebibmacro{note+pages}%
   \usebibmacro{doi+eprint+url}%从后面移上来，调整url和页码之间的位置
   \newunit\newblock
@@ -3404,8 +3431,6 @@ incollection,proceedings,inproceedings]{number}{%
     {\printfield{issn}}
     {}%
   \newunit\newblock
-  %\usebibmacro{doi+eprint+url}%
-  %\newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
@@ -3462,7 +3487,6 @@ incollection,proceedings,inproceedings]{number}{%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
 \ifnameundef{author}{}{\setunit{\labelnamepunct}\newblock}%这一段用于去除作者不存在时多出的标点
-  %\usebibmacro{title}%
   \usebibmacro{patenttitle}%给出专利专用的标题输出
   \iftoggle{bbx:gbstrict}{}{%
   \newunit%
@@ -3471,15 +3495,15 @@ incollection,proceedings,inproceedings]{number}{%
   \usebibmacro{byauthor}}%
   \newunit\newblock
   \printfield{type}%
-  \setunit*{\addspace}%
+  \setunit*{\innerspacedelim}%
   %\printfield{number}%已放到patenttitle中处理
   \iflistundef{location}
     {}
-    {\setunit*{\addspace}%
+    {\setunit*{\innerspacedelim}%
      \printtext{%[parens]
        \printlist[][-\value{listtotal}]{location}}}%
   \ifboolexpr{not test {\iflistundef{publisher}} and test {\iffieldundef{url}}}%
-    {\setunit*{\addcolon\addspace}%
+    {\setunit*{\subtitlepunct}%
      \printtext{%[parens]
        \printlist[][-\value{listtotal}]{publisher}}}{}%
   \newunit\newblock
@@ -3490,7 +3514,6 @@ incollection,proceedings,inproceedings]{number}{%
   \ifboolexpr{not test {\iflistundef{publisher}} and test {\iffieldundef{url}}}
   {\usebibmacro{date}}
   {\usebibmacro{newsdate}}%
-  %\newunit\newblock
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
@@ -3526,26 +3549,17 @@ incollection,proceedings,inproceedings]{number}{%
   \printfield{version}%
   \newunit\newblock
   %\printlist{organization}%
-  \printlist{institution}%
+  \printlist{institution}%%带括号的日期和不带括号的日期
 \iffieldundef{entrysubtype}{\newunit\usebibmacro{modifydate}}
     {\iffieldequalstr{entrysubtype}{archive}{\newunit\usebibmacro{newsdate}}
         {\ifboolexpr{test {\iffieldequalstr{entrysubtype}{dataset}} or test {\iffieldequalstr{entrysubtype}{preprint}}}
           {\usebibmacro{modifydate}}{\newunit\usebibmacro{modifydate}}}}%
-%\newunit\newblock
-%\ifboolexpr{%
-%test{\iffieldundef{day}} and test{\iffieldundef{endday}} and test{\iffieldundef{eventday}}%
-%}{\usebibmacro{date}}%
-%{\iffieldundef{entrysubtype}{\usebibmacro{modifydate}}%
-%    {\iffieldequalstr{entrysubtype}{archive}{\usebibmacro{newsdate}}{\usebibmacro{modifydate}}}%
-%}%带括号的日期和不带括号的日期
   \usebibmacro{online:url+urldate}%从下面移上来
   \newunit\newblock
   \iftoggle{bbx:eprint}
     {\usebibmacro{eprint}}
     {}%
   \newunit\newblock
-  %\usebibmacro{url+urldate}%
-  %\newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
@@ -3576,7 +3590,7 @@ incollection,proceedings,inproceedings]{number}{%
   \usebibmacro{byeditor+others}%增加的译者信息
   \newunit\newblock
   \printfield{type}%
-  \setunit*{\addspace}%
+  \setunit*{\innerspacedelim}%
   \printfield{number}%
   \newunit\newblock
   \printfield{version}%
@@ -3584,7 +3598,6 @@ incollection,proceedings,inproceedings]{number}{%
   \printfield{note}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
-  %\newunit\newblock
   \usebibmacro{chapter+pages}%
   \usebibmacro{doi+eprint+url}%
   \newunit
@@ -3594,8 +3607,6 @@ incollection,proceedings,inproceedings]{number}{%
     {\printfield{isrn}}
     {}%
   \newunit\newblock
-%  \usebibmacro{doi+eprint+url}%
-%  \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
@@ -3626,7 +3637,7 @@ incollection,proceedings,inproceedings]{number}{%
   \newunit\newblock
   \iftoggle{bbx:gbfieldtype}{%
   \printfield{type}%
-  \setunit*{\addspace}}{}%
+  \setunit*{\innerspacedelim}}{}%
   \printfield{number}%
   \newunit\newblock
   \printfield{version}%
@@ -3634,7 +3645,6 @@ incollection,proceedings,inproceedings]{number}{%
   \printfield{note}%
   \newunit\newblock
   \usebibmacro{institution+location+date}%
-  %\newunit\newblock
   \usebibmacro{chapter+pages}%
   \iffieldundef{url}{}{%当没有网址时也不输出修改或更新日期
   \ifboolexpr{test {\ifentrytype{archive}} or test {\ifentrytype{thesis}}}%
@@ -3647,8 +3657,6 @@ incollection,proceedings,inproceedings]{number}{%
     {\printfield{isrn}}
     {}%
   \newunit\newblock
-%  \usebibmacro{doi+eprint+url}%
-%  \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
@@ -3687,7 +3695,6 @@ incollection,proceedings,inproceedings]{number}{%
   \newunit\newblock
   \usebibmacro{institution+location+date}%
   %\usebibmacro{organization+location+date}%
-  %\newunit\newblock
   \usebibmacro{chapter+pages}%
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock
@@ -3707,32 +3714,17 @@ incollection,proceedings,inproceedings]{number}{%
 %   20210216,v1.0w,hzz
 \newbibmacro*{inbook:parent}{%
 \usebibmacro{bybookauthor}%
-  \ifnameundef{bookauthor}{%
-  \ifnameundef{editor}{}{\newunit}%
-  }{\newunit}%替换下一句
+  \ifnameundef{bookauthor}{\ifnameundef{editor}{}{\newunit}}{\newunit}%替换下一句
   %\newunit\newblock
-\iffieldundef{series}{}{\usebibmacro{series+number}\setunit{\addcolon\addspace}}%为处理一些存在series的情况而增加
+\iffieldundef{series}{}{\usebibmacro{series+number}\setunit{\subtitlepunct}}%为处理一些存在series的情况而增加
   \usebibmacro{maintitle+booktitle}%
-\iffieldundef{volume}{}{\setunit{\addcolon\addspace}\printfield{volume}}%
-\iffieldundef{number}{}{\setunit{\addcolon\addspace}\printfield{number}}%增加卷和册信息
+\iffieldundef{volume}{}{\setunit{\subtitlepunct}\printfield{volume}}%
+\iffieldundef{number}{}{\setunit{\subtitlepunct}\printfield{number}}%增加卷和册信息
   \newunit\newblock%
-%  \usebibmacro{byeditor+others}%
-%  \newunit\newblock
   \printfield{edition}%
   \newunit
-  \iftoggle{bbx:gbstrict}{}{%
-%  \iffieldundef{maintitle}
-%    {\printfield{volume}%
-%     \printfield{part}}
-%    {}%
-%  \newunit
-%  \printfield{volumes}%
-%  \newunit\newblock
-%  \usebibmacro{series+number}
-  }%
   \newunit\newblock
   %\printfield{note}%
-  %\newunit\newblock
   \usebibmacro{publisher+location+date}}
 
 %
@@ -3754,19 +3746,14 @@ incollection,proceedings,inproceedings]{number}{%
     (not test {\ifnameundef{translator}})
   }{\newunit\usebibmacro{bytranslator+others}}{}%
 \usebibmacro{in:}%
-%\printtext{\texttt{//}\addthinspace}%
 \usebibmacro{crosscite}{inbook:parent}%
-  %\newunit\newblock
   \usebibmacro{chapter+pages}%
-  %\newunit\newblock
   \usebibmacro{doi+eprint+url}%移到上面来
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-%  \usebibmacro{doi+eprint+url}%
-%  \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
@@ -3793,6 +3780,8 @@ incollection,proceedings,inproceedings]{number}{%
 \DefineBibliographyExtras{english}{\renewcommand*{\bibdatesep}{--}}%将页码间隔符替换会endash
 \DefineBibliographyExtras{russian}{\renewcommand*{\bibdatesep}{--}}%将页码间隔符替换会endash
 %域中的部分标点
+\renewcommand*{\presuffixdelim}{%
+    \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
 \renewcommand*{\revsdnamepunct}{%
     \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
 \DeclareDelimFormat{multinamedelim}{%
@@ -3844,7 +3833,7 @@ incollection,proceedings,inproceedings]{number}{%
     \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
 \DeclareDelimFormat{bibpagespunct}{%
     \iffieldequalstr{userd}{chinese}{\unspace\gbpunctcolon}{\unspace\gbpunctcolonlanen}}
-\renewcommand{\aftertransdelim}{\gbpunctcomma\addspace}
+\renewcommand{\aftertransdelim}{\gbpunctcomma}
 %著录项间的部分标点
 \renewcommand*{\newunitpunct}{%
   \iffieldequalstr{userd}{chinese}{\gbpunctdot}{\gbpunctdotlanen}}

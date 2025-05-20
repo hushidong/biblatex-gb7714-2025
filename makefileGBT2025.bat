@@ -25,3 +25,5 @@ biber gbT7714-2025
 
 xelatex.exe  gbT7714-2025.tex
 
+xelatex.exe  gbT7714-2025.tex
+

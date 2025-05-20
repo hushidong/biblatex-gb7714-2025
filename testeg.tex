@@ -6,13 +6,17 @@
 \usepackage[colorlinks,CJKbookmarks,bookmarksnumbered=true]{hyperref}
 \usepackage[a4paper,top=3cm,bottom=2cm,left=2.54cm,right=2.54cm]{geometry}
 
-\usepackage[backend=biber,style=gb7714,%gbpunctwidth=mixed,
+\usepackage[backend=biber,style=gb7714,gbnamefmt=fullname,%casechanger=latex2e,%gbpunctwidth=mixed,
 gbfootbib=true,gbalign=gb7714]{biblatex}%sorting=nyt
 %\setlength{\bibitemsep}{1pt}
 %\setlength{\bibnamesep}{0ex}
 %\setlength{\bibinitsep}{0ex}
 %\setlength{\bibparsep}{0ex}
 \renewcommand{\bibfont}{\zihao{-5}}
+\renewcommand\mktitlecase[1]{\MakeSentenceCase{#1}}
+%可用\MakeUppercase，\MakeLowercase，\MakeSentenceCase
+%\renewcommand\mkbooktitlecase[1]{\MakeLowercase{#1}}%用于调整booktitlecase
+%\renewcommand\mkjournaltitlecase[1]{\MakeUppercase{#1}}%用于调整journaltitlecase
 
 \addbibresource{example2025.bib}
 

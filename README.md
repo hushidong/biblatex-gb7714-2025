@@ -55,6 +55,7 @@ biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hus
 
 ## Update history
 
++ 20250519 add cmd mktitlecase, mkbooktitlecase, mkjournaltitlecase to control the case of title, booktitle, journaltitle. (增加 mktitlecase, mkbooktitlecase, mkjournaltitlecase 三个接口用于调整不同标题的大小写)
 + 20250517 add field scale, dimensions. (增加域：scale, dimensions)
 + 20250516 fix some flaws. (修正一些错误)
 + 20250423 add option gbpunctwidth to implement fullwidth punctuation, where option values: half, mixed, full, and bylan represent all punctuations are halfwidth, partial punctuations are fullwidth, all punctuations are fullwidth, and punctuations for Chinese references are fullwidth whereas punctuations for English references are halfwidth. (增加选项gbpunctwidth实现全角的标点，选项值 half, mixed, full, bylan 分别表示全半角，部分全角，全部全角，中文全角英文半角)
@@ -70,13 +71,15 @@ biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hus
 
 ## Compile introduction
 
-上述文件是编译后合并得到的，提供了一个完整的bat脚本 makefileGBT2025.bat。
+提供了一个完整的bat脚本 makefileGBT2025.bat。
 
-文件中，gbT7714-2025.pdf 由gbT7714-2025.tex编译得到。
-
-tngbcitationaynew.pdf 由 tngbcitationaynew.tex 编译得到。
+文件中，tngbcitationaynew.pdf 由 tngbcitationaynew.tex 编译得到。
 
 testeg.pdf 由 testeg.tex 编译得到。
+
+gbT7714-2025.pdf 由gbT7714-2025.tex编译得到。
+
+
 
 
 ---------------------------------------------------------
