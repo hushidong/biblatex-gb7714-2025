@@ -959,6 +959,13 @@
 
 \DeclareSourcemap{
 \maps[datatype=bibtex]{%
+        %将英文姓名中全大写的词转化为首字母大写其他字母小写的词
+        %注意：biber中的正则替换默认是针对所有的匹配项的(如同在perl中加上g参数)
+        %注意：若是花括号包围的团体责任者则跳过
+        \map[overwrite,foreach={author,editor,translator}]{%
+            \step[fieldsource=\regexp{$MAPLOOP},notmatch=\regexp{\{.+\}},final]
+            \step[fieldsource=\regexp{$MAPLOOP},match=\regexp{\b([A-Z])([A-Z]+)(\b|\,|\.)}, replace=\regexp{$1\L$2}]
+        }
         \map{%如果author或者editor或者translator存在，那么设置namea便于后面判断。
             \step[fieldsource=author,final]
             \step[fieldset=namea,origfieldval]

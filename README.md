@@ -55,6 +55,7 @@ biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hus
 
 ## Update history
 
++ 20250520 nomorlize the case of personal authors by source mapping (通过source mapping规范个人责任者的英文字母大小写)
 + 20250519 add cmd mktitlecase, mkbooktitlecase, mkjournaltitlecase to control the case of title, booktitle, journaltitle. (增加 mktitlecase, mkbooktitlecase, mkjournaltitlecase 三个接口用于调整不同标题的大小写)
 + 20250517 add field scale, dimensions. (增加域：scale, dimensions)
 + 20250516 fix some flaws. (修正一些错误)
