@@ -1,4 +1,4 @@
-<b>Date of last change: 2025/03/03 v1.1t</b>
+<b>Date of last change: 2025/05/22 v1.1u</b>
 
 
 
@@ -89,7 +89,7 @@ gbT7714-2025.pdf 由gbT7714-2025.tex编译得到。
 
 * 2025/03/03 v1.1t,github,initialized
 
-
+* 2025/05/22 v1.1u,ctan,github
 
 
 
