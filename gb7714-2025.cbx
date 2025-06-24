@@ -390,7 +390,7 @@
 
 \newbibmacro*{citet}{%
   \iffieldequals{namehash}{\cbx@lasthash}%
-    {\usebibmacro{cite:comp}}%
+    {\mkbibsuperscript{\usebibmacro{cite:comp}}}%
     {\usebibmacro{cite:dump}%
      \ifbool{cbx:parens}%
        {\mkbibsuperscript{{\hspace{-0.075em}\mkbibrightborder}}%\bibclosebracket
