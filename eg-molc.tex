@@ -1,0 +1,1150 @@
+
+% !Mode:: "TeX:UTF-8"
+% 用于测试gb7714-2025样式
+\documentclass{article}
+\usepackage[zihao=5]{ctex}
+\usepackage[vmargin=3cm,left=1.5cm,right=4.5cm,marginparsep=7mm,
+marginparwidth=3.3cm%,showframe
+]{geometry}
+\usepackage[backend=biber,style=chinese-molc]{biblatex}%sorting=nyt
+
+
+%\usepackage{multicol}
+\usepackage[colorlinks,bookmarksnumbered=true]{hyperref}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{circledtext}
+\circledtextset{resize=real,height=1.5ex,boxcolor=blue,charcolor=blue,boxlinewidth=1pt}
+\usepackage{snotez}
+\setsidenotes{
+text-mark-format={\textsuperscript{\circledtext*[boxcolor=blue,charcolor=blue]{#1}}},
+note-mark-format={\circledtext*[boxcolor=blue,charcolor=blue]{#1}}
+}
+
+\counterwithout{subsubsection}{subsection}
+\usepackage[nostruts]{titlesec}
+\titleformat{\section}{\zihao{4}\bfseries}{\chinese{section}}{1em}{}
+\titleformat{\subsection}{\zihao{-4}\bfseries}{（\chinese{subsection}）}{0pt}{}
+\titleformat{\subsubsection}{\zihao{5}\bfseries}{\thesubsubsection}{1em}{}
+
+
+%\BeforeBeginEnvironment{quote}{\begingroup}
+%\AtBeginEnvironment{quote}{\fangsong\color{teal}}
+%\AfterEndEnvironment{quote}{\endgroup}
+\BeforeBeginEnvironment{quotation}{\begingroup}
+\AtBeginEnvironment{quotation}{\fangsong\color{teal}}
+\AfterEndEnvironment{quotation}{\endgroup}
+
+\addbibresource{molc.bib}
+
+\title{法学引注手册-文档复现}
+
+\begin{document}
+
+\maketitle
+
+
+\section{示例}
+
+\subsection{引用书籍的基本格式为：\sidenote{使用的entrytype为book，collection等。版本信息可以用edition保存，也可以用volume直接写。主编、编等角色可以用authortype或editortype填写。若是古籍则使用entrysubtype=classic。特殊的年份信息直接用year保存，除版本外的其他复杂信息也可以放到edition中。}}\label{sec:sub:typebook}
+
+\begin{refsegment}
+\nocite{molc.0:01,molc.0:02,molc.0:03,molc.0:04}%,萨利斯2000
+
+\printbibliography[heading=none,segment=1]
+\end{refsegment}
+
+
+\subsection{引用已刊发文章的基本格式为：\sidenote{使用的entrytype为article和newspaper，后者对应报纸中的文章。从文集或书籍中析出的文献的entrytype可以使inbook或incollection等。article的volume 在年份后输出。inbook的volume和number在booktitle后输出。}}
+
+\begin{refsegment}
+%\nocite{molc.0:05,molc.0:06,molc2019.0:07,molc.0:08,molc.0:08a,molc.0:08b,molc.0:07}
+\nocite{molc.0:05,molc.0:06,molc.0:07,molc.0:08}
+
+\printbibliography[heading=none,segment=2]
+\end{refsegment}
+
+
+\subsection{引用网络文章的基本格式为：\sidenote{使用的entrytype为online。当引用的是网站时(用entrysubtype=website标记)，网站名不加书名号，且前面需要加参见，访问日期后要加访问两字。微信公众号等信息也一同放在organization域中。}}
+
+\begin{refsegment}
+\nocite{molc.0:09,molc.0:10,molc.0:11,molc.0:12}
+
+\printbibliography[heading=none,segment=3]
+\end{refsegment}
+
+
+\subsection{引用学位论文的基本格式为：\sidenote{学位论文使用的entrytype为thesis，也可以使用phdthesis或mastersthesis。}}
+
+
+\begin{refsegment}
+\nocite{molc.0:13}
+
+\printbibliography[heading=none,segment=4]
+\end{refsegment}
+
+
+\subsection{引用法律文件的基本格式为：\sidenote{使用的entrytype为legislation，无逗号隔开的文件条款信息可以放到volume中，有逗号隔开的信息可以放到number里面。}}
+
+\begin{refsegment}
+\nocite{molc.0:14,molc.0:15}
+
+\printbibliography[heading=none,segment=5]
+\end{refsegment}
+
+
+\subsection{引用司法案例的基本格式为：\sidenote{使用的entrytype为jurisdiction，案例的信息可以直接放在number中，若带有类似期刊的信息，也可按期刊文章的形式写。}}
+
+\begin{refsegment}
+\nocite{molc.0:16,molc.0:17}
+
+\printbibliography[heading=none,segment=6]
+\end{refsegment}
+
+
+
+\subsection{引用英文报刊文章和书籍的基本格式为：\sidenote{著录格式见第
+\ref{sec:fmt:engrefs}节。}}
+
+\begin{refsegment}
+\nocite{molc.0:18,molc.0:19,molc.0:20}
+
+\printbibliography[heading=none,segment=7]
+\end{refsegment}
+
+
+\section{引注的一般规范}
+
+\subsection{引注的基本要求}
+
+\subsubsection{使用引注应当必要和适度}
+
+\subsubsection{文献来源真实、 相关、权威}
+
+\subsubsection{引注信息准确、完整、简洁}\label{sec:ssub:postnote}
+已出版文献引注信息的内容， 原则上从原文原著。 书籍的作者、名称和出
+版信息（如“修订版”“增订版”“第×版”），以版权页为准。 原文献的署名或
+者标题有错误的，先依原文，之后可以在适当位置注明。
+\sidenote{注明可通过为cite命令提供postnote信息实现，比如：
+\textbackslash cite[prenote][postnote] \{entrykey\}。}
+
+\begin{quotation}
+\fullcite[][（引者注： 此处“马歇尔”系“马伯里”之误）]{朱苏力1998}
+\end{quotation}
+
+
+\subsection{引注的一般格式}
+
+\subsubsection{引注信息的排版}
+注释内容采用页下脚注。
+
+
+引注符号使用阿拉伯数字，可以带圆圈或者六角括号，也可以不带。 对论
+文作者的介绍、翻译作品的译者注，可以使用其他符号，以示区别。
+
+\subsubsection{引注符号的位置}
+
+对全句的引用，引注符号置于句号、问号等标点之后。 
+
+\begin{quotation}
+在《行政诉讼法》 起草过程中，关于受案范围问题曾有热烈的讨论。
+\footnote{立法过程中的相关讨论和争鸣，参见\fullcite{金俊银1988,姜明安1988}}
+尽管
+多数学者主张概括规定法院应当受理的案件范围，以使受案范围尽量宽泛， 
+\footnote{同上注。特别是俞梅荪、孙林文和张树义文，针对全国人大常委会公布的法律草案，明确主张采用概括式规定。}
+立法最终采取了逐项列举的方式。比起此前各个单行法，《行政诉讼法》 规定的
+受案范围“有所扩大” 
+\footfullcite{王汉斌1989}
+，但与概括规定的主张还相距很远。
+\end{quotation}
+
+\subsubsection{引文的编排处理}
+
+
+大段引用， 或者有其他情况作者需要特别强调的， 引注内容可以独立成段，
+变换字体，缩进编排。 例如：
+
+\begin{quotation}
+河南是全国行政诉讼大省， 10 年受案 10.6 万余件，约占全国的六分之一。
+该省于 1996 年 4 月召开全省法院行政审判工作会议：
+除各中院的院长、行政庭长和 1995 年行政诉讼、非诉行政案件收案‘双
+超百’的 23 个基层法院的一把手和三个大力支持行政审判工作的县委
+书记参加会议外（\textbf{以之鼓励先进！}），我们还让行政诉讼案件收案不足 10
+件的 14 个基层法院的一把手参加会议（\textbf{以之鞭策后进！}）。在省院会议
+上，李道民院长（\textbf{针对各地收案悬殊的状况}）要求每个法院的领导都要
+认真查找一下原因，关键是从法院内部、从领导自身找原因；要认真反
+思一下，自己思想是否解放，是不是真正重视行政审判工作。
+\footfullcite{河南高院2000}
+\end{quotation}
+
+
+\subsubsection{文中图表的注释}
+
+对文中图表的来源或者内容的注释，可以采用页下注， 也可以置于图表下
+面； 置于图表下面的， 不与其他注释连续编码。
+
+\subsubsection{文中夹注古籍}
+
+
+引用常见古籍经典中的语句， 出处又相当简短的，可以在正文中使用夹注，
+以代替页下脚注。 夹注一般只标书名和篇名，用中圆点连接，用圆括号括注，
+紧随引文之后。 例如：
+
+\begin{quotation}
+天神所具有的道德意志，代表的是人民的意志。这也就是所谓“天聪明自
+我民聪明，天明畏自我民明畏”\citejz{尚书皋陶谟}，“民之所欲，天必从之”
+\citejz{尚书泰誓}。
+\end{quotation}
+
+
+\subsubsection{文中夹注外文}
+
+正文中提及的外国人名、地名和重要术语， 读者不熟悉或者容易误解的，
+第一次出现时， 在正文中夹注外文。 例如：
+
+\begin{quotation}
+自毕克尔（A. Bickel）提出司法审查“反多数难题”（counter-majoritarian
+difficulty）\footfullcite{Bickel1962}，该问题占据了美国宪法研究的中心，无数的笔墨花在对司法审查
+合法性的探讨上。
+\end{quotation}
+
+\subsubsection{文中夹注页码}
+
+一般来说，不鼓励在一个篇章中频繁、密集引用同一文献。对特定书籍和
+文章的专门介绍、评论、商榷，确需多次引用的，可以在适当声明后，在正文
+相应位置用括号夹注页码。
+
+\subsubsection{引领词的用法}
+
+一般来说，概括引用可以使用“参见”引领，直接引用原文用“见”。
+
+同一文献有不同出处，需要互相印证的，可以写“又见”。
+
+
+\subsubsection{标点符号的用法}
+
+标点符号的使用应当遵循国家标准《标点符号用法》（GB/T 15834-2011），
+防止误用。
+
+\subsubsection{同一注释包含多个文献}
+同一注释里包含多条同类文献的，一般按时间顺序排列，用分号隔开。例
+如：
+
+\begin{quotation}
+\fullcite{马怀德2004,沈岿2000,molc.0:08}
+%马怀德主编：《司法改革与行政诉讼制度的完善》，中国政法大学出版社 2004
+%年版； 胡建淼主编：《行政诉讼法修改研究》，浙江大学出版社 2007 年版； 杨小
+%君主编：《行政诉讼法问题研究与制度改革》，中国人民公安大学出版社 2007 年
+%版； 莫于川主编：《建设法治政府需要司法更给力》，清华大学出版社 2014 年
+%版； 何海波等：《理想的行政诉讼法》， 载《行政法学研究》 2014 年第 2 期。
+\end{quotation}
+
+同一注释里中外文文献混合排列的，结尾句号使用最后文献的语种。例如：
+\begin{quotation}
+参见\fullcite{沈岿2000,Kellogg2007}
+%沈岿：《制度变迁与法官的规则选择：立足刘燕文案的初步探索》， 载
+%《 北大法律评论》 第 3 卷第 2 辑， 法律出版社 2000 年版； Thomas Kellogg,
+%“Courageous Explorers”? Education Litigation and Judicial Innovation in China, 20
+%Harvard Human Rights Journal 141 (2007).
+\end{quotation}
+
+外文文献包含在一个句子中，整个句子属于中文句式的，结尾句号使用中
+文句号。例如：
+\begin{quotation}
+对于“分离的领域”的经典论述，参见\fullinnercite{Bradwell1892}。
+%Bradwell v. Illionois, 83 U.S. 130, 141 (1892)。
+\end{quotation}
+
+
+\subsubsection{同一文献多次出现}
+
+同一文献在文中多次出现的，第一次必须引用完整信息， 再次引用时可以
+略写。 是否略写，由各刊物、出版社或者出版社授权编辑自行决定。为防止修
+改、编辑过程中发生错乱，作者投稿时不建议采用略写。
+\sidenote{为了可以让用户自由控制是否进行略写，区分不同的引用命令。使用footfullcite命令除非前一条文献相同否则不略写，而footbriefcite命令则主动缩写。}
+
+\footfullcite{molc.14:16}
+\footnote{插入脚注}
+\footbriefcite{molc.14:16}
+\footbriefcite{molc.14:16}
+\footnote{同前注， 应松年、马怀德书，第 330 页。}
+
+前后紧邻的两个引注，文献完全相同，而且没有其他文献干扰的，可以写
+“同上注” 或者“Ibid”；所引文献是外文的，从该语种习惯。 
+\sidenote{Ibid. refers to the same author and source (e.g., book, journal) in the immediately preceding reference.
+op. cit. refers to the reference listed earlier by the same author.}
+例如：
+
+\footfullcite{RvPanel1987}
+\footbriefcite{RvPanel1987}
+
+
+\subsubsection{同一文献多个来源}
+
+同一文献有多个来源的，原则上只引用一个来源，即最早的出处。一些早
+期文献的最早出处一般读者不易查找，作者认为有必要的，可以同时引注该文
+献重印或者转载的信息。\sidenote{额外的来源可以通过附加信息来实现，将附加的信息填入addendum域即可。}
+例如：
+
+\begin{quotation}
+\fullcite{顾颉刚1930}
+
+
+\fullcite{熊元翰1914}
+\end{quotation}
+
+
+\subsubsection{对文献的解释和评论}
+除了纯粹的解释性脚注，引用文献的脚注也可以适当夹带解释或者评论。
+
+1） 对文献内容的解释。例如：
+
+\begin{quotation}
+\fullcite{RvPanel1987} 该案涉及对一个证券交易机构的司法审查。这个交易机构既非行政机关也没有法律授权，却行使规制和惩罚的职能。
+\end{quotation}
+
+2） 提示类似研究或者相反观点。例如：
+
+\begin{quotation}
+\fullcite{Cohen1986} 类似的研究还有 \fullcite{Quirk1981}
+\end{quotation}
+
+3） 对文献整体的评论。 例如：
+
+\begin{quotation}
+这些意见没有公开，但从最高人民法院法官的著作中，可以了解法院的基
+本立场。参见\fullcite{江必新2005,江必新2013,李广宇2013}
+\end{quotation}
+
+\subsection{与引注有关的论文部件}
+
+\subsubsection{论文标题}
+
+\subsubsection{论文摘要}
+
+\subsubsection{关键词}
+
+\subsubsection{作者介绍}
+
+\subsubsection{项目说明}
+
+\subsubsection{作者致谢}
+
+\subsubsection{参考文献}
+
+\section{中文引注体例}
+
+\subsection{引用纸质出版文献}
+
+\subsubsection{引用纸质出版文献的基本要求}
+
+\subsubsection{原创作品的作者}
+
+作者对于作品的形成注入了较多贡献的，在引用时视为原创作品；主要是
+翻译、整理、校勘他人文字和口头作品的，在引用时视为原创作品。
+
+\begin{quotation}
+\fullcite{陈卫佐2015}
+\end{quotation}
+
+\subsubsection{编辑作品的编者}
+
+编辑作品的， 在主要作者（编者） 姓名之后， 加“主编”“编”“编著”“编
+译”“译注”等，说明文献性质。例如：
+
+\begin{quotation}
+\fullcite{何海波2018}
+\end{quotation}
+
+\subsubsection{翻译作品的译者}
+
+翻译作品的译者位于文献名称之后、出版信息之前。
+%[美]富勒：《法律的道德性》，郑戈译，商务印书馆 2005 年版。
+%[美]欧中坦：《 千方百计上京城：清朝的京控》，谢鹏程译， 载高道蕴等编：
+%《美国学者论中国法律传统》，中国政法大学出版社 1994 年版。
+翻译作品有校对者的，可以视情况写明校对者。
+\sidenote{译者、校对者等信息较多时可以用团体作者的方式直接放到一个域比如editor中，并利用editortype给出最后的责任者的角色。}
+例如：
+%[英]科林· 斯科特：《 规制、治理与法律》， 安永康译， 宋华琳校， 清华大
+%学出版社 2018 年版。
+
+\begin{quotation}
+\fullcite{molc.0:04}
+
+\fullcite{molc2019.0:07}
+
+\fullcite{斯科特2018}
+
+\fullcite{斯科特2018a}
+\end{quotation}
+
+
+\subsubsection{口述作品的整理者}
+口述作品，口述者位于文献名称之前， 整理者位于文献名称之后、出版信
+息之前。例如：
+
+\begin{quotation}
+\fullcite{江平2010}
+\end{quotation}
+
+\subsubsection{勘校作品的校对者}
+古籍点校作品， 可以视情况写明点校者；早期作品再版的，也可以视情况
+写明校对者。例如：
+
+\begin{quotation}
+\fullcite{沈家本1985}
+\end{quotation}
+
+\subsubsection{作者的一般写法}
+
+引用著作直写作者姓名，不写职务。 
+作者姓名、名称，原则上应当按照版权声明标注全名。
+作者系多人，以“编写组”“编委会”等为名的，从其署名。
+作者使用笔名的，从笔名；必要时，可以括注真名。例如：
+
+\begin{quotation}
+\fullcite{慕槐1995}
+\end{quotation}
+
+
+\subsubsection{外籍作者}
+外籍作者，在姓名之前用方括号[ ]注明国籍；台港澳作者， 无需特别标明。
+
+\subsubsection{合作作品的作者}
+%\textcolor{red}{pagetotal,url要处理。}
+合作作品的几位作者之间，用顿号间隔。
+
+\begin{quotation}
+\fullcite{molc.32:02}
+\end{quotation}
+
+\subsubsection{作者信息的省略}
+常用基本典籍和官修大型典籍， 可不标注作者。例如，《论语》《资治通鉴》、
+二十四史等。由编委会组织编写的辞典、百科全书等，可以省略作者。被引文献没有作者署名，经过查考仍无法确定作者的，不写作者姓名，或
+者只写“佚名”。书名包含作者姓名的个人文集， 从书名可以直接推断作者的， 可以省略文
+集作者。例如：
+
+\begin{quotation}
+\fullcite{汉语词典}
+
+\fullcite{邓小平1994}
+\end{quotation}
+
+
+\subsubsection{文献名称}
+1）引用文献的名称，包括文章标题， 用书名号； 栏目名称、丛书名，可视
+情况使用引号
+2）引用文献应当用全称，不用简称。文献名称冗长的，第一次引用仍应全
+称，再次引用时可以略称（ 详见本手册第 12 条）。
+3）所引文献标题带有逗号、问号等标点符号的，从原文，不省略。例如：
+《执行难，难于上青天？》
+4）所引文献有副标题的， 主标题和副标题之间的符号（ 冒号、 破折号等），
+一般从原文。
+
+
+\subsubsection{报纸的标题}
+所引文章标题包含两个部分，但没有主从关系的，用一个字符的空格隔开。
+
+\subsubsection{图书的标题}
+所引图书包含两个不同主题， 互相没有主从关系的，用一个字符的空格隔
+开。
+
+
+\subsubsection{图书的版本}
+1）图书版本不同于印刷次数；同一版本多次印刷的，仍为一版。版本信息
+以版权页为准。
+2） 图书初版的， 无需标明“初版”“第 1 版”； 再版的， 在图书名称后， 括
+注“修订版”“增订版”“第×版” 等。
+%张新宝：《 侵权责任法》， 中国人民大学出版社 2006 年版。
+%张新宝：《 侵权责任法》（ 第 4 版）， 中国人民大学出版社 2016 年版。
+3）外文图书的中译本一般无需标明原书版次；确有必要时， 可以在书名后
+用括号标明“原书第× 版”。
+%[美]理查德· J.皮尔斯：《 行政法》（ 原书第 5 版）， 苏苗罕译，中国人民大
+%学出版社 2016 年版。
+%[英]劳特派特修订：《奥本海国际法》（第 8 版上卷第一分册），王铁崖、陈
+%体强译，商务印书馆 1971 年版。
+4）图书再版时变更出版社，没有标明再版的，从原书信息。 例如：
+
+
+\begin{quotation}
+\fullcite{张新宝2006}
+
+\fullcite{molc.0:02}
+\end{quotation}
+
+\subsubsection{图书的出版信息}
+
+1） 图书的出版信息，包括出版社和出版时间。
+2） 出版社名称应当完整，出版社之前不写所在城市。例如，只写“法律出
+版社”，不写“ 北京：法律出版社”。
+3） 两家出版机构联合出版的，应当一一列明，中间用顿号。 
+%魏振瀛主编：《 民法》（第 7 版）， 北京大学出版社、高等教育出版社 2017
+%年版。
+4） 出版时间只写年、不写月。 例如：
+
+\begin{quotation}
+\fullcite{魏振瀛2017}
+\end{quotation}
+
+
+\subsubsection{期刊的出版信息}
+
+1）期刊名称用书名号。期刊的“社会科学版”“人文社会科学版”属于期
+刊名称的一部分，用括号置于书名号内。 
+2）期刊名称有变化的， 写所引文献发表当时的期刊名。
+3）期刊有别名的， 写主要名称。
+
+\subsubsection{其他连续出版物的出版信息}
+期刊之外的其他连续出版物（包括一卷多辑、连续页码的出版物）， 一般标
+明主编或者编辑， 直接标注“第×卷”“第× 辑” 或者“第× 卷第× 辑”，后面
+注明出版社和出版年份。 连续出版物的封面未标明主编的，引注时也不标主编。
+例如：
+
+\begin{quotation}
+\fullcite{molc.0:06}
+
+\fullcite{沈岿2000}
+\end{quotation}
+
+
+\subsubsection{文集的出版信息}
+引用会议文集、纪念文集或者其他专题文集中的文章，应当完整标注该书
+籍的编者、书名和出版信息，以“载”字开头。
+\begin{quotation}
+\fullcite{宋炉安2006}
+\end{quotation}
+
+
+\subsubsection{报纸和新闻类杂志的出版信息}
+报纸的出版信息，一般注明年、月、日；必要时，注明版次。
+%例如：
+%何海波：《判决书上网》， 载《法制日报》 2000 年 5 月 21 日，第 2 版。
+新闻类杂志的出版信息，一般注明期次，必要时括注刊发时间。
+\sidenote{刊发时间可以如第\ref{sec:ssub:postnote}节一般利用postnote提供。比如：
+\textbackslash fullcite[（2009 年 6 月 22 日）]\{王和岩1988\}}
+例如：
+
+\begin{quotation}
+\fullcite{molc.0:08}
+
+\fullcite[（2009 年 6 月 22 日）]{王和岩1988}
+\end{quotation}
+
+
+\subsubsection{古籍的出版信息}
+传统的刻本、抄本， 应当标明版本信息； 现代出版的标点本、整理本、影印
+本， 也可根据需要标注出版方式。
+%姚际恒：《古今伪书考》卷三，光绪三年（ 1877 年） 苏州文学山房活字本
+%《太平御览》卷六九○，中华书局 1985 年影印本，第 3 册，第 3080 页下
+%栏。
+引用常用基本典籍，不涉及内容争议的，可以省略出版信息。
+\sidenote{关于古籍的出版信息的填写说明见第\ref{sec:sub:typebook}节。}
+例如：
+%《论语· 述而篇》
+
+
+\begin{quotation}
+\fullcite{姚际恒1877}
+
+
+\fullcite{太平御览1985}
+
+
+\fullcite{论语述而}
+
+\end{quotation}
+
+
+\subsubsection{台湾文献的出版信息}
+引用我国台湾地区的文献应当遵守“一个中国”原则，一般不使用“国立”
+“中央”等字眼。\sidenote{台湾文献除了去除国立之外，其他的实际上没必要区分，统一就行。}
+
+\subsubsection{页码}
+
+1） 引用书籍或者论文特定部分的内容，应当标明页码；如果是概括提及书
+籍、 论文整体，不标页码。 
+%例如：
+%瞿同祖：《中国法律与中国社会》，商务印书馆 2010 年版， 第 5-30 页。
+%崔国斌：《知识产权法官造法批判》， 载《中国法学》 2006 年第 1 期，第 163 页。
+2） 古籍刻本的页码有两面的， 可以进一步用 a、 b 标明。例如：
+%姚际恒：《古今伪书考》卷三，光绪三年（ 1877 年） 苏州文学山房活字本，
+%第 9 页 a。
+3） 引用同一著作的几个内容互不连续的页码，用“、” 隔开；内容连续的
+页码（包括连续两页）， 用短横线“ -” 连接。 页码数字置于“第”和“页”中
+间，“第”和“页”只写一次。\sidenote{页码信息可以利用pages域提供，也可以利用postnote在引用时提供。}
+例如：
+
+\begin{quotation}
+\fullcite{molc.0:02}
+
+
+\fullcite[，第 9 页 a]{姚际恒1877}
+
+
+\fullcite[，第 55、 64-68 页]{molc.0:04}
+
+\end{quotation}
+
+
+\subsubsection{章节}
+标示页码，一般写起始页和结束页。 必要时，可以在页码后括注提示相应
+内容。
+%例如：
+%《中国大百科全书·法学》，大百科全书出版社 1984 年， 第 81 页（“法的
+%解释”条）
+在一些场合下， 引用书籍特定章节更加明白的，可以只标明章节序号和名
+称，不写页码。
+\sidenote{章节信息可以放在chapter域中，也可以利用引用时的postnote信息提供。}
+例如：
+%《圣经· 出埃及记》， 20:3。
+%《元典章》卷一九《 户部五· 田宅· 家财》， “ 过房子与庶子 分家财” 条。
+%应松年主编：《当代中国行政法》，人民出版社 2018 年版， 第二章“行政法
+%的渊源”。
+
+\begin{quotation}
+\fullcite{molc.0:03}
+\end{quotation}
+
+\subsection{引用网络、 电视和音像制品}
+
+\subsubsection{引用网络电视文献的原则}
+引用网络电视文献应当谨慎。
+
+\subsubsection{引用网络文献}
+引用互联网上的文献，引领词、作者、文章名参照前述做法。
+\begin{quotation}
+
+\fullcite{molc.0:09}
+
+\fullcite{molc.0:10}
+\end{quotation}
+
+
+\subsubsection{引用个人博客、 微信公众号}
+引用个人博客、微信公众号等自媒体，应当非常谨慎。
+
+
+\subsubsection{引用电视节目}
+
+引用电视节目，应当标明电视台和电视栏目名称、播出时间；必要时，可
+以标明节目主持人姓名；可能的话，标明该电视节目在互联网上的链接。
+\sidenote{电视节目的entrytype可以用video，播出信息可以放到version域中，网址放到url域中。}
+比如：
+\begin{quotation}
+\fullcite{袭警案2008}
+\end{quotation}
+
+\subsubsection{引用音像制品}
+引用 CD、 DVD 等介质的音像制品，应当标明其名称、制作单位和发行时间。
+
+
+\subsection{引用未发表文献\sidenote{未发表文献除了会议、学位论文等常规文献，使用unpublished作为其entrytype。}}
+
+\subsubsection{引用访谈}
+访谈应当事先获得对方同意。 引用访谈，应当标明访谈的时间、地点或者
+方式。例如：
+
+\begin{quotation}
+\fullcite{访谈2000}
+\end{quotation}
+
+\subsubsection{引用私人通讯}
+引用私人通讯原则上应获得对方同意，并标明通讯方式和通讯时间。例如：
+
+\begin{quotation}
+\fullcite{邮件2002}
+\end{quotation}
+
+\subsubsection{引用内部资料}
+引用未发表工作报告、调研报告或者口头讲话， 原则上应征得当事人同意
+（不涉及秘密的官方报告和会议讨论除外），并适当注明文献产生、保管或者
+公开之时间、地点和方式。 
+\sidenote{默认情况下unpublished没有author只有title，所以不加书名号，当存在作者时，则加上书名号。}
+例如：
+\begin{quotation}
+\fullcite{行政庭2001}
+
+\fullcite{座谈会2009}
+\end{quotation}
+
+
+
+\subsubsection{引用会议论文}
+引用未发表的会议论文，一般应当经作者同意。如果会议论文明确要求“请
+勿援引”，则不应援引，除非得到作者特别许可。
+引用会议论文，应当注明会议名称、 时间、 地点等会议信息；持续举行的
+年会， 时间、地点可以从略。
+\sidenote{所有的会议信息可以一起放到publisher中，而不是放到booktitle中。}
+例如：
+\begin{quotation}
+\fullcite{贺卫方2001}
+\end{quotation}
+
+
+\subsubsection{引用学位论文}
+引用已公开的学位论文， 无需经过作者同意。该学位论文已经发表或者修
+改后发表的，一般应当引用发表后的文献。
+\begin{quotation}
+\fullcite{molc.0:13}
+\end{quotation}
+
+
+\subsubsection{引用档案文献}
+引用档案文献，需标明文献名称、形成时间、 保管机构、 档案编号。
+\sidenote{档案的entrytype使用archive，档案信息放在publisher内，档案号放在number内。}
+例如：
+%雷经天：《 关于边区司法工作检查情形》（ 1943 年 9 月 3 日）， 陕西省档案
+%馆藏陕甘宁边区高等法院档案，档案号 15/149。
+
+\begin{quotation}
+\fullcite{雷经天1943}
+\end{quotation}
+
+
+\subsection{引用法律文件}
+
+\subsubsection{法律文件的名称}
+%\textcolor{red}{url要处理}
+1） 法律文件名称应加书名号。
+2） 法律文件的“试行”“草案”， 以及刑法修正案的序号， 应当视为法律
+文件名称的一部分，括注于书名号内。
+
+\begin{quotation}
+\fullcite{molc.58.2:02}
+\end{quotation}
+
+
+
+\subsubsection{法律文件名称的缩写}
+在不引起误解的情况下， 法律文件名称中的“中华人民共和国” 可以省略，
+无需特别说明。 
+
+
+\subsubsection{法律文本的版本}
+1） 引用经过修改的法律文件，应当注明所引版本的制定、修改年份， 除
+非正文已经交代或者根据情境不难判断。
+%例如：
+%《公司法》（ 2005 年修订）第 16 条。
+%《公司法》（ 2013 年修正）第 36 条。
+2） 引用已经失效的法律文件，应当予以注明，除非正文已经交代或者根
+据情境不难判断。
+例如：
+%《 最高人民法院、最高人民检察院关于依法严惩破坏计划生育犯罪活动的
+%通知》（已废止）， 法发〔 1993〕 36 号。
+
+\begin{quotation}
+\fullcite{molc.60.1:01}
+
+\fullcite{molc.60.2:01}
+\end{quotation}
+
+\subsubsection{法律文件的条款序数}
+
+1）为使行文简洁， 法律文本的条、款、项序数采用阿拉伯数字， 序数中
+的括号省略。
+%例如：
+%《民法总则》第 27 条第 2 款第 3 项。
+%《行政诉讼法》（ 1989 年） 第 54 条第 2 项第 3 目。
+%根据《 刑法》 第 64 条和《最高人民法院关于适用〈中华人民共和国刑事
+%诉讼法〉的解释》第 138 条、第 139 条的规定，被告人非法占有、处置被害
+%人财产的，应当依法予以追缴或者责令退赔。
+2）原文引用法律文本的， 条、款、项、目的序数一般从原文。 即， 条、
+款序数一般用汉字，项的序数用汉字加括号，目的序数用阿拉伯数字。
+%例
+%如：
+%《民法总则》第二十七条第二款第（三）项。
+%《行政诉讼法》（ 1989 年） 第五十四条第（二）项第 3 目。
+3）在任何情况下， 法律文件名称中的条款序数不得改为阿拉伯数字。 例
+%如：
+%《 最高人民法院关于适用刑法第六十四条有关问题的批复》
+%《全国人民代表大会常务委员会关于〈 中华人民共和国民法通则〉 第九十
+%九条第一款、〈 中华人民共和国婚姻法〉 第二十二条的解释》
+
+
+\subsubsection{法律条文的排版}
+
+法律条文包含多个款项，需要完整引用原文并且需要突出内容的，可以将
+相关款项单独排列、分行分段。
+
+\subsubsection{引用法律、法规、规章}
+1） 援引最高立法机关的法律条文，一般只需提及该法的名称和条文序数。
+2） 引用全国人大及其常委会通过的法律性质的决定，应当标明决定机关、
+决定名称、决定时间和会议届次。
+%例如：
+%《 全国人民代表大会常务委员会关于严禁卖淫嫖娼的决定》， 1991 年 9 月
+%4 日第七届全国人大常委会第二十一次会议通过。
+3）援引法规、规章的条文，参照法律。必要时，可以进一步标明该法
+规、规章的制定机关和年份。
+
+
+\subsubsection{引用规范性文件}
+
+1） 引用规范性文件，应当标明该文件的制定机关和文件号；必要时，进
+一步标明发布日期。 文件号中的年份加六角括号〔 〕 。 
+2） 规范性文件的名称包括制定机关的，制定机关在书名号内；否则，制
+定机关放在书名号前。
+3） 文件号一般在文件名之后，用逗号分隔。 文章叙述中提及规范性文件
+又需要标明文件号的， 为保持行文顺畅， 可以在文件名之后括注文件号。
+4） 一些较早时期发布的规范性文件，读者难以查找的，最好进一步标明
+可供查阅的载体。\sidenote{一些查阅信息可以一股脑放到number域里面，也可以直接在正文表明。同时为避免出现文献末尾的标点，则使用fullinnercite命令引用文献。}
+例如：
+
+\begin{quotation}
+\fullcite{molc.0:15}
+
+\fullinnercite{molc.0:15a}，2007 年 7 月 11 日发布。
+
+国务院下发的\fullcite{molc.0:15}
+
+\citetitle{molc.0:15}（国发〔2007〕19号）明确要求，“2007年在全国建立农村最低生活保障制度” 。
+
+\fullcite{缺点批复1998}
+
+\fullinnercite{缺点批复1998a}，载司法部编《中华人民共和国司法行政规章汇编（ 1949— 1985）》，法律出版社 1998 年版，第 646 页。
+\end{quotation}
+
+
+\subsubsection{引用国家标准}
+引用国家标准，写明发布机关、名称和标准号；必要时，注明发布时间。
+例如：
+
+\begin{quotation}
+\fullcite{molc.65:01}
+\end{quotation}
+
+\subsubsection{引用立法说明}
+引用官方的立法说明，应当标明报告人、报告名称和报告场合；必要时，
+可以用括号标明报告人的身份。
+
+\subsubsection{引用会议决议}
+引用官方会议的决议，写明决议名称、决议机关和作出决议的时间。例
+如：
+\begin{quotation}
+\fullcite{王汉斌1989}
+\end{quotation}
+
+
+\subsubsection{引用外国法律和国际公约}
+1） 引用外国法律或者国际公约的中文版本，视情况加国别（国际组织）
+和年份。
+%例如：
+%英国《 1996 年仲裁法》
+%美国《 统一买卖法》（ 1906 年）， 或者美国 1906 年《 统一买卖法》
+2） 外国法律或者国际公约加书名号， 约定俗成的简称除外。
+%例如， 《美
+%利坚合众国宪法》 第十四修正案， 通常无需说明， 直接表述为：
+%美国宪法第十四修正案
+3） 国别或者国际组织一般置于书名号之前， 但国名或者国际组织名称是
+法律文件名称一部分的除外。 
+%例如：
+%美国《 统一买卖法》，《法国民法典》
+%联合国《儿童权利公约》，《联合国海洋法公约》
+4） 引用外国法律或者国际公约的中文版本， 必要时可以括注外文。 
+%例
+%如：
+%《联合国海洋法公约》（ United Nations Convention on the Law of the Sea）38
+5） 引用外国法律和国际公约的特定译本， 一般应当注明译者和出版信
+息；引用国际公约的官方文本，不需要注明译者和出版信息。
+%例如：
+%陈卫佐译注：《德国民法典》（第 4 版），法律出版社 2015 年版， 第 1408 条
+%“夫妻财产合同、契约自由”。
+%《美国法典· 宪法行政法卷》， 中国社会科学出版社 1993 年版，第 276 页
+%（第 554 条“裁决”）。
+%联合国《儿童权利公约》第 27 条
+6）引用外国法律和国际公约，条文序号原则上用阿拉伯数字，款项依习
+惯用数字或者字母。 外国法律增订条文“之一”“ 之二”，不改为阿拉伯数
+字。\sidenote{外国法律和国际公约的附加信息可以视情放在volume，pubstate，number，chapter，pages等域中。}
+
+\subsubsection{引用台湾地区的法律文件}
+引用我国台湾地区的法律文件，应当根据情境注明“我国台湾地区”或者
+“台湾地区”。 引用台湾地区的“宪法”以及其他涉及两岸关系、容易产生“两
+个中国”或者“一中一台”嫌疑的法律文件，必须打上引号； 其他法律文件，
+使用引号或者做其他适当处理。 
+%例如：
+%台湾地区“民法” 第 12 条规定：“满二十岁为成年。”
+%驾驶人无过失及情节轻微之肇事逃逸案，“司法院大法官会议” 释字第 777
+%号， 2019 年 5 月 31 日公布。
+
+
+\subsection{引用司法案例}
+
+\subsubsection{案例名称}
+
+民事和行政案件的名称，格式为：“×××（原告）诉×××（被告）×
+××（案由）案”。 刑事案件的名称，格式为：“×××（被告人）×××
+（指控罪名）案”。 必要时，可以加上审级说明，例如“×××上诉（再审）
+案件”。
+
+\subsubsection{案件文号}
+1） 裁判文书一般注明审判法院、文书名称和案号。审判法院用全名，案
+号中的年份加圆括号“（ ）”。 
+%例如：
+%北京市海淀区人民法院行政判决书，（ 1998）海行初字第 142 号。
+2）案号一般置于文书名称之后，用逗号隔开。 在有其他案件信息的情况下，
+为使表述更加紧凑，可以把案号置于审判法院和文书名称中间，不用逗号。
+
+\begin{quotation}
+\fullcite{molc.0:16}
+\end{quotation}
+
+
+\subsubsection{案例来源}
+最高法院、最高检察院发布的指导性案例，一般只标注发布机关、 指导
+性案例的序号，并用括号标注发布年份。
+%例如：
+%荣宝英诉王阳、永诚财产保险股份有限公司江阴支公司机动车交通事故责
+%任纠纷案， 最高人民法院指导案例 24 号（ 2014 年）。
+《最高人民法院公报》上的案例，可以只援引《公报》，不再引用裁判
+文书（除非需要文本比较）。 
+%例如：
+%陆红霞诉南通市发展和改革委员会政府信息公开答复案，《最高人民法院公
+%报》 2015 年第 11 期。
+\begin{quotation}
+\fullcite{molc.72:01a}
+
+\fullcite{molc.0:17}
+\end{quotation}
+
+
+\subsubsection{裁判时间}
+裁判时间一般无需标明。如果有必要的话，例如裁判年份与立案年份不
+一致或者讨论涉及裁判时点，可以标明裁判时间。
+
+\begin{quotation}
+\fullcite{molc.73:01}
+
+\end{quotation}
+
+\subsection{引用统计数据}
+
+
+\subsubsection{应当标明出处的数据}
+
+除业内周知的事实外， 统计数据应当标明出处。
+
+\begin{quotation}
+与每年400万到600万件涉及行政争议的信访案件相比，行政诉讼案件简直
+微不足道。\footfullcite{孙乾2014}与国外相比，中国的行政诉讼案件也是少得出奇：法国六千万
+人口，地方行政法院一年受理的案件也近20万；德国八千万人口，几套法院
+一年受理的各类行政性案件更是高达50万左右。
+\end{quotation}
+
+\subsubsection{引用统计数据的注意事项}
+统计数据的来源应当可靠，数据应当合理。对于不可靠的来源、不合理的
+数字，应当作出解释和评估。
+
+\subsubsection{统计数据的图表呈现}
+为更加直观地显示统计数据，可以使用图表。
+图表应当与统计数据相符，力求直观和美观。
+
+
+\section{外文引注体例}
+
+\subsection{英文引注体例}\label{sec:fmt:engrefs}
+
+
+\subsubsection{引用外文文献的一般要求}
+中文文献优先引用。
+
+
+\subsubsection{期刊文章基本格式为：\sidenote{期刊名、卷、页码等有两种方式，一种是卷和页码放在期刊名两侧，另一种是期刊名称之后写期刊卷数、首页页码。由选项gbenArtVolahead控制，默认为true，即使用第一种方式。}}
+
+%比如：Stephen J. Choi \& Adam C. \textit{Pritchard, Behavioral Economics and the SEC}, Stanford Law Review, Vol.56:1, p.1-73 (2003)
+
+\begin{refsegment}
+\nocite{molc.0:18,molc.0:19,molc.78:02,molc.78:03}
+
+\printbibliography[heading=none,segment=8]
+\end{refsegment}
+
+
+\subsubsection{报纸文章基本格式为：\sidenote{采用方式为：期刊名称之后出版年月日完整，版次若非数字需加at。}}
+
+%比如：Andrew Rosenthal, \textit{White House Tutors Kremlin in How a Presidency Works}, New York Times, June 15, 1990, at A1
+
+\begin{refsegment}
+\nocite{molc.79:01}
+
+\printbibliography[heading=none,segment=9]
+\end{refsegment}
+
+\subsubsection{书籍基本格式为：\sidenote{编辑作品，在编者之后加 ed.；两人以上编辑的，在编者之后加 eds.。翻译作品，在书名后加译者信息，译者前加 translated by。}}
+
+\begin{refsegment}
+\nocite{molc.0:20,molc.80:02}
+
+\printbibliography[heading=none,segment=10]
+\end{refsegment}
+
+
+\subsubsection{集合作品中的文章基本格式为：\sidenote{用 in 表示“载于”。}}
+
+\begin{refsegment}
+\nocite{molc.81:01}
+
+\printbibliography[heading=none,segment=11]
+\end{refsegment}
+
+
+\subsubsection{法规基本格式为：\sidenote{有逗号隔开的条款、来源等信息可以都放到number里面。}}
+
+\begin{refsegment}
+\nocite{molc.82:01,molc.82:02}
+
+\printbibliography[heading=none,segment=12]
+\end{refsegment}
+
+
+\subsubsection{案例基本格式为：\sidenote{卷，页码，年份正常放在volume，pages，date中。当一些信息不便于单独保存时，可直接放到title内，若与标题间有逗号，则可以放到number里面。}}
+
+\begin{refsegment}
+\nocite{molc.83:01-1,molc.83:01-2,molc.83:02,molc.83:03}
+
+\printbibliography[heading=none,segment=13]
+\end{refsegment}
+
+
+\subsubsection{英国法院案例}
+英国早期的案例报告比较杂， 都为私人编撰， 引用时根据具体情况。
+
+
+
+\subsubsection{网络文章基本格式为：\sidenote{日期为有月份名的日期。}}
+
+\begin{refsegment}
+\nocite{molc.85:01}
+
+\printbibliography[heading=none,segment=14]
+\end{refsegment}
+
+
+\subsection{法文引注体例}
+
+\subsubsection{法文学术文献}
+
+\begin{quotation}
+\fullcite{molc.86.1:01}
+
+\fullcite{molc.86.2:01}
+
+\fullcite{molc.86.2:02}
+
+\fullcite{molc.86.3:01}
+
+\fullcite{molc.86.4:01}
+
+\fullcite{molc.86.5:01}
+
+\fullcite{molc.86.6:01}
+\end{quotation}
+
+
+\subsubsection{法国法律}
+
+
+\subsubsection{法国法院判决}
+
+
+\subsubsection{法文网络信息}
+
+\begin{quotation}
+\fullcite{molc.89:01}
+
+\end{quotation}
+
+
+
+\subsubsection{引注关系}
+
+\subsection{德文引注体例}
+
+\subsubsection{德文学术文献}
+
+\begin{quotation}
+\fullcite{molc.91.1:01}
+
+\fullcite{molc.91.1:02}
+
+\fullcite{molc.91.2:01}
+
+\fullcite{molc.91.3:01}
+
+\fullcite{molc.91.3:02}
+
+\fullcite{molc.91.4:01}
+
+\fullcite{molc.91.5:01}
+
+\fullcite{molc.91.6:01}
+
+\end{quotation}
+
+\subsubsection{德文法规}
+
+
+\begin{quotation}
+\fullcite{molc.92:01}
+
+\fullcite{molc.92:02}
+
+\fullcite{molc.92:03}
+
+\end{quotation}
+
+
+\subsubsection{德文案例}
+
+\begin{quotation}
+\fullcite{molc.93:01}
+
+\fullcite{molc.93:02}
+
+\fullcite{molc.93:03}
+
+\end{quotation}
+
+\subsubsection{德文网络文章}
+
+\begin{quotation}
+\fullcite{molc.94:01}
+
+\end{quotation}
+
+\subsubsection{几种情况的处理}
+
+
+\subsection{日文引注体例}
+
+\subsubsection{日文学术文献}
+
+\begin{quotation}
+\fullcite{molc.96.1:01}
+
+\fullcite{molc.96.1:02}
+
+\fullcite{molc.96.2:01}
+
+\fullcite{molc.96.3:01}
+
+\end{quotation}
+
+\subsubsection{日文案例}
+\begin{quotation}
+\fullcite{molc.97:01}
+
+\fullcite{molc.97:02}
+\end{quotation}
+
+\subsubsection{日文法规}
+\begin{quotation}
+\fullcite{molc.98:01}
+\end{quotation}
+\subsubsection{日本官方文件}
+\begin{quotation}
+\fullcite{molc.99:01}
+
+\fullcite{molc.99:99}
+\end{quotation}
+\subsubsection{日文网络文献}
+
+\end{document}
