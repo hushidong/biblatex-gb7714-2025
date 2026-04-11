@@ -42,7 +42,7 @@ sorting=none
 \newgeometry{layoutwidth=21cm,layoutheight=3.5cm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
 %\textbf{示例：}引用单篇文献
-the notion of an invisible college has been explored in thesciences\cite{CRANE1972--}.Its absence among historians was noted by Stieg\yearcite{STIEG1981-549-560} ...
+The notion of an invisible college has been explored in thesciences\cite{CRANE1972--}.Its absence among historians was noted by Stieg\yearcite{STIEG1981-549-560} ...
 
 \textbf{参考文献：}
 
@@ -111,5 +111,56 @@ the notion of an invisible college has been explored in thesciences\cite{CRANE19
 
 \parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
 \end{refsection}
+
+\eject
+
+\pdfpagewidth=21cm \pdfpageheight=1cm
+\newgeometry{layoutwidth=21cm,layoutheight=1.5cm,layoutvoffset=-1mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
+\begin{refsection}
+\small\setlength{\bibitemsep}{0ex}
+%\textbf{示例 1：}引用同一著者同年出版的多篇中文文献
+\nocite{帛画2023,anon1981-628}
+\vspace{-2mm}
+\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+\end{refsection}
+
+\eject
+
+
+\pdfpagewidth=21cm \pdfpageheight=2.6cm
+\newgeometry{layoutwidth=21cm,layoutheight=3.0cm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
+
+\begin{refsection}
+Poor teacher behaviors are not a substantial problem for EFL (English as a Foreign Language) Japanese learners, but
+the converse, that teacher scem quite inspiring \cite{gbt7714.9.3.1.2:1} ...
+
+\textbf{参考文献：}
+
+\vspace{-2mm}
+\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+\end{refsection}
+
+
+
+\eject
+
+\pdfpagewidth=21cm \pdfpageheight=9.3cm
+\newgeometry{layoutwidth=21cm,layoutheight=9.5cm,layoutvoffset=1.5mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
+\begin{refsection}
+%\textbf{示例：}多次引用同一著者的同一文献
+
+文献增长规律能在一定程度上反映出某个研究领域的发展状况。文献逻辑增长模型提出文献增长包括三个阶段：早期阶段呈指数增长;中期阶段增长率开始变小，出现转折点；后期文献累积量增加缓慢并且趋于一个板限值\cite{gbt7714.9.3.1.3:1}。...文献计量学中的布拉德福分散定律描述了科技论文在期刊中的分布规律，运用此定律，结合本研究的样本数量，将来源期刊按照其刊载的文献数量进行降序排列，并且划分出4个区域(核心区、相关区、弱相关区、非相关区)，使每个区内期刊载文量约为全部期刊载文量的1/4，并且尽量使核心区、相关区、弱相关区、非相关区
+含有的期刊数量满足$1:n:n^{2}:n^{3}$的比例关系\cite{gbt7714.9.3.1.3:2}。.....洛特卡定律描述了科学工作者和科学论文产量之问的数学规律，核心思想可表述为:发表$x$篇文章的作者数量是发表1篇文章作者数量的$1/x^2$，且发表1篇文章的作者数是全体作者的60\%左右
+\cite{gbt7714.9.3.1.3:3}。利用此规律可以对某领域的作者发文情况进行分析。
+
+\textbf{参考文献：}
+
+\newrefcontext[sorting=gb7714-2015]{}
+\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+\end{refsection}
+
+
+
+
 
 \end{document}

@@ -17,8 +17,23 @@
 \usepackage{lipsum}
 \usepackage{tcolorbox}
 \usepackage{enumitem}
+\usepackage{threeparttable}
 \usepackage[a4paper]{geometry}%,showframe
 \geometry{asymmetric,top=3cm,bottom=2.5cm,left=2.5cm,right=2cm}%twoside=false,
+%\renewcommand{\figurename}{图}
+%\renewcommand{\tablename}{表}
+%\addto\captionsenglish{\renewcommand{\figurename}{图}\renewcommand{\tablename}{表}}
+%\ctexset{
+%figurename = 图,
+%tablename=表
+%}
+
+\usepackage{caption}
+% Renaming floats **with**caption
+\captionsetup{%
+figurename=图,
+tablename=表
+}
 
 \setcounter{secnumdepth}{4}
 \usepackage[pagestyles,nostruts]{titlesec}
@@ -28,12 +43,12 @@
 %\titlespacing{\paragraph}{5pc}{1.5ex minus .1 ex}{1pc}
 
 \newpagestyle{main}{%%内容奇数页左,偶数页右
-\sethead[GB/T 7714—××××]%偶数页左
+\sethead[GB/T 7714—2025]%偶数页左
 []%偶数页中left\sectiontitle|\subsectiontitle
 []%偶数页右
 {}%奇数页左
 {}%奇数页中right\sectiontitle|\subsectiontitle
-{GB/T 7714—××××}%奇数页右
+{GB/T 7714—2025}%奇数页右
 \setfoot[\thepage][][]{}{}{\thepage}%
 %\headrule%
 %\footrule
@@ -44,13 +59,16 @@
 
 \usepackage{xltxtra,mflogo,texnames}
 %%注意:这里使用other*来使得babel切换环境时忽略空白，使得条目集中各文献间的标点正确
-\usepackage[backend=biber,style=gb7714-2025,gbpub=true,gbpunctwidth=mixed,
+\usepackage[backend=biber,style=gb7714-2025,gbpunctwidth=mixed,%gbpub=true,
 gbfootbib=true,gbalign=gb7714-2015,autolang=other*,]{biblatex}%sorting=nyt,casechanger=latex2e
 \setlength{\bibitemsep}{1pt}
 \setlength{\bibnamesep}{0ex}
 \setlength{\bibinitsep}{0ex}
 \setlength{\bibparsep}{0ex}
 \renewcommand{\bibfont}{\zihao{-5}}
+\addbibresource{example2025.bib}
+
+\defdblanentry{gbt7714.8.5.3.7a}{gbt7714.b.4.11}
 
 
 
@@ -200,7 +218,6 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*,]{biblatex}%sorting=nyt,casec
 \defbibheading{biblist}[\bibname]{%
 \paragraph*{#1}}
 
-\addbibresource{example2025.bib}
 
 
 \usepackage{tikz}
@@ -360,7 +377,9 @@ and citations to information resources}
 
 本文件规定了参考文献的著录用文字、著录用符号、著录通则、各文献类型的著录项目与著录格式
 以及参考文献标引体系编制法。
+
 本文件适用于著者和编辑著录参考文献。
+
 本文件不适用于图书馆员、文献目录编制者以及索引编辑者作为文献著录规则使用。
 
 \section{规范性引用文件}
@@ -368,23 +387,23 @@ and citations to information resources}
 下列文件中的内容通过文中的规范性引用而构成本文件必不可少的条款。其中，注日期的引用文件，
 仅该日期对应的版本适用于本文件；不注日期的引用文件，其最新版本（包括所有的修改版）适用于本文件。
 
-GB/T 4894—2024 信息与文献 基础与术语
+GB/T 4894\quad 信息与文献\quad 基础与术语
 
-GB/T 7408 日期和时间 信息交换表示法
+GB/T 7408.1\quad 日期和时间\quad 信息交换表示法
 
-GB/T 28039 中国人名汉语拼音字母拼写规则
-
-ISO 4 信息与文献 出版物题名和标题缩写规则（ Information and documentation—Rules for the
-abbreviation of title words and titles of publications）
+%GB/T 28039 中国人名汉语拼音字母拼写规则
+%
+%ISO 4 信息与文献 出版物题名和标题缩写规则（ Information and documentation—Rules for the
+%abbreviation of title words and titles of publications）
 
 \section{术语和定义}
 
 {
 \renewcommand\addcontentsline[3]{}
-GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
+GB/T 4894 界定的以及下列术语和定义适用于本文件。
 
 \subsection{参考文献 reference}
-对信息资源或其中一部分进行准确和详细著录的数据，位于文末或文中，以便识别、定位和检索相
+位于文末或文中，对信息资源或其中一部分进行准确和详细著录的数据，位于文末或文中，以便识别、定位和检索相
 关信息。
 
 \subsection{电子资源 electronic resource}
@@ -397,27 +416,31 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 \subsection{会议录 proceedings； transactions}
 包含向大会提交的论文、通常还有论文的讨论和与论文相关事务等内容报道的文献。
 
-[来源： GB/T 4894-2024， 3.4.7.34]
+%[来源： GB/T 4894-2024， 3.4.7.34]
 
 \subsection{连续出版物 serial； serial publication}\label{sec:concept:serial}
 以连续的各个部分发行的、通常具有数字或年代标识的、计划无限期发行，不论周期长短的印刷文
 献或非印刷形式的出版物。
 
-注：包括：期刊、报纸等。
+\small{注：包括：期刊、报纸等。}
 
-[来源： GB/T 4894-2024， 3.4.1.28.1]
+%[来源： GB/T 4894-2024， 3.4.1.28.1]
 
 \subsection{数据集 dataset}
 相似或相关数据合乎逻辑的集合或分组，通常用作记录或用于研究。
 
+\small{注：通常用作记录或用于研究。}
+
 \subsection{顺序编码制 numeric system}
-一种引文参考文献（\ref{sec:concept:citeref}）的标注体系，即引文采用序号标注，参考文献表按引文的序号排序。
+%一种引文参考文献（\ref{sec:concept:citeref}）的标注体系，即引文采用序号标注，参考文献表按引文的序号排序。
+
+引文采用序号标注，参考文献表按引文的序号排序的标注体系。%如（\ref{sec:concept:citeref}）所示。
 
 \subsection{析出文献 component part}
-由某个责任者（\ref{sec:concept:creator}）提供的、构成可能涉及多个责任者
-（\ref{sec:concept:creator}）的主文献一部分的文献。
+由某个责任者提供的、构成可能涉及多个责任者的主文献一部分的文献。
+%如（\ref{sec:concept:creator}）所示。
 
-注：析出文献可以是连续出版物（\ref{sec:concept:serial}）中的论文，图书中具有独立作者、独立篇名的文献等。
+\small{注：析出文献可以是连续出版物（\ref{sec:concept:serial}）中的论文，图书中具有独立作者、独立篇名的文献等。}
 
 \subsection{引文参考文献 cited reference}\label{sec:concept:citeref}
 著者为撰写或编辑作品而引用的信息资源。
@@ -425,7 +448,7 @@ GB/T 4894—2024界定的以及下列术语和定义适用于本文件。
 \subsection{永久标识符 persistent identifier； PID}\label{sec:concept:pid}
 数字对象的唯一标识符，通过独立于其物理位置或当前所有权提供访问，确保对其的永久存取。
 
-注：永久标识符包括数字对象标识符（DOI）、统一资源名称（URN）等。
+\small{注：永久标识符包括数字对象标识符（DOI）、统一资源名称（URN）等。}
 \footnote{永久标识符 (PID) 用于对数字资源的长期引用。DOI (Digital Object Unique Identifier) 是数字对象标识符。URN (Uniform Resource Name) 是统一资源名。这三个概念实际是从不同角度提出的概念。\newline
 PID 强调引用的持久不变性，不论这种持久不变性是什么形式，由什么组织或机构实现。PID 是联合国教科文组织（United Nations Educational, Scientific and Cultural Organization, UNESCO）"开放科学建议"（RECOMMENDATION on OPEN SCIENCE）的开放科学重要基础设施之一。\\
 URN 是从互联网资源角度强调资源名的统一性和唯一性，也就是同一资源无论放到哪里(访问网址是否相同，是否有效)都有相同的名称，也可以看做是一种身份证信息。URN 由NID (Namespace Identifier) 和 NSS (Namespace Specific String) 构成，NID 由参与URN计划的组织和单位在 IANA ( Internet Assigned Numbers Authority ) 注册，NSS 由这些单位自行决定命名方式。\newline
@@ -452,55 +475,68 @@ DOI、ISBN等既被视作支持PID的
 
 
 \subsection{著者-出版年制 name and data system}
-一种引文参考文献（\ref{sec:concept:citeref}）的标注体系，即引文采用著者-出版年标注，参考文献表按著者字顺和出
-版年排序。
+%一种引文参考文献（\ref{sec:concept:citeref}），即
+引文采用著者-出版年标注，参考文献表按著者字顺和出
+版年排序的标注体系。
 
 }
 
 \titleformat{\subsection}[runin]{\zihao{5}\bfseries}{\thesubsection}{1em}{\hspace{1em}}
 \section{著录信息源}
 
-参考文献的著录信息源是被著录的信息资源本身。图书、连续出版物、会议录、学位论文、报告、
-标准、专利、网站和网页、档案、地图、数据集、预印本可依据题名页、版权页、封面等主要信息源著录各个著录项目；图书、连续出版物中的析出文献依据参考文献本身著录析出文献的信息，并依据主要信息源著录析出文献的出处；电子资源依据其存储介质上提供的主要信息源著录各个著录项目。
+{
+\renewcommand\addcontentsline[3]{}
+\subsection{} 参考文献的著录信息源是被著录的信息资源本身。
+
+\subsection{} 图书、连续出版物、会议录、学位论文、报告、标准、专利、网站和网页、档案、地图、数据集、预印本可依据题名页、版权页、封面等主要信息源著录各个著录项目。
+
+\subsection{} 图书、连续出版物中的析出文献依据参考文献本身著录析出文献的信息，并依据主要信息源著录析出文献的出处。
+
+\subsection{} 电子资源依据其存储介质上提供的主要信息源著录各个著录项目。
+
+}
 
 \section{著录用文字}
 
 {
 \renewcommand\addcontentsline[3]{}
-\subsection{} 参考文献原则上要求用信息资源本身的语种著录。必要时，可采用双语著录。用双语著录参考文
-献时，首先应用信息资源的原语种著录，然后用其他语种著录。
+\subsection{} 参考文献应用信息资源本身的语种著录。
 
-\textbf{示例1}：用原语种著录参考文献
+%参考文献原则上要求用信息资源本身的语种著录。必要时，可采用双语著录。用双语著录参考文
+%献时，首先应用信息资源的原语种著录，然后用其他语种著录。
+
+\textbf{示例：}%用原语种著录参考文献
 
 \begin{refsection}
-\nocite{周鲁卫2011--}
+%\nocite{周鲁卫2011--}
+\nocite{gbt7714.5.1:1}
 \nocite{japaneserefc}
-\nocite{RUDDOCK2009--}
+\nocite{gbt7714.5.1:3}
 \nocite{russianrefc}
 
 {\printbibliography[env=indentegenv,heading=none]}
 \end{refsection}
 
-\textbf{示例2：}用韩中两种语种著录参考文献
-\begin{refsection}
-\defbibentryset{李炳穆set}{kereanrefb,李炳穆2005--}
-\defbibentryset{图书馆信息政策set}{kereanrefc,图书馆信息政策委员会2007--}
-\nocite{李炳穆set}
-\nocite{图书馆信息政策set}
-
-
-{\printbibliography[heading=none,env=indentegenv]}
-\end{refsection}
-
-\textbf{示例3：}用中英两种语种著录参考文献
-\begin{refsection}
-\defbibentryset{熊平set}{熊平2005--,xiong2005--}
-\defbibentryset{脱贫攻坚2021set}{脱贫攻坚2021,脱贫攻坚2021en}
-\nocite{熊平set}
-\nocite{脱贫攻坚2021set}
-
-{\printbibliography[heading=none,env=indentegenv]}
-\end{refsection}
+%\textbf{示例2：}用韩中两种语种著录参考文献
+%\begin{refsection}
+%\defbibentryset{李炳穆set}{kereanrefb,李炳穆2005--}
+%\defbibentryset{图书馆信息政策set}{kereanrefc,图书馆信息政策委员会2007--}
+%\nocite{李炳穆set}
+%\nocite{图书馆信息政策set}
+%
+%
+%{\printbibliography[heading=none,env=indentegenv]}
+%\end{refsection}
+%
+%\textbf{示例3：}用中英两种语种著录参考文献
+%\begin{refsection}
+%\defbibentryset{熊平set}{熊平2005--,xiong2005--}
+%\defbibentryset{脱贫攻坚2021set}{脱贫攻坚2021,脱贫攻坚2021en}
+%\nocite{熊平set}
+%\nocite{脱贫攻坚2021set}
+%
+%{\printbibliography[heading=none,env=indentegenv]}
+%\end{refsection}
 
 
 \subsection{} 著录数字时，应保持信息资源原有的形式。但是，卷期号、页码、出版年、创建或修改日期、引用日期、顺序编码制的参考文献序号等宜用阿拉伯数字著录，其中日期著录应遵循 GB/T 7408 中的有关
@@ -520,36 +556,41 @@ DOI、ISBN等既被视作支持PID的
 
 \section{著录用符号}
 
-参考文献使用下列规定的标识符号：
 
-. 用于题名项、析出文献题名项、其他责任者、析出文献其他责任者、连续出版物的“年卷期或其
+{
+\renewcommand\addcontentsline[3]{}
+\subsection{} 本文件中的著录用符号为前置符。按著者-出版年制(见9.3)组织的参考文献表中的第一个著录项目，如主要责任者、析出文献主要责任者、专利申请者/所有者前不应使用任何标识符号。按顺序编码制(见9.2)组织的参考文献表中的各篇文献序号应用方括号括起，如：[1]、[2]、.....
+
+
+\subsection{} 参考文献使用下列规定的标识符号：\footnote{为方便标点切换，在实现上考虑三种实现，一种是全部半角，一种是全部全角，一种是全角半角混合。当前标准对应的就是最后这一种。三种方式通过选项 gbpunctwidth 来切换。gbpunctwidth=half，full，mixed 分别对应这三种方式。}
+
+——“.” 用于题名项、析出文献题名项、其他责任者、析出文献其他责任者、连续出版物的“年卷期或其
 他标识”项、版本项、出版项、地图比例尺、地图尺寸、连续出版物中析出文献的出处项、获取
 和访问路径以及永久标识符前。每一条参考文献的结尾可用“.”号标识。
 
-: 用于其他题名信息、报告编号、标准号、专利申请号、档号、出版者、引文页码、析出文献的页
-码前。
+——“:” 用于其他题名信息、报告编号、标准号、专利申请号、档号、出版者、引文页码、析出文献的页码前。
 
-, 用于同一著作方式的责任者、“等”“译”字样、出版年、期刊年卷期标识中的年和卷号前。
+——“,” 用于同一著作方式的责任者、“等”“译”字样、出版年、期刊年卷期标识中的年和卷号前。
 
-; 用于同一责任者的合订题名以及期刊后续的年卷期标识与页码前。
+——“;” 用于同一责任者的合订题名以及期刊后续的年卷期标识与页码前。
 
-// 用于析出文献的出处项前。
+——“//” 用于析出文献的出处项前。
 
-( ) 用于期刊年卷期标识中的期号、报纸的版次、电子资源的创建或修改日期以及非公元纪年的出
+——“( )” 用于期刊年卷期标识中的期号、报纸的版次、电子资源的创建或修改日期以及非公元纪年的出
 版年。
 
-[ ] 用于文献序号、文献类型和文献载体标识、电子资源的引用日期以及自拟的信息。
+——“[ ]” 用于文献序号、文献类型和文献载体标识、电子资源的引用日期以及自拟的信息。
 
-/ 用于合期的期号间以及文献载体标识前。
+——“/” 用于合期的期号间以及文献载体标识前。
 
-- 用于起讫序号和起讫页码间。
+——“-” 用于起讫序号和起讫页码间。
 
-注： “.”“[ ]”用半角符号，其他标识符号用全角符号。\footnote{为方便考虑，在实现上考虑三种实现，一种是全部半角，一种是全部全角，一种是全角半角混合。当前标准对应的就是最后这一种。三种方式通过选项 gbpunctwidth 来切换。gbpunctwidth=half，full，mixed 分别对应这三种方式。}
+%注： “.”“[ ]”用半角符号，其他标识符号用全角符号。\footnote{为方便考虑，在实现上考虑三种实现，一种是全部半角，一种是全部全角，一种是全角半角混合。当前标准对应的就是最后这一种。三种方式通过选项 gbpunctwidth 来切换。gbpunctwidth=half，full，mixed 分别对应这三种方式。}
 
 %\begin{tcolorbox}[colback=yellow!80,boxrule=0pt]
 %注意：标点符号要按照全半角、部分全角、全全角的方式以选项方式设置。
 %\end{tcolorbox}
-
+}
 
 
 \titleformat{\subsection}[hang]{\zihao{5}\bfseries}{\thesubsection}{1em}{}
@@ -558,7 +599,11 @@ DOI、ISBN等既被视作支持PID的
 \section{著录规则}
 \subsection{主要责任者或其他责任者}
 \subsubsection{} 个人责任者采用姓在前名在后的著录形式。欧美责任者的名可用缩写字母，缩写名后省略缩写点。
-欧美责任者的中译名只著录其姓；同姓不同名的欧美责任者，其中译名不仅要著录其姓，还应著录其名的首字母。 用西文或汉语拼音字母著录个人作者， 姓应全部著录，字母全大写，名可缩写为首字母；如用首字母无法识别该人名时，可著录全名\footnote{注意：下面示例中“昂温”文献的情况，姓名是中英文混合的情况是比较特殊的，因为存在中文，所以判定为中文，但为了输出的形式保持英文中姓和名之间的空格，因此bib文件中的输入以\{\}进行保护。特别注意：示例3中的结果是因为处理中文情况：“姓, 名”时，会去掉逗号合并姓和名导致的。}。
+同姓不同名的欧美责任者，其中译名不仅要著录其姓，还应著录其名的首字母。 用西文字母著录个人作者，姓应全部著录，字母全大写，名可缩写为首字母；如用首字母无法识别该人名时，可著录全名；用汉语拼音著录个人作者，姓应全部著录，首字母应大写，名宜用全称
+\footnote{注意：下面示例中“昂温”文献的情况，姓名是中英文混合的情况是比较特殊的，因为存在中文，所以判定为中文，但为了输出的形式保持英文中姓和名之间的空格，因此bib文件中的输入以\{\}进行保护。特别注意：示例3中的结果是因为处理中文情况：“姓, 名”时，会去掉逗号合并姓和名导致的。}
+\footnote{由于拼音和英文不易区分，当考虑要著录拼音的名全称时，可以利用花括号直接保护。注意：保护的是包括姓和名全部的格式化内容，也就是让biblatex直接原样输出需要的格式。除此方式外，也可以利用nameformat=\{quanpin\}选择直接指定当前文献采用全拼而不缩写，
+如 \ref{sec:confer:biblieg} 所示。}
+。
 
 \begin{refsection}
 
@@ -572,6 +617,7 @@ DOI、ISBN等既被视作支持PID的
 \nocite{Williams-ellis--}
 \nocite{morgan--}
 \nocite{lijianning--a}
+\nocite{Godard--}
 \nocite{lijianning--b}
 
 {\printbiblist[heading=none,env=exampleenv]{authorexample}}
@@ -591,11 +637,18 @@ DOI、ISBN等既被视作支持PID的
 \footnote{注意：佚名的处理是全局的，而不能单独局部化处理，所以在一个文档内是统一的。若要给出佚名，则可以设置选项 gbnoauthor=true。为避免影响文档其他部分不给出佚名的情况，这里使用的技巧是直接在bib文件中给出佚名信息。}
 
 \begin{refsection}
-\nocite{帛画2023给出佚名,anon1981-628givenanon}
-%\nocite{帛画2023,anon1981-628}
+%\nocite{帛画2023给出佚名,anon1981-628givenanon}
+\nocite{帛画2023,anon1981-628}
 
 {\printbibliography[heading=none,env=exampleenv]}
 \end{refsection}
+
+\small{注1：顺序编码制}
+
+\parbox{1.3cm}{\small\bfseries 示例3：\\示例4：}
+\parbox{15cm}{\includegraphics[viewport=3cm 0cm 17.5cm 1.0cm, clip=true,page=6]{tngbcitationaynew.pdf}\hfill}%width=15cm
+
+\small{注2：著者年份制}
 
 \subsubsection{}\label{sec:author:group} 凡是对文献负责的机关团体名称，通常根据著录信息源著录。机关团体名称应由上至下分级著录，上下级间用“ .”分隔，用汉字书写的机关团体名称除外。
 
@@ -614,14 +667,16 @@ DOI、ISBN等既被视作支持PID的
 \begin{refsection}
 \nocite{西游记词汇--}
 \nocite{张子正蒙注--}
-\nocite{化学动力学和反应器原理--}
+%\nocite{化学动力学和反应器原理--}
 \nocite{袖珍神学--}
 \nocite{北京师范大学学报--}
+\nocite{昨日之歌--}
 \nocite{Gasesinsea--}
 \nocite{jmath--}
 
-
 {\printbiblist[heading=none, env=exampleenv]{titlexamplea}}
+
+\small{注：示例5为自拟题名}
 \end{refsection}
 
 \subsubsection{} 同一责任者的多个合订题名，著录前 3 个合订题名。对于不同责任者的多个合订题名，可以只著
@@ -642,7 +697,7 @@ DOI、ISBN等既被视作支持PID的
 \nocite{世界出版业--}
 \nocite{ECL集成电路--}
 \nocite{中国科学技术史--}
-\nocite{中国科学--}
+\nocite{红楼梦--}
 \nocite{AsianPacificjournal--}
 
 {\printbiblist[heading=none, env=exampleenv]{titlexamplea}}
@@ -651,12 +706,13 @@ DOI、ISBN等既被视作支持PID的
 
 \subsection{文献类型和载体标识符}
 
-应按照附录 B 著录。电子资源既应著录文献类型标识，也应著录文献
+应按照附录\ref{sec:ids:mediums}著录。电子资源既应著录文献类型标识，也应著录文献
 载体标识。
 
 \begin{refsection}
 \nocite{马寅初讲义--}
-\nocite{商鞅战秋菊--}
+\nocite{环境司法--}
+%\nocite{商鞅战秋菊--}
 \nocite{严复思想--}
 \nocite{中子反射--}
 \nocite{信息与文献--}
@@ -683,21 +739,23 @@ DOI、ISBN等既被视作支持PID的
 
 \subsection{出版项}
 
-\subsubsection{通用要求}
+\subsubsection{通用要求}\label{sec:pub:gene}
+
 
 出版项应按出版地、出版者、出版日期顺序著录。
 
 本文件中的以下项目也应按照出版项的要求著录：
 
-——会议录中的会议地点、会议名称、会议年份（见 \ref{sec:entrytype:proceed}）；
+%——会议录中的会议地点、会议名称、会议年份（见 \ref{sec:entrytype:proceed}）；
 
 ——学位论文中的学位授予单位所在地、学位论文授予单位、学位授予年（见 \ref{sec:entrytype:thesis}）；
-
-——档案中的收藏地、收藏者、档案形成日期（见 \ref{sec:entrytype:archive}）；
 
 ——报告发布日期（见 \ref{sec:entrytype:report}）；
 
 ——专利公告（公开）日期（见 \ref{sec:entrytype:patent}）；
+
+——档案中的收藏地、收藏者、档案形成日期（见 \ref{sec:entrytype:archive}）；
+
 
 ——数据集中的创建机构（见 \ref{sec:entrytype:dataset}）；
 
@@ -707,7 +765,7 @@ DOI、ISBN等既被视作支持PID的
 \nocite{egbookpuba--}
 \nocite{egbookpubb--}
 \nocite{egbookpubc--}
-\nocite{egbookpubd--}
+%\nocite{egbookpubd--}
 \nocite{egbookpube--}
 {\printbiblist[heading=none, env=exampleenv]{pubexample}}
 \end{refsection}
@@ -721,6 +779,8 @@ DOI、ISBN等既被视作支持PID的
 \togglefalse{bbx:gbpub}
 \nocite{egbookpubaddressa--}
 \nocite{egbookpubaddressb--}
+\nocite{egbookpubaddressc--}
+\nocite{egbookpubaddressd--}
 
 
 {\printbiblist[heading=none, env=exampleenv]{pubexample}}
@@ -730,8 +790,8 @@ DOI、ISBN等既被视作支持PID的
 \paragraph{} 文献中载有多个出版地，宜只著录第一个或处于显要位置的出版地。
 
 \begin{refsection}
-\nocite{egbookpubaddressc--}
-\nocite{egbookpubaddressd--}
+\nocite{egbookpubaddressca--}
+\nocite{egbookpubaddressda--}
 
 
 {\printbiblist[heading=none, env=exampleenv]{pubexample}}
@@ -740,7 +800,7 @@ DOI、ISBN等既被视作支持PID的
 \paragraph{} 无出版地的中文文献著录“出版地不详”，外文文献著录“ S.l.”，并置于方括号内。无出版地的电子资源可省略此项。
 
 \begin{refsection}
-
+\toggletrue{bbx:gbpub}
 \nocite{egbookpubaddresse--}
 \nocite{egbookpubaddressf--}
 \nocite{egbookpubaddressg--}
@@ -773,7 +833,7 @@ DOI、ISBN等既被视作支持PID的
 \paragraph{} 无出版者的中文文献著录“出版者不详”，外文文献著录“ s.n.”，并置于方括号内。无出版者的电子资源可省略此项。
 
 \begin{refsection}
-
+\toggletrue{bbx:gbpub}
 \nocite{egbookpubpublishere--}
 \nocite{egbookpubpublisherf--}
 
@@ -784,7 +844,7 @@ DOI、ISBN等既被视作支持PID的
 
 \subsubsection{出版日期}
 
-\paragraph{} 出版年采用公元纪年，并用阿拉伯数字著录。如有其他纪年形式时，将原有的纪年形式置于“（\space  ）”内。
+\paragraph{} 出版年采用公元纪年，并用阿拉伯数字著录。如有其他纪年形式时，将原有的纪年形式置于“（\space  ）”内。\label{sec:pub:date}
 
 \begin{refsection}
 \nocite{egbookpubdatea--}
@@ -793,7 +853,9 @@ DOI、ISBN等既被视作支持PID的
 {\printbiblist[heading=none, env=exampleenv]{dateexample}}
 \end{refsection}
 
-\paragraph{} 报纸的出版日期按照“ YYYY-MM-DD”格式，用阿拉伯数字著录。
+%\paragraph{} 报纸的出版日期按照“ YYYY-MM-DD”格式，用阿拉伯数字著录。
+
+\paragraph{} 期刊的在线出版日期、报纸的出版日期、报告的发布日期、专利的公告日期、档案的形成日期应按照“YYYY-MM-DD"格式，用阿拉伯数字著录，
 
 
 \begin{refsection}
@@ -802,13 +864,13 @@ DOI、ISBN等既被视作支持PID的
 {\printbiblist[heading=none, env=exampleenv]{dateexample}}
 \end{refsection}
 
-\paragraph{} 专利文献的公告日期或公开日期按照“ YYYY-MM-DD”格式，用阿拉伯数字著录。
-
-\begin{refsection}
-\nocite{egbookpubdateh--}
-
-{\printbiblist[heading=none, env=exampleenv]{dateexample}}
-\end{refsection}
+%\paragraph{} 专利文献的公告日期或公开日期按照“ YYYY-MM-DD”格式，用阿拉伯数字著录。
+%
+%\begin{refsection}
+%\nocite{egbookpubdateh--}
+%
+%{\printbiblist[heading=none, env=exampleenv]{dateexample}}
+%\end{refsection}
 
 \paragraph{} 出版年无法确定时，可依次选用版权年、印刷年、估计的出版年。估计的出版年应置于方括号
 内。
@@ -820,6 +882,12 @@ DOI、ISBN等既被视作支持PID的
 \nocite{egbookpubdatef--}
 
 {\printbiblist[heading=none, env=exampleenv]{dateexample}}
+
+\small
+
+注1：示例1为版权年
+
+注2：示例3为估计的出版年
 \end{refsection}
 
 
@@ -855,47 +923,126 @@ DOI、ISBN等既被视作支持PID的
 
 \begin{refsection}
 
-\nocite{储大同2010-721-724,weiner2010-38}
+\nocite{储大同2010-721-724,gbt7714.7.8:2} %weiner2010-38
 
 {\printbibliography[heading=none,env=exampleenv]}
 \end{refsection}
 
 \subsection{永久识别符}
-获取和访问路径中含永久标识符时，可不著录永久标识符。当不含永久标识符时，可按照原文如实著
-录永久标识符。
+
+\subsubsection{} 获取和访问路径中含永久标识符时，可不著录永久标识符。
 
 \begin{refsection}
 
-\nocite{刘乃安2000-17-18,Deverell2013-21-22,GROSS2016LM}
+\nocite{Deverell2013-21-22,GROSS2016LM}
 
 {\printbibliography[heading=none,env=exampleenv]}
+
+\small
+注1：示例1永久标识符为：DOI: 10.1002/9781444305036.ch2
+
+注2：示例2永久标识符为：URN:ISBN:978-951-51-2090-8
+\end{refsection}
+
+\subsubsection{} 获取和访问路径中不含永久标识符时，可按照原文如实著录永久标识符。
+
+\begin{refsection}
+
+\nocite{刘乃安2000-17-18}
+
+{\printbibliography[heading=none,env=exampleenv]}
+
+\small
+注1：该示例永久标识符为：DOI: 10.7666/d.y351065.
 \end{refsection}
 
 
 \titleformat{\subsubsection}[hang]{\zihao{5}\bfseries}{\thesubsubsection}{1em}{}%\hspace{1em}
 \section{各文献类型著录项目与著录格式}
-\subsection{概述}
 
-本文件分别规定了图书、图书中的析出文献、连续出版物、连续出版物中的析出文献、会议录、学
-位论文、报告、标准、专利、网站和网页、档案、地图、数据集、预印本的著录项目和著录格式。著录项目（元素）设必备状态与可选状态。
+%\subsection{概述}
+%
+%本文件分别规定了图书、图书中的析出文献、连续出版物、连续出版物中的析出文献、会议录、学
+%位论文、报告、标准、专利、网站和网页、档案、地图、数据集、预印本的著录项目和著录格式。著录项目（元素）设必备状态与可选状态。
+
+\subsection{通用要求}
+
+本章所有文献类型著录格式与示例均按照顺序编码制组织。
+
+采用著者-出版年制标注参考文献时，各种文献类型的著录格式应仿照本章所规定的著录格式与示
+例，但应将出版年(见\ref{sec:pub:gene}、
+\ref{sec:pub:date})置于责任者之后，并以“，”分隔。
+
+\begin{refsection}
+
+\nocite{张伯伟2002--,
+程根伟1999-32-36,
+杨洪升2013-56-75,
+Caplan1993-61-66,
+CHRISTOU2024}
+
+\textbf{示例：}
+
+{\printbibliography[heading=none,env=indentegenv]}
+\end{refsection}
+
+
 
 \subsection{图书}\label{sec:entrytype:book}
 
 \subsubsection{著录项目}
+图书著录项目如表所示：
+\begin{table}[htbp]
+\centering
+\caption{图书著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+其他责任者 & 可选 & 7.1 \\
+\hline
+版本 & 有则必备 & 7.4 \\
+\hline
+出版地 & 有则必备 & 7.5.2 \\
+\hline
+出版者 & 有则必备 & 7.5.3 \\
+\hline
+出版年 & 有则必备 & 7.5.4 \\
+\hline
+引文页码 & 有则必备 & 7.7 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
 
-主要责任者 有则必备；
-题名 必备；
-其他题名信息 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-其他责任者 可选；
-版本 有则必备；
-出版地 有则必备；
-出版者 有则必备；
-出版年 有则必备；
-引文页码 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+
+
+%主要责任者 有则必备；
+%题名 必备；
+%其他题名信息 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%其他责任者 可选；
+%版本 有则必备；
+%出版地 有则必备；
+%出版者 有则必备；
+%出版年 有则必备；
+%引文页码 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
 
@@ -905,22 +1052,24 @@ DOI、ISBN等既被视作支持PID的
 \begin{refsection}
 
 \nocite{张伯伟2002--,
-陈登原2000-29-29,
+%陈登原2000-29-29,
 王夫之1865--,
 顾炎武1992--,
 1962-50-50,
-战德臣2019,
-哈里森沃尔德伦2012-235-236,
-牛永敢2019,
-美国妇产科医师学会2010-38-39,
-中国企业投资协会2013--,
-赵学功2001--,
-中国造纸学会2003--,
+gbt7714.8.2.2:5,
+%战德臣2019,
+%哈里森沃尔德伦2012-235-236,
+%牛永敢2019,
+%美国妇产科医师学会2010-38-39,
+%中国企业投资协会2013--,
+%赵学功2001--,
+%中国造纸学会2003--,
 PEEBLES2001--,
-SADOCK2009,
-InstituteForArt2023,
-Kinchy2012-50-50,
-Praetzellis2011-13-13}
+%SADOCK2009,
+%InstituteForArt2023,
+%Kinchy2012-50-50,
+Praetzellis2011-13-13,
+gbt7714.8.2.2:8}
 
 \textbf{示例：}
 
@@ -931,23 +1080,66 @@ Praetzellis2011-13-13}
 \subsection{图书中的析出文献}\label{sec:entrytype:inbook}
 
 \subsubsection{著录项目}
+图书中的析出文献著录项目如表所示：
+\begin{table}[htbp]
+\centering
+\caption{图书中的析出文献著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+析出文献主要责任者 & 有则必备 & 7.1 \\
+\hline
+析出文献题名 & 必备 & 7.2 \\
+\hline
+析出文献其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+析出文献其他责任者 & 可选 & 7.1 \\
+\hline
+图书主要责任者 & 有则必备 & 7.1 \\
+\hline
+图书题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+版本 & 有则必备 & 7.4 \\
+\hline
+出版地 & 有则必备 & 7.5.2 \\
+\hline
+出版者 & 有则必备 & 7.5.3 \\
+\hline
+出版年 & 有则必备 & 7.5.4 \\
+\hline
+析出文献页码 & 有则必备 & 7.7 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
 
-析出文献主要责任者 有则必备；
-析出文献题名 必备；
-析出文献其他题名信息 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-析出文献其他责任者 可选；
-图书主要责任者 有则必备；
-图书题名 必备；
-其他题名信息 有则必备；
-版本 有则必备；
-出版地 有则必备；
-出版者 有则必备；
-出版年 有则必备；
-引文页码 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+
+%析出文献主要责任者 有则必备；
+%析出文献题名 必备；
+%析出文献其他题名信息 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%析出文献其他责任者 可选；
+%图书主要责任者 有则必备；
+%图书题名 必备；
+%其他题名信息 有则必备；
+%版本 有则必备；
+%出版地 有则必备；
+%出版者 有则必备；
+%出版年 有则必备；
+%引文页码 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
 
@@ -957,13 +1149,13 @@ Praetzellis2011-13-13}
 
 \begin{refsection}
 
-\nocite{1988-590-590,
+\nocite{%1988-590-590,
 阿扬2023,
 王夫之2011-1109-1109,
-程根伟1999-32-36,
-陈晋镳1980-56-114a,
+%程根伟1999-32-36,
+%陈晋镳1980-56-114a,
 马克思2013-302-302,
-楼梦麟2011-11-12,
+%楼梦麟2011-11-12,
 Weinstein1974-745-772,
 Roberson2011-1-36}
 
@@ -976,18 +1168,51 @@ Roberson2011-1-36}
 \subsection{连续出版物}
 
 \subsubsection{著录项目}
+连续出版物著录项目如表所示：
+\begin{table}[htbp]
+\centering
+\caption{连续出版物著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+年卷期或其他标识 & 有则必备 & 8.5.1 \\
+\hline
+出版地 & 有则必备 & 7.5.2 \\
+\hline
+出版者 & 有则必备 & 7.5.3 \\
+\hline
+出版年 & 有则必备 & 7.5.4 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
 
-主要责任者 有则必备；
-题名 必备；
-其他题名信息 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-年卷期或其他标识 有则必备；
-出版地 有则必备；
-出版者 有则必备；
-出版年 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+
+%主要责任者 有则必备；
+%题名 必备；
+%其他题名信息 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%年卷期或其他标识 有则必备；
+%出版地 有则必备；
+%出版者 有则必备；
+%出版年 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
 
@@ -1014,28 +1239,48 @@ Publiclibrary1979}
 
 \subsubsection{通用要求}\label{sec:article:request}
 
-凡是从期刊中析出的文章，应在刊名之后注明其年、卷、期、页码等。阅读型参考文献的页码著录
+\paragraph{} 凡是从期刊中析出的文章，应在刊名之后注明其年、卷、期、页码等。阅读型参考文献的页码著录
 文章的起讫页或起始页，引文参考文献的页码著录引用信息所在页。\footnote{注意：当前存在一些期刊文献的引用信息是提供文章编号而不是页码。由于编号的格式与页码类似(见 \ref{sec:item:pages} 节)，所以可以直接将文章编号放在 pages 域中或者 eid 域中。比如，下面的示例5，可以在bib中给出：pages=\{147370\} 或  eid =\{147370\}。}
 
 \begin{refsection}
 
 \nocite{egdatevolnumpagea--,egdatevolnumpageb--,%
-egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageg--,egdatevolnumpageh--}
+egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--,egdatevolnumpageh--}
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
+
+\small
+注1：示例1中“2001”代表“年”。“2”代表“卷”。“1”代表“期”，“5-6”代表“页码”。
+
+注2：示例2中“2014”代表“年”，“510”代表“卷”，“356-363”代表“页码”。
+
+注3：示例3中“2010”代表“年”，“6”代表“期”。“23”代表“页码”。
+
+注4：示例4中“2012”代表“年"，“22”代表“卷”。“增刊2”代表“期”。“81-86”代表“页码”。
+
+注5：示例5中“2024”代表“年”。“12”代表“卷"，“S1”代表“期”，“7-11”代表“页码”。
+
+注6：示例6中“2023”代表“年”，“267”代表“卷”，“147370”代表“文章编号”。
+
+注7：示例7中“2024-05-09”代表“在线出版日期”。
+
+
 \end{refsection}
 
-对从合期中析出的文献，遵循上述规则著录，并在圆括号内注明合期号。
+\paragraph{} 对从合期中析出的文献，遵循上述规则著录，并在圆括号内注明合期号。
 
 \begin{refsection}
 \nocite{egdatevolnumpagee--}
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
+
+\small
+注：“2001”代表“年”，“9/10”代表“合期号”，“36-39”代表“页码”。
 \end{refsection}
 
 
 
-凡是在同一期刊上连载的文献，其后续部分不必另行著录，可在原参考文献后直接注明后续部分的
+\paragraph{} 凡是在同一期刊上连载的文献，其后续部分不必另行著录，可在原参考文献后直接注明后续部分的
 年、卷、期、页码等。\footnote{这里这种复杂的年卷期形式不便于自动化处理，所以可以直接在year域中给出需要复杂信息形式，下面的示例中给出了半角符号和全局符号下的两种示例。}
 
 \begin{refsection}
@@ -1043,10 +1288,15 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageg--,egdatevolnumpageh--}
 \nocite{egdatevolnumpagef--,egdatevolnumpagefull--}
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
+
+\small
+注：“2011”代表“年”，“33”代表“卷”，“2”代表“期”，“20-25”代表“页码”；“2011”代表“年”，“33”代
+表“卷”，“3”代表“期”，“26-30”代表“页码”。
+
 \end{refsection}
 
 
-凡是从报纸中析出的文献，应在报纸名后著录其出版日期与版次。
+\paragraph{} 凡是从报纸中析出的文献，应在报纸名后著录其出版日期与版次。
 
 
 \begin{refsection}
@@ -1054,21 +1304,56 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageg--,egdatevolnumpageh--}
 \nocite{egdatevolnumpagei--}
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
+
+注：“2013-03-16”代表“出版日期”。“1”代表“版次”。
 \end{refsection}
 
 
 \subsubsection{著录项目}
 
-析出文献主要责任者 有则必备；
-析出文献题名 必备；
-析出文献其他题名信息 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-连续出版物题名 有则必备；
-其他题名信息 有则必备；
-年卷期标识与页码等 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+连续出版物中的析出文献著录项目如表所示：
+\begin{table}[htbp]
+\centering
+\caption{连续出版物中的析出文献著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+析出文献主要责任者 & 有则必备 & 7.1 \\
+\hline
+析出文献题名 & 必备 & 7.2 \\
+\hline
+析出文献其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+析出文献其他责任者 & 可选 & 7.1 \\
+\hline
+连续出版物题名 & 有则必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+年卷期/版次标识与页码等 & 有则必备 & 8.5.1 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
+
+%析出文献主要责任者 有则必备；
+%析出文献题名 必备；
+%析出文献其他题名信息 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%连续出版物题名 有则必备；
+%其他题名信息 有则必备；
+%年卷期标识与页码等 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
 
@@ -1082,19 +1367,21 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageg--,egdatevolnumpageh--}
 %\end{tcolorbox}
 
 
-\nocite{杨洪升2013-56-75}
-\nocite{丁文祥2000--}
+%\nocite{杨洪升2013-56-75}
+\nocite{丁文祥2000--,gbt7714.8.5.3:2}
 \nocite{于潇2012-1518-1523}
-\nocite{李炳穆2008-6-12}
-\nocite{陈建军2010-93-93,陈缮真2022--,李幼平2010-225-228}
+%\nocite{李炳穆2008-6-12}
+%\nocite{陈建军2010-93-93,陈缮真2022--,李幼平2010-225-228}
 \nocite{张群2024在线,
-张群2024出版,
-Caplan1993-61-66,
+张群2024出版,gbt7714.8.5.3:6,gbt7714.8.5.3:7,
+%Caplan1993-61-66,
 Saito2006-169-176,
-DESMARAIS1992-605-609,
-Park2010-696-715,
-Frese2013-378-398,
-Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
+%DESMARAIS1992-605-609,
+%Park2010-696-715,
+%Frese2013-378-398,
+Myburg2014-356-362,gbt7714.8.5.3:10
+%SANTER2025ANN,SHINOTSUKA2023SAMPLE
+}
 
 
 
@@ -1110,30 +1397,82 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献形式出现的会议录，其著录
 项目与著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的会议录根据本规则著录。
 
+\begin{refsection}
+\nocite{%王莉2023--,中国社会科学院台湾史研究中心2012--,
+牛志明2012--,汪学军2002-22-25,肖希明2024民国}
+%\nocite{贾东琴2011-45-52a,陈志勇2011--}
+\nocite{%WANG2022ACAIT,HU2024SSDBM,
+Yufin2000--}
+\nocite{%Babu2014--,
+FOURNEY1971-17-38}
+
+{
+ \hyphenpenalty=100 %断词阈值，值越大越不容易出现断词
+ \tolerance=5000 %丑度，10000为最大无溢出盒子，参考the texbook 第6章
+
+\textbf{示例：}
+
+{\printbibliography[heading=none,env=indentegenv]}
+}
+\end{refsection}
+
 \subsubsection{著录项目}
+会议录著录项目如表所示：
+\begin{table}[htbp]
+\centering
+\caption{会议录著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+会议名称 & 有则必备 & — \\
+\hline
+会议年份 & 有则必备 & — \\
+\hline
+引文页码 & 有则必备 & 7.7 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
 
-主要责任者 有则必备；
-题名 必备；
-其他题名信息 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-会议地点 有则必备；
-会议名称 有则必备；
-会议年份 有则必备；
-引文页码 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
 
-\subsubsection{著录格式}
+%主要责任者 有则必备；
+%题名 必备；
+%其他题名信息 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%会议地点 有则必备；
+%会议名称 有则必备；
+%会议年份 有则必备；
+%引文页码 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
+
+\subsubsection{著录格式}\label{sec:confer:biblieg}
 主要责任者. 题名：其他题名信息[文献类型标识/文献载体标识]. 会议地点：会议名称，会议年
 份：引文页码. 获取和访问路径. 永久标识符.\footnote{未正式出版的会议录使用了会议名称，由于其格式与publisher类似，可以直接将会议名称填入publisher，也可以填入eventitle，即用eventitle来描述会议名称。由于eventitle也可用来描述会议录名即booktitle，所以在实现中 eventitle 根据如下逻辑转化：当是inproceedings时，eventitle转为booktitle。当是proceedings时，eventitle转为publisher。}
 
 
 \begin{refsection}
-\nocite{王莉2023--,牛志明2012--,中国社会科学院台湾史研究中心2012--,肖希明2024民国}
-\nocite{汪学军2002-22-25,贾东琴2011-45-52a,陈志勇2011--}
-\nocite{WANG2022ACAIT,HU2024SSDBM,Yufin2000--}
-\nocite{Babu2014--,FOURNEY1971-17-38}
+%\nocite{王莉2023--,牛志明2012--,中国社会科学院台湾史研究中心2012--,肖希明2024民国}
+%\nocite{汪学军2002-22-25,贾东琴2011-45-52a,陈志勇2011--}
+%\nocite{WANG2022ACAIT,HU2024SSDBM,Yufin2000--}
+%\nocite{Babu2014--,FOURNEY1971-17-38}
+
+\nocite{gbt7714.8.6.3:1,gbt7714.8.6.3:2,gbt7714.8.6.3:3}
 
 {
  \hyphenpenalty=100 %断词阈值，值越大越不容易出现断词
@@ -1149,18 +1488,50 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 \subsection{学位论文}\label{sec:entrytype:thesis}
 
 \subsubsection{著录项目}
+学位论文著录项目如表所示：
+\begin{table}[htbp]
+\centering
+\caption{学位论文著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+学位授予单位所在地 & 有则必备 & 7.5.1、7.5.2 \\
+\hline
+学位授予单位 & 必备 & 7.5.1、7.5.3 \\
+\hline
+学位授予年 & 有则必备 & 7.5.1、7.5.4 \\
+\hline
+引文页码 & 有则必备 & 7.7 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
 
-主要责任者 有则必备；
-题名 必备；
-其他题名信息 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-学位授予单位所在地 有则必备；
-学位授予单位 有则必备；
-学位授予年 有则必备；
-引文页码 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+%主要责任者 有则必备；
+%题名 必备；
+%其他题名信息 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%学位授予单位所在地 有则必备；
+%学位授予单位 有则必备；
+%学位授予年 有则必备；
+%引文页码 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
 
@@ -1169,7 +1540,7 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 
 \begin{refsection}
 
-\nocite{王琦2022,CALMS1965--,何筱梅2016,CHRISTOU2024,曲恩熙2023社交}
+\nocite{王琦2022,gbt7714.8.7.2:2,gbt7714.8.7.2:3,CALMS1965--,CHRISTOU2024}%何筱梅2016,曲恩熙2023社交
 
 
 \textbf{示例：}
@@ -1187,16 +1558,48 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 
 \subsubsection{著录项目}
 
-要责任者 有则必备；
-题名 必备；
-其他题名信息 有则必备；
-报告编号 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-报告发布日期 有则必备；
-引文页码 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+报告著录项目如表所示：
+\begin{table}[htbp]
+\centering
+\caption{报告著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+报告编号 & 有则必备 & — \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+发布日期 & 有则必备 & 7.5.1、7.5.4 \\
+\hline
+引文页码 & 有则必备 & 7.7 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+%要责任者 有则必备；
+%题名 必备；
+%其他题名信息 有则必备；
+%报告编号 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%报告发布日期 有则必备；
+%引文页码 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
 主要责任者. 题名： 其他题名信息：报告编号[文献类型标识/文献载体标识]. 报告发布日期：引
@@ -1208,11 +1611,12 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 
 \begin{refsection}
 
-\nocite{中国互联网络信息中心2012--}
-\nocite{汤万金2013-09-30--,中国宏观2020蓝皮书,美国疾病2018黄皮书,中国信息2023白皮书}
+%\nocite{中国互联网络信息中心2012--}
+\nocite{汤万金2013-09-30--,%中国宏观2020蓝皮书,美国疾病2018黄皮书,
+中国信息2023白皮书}
 \nocite{Calkin2011-8-9}
 \nocite{DTFHA1990--}
-\nocite{WHO1970--,UN2024DT}
+%\nocite{WHO1970--,UN2024DT}
 
 
 \textbf{示例：}
@@ -1229,35 +1633,87 @@ Myburg2014-356-362,SANTER2025ANN,SHINOTSUKA2023SAMPLE}
 理。除此之外的标准根据本规则著录。
 
 \subsubsection{著录项目}
+标准著录项目如表所示：
 
-主要责任者 有则必备；
-题名 必备；
-其他题名信息 有则必备；
-标准号 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-其他责任者 可选；
-版本 有则必备；
-出版地 有则必备；
-出版者 有则必备；
-出版年 有则必备；
-引文页码 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}[b]
+\caption{标准著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+标准编号 & 必备 & --- \\
+\hline
+标准名称 & 必备 & 7.2 \\
+\hline
+文献类型标识\tnote{a} & 必备/可选 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item[a] 标准化文件中"文献类型标识"为可选项。
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+%标准名称
+%必备；
+%文献类型标识
+%必各/可选；
+%文献载体标识
+%电子资源必备；
+%获取和访问路径
+%电子资源必备；
+%永久标识符
+%电子资源可选。
+
+
+%主要责任者 有则必备；
+%题名 必备；
+%其他题名信息 有则必备；
+%标准号 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%其他责任者 可选；
+%版本 有则必备；
+%出版地 有则必备；
+%出版者 有则必备；
+%出版年 有则必备；
+%引文页码 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
-主要责任者. 题名：其他题名信息：标准号[文献类型标识/文献载体标识]. 其他责任者. 版本.
-出版地：出版者，出版年：引文页码. 获取和访问路径. 永久标识符.
+%主要责任者. 题名：其他题名信息：标准号[文献类型标识/文献载体标识]. 其他责任者. 版本.
+%出版地：出版者，出版年：引文页码. 获取和访问路径. 永久标识符.
+
+标准编号\quad 标准名称[文献类型标识/文献载体标识]. 获取和访问路径. 永久标识符.
+
 
 \begin{refsection}
 
-\nocite{全国信息文献标准化技术委员会2010-3-3}
-\nocite{全国广播电视标准化技术委员会2007-1-1}
-\nocite{水电水利2020,国家环境保护局科技标准司1996-2-3,
-中国铁建2021,华北水利2022,网络安全2021,国家标准局信息分类编码研究所1988-59-92}
-\nocite{Auditdata2019,Softwareinterface2021,
-Informationtechnology2020,Lithiumbattery2022,
-Explosiveatmospheres2016,Atmospheresexplosives2016}
+%\nocite{全国信息文献标准化技术委员会2010-3-3}
+%\nocite{全国广播电视标准化技术委员会2007-1-1}
+%\nocite{水电水利2020,国家环境保护局科技标准司1996-2-3,
+%中国铁建2021,华北水利2022,网络安全2021,国家标准局信息分类编码研究所1988-59-92}
+%\nocite{Auditdata2019,Softwareinterface2021,
+%Informationtechnology2020,Lithiumbattery2022,
+%Explosiveatmospheres2016,Atmospheresexplosives2016}
+
+\nocite{gbt7714.8.9.2:1,
+gbt7714.8.9.2:2,
+gbt7714.8.9.2:3,
+gbt7714.8.9.2:4,
+gbt7714.8.9.2:5
+}
 
 
 \textbf{示例：}
@@ -1268,23 +1724,56 @@ Explosiveatmospheres2016,Atmospheresexplosives2016}
 
 \subsection{专利}\label{sec:entrytype:patent}
 
-\subsubsection{通用要求}
-
-凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献出现的专利，其著录项目与
-著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的专利根据本规则著录。
+%\subsubsection{通用要求}
+%
+%凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献出现的专利，其著录项目与
+%著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的专利根据本规则著录。
 
 \subsubsection{著录项目}
 
-专利申请者/所有者 必备；
-专利题名 必备；
-其他题名信息 有则必备；
-专利申请号 必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-公告日期或公开日期 有则必备；
-引文页码 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+专利著录项目如表所示：
+
+\begin{table}[htbp]
+\centering
+\caption{专利著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+专利申请者/所有者 & 必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+专利申请号 & 必备 & — \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+公告日期或公开日期 & 有则必备 & 7.5.1、7.5.4.2 \\
+\hline
+引文页码 & 有则必备 & 7.7 \\
+\hline
+获取和访问路径 & 必备 & 7.8 \\
+\hline
+永久标识符 & 可选 & 7.9 \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+%专利申请者/所有者 必备；
+%专利题名 必备；
+%其他题名信息 有则必备；
+%专利申请号 必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%公告日期或公开日期 有则必备；
+%引文页码 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
 
@@ -1298,9 +1787,13 @@ Explosiveatmospheres2016,Atmospheresexplosives2016}
 
 \begin{refsection}
 
-\nocite{邓一刚2006--,张凯军2012-04-05--,李华2023,
-西安电子科技大学2002--,河北绿洲生态环境科技有限公司2001--,
-苏州生物2022,Tachibana2005--,TRISCO2022,中国焊接协会2023}
+\nocite{邓一刚2006--,%张凯军2012-04-05--,李华2023,
+西安电子科技大学2002--,%河北绿洲生态环境科技有限公司2001--,
+苏州生物2022,
+%Tachibana2005--,
+TRISCO2022,
+%中国焊接协会2023
+}
 
 
 
@@ -1321,70 +1814,150 @@ Explosiveatmospheres2016,Atmospheresexplosives2016}
 凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献出现的专利，其著录项目与
 著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的专利根据本规则著录。
 
-\subsubsection{著录项目}
+\subsubsection{网站}
 
-网站的著录项目：
-主要责任者 有则必备；
-题名 必备；
-文献类型标识 必备；
-文献载体标识 必备；
-创建或修改日期 有则必备；
-引用日期 必备；
-获取和访问路径 必备。
+{
+\titleformat{\paragraph}[hang]{\zihao{5}\bfseries}{\theparagraph}{1em}{}
+\paragraph{著录项目}
 
-网页的著录项目：
-主要责任者 有则必备；
-题名 必备；
-文献类型标识 必备；
-文献载体标识 必备；
-创建或修改日期 有则必备；
-引用日期 必备；
-获取和访问路径 必备；
-永久标识符 可选。
+网站著录项目如表所示：
 
-\subsubsection{著录格式}
+\begin{table}[htb]
+\centering
+\caption{网站著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 必备 & 7.3、A.2 \\
+\hline
+创建或修改日期 & 有则必备 & 7.6 \\
+\hline
+引用日期 & 必备 & 7.6 \\
+\hline
+获取和访问路径 & 必备 & 7.8 \\
+\hline
+\end{tabular}
+\end{table}
 
-网站：主要责任者. 网站题名[文献类型标识/文献载体标识].（创建或修改日期） [引用日期]. 获取和访问路径.
+
+%主要责任者 有则必备；
+%题名 必备；
+%文献类型标识 必备；
+%文献载体标识 必备；
+%创建或修改日期 有则必备；
+%引用日期 必备；
+%获取和访问路径 必备。
+
+\paragraph{著录格式}
+
+主要责任者. 网站题名[文献类型标识/文献载体标识].（创建或修改日期） [引用日期]. 获取和访问路径.
+
+\begin{refsection}
+
+\nocite{gbt7714.8.11.2.2:1,
+gbt7714.8.11.2.2:2
+%鲁迅博物馆2023,
+%BBC2020a,
+%BBC2020b
+}
+
+
+{
+ \hyphenpenalty=100 %断词阈值，值越大越不容易出现断词
+ \tolerance=5000 %丑度，10000为最大无溢出盒子，参考the texbook 第6章
+
+
+\textbf{示例：}
+
+{\printbibliography[heading=none,env=indentegenv]}
+}
+\end{refsection}
+
+}
+
+\subsubsection{网页}
+
+{
+\titleformat{\paragraph}[hang]{\zihao{5}\bfseries}{\theparagraph}{1em}{}
+\paragraph{著录项目}
+
+网页著录项目如表所示：
+
+\begin{table}[htb]
+\centering
+\caption{网页著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 必备 & 7.3、A.2 \\
+\hline
+创建或修改日期 & 有则必备 & 7.6 \\
+\hline
+引用日期 & 必备 & 7.6 \\
+\hline
+获取和访问路径 & 必备 & 7.8 \\
+\hline
+永久标识符 & 可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+%主要责任者 有则必备；
+%题名 必备；
+%文献类型标识 必备；
+%文献载体标识 必备；
+%创建或修改日期 有则必备；
+%引用日期 必备；
+%获取和访问路径 必备；
+%永久标识符 可选。
+
+\paragraph{著录格式}
 
 网页：主要责任者.题名[文献类型标识/文献载体标识].（创建或修改日期） [引用日期]. 获取和访问路径. 永久标识符.
 
-
 \begin{refsection}
 
-\nocite{鲁迅博物馆2023,
-BBC2020a,
-BBC2020b}
+%\nocite{北京市人民政府办公厅2005--,鲁迅博物馆2021,
+%杨立华2022,ISOHOME2020,ANTONIO2019,BEVINGTON2025,昨日之歌2015,
+%仉尚航2024}
 
+\nocite{gbt7714.8.11.3.2:1,
+gbt7714.8.11.3.2:2,
+gbt7714.8.11.3.2:3,
+gbt7714.8.11.3.2:4,
+Zotero2024}
 
 {
  \hyphenpenalty=100 %断词阈值，值越大越不容易出现断词
  \tolerance=5000 %丑度，10000为最大无溢出盒子，参考the texbook 第6章
 
 
-\textbf{网站示例：}
+\textbf{示例：}
 
 {\printbibliography[heading=none,env=indentegenv]}
 }
 \end{refsection}
 
-\begin{refsection}
-
-\nocite{北京市人民政府办公厅2005--,鲁迅博物馆2021,
-杨立华2022,ISOHOME2020,ANTONIO2019,BEVINGTON2025,昨日之歌2015,
-Zotero2024,仉尚航2024}
-
-
-{
- \hyphenpenalty=100 %断词阈值，值越大越不容易出现断词
- \tolerance=5000 %丑度，10000为最大无溢出盒子，参考the texbook 第6章
-
-
-\textbf{网页示例：}
-
-{\printbibliography[heading=none,env=indentegenv]}
 }
-\end{refsection}
-
 
 \subsection{档案}\label{sec:entrytype:archive}
 
@@ -1395,18 +1968,55 @@ Zotero2024,仉尚航2024}
 
 \subsubsection{著录项目}
 
-主要责任者 有则必备；
-题名 必备；
-其他题名信息 有则必备；
-档号 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-收藏地 有则必备；
-收藏者 有则必备；
-档案形成日期 有则必备；
-引文页码 有则必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+档案著录项目如表所示：
+
+\begin{table}[htbp]
+\centering
+\caption{档案著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+档号 & 有则必备 & — \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+收藏者所在地 & 有则必备 & 7.5.1、7.5.2 \\
+\hline
+收藏者 & 有则必备 & 7.5.1、7.5.3 \\
+\hline
+形成日期 & 有则必备 & 7.5.1、7.5.4 \\
+\hline
+引文页码 & 有则必备 & 7.7 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+%主要责任者 有则必备；
+%题名 必备；
+%其他题名信息 有则必备；
+%档号 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%收藏地 有则必备；
+%收藏者 有则必备；
+%档案形成日期 有则必备；
+%引文页码 有则必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
 
 \subsubsection{著录格式}
 
@@ -1420,7 +2030,8 @@ Zotero2024,仉尚航2024}
 
 \begin{refsection}
 \nocite{李鸿章1887,湖北省建设厅1931,武汉市军事管制委员会1949,FITZWILLIAM1570,
-中国第一历史档案馆2001--,清代奏折汇编2005,私立武昌2021}
+%中国第一历史档案馆2001--,清代奏折汇编2005,私立武昌2021
+}
 
 
 \textbf{示例：}
@@ -1435,25 +2046,75 @@ Zotero2024,仉尚航2024}
 \subsubsection{通用要求}
 
 凡以图书、图书中的析出文献出现的地图册、地图集等，其著录项目与著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:inbook} 中
-的有关规则处理。除此之外的地图根据本规则著录。
+的有关规则处理。除此之外的地图应按 \ref{sec:map:biblieg} 著录。
+
+
+\begin{refsection}
+\nocite{訾冬梅2006地图,谭其骧1982地图,CRIBB2015map,gbt7714.8.13.1:4}
+
+
+\textbf{示例：}
+
+{\printbibliography[heading=none,env=indentegenv]}
+
+\end{refsection}
+
 
 \subsubsection{著录项目}
 
-主要责任者 有则必备；
-题名 必备；
-其他题名信息 有则必备；
-比例尺 有则必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-版本 有则必备；
-出版地 有则必备；
-出版者 有则必备；
-出版年 有则必备；
-尺寸 纸质单幅地图必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+地图著录项目如表所示：
+\begin{table}[htbp]
+\centering
+\caption{地图著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+比例尺 & 有则必备 & — \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+版本 & 有则必备 & 7.4 \\
+\hline
+出版地 & 有则必备 & 7.5.2 \\
+\hline
+出版者 & 有则必备 & 7.5.3 \\
+\hline
+出版年 & 有则必备 & 7.5.4 \\
+\hline
+尺寸 & 纸质单幅地图必备 & — \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
 
-\subsubsection{著录格式}
+
+%主要责任者 有则必备；
+%题名 必备；
+%其他题名信息 有则必备；
+%比例尺 有则必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%版本 有则必备；
+%出版地 有则必备；
+%出版者 有则必备；
+%出版年 有则必备；
+%尺寸 纸质单幅地图必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
+
+\subsubsection{著录格式}\label{sec:map:biblieg}
 
 主要责任者. 题名：其他题名信息. 比例尺[文献类型标识/文献载体标识]. 版本. 出版地：出版
 者，出版年. 尺寸. 获取和访问路径. 永久标识符.\footnote{由于地图比例尺和大小尺寸在biblatex中没有专门的域描述，所以比例尺直接在标题中写入或者利用新增的 scale 域表示，大小尺寸则用新增的 dimensions 或原有的 addendum 域描述。版本则用version描述，而不是edition。两个新增域的信息见\url{https://aurimasv.github.io/z2csl/typeMap.xml}。}
@@ -1461,8 +2122,11 @@ Zotero2024,仉尚航2024}
 
 
 \begin{refsection}
-\nocite{胡健民2021--,刘祥沈2016地图,中工武大2019地图,吴自银2019地图,国家测绘2016地图,
-訾冬梅2006地图,谭其骧1982地图,童世亨1926地图,CRIBB2015map}
+\nocite{胡健民2021--,刘祥沈2016地图,
+%中工武大2019地图,吴自银2019地图,
+国家测绘2016地图,
+%訾冬梅2006地图,谭其骧1982地图,童世亨1926地图,CRIBB2015map
+}
 
 
 \textbf{示例：}
@@ -1477,28 +2141,65 @@ Zotero2024,仉尚航2024}
 \subsubsection{通用要求}
 
 凡以图书、图书中的析出文献、连续出版物、连续出版物中的析出文献形式出现的数据集，其著录
-项目与著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的数据集根据本规则著录。
+项目与著录格式分别按 \ref{sec:entrytype:book}--\ref{sec:entrytype:article} 中的有关规则处理。除此之外的数据集根据 \ref{sec:dataset:biblieg} 著录。
 
 \subsubsection{著录项目}
 
-主要责任者 有则必备；
-题名 必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-版本 可选；
-创建机构 电子资源可选；
-创建或修改日期 有则必备；
-引用日期 必备；
-获取和访问路径 电子资源必备；
-永久标识符 电子资源可选。
+数据集著录项目如表所示：
+\begin{table}[htbp]
+\centering
+\caption{数据集著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+版本 & 可选 & 7.4 \\
+\hline
+发布平台 & 电子资源可选 & 7.5.1 \\
+\hline
+发布或修改日期 & 有则必备 & 7.6 \\
+\hline
+引用日期 & 必备 & 7.6 \\
+\hline
+获取和访问路径 & 电子资源必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
 
-\subsubsection{著录格式}
+
+%主要责任者 有则必备；
+%题名 必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%版本 可选；
+%创建机构 电子资源可选；
+%创建或修改日期 有则必备；
+%引用日期 必备；
+%获取和访问路径 电子资源必备；
+%永久标识符 电子资源可选。
+
+\subsubsection{著录格式}\label{sec:dataset:biblieg}
 主要责任者. 数据集名称[文献类型标识/文献载体标识]. 版本. 创建机构（创建或修改日期） [引
 用日期]. 获取和访问路径. 永久标识符.\footnote{数据集若存在网址且来源不是期刊的转化为online处理，其他默认利用manual输出，根据来源按图书等类型输出，图书类与manual一致所以无需转换。但析出文献则需要转换，下面的示例中仅有第2条文献为期刊析出文献，所以目前仅实现了期刊析出文献的转换，考虑判断的方式是没有location且存在journal。}
 
 \begin{refsection}
 
-\nocite{草地数据1994--,李皓2024语料库,彭守璋2024降水,刘时银2012水川,仲晓雅2022夜间灯光,仲晓雅2022夜间灯光en,IHME2021Disease,郑涵2018生态}
+\nocite{gbt7714.8.14.3:1,gbt7714.8.14.3:2,
+IHME2021Disease
+%草地数据1994--,李皓2024语料库,彭守璋2024降水,刘时银2012水川,仲晓雅2022夜间灯光,仲晓雅2022夜间灯光en,郑涵2018生态
+}
 
 
 \textbf{示例：}
@@ -1513,27 +2214,65 @@ Zotero2024,仉尚航2024}
 
 \subsubsection{著录项目}
 
-主要责任者 有则必备；
-题名 必备；
-文献类型标识 必备；
-文献载体标识 电子资源必备；
-版本 有则必备；
-预印本出版平台 可选；
-创建或修改日期 有则必备；
-引用日期 必备；
-获取和访问路径 必备；
-永久标识符 可选。
+预印本著录项目如表所示：
+
+\begin{table}[htbp]
+\centering
+\caption{预印本著录项目}
+\begin{tabular}{|c|c|c|}
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+主要责任者 & 有则必备 & 7.1 \\
+\hline
+题名 & 必备 & 7.2 \\
+\hline
+其他题名信息 & 有则必备 & 7.2.3 \\
+\hline
+文献类型标识 & 必备 & 7.3、A.1 \\
+\hline
+文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+\hline
+版本 & 有则必备 & 7.4 \\
+\hline
+出版平台 & 电子资源可选 & 7.5.1 \\
+\hline
+创建或修改日期 & 有则必备 & 7.6 \\
+\hline
+引用日期 & 必备 & 7.6 \\
+\hline
+获取和访问路径 & 必备 & 7.8 \\
+\hline
+永久标识符 & 电子资源可选 & 7.9 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+%主要责任者 有则必备；
+%题名 必备；
+%文献类型标识 必备；
+%文献载体标识 电子资源必备；
+%版本 有则必备；
+%预印本出版平台 可选；
+%创建或修改日期 有则必备；
+%引用日期 必备；
+%获取和访问路径 必备；
+%永久标识符 可选。
 
 \subsubsection{著录格式}
 
 主要责任者. 题名[文献类型标识/文献载体标识]. 版本. 预印本出版平台（创建或修改日期） [引
-用日期]. 获取和访问路径. 永久标识符.\footnote{预印本通常是在线的，所以一般转为online处理，同时考虑一般的预印平台放在archiveprefix域中，将其转化为institution。并且根据该域信息设置misc类的标识符为PP。PID 可以是URN，也可以是DOI，或是其他的标识，如CSTR(全球通用科技资源标识符)，PID一般不用专门的域来保存，所以可以直接将其放在URL中，所以 URL 可以是带有网络协议、主机端口信息的网址，也可以是单纯的 PID 信息。而DOI域仅用于保存纯粹的DOI信息。示例中的文献3中的URL保存了 PID 信息(这里是CSTR)。文献1和4中的URL则保存了带有网络协议信息和PID信息的网址，只是文献1中的PID信息是CSTR，而文献4中的是DOI信息。关于 PID 这些概念的解释见 \ref{sec:concept:pid} 节。}
+用日期]. 获取和访问路径. 永久标识符.\footnote{预印本通常是在线的，所以一般转为online处理，同时考虑一般的预印平台放在archiveprefix域中，将其转化为institution。并且根据该域信息设置misc类的标识符为PP。PID 可以是URN，也可以是DOI，或是其他的标识，如CSTR(全球通用科技资源标识符)，PID一般不用专门的域来保存，所以可以直接将其放在URL中，所以 URL 可以是带有网络协议、主机端口信息的网址，也可以是单纯的 PID 信息。而DOI域仅用于保存纯粹的DOI信息。
+%示例中的文献3中的URL保存了 PID 信息(这里是CSTR)。文献1和4中的URL则保存了带有网络协议信息和PID信息的网址，只是文献1中的PID信息是CSTR，而文献4中的是DOI信息。
+关于 PID 这些概念的解释见 \ref{sec:concept:pid} 节。}
 
 
 
 \begin{refsection}
-\nocite{方向明2023元宇宙,肖玲2024数据,山东一医大2025,BLOSS2025trial,JENKINS2012light}
+%\nocite{方向明2023元宇宙,肖玲2024数据,山东一医大2025,BLOSS2025trial,JENKINS2012light}
 
+\nocite{肖玲2024数据,方向明2023元宇宙,JENKINS2012light}
 
 \textbf{示例：}
 
@@ -1542,13 +2281,7 @@ Zotero2024,仉尚航2024}
 \end{refsection}
 
 
-\newpage
-\appendix
-
-\titleformat{\section}[display]
-{\centering\zihao{5}\bfseries}{附录 \thesection}{0pt}{\centering}
-\titlespacing{\section}{0pt}{1.5ex plus 1pt minus 1pt}{1.5ex plus 1pt minus 1pt}
-\section[参考文献标引体系编制法]{（规范性）\\参考文献标引体系编制法}
+\section{参考文献标引体系编制法}
 
 \subsection{通用要求}
 
@@ -1558,7 +2291,7 @@ Zotero2024,仉尚航2024}
 
 \subsubsection{正文中的引用}\label{sec:numeric:cite}
 
-\paragraph{} 顺序编码制是按正文中引用的文献出现的先后顺序连续编码，将序号置于方括号中。如果顺序编码制用脚注方式时，序号可由计算机自动生成圈码
+\paragraph{} 顺序编码制是按正文中引用的文献出现的先后顺序连续编码，将序号置于方括号中。如果顺序编码制用脚注方式时，序号可由计算机自动生成圈码，见示例2。
 
 \begin{refsection}
 \textbf{示例1：}引用单篇文献，序号置于方括号中
@@ -1630,9 +2363,9 @@ Zotero2024,仉尚航2024}
 \end{minipage}
 \end{refsection}
 
-\subsubsection{参考文献表编制示例}
+\subsubsection{参考文献表编制要求}
 
-参考文献表采用顺序编码制组织时，各篇文献应按正文部分标注的序号依次列出（参见 \ref{sec:numeric:cite}）。
+参考文献表采用顺序编码制组织时，各篇文献应按正文部分标注的序号依次列出（参见 \ref{sec:numeric:cite}）。更多示例见附录 \ref{sec:appdix:biblieg}。
 
 \begin{refsection}
 \textbf{示例：}
@@ -1662,28 +2395,37 @@ Zotero2024,仉尚航2024}
 
 \paragraph{} 正文中引用多著者文献时，对欧美著者只需标注第一个著者的姓，其后附“ et al.”；对于中国著者应标注第一著者的姓名，其后附“等”字。姓氏与“ et al.”“等”之间留适当空隙。
 
-\paragraph{} 在参考文献表中著录同一著者在同一年出版的多篇文献时，出版年后应用小写字母 a， b， c…区别。
+\textbf{示例：}
 
-\textbf{示例 1：}引用同一著者同年出版的多篇中文文献
+\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=7]{tngbcitationaynew.pdf}
 
-\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=2]{tngbcitationaynew.pdf}
-%\begin{refsection}
+\paragraph{} 在参考文献表中著录同一著者在同一年出版的多篇文献时，出版年后应用小写字母 a， b， c…区别，并置于（）内。
+
+\textbf{示例：}
+
+\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=8]{tngbcitationaynew.pdf}
+
 %\textbf{示例 1：}引用同一著者同年出版的多篇中文文献
-%\nocite{贾君枝2023编目,贾君枝2023短评}
 %
-%\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
-%\end{refsection}
-
-\textbf{示例 2：}引用同一著者同年出版的多篇英文文献
-
-\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=3]{tngbcitationaynew.pdf}
-
-%\begin{refsection}
+%\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=2]{tngbcitationaynew.pdf}
+%
+%%\begin{refsection}
+%%\textbf{示例 1：}引用同一著者同年出版的多篇中文文献
+%%\nocite{贾君枝2023编目,贾君枝2023短评}
+%%
+%%\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+%%\end{refsection}
+%
 %\textbf{示例 2：}引用同一著者同年出版的多篇英文文献
-%\nocite{KENNEDY1975-311-386,KENNEDY1975-339-360}
 %
-%\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
-%\end{refsection}
+%\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=3]{tngbcitationaynew.pdf}
+%
+%%\begin{refsection}
+%%\textbf{示例 2：}引用同一著者同年出版的多篇英文文献
+%%\nocite{KENNEDY1975-311-386,KENNEDY1975-339-360}
+%%
+%%\parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
+%%\end{refsection}
 
 
 \paragraph{}\label{sec:ay:multicites} 多次引用同一著者的同一文献，在正文中标注著者与出版年，并在“（）”外以角标的形式著录引文页码。
@@ -1731,37 +2473,425 @@ Zotero2024,仉尚航2024}
 %\end{refsection}
 
 \newpage
+\appendix
+
+\titleformat{\section}[display]
+{\centering\zihao{5}\bfseries}{附录 \thesection}{0pt}{\centering}
+\titlespacing{\section}{0pt}{1.5ex plus 1pt minus 1pt}{1.5ex plus 1pt minus 1pt}
+
 \section[文献类型和文献载体标识代码]{（规范性）\\文献类型和文献载体标识代码}
+\label{sec:ids:mediums}
 
 \subsection{文献类型和标识代码}
 
 参考文献类型对应的文献类型标识代码为：
-图书 M；
-会议录 C；
-汇编 G；
-报纸 N；
-期刊 J；
-学位论文 D；
-报告 R；
-标准 S；
-专利 P；
-数据库 DB；
-计算机程序 CP；
-网站和网页 EB；
-档案 A；
-地图 CM；
-数据集 DS；
-预印本 PP；
-其他 Z。
+
+\begin{table}[htbp]
+\centering
+\caption{文献类型和标识代码}
+\begin{tabular}{|c|c|}
+\hline
+参考文献类型 & 文献类型标识代码 \\
+\hline
+图书 & M \\
+\hline
+期刊 & J \\
+\hline
+报纸 & N \\
+\hline
+会议录 & C \\
+\hline
+学位论文 & D \\
+\hline
+报告 & R \\
+\hline
+标准 & S \\
+\hline
+专利 & P \\
+\hline
+网站、网页 & EB \\
+\hline
+档案 & A \\
+\hline
+地图 & CM \\
+\hline
+数据集 & DS \\
+\hline
+预印本 & PP \\
+\hline
+汇编 & G \\
+\hline
+计算机程序 & CP \\
+\hline
+数据库 & DB \\
+\hline
+其他 & Z \\
+\hline
+\end{tabular}
+\end{table}
+
+%图书 M；
+%会议录 C；
+%汇编 G；
+%报纸 N；
+%期刊 J；
+%学位论文 D；
+%报告 R；
+%标准 S；
+%专利 P；
+%数据库 DB；
+%计算机程序 CP；
+%网站和网页 EB；
+%档案 A；
+%地图 CM；
+%数据集 DS；
+%预印本 PP；
+%其他 Z。
 
 \subsection{电子资源载体和标识代码}
 
 
 电子资源的载体类型对应的载体类型标识代码为：
-磁带（ magnetic tape） MT；
-磁盘（ disk） DK；
-光盘（ CD-ROM） CD；
-缩微资料（ microform materials） MM；
-联机网络（ online） OL。
+%磁带（ magnetic tape） MT；
+%磁盘（ disk） DK；
+%光盘（ CD-ROM） CD；
+%缩微资料（ microform materials） MM；
+%联机网络（ online） OL。
+
+\begin{table}[htbp]
+\centering
+\caption{电子资源载体和标识代码}
+\begin{tabular}{|c|c|}
+\hline
+电子资源的载体类型 & 载体类型标识代码 \\
+\hline
+磁带(magnetic tape) & MT \\
+\hline
+磁盘(disk) & DK \\
+\hline
+光盘(CD-ROM) & CD \\
+\hline
+联机网络(online) & OL \\
+\hline
+缩微资料(microform materials) & MM \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\newpage
+\section[顺序编码制参考文献著录格式示例]{（资料性）\\顺序编码制参考文献著录格式示例}
+\label{sec:appdix:biblieg}
+
+
+\subsection{图书}
+
+\begin{refsection}
+\nocite{张伯伟2002--,
+曹凌2011-19-,陈登原2000-29-29,
+王夫之1865--,
+顾炎武1992--,
+钱学森2001--,
+冯友兰2008--,
+1962-50-50,
+战德臣2019,
+哈里森沃尔德伦2012-235-236,
+牛永敢2019,
+gbt7714.8.2.2:5,
+gbt7714.b.1:13,
+赵学功2001--,
+中国造纸学会2003--,
+gbt7714.5.1:1,
+japaneserefc,
+PEEBLES2001--,
+SADOCK2009,
+InstituteForArt2023,
+Kinchy2012-50-50,
+Praetzellis2011-13-13,
+gbt7714.7.8:2,
+gbt7714.5.1:3,
+Deverell2013-21-22,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{图书中的析出文献}
+
+\begin{refsection}
+\nocite{阿扬2023,
+王夫之2011-1109-1109,
+程根伟1999-32-36,
+李约瑟1991--,
+陈晋镳1980-56-114,
+马克思2013-302-302,
+gbt7714.b.2:7,
+楼梦麟2011-11-12,
+Weinstein1974-745-772,
+Roberson2011-1-36,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{连续出版物}
+
+\begin{refsection}
+\nocite{中华医学会湖北分会1984----,
+中国图书馆学会1957--1990--,
+AAAS1883----,
+Publiclibrary1979,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{连续出版物中的析出文献}
+
+\begin{refsection}
+
+%\defbibentryset{wanglpdblan}{gbt7714.8.5.3:7,gbt7714.b.4:11}
+
+\nocite{杨洪升2013-56-75,
+丁文祥2000--,
+于潇2012-1518-1523,
+gbt7714.8.5.3:2,
+陈建军2010-93-93,
+陈缮真2022--,
+李幼平2010-225-228,
+张群2024在线,
+张群2024出版,
+gbt7714.8.5.3:6,
+gbt7714.8.5.3.7a,
+Caplan1993-61-66,
+Saito2006-169-176,
+DESMARAIS1992-605-609,
+Park2010-696-715,
+Frese2013-378-398,
+Myburg2014-356-362,
+SANTER2025ANN,
+SHINOTSUKA2023SAMPLE,
+gbt7714.8.5.3:10,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+
+\subsection{会议录}
+
+\begin{refsection}
+\nocite{gbt7714.8.6.3:1,
+牛志明2012--,
+中国社会科学院台湾史研究中心2012--,
+肖希明2024民国,
+汪学军2002-22-25,
+贾东琴2011-45-52,
+陈志勇2011--,
+gbt7714.8.6.3:2,
+gbt7714.8.6.3:3,
+Yufin2000--,
+Babu2014--,
+FOURNEY1971-17-38,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{学位论文}
+
+\begin{refsection}
+\nocite{王琦2022,
+gbt7714.8.7.2:2,
+何筱梅2016,
+gbt7714.8.7.2:3,
+gbt7714.b.6:5,
+CHRISTOU2024,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{报告}
+
+\begin{refsection}
+\nocite{中国互联网络信息中心2012--,
+汤万金2013-09-30--,
+中国信息2023白皮书,
+Calkin2011-8-9,
+DTFHA1990--,
+UN2024DT,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{标准}
+
+\begin{refsection}
+\nocite{gbt7714.8.9.2:1,
+gbt7714.8.9.2:3,
+gbt7714.b.8:3,
+gbt7714.8.9.2:2,
+Auditdata2019,
+gbt7714.8.9.2:5,
+Informationtechnology2020,
+Lithiumbattery2022,
+Explosiveatmospheres2016,
+Atmospheresexplosives2016,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{专利}
+
+\begin{refsection}
+\nocite{邓一刚2006--,
+张凯军2012-04-05--,
+李华2023,
+西安电子科技大学2002--,
+河北绿洲生态环境科技有限公司2001--,
+苏州生物2022,
+IBM2002,
+TRISCO2022,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{网站、网页}
+
+\begin{refsection}
+\nocite{gbt7714.b.10:1,
+鲁迅博物馆2023,
+杨立华2022,
+gbt7714.8.11.3.2:1,
+gbt7714.8.11.3.2:3,
+昨日之歌2015,
+仉尚航2024,
+gbt7714.b.10:8,
+gbt7714.8.11.2.2:2,
+ISOHOME2020,
+ANTONIO2019,
+BEVINGTON2025,
+Zotero2024,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{档案}
+
+\begin{refsection}
+\nocite{李鸿章1887,
+湖北省建设厅1931,
+武汉市军事管制委员会1949,
+FITZWILLIAM1570,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{地图}
+
+\begin{refsection}
+\nocite{胡健民2021--,
+刘祥沈2016地图,
+中工武大2019地图,
+吴自银2019地图,
+国家测绘2016地图,
+訾冬梅2006地图,
+谭其骧1982地图,
+童世亨1926地图,
+CRIBB2015map,
+gbt7714.8.13.1:4,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{数据集}
+
+\begin{refsection}
+\nocite{彭守璋2024降水,
+刘时银2012水川,
+gbt7714.8.14.3:1,
+郑涵2018生态,
+gbt7714.8.14.3:2,
+gbt7714.b.13:6,
+gbt7714.b.13:7,
+gbt7714.b.13:8,
+IHME2021Disease,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\subsection{预印本}
+
+\begin{refsection}
+\nocite{方向明2023元宇宙,
+肖玲2024数据,
+BLOSS2025trial,
+JENKINS2012light,
+}
+
+
+{\printbibliography[env=indentegenv,heading=none]}
+\end{refsection}
+
+
+\newpage
+%\titleformat{\section}{}{\thesection}{1em}{}%\zihao{5}\bfseries
+\begin{refsection}
+\nocite{人名拼音std,
+Inforanddocstd,
+韩云波2015,
+陈海燕2016,
+冯秀兰2016,
+余丁2016,
+陈庆2017,
+罗银科2017,
+贾晓林2018,
+赵慧2019,
+周俊2020,
+李丽2020,
+张衍2021,
+尚品2024,
+}
+
+\addcontentsline{toc}{section}{参考文献}
+\printbibliography[title={参\quad 考\quad 文\quad 献}]
+\end{refsection}
+
+
 
 \end{document}

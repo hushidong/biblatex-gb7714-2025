@@ -1,4 +1,4 @@
-<b>Date of last change: 2025/06/10 v1.1v</b>
+<b>Date of last change: 2026/04/11 v1.1w</b>
 
 
 
@@ -12,7 +12,7 @@ Maintainer: huzhenzhen <hzzmail@163.com>
 
 Homepage: <https://github.com/hushidong/biblatex-gb7714-2025>
 
-ctan-pkg: <https://www.ctan.org/pkg/biblatex-gb7714-2025>
+ctan-pkg: <https://www.ctan.org/pkg/biblatex-gb7714-2015>
 
 License: LaTeX Project Public License 1.3c or later
 
@@ -23,6 +23,7 @@ The biblatex-gb7714-2025 package provides an implementation of the bibliography 
 
 biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015), all the options and useages are the same.
 
+The style files (gb7714-2025.cbx/bbx,gb7714-2025ay.cbx/bbx,gb7714.cbx/bbx,gb7714.cbx/bbx) are released in package biblatex-gb7714-2015 on ctan.
 
 
 ---------------------------------------------------------
@@ -55,6 +56,8 @@ biblatex-gb7714-2025 is similar to [biblatex-gb7714-2015](https://github.com/hus
 
 ## Update history
 
++ 20260411 refine 2025 styles to conforming to the formal stardard of GB/T 7714-2025 (修正样式使其符合将要实施的正式GB/T 7714-2025标准)
++ 20260410 modify the format for arXiv references (修改arXiv上文献的格式使其符合priprint类型的输出)
 + 20250719 remove a duplicated dot after title for gbpunctwidth=bylan (去除gbpunctwidth=bylan标题后多出的点)
 + 20250520 nomorlize the case of personal authors by source mapping (通过source mapping规范个人责任者的英文字母大小写)
 + 20250519 add cmd mktitlecase, mkbooktitlecase, mkjournaltitlecase to control the case of title, booktitle, journaltitle. (增加 mktitlecase, mkbooktitlecase, mkjournaltitlecase 三个接口用于调整不同标题的大小写)
@@ -91,6 +94,6 @@ gbT7714-2025.pdf 由gbT7714-2025.tex编译得到。
 * 2025/03/03 v1.1t,github,initialized
 * 2025/05/22 v1.1u,ctan,github
 * 2025/06/10 v1.1v,ctan,github
-
+* 2026/04/11 v1.1w,ctan,github
 
 
