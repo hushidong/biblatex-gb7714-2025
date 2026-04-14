@@ -1,6 +1,5 @@
-
 % !Mode:: "TeX:UTF-8"
-% 用于测试gb7714-2015ay样式，实现GB/T 7714-2015 标准说明中给出的著者年份制示例
+% 用于测试gb7714-2025ay样式，实现GB/T 7714-2025 标准说明中给出的著者年份制示例
 \documentclass{article}
 \usepackage[10pt]{ctex}
 \setmainfont[BoldFont={cmunsx.otf}]{cmunrm.otf}
@@ -79,6 +78,7 @@ The notion of an invisible college has been explored in thesciences\cite{CRANE19
 \newgeometry{layoutwidth=21cm,layoutheight=10cm,layoutvoffset=1.5mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
 %\textbf{示例：}多次引用同一著者的同一文献
+\nocite{裴丽生1981-2-10,刘彻东1998-38-39,张忠智1997-33-34,中国社会科学院语言研究所词典编辑室1996--}
 
 主编靠编辑思想指挥全局已是编辑界的共识\cite{张忠智1997-33-34}，然而对编辑思想至今没有一个明确的界定，故不妨提出一个构架……参与讨论。
 由于“思想”的内涵是“客观存在反映在人的意识中经过思维活动而产生的结果”
@@ -94,7 +94,7 @@ The notion of an invisible college has been explored in thesciences\cite{CRANE19
 
 \textbf{参考文献：}
 
-\newrefcontext[sorting=gb7714-2015]{}
+\newrefcontext[sorting=none]{}
 \parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
 \end{refsection}
 
@@ -155,7 +155,7 @@ the converse, that teacher scem quite inspiring \cite{gbt7714.9.3.1.2:1} ...
 
 \textbf{参考文献：}
 
-\newrefcontext[sorting=gb7714-2015]{}
+\newrefcontext[sorting=none]{}
 \parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
 \end{refsection}
 
