@@ -76,6 +76,7 @@
     \DeclareDatamodelFields[type=field,datatype=integer]{refnumber}
     \DeclareDatamodelFields[type=field,datatype=literal]{scale}%表示地图比例
     \DeclareDatamodelFields[type=field,datatype=literal]{dimensions}%表示地图大小
+    \DeclareDatamodelFields[type=field,datatype=literal]{cstr}%表示cstr，类似于doi
 
 
     %因为biblatex更新3.14版本以后，biber对于为声明数据模型的条目类型
@@ -2189,6 +2190,11 @@
   \ifhyperref
     {\href{https://doi.org/#1}{\nolinkurl{#1}}}
     {\nolinkurl{#1}}}
+\DeclareFieldFormat{cstr}{%
+  \rmfamily{CSTR}\addcolon\space
+  \ifhyperref
+    {\href{https://cstr.org/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
 %
 %   标题的字母大小写格式修改
 %
@@ -2875,7 +2881,20 @@
   \iftoggle{bbx:doi}
     {\printfield{doi}}
     {}}
+%
+%   增加cstr、doi+cstr格式
+%    2026.04.14 byhzz
+\newbibmacro*{cstr}{%
+  \iftoggle{bbx:doi}
+    {\printfield{cstr}}
+    {}}
+\newbibmacro*{doi+cstr}{%
+  \iftoggle{bbx:doi}
+    {\iffieldundef{doi}
+        {\printfield{cstr}}{\printfield{doi}}}
+    {}}
 
+%
 %
 %   调整页码的格式，即chapter+pages格式
 %
@@ -3773,6 +3792,7 @@ test {\ifentrytype{conference}}
   \ifboolexpr{not test {\iflistundef{publisher}} and test {\iffieldundef{url}}}
   {\usebibmacro{date}}
   {\usebibmacro{newsdate}}%
+  \usebibmacro{note+pages}%
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
@@ -3823,6 +3843,8 @@ test {\ifentrytype{conference}}
 %}%带括号的日期和不带括号的日期
 \iffieldundef{entrysubtype}{\usebibmacro{online:url+urldate}}
     {\iffieldequalstr{entrysubtype}{report}{\newunit\usebibmacro{url}}{\usebibmacro{online:url+urldate}}}%
+  \newunit\newblock
+  \usebibmacro{doi+cstr}%
   \newunit\newblock
   \iftoggle{bbx:eprint}
     {\usebibmacro{eprint}}
@@ -3922,6 +3944,9 @@ test {\ifentrytype{conference}}
    or test {\ifentrytype{map}}}%
     {}{\usebibmacro{modifydate}}}%修改或更新日期为带括号的时间
   \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \iffieldundef{cstr}{}
+  {\usebibmacro{cstr}}%
   %\newunit
   %\printfield{pagetotal}%
   \newunit\newblock
