@@ -426,7 +426,7 @@ GB/T 4894 界定的以及下列术语和定义适用于本文件。
 \subsection{顺序编码制 numeric system}
 %一种引文参考文献（\ref{sec:concept:citeref}）的标注体系，即引文采用序号标注，参考文献表按引文的序号排序。
 
-引文采用序号标注，参考文献表按引文的序号排序的标注体系。%如（\ref{sec:concept:citeref}）所示。
+引文采用序号标注、参考文献表按引文的序号排序的标注体系。%如（\ref{sec:concept:citeref}）所示。
 
 \subsection{析出文献 component part}
 由某个责任者提供的、构成可能涉及多个责任者的主文献一部分的文献。
@@ -438,20 +438,19 @@ GB/T 4894 界定的以及下列术语和定义适用于本文件。
 作者为撰写或编辑作品而引用的信息资源。
 
 \subsection{永久标识符 persistent identifier； PID}\label{sec:concept:pid}
-通过独立于其物理位置或当前所有权提供访问以确保对数字对象永久存取的唯一标识符。
+通过独立于数字对象物理位置或当前所有权提供访问以确保对数字对象永久存取的唯一标识符。
 
 \small{注：永久标识符包括数字对象标识符（DOI）、统一资源名称（URN）等。}
-\footnote{永久标识符 (PID) 用于对数字资源的长期引用。DOI (Digital Object Unique Identifier) 是数字对象标识符。URN (Uniform Resource Name) 是统一资源名。这三个概念实际是从不同角度提出的概念。\newline
-PID 强调引用的持久不变性，不论这种持久不变性是什么形式，由什么组织或机构实现。PID 是联合国教科文组织（United Nations Educational, Scientific and Cultural Organization, UNESCO）"开放科学建议"（RECOMMENDATION on OPEN SCIENCE）的开放科学重要基础设施之一。\\
-URN 是从互联网资源角度强调资源名的统一性和唯一性，也就是同一资源无论放到哪里(访问网址是否相同，是否有效)都有相同的名称，也可以看做是一种身份证信息。URN 由NID (Namespace Identifier) 和 NSS (Namespace Specific String) 构成，NID 由参与URN计划的组织和单位在 IANA ( Internet Assigned Numbers Authority ) 注册，NSS 由这些单位自行决定命名方式。\newline
+\footnote{永久标识符 (PID) 用于对数字资源的长期引用。\href{https://doi.org}{DOI (Digital Object Identifier)} 是数字对象标识符。\href{https://rfc-editor.org/rfc/rfc8141}{URN (Uniform Resource Name)} 是统一资源名。这三个概念实际是从不同角度提出的概念。\newline
+PID 强调引用的持久不变性，不论这种持久不变性是什么形式，由什么组织或机构实现。PID 是联合国教科文组织（United Nations Educational, Scientific and Cultural Organization, UNESCO）\href{https://unesco.org/en/legal-affairs/recommendation-open-science}{《开放科学建议书》（RECOMMENDATION on OPEN SCIENCE）}的开放科学重要基础设施之一。\\
+URN 是从互联网资源角度强调资源名的统一性和唯一性，也就是同一资源无论放到哪里（访问网址是否相同，是否有效）都有相同的名称，也可以看做是一种身份证信息。URN 由NID (Namespace Identifier) 和 NSS (Namespace Specific String) 构成，NID 由参与URN计划的组织和单位在 IANA (Internet Assigned Numbers Authority) 注册，NSS 由这些单位自行决定命名方式。\newline
 DOI 强调对象标识的唯一性，可以看做是由 International DOI Foundation 组织提供的资源身份证信息，该组织维护DOI系统来为数字资源提供唯一的、永久的标识符，以方便资源的检索、引用和链接。\newline
 注意到：
-DOI 实际上也在URN的
-\href{https://www.iana.org/assignments/urn-namespaces/urn-namespaces.xhtml}{注册列表}中，所以 DOI 也可以看做是URN的一种实现。同时因为 DOI 也支持对数字资源的长期引用，所以DOI也视作 PID 的一种具体实现。\\
-无论是URN 和 PID 都存在不同的实现。在PID 中，CSTR (Common Science and Technology Resources) 就是与 DOI 类似的这样一种实现，它是全球通用科技资源标识符，也是全球科技资源唯一标识的贡献者与全球开放科学的实践者。除此之外，ISBN (International Standard Book Number)、ArXiv 等都可以视作是PID的实现。
+DOI 实际上也在URN的\href{https://www.iana.org/assignments/urn-namespaces/urn-namespaces.xhtml}{注册列表}中，所以 DOI 也可以看做是URN的一种实现。同时因为 DOI 也支持对数字资源的长期引用，所以DOI也视作 PID 的一种具体实现。\\
+无论是URN 和 PID 都存在不同的实现。在PID 中，CSTR (Common Science and Technology Resources) 就是与 DOI 类似的这样一种实现，它是全球通用科技资源标识符，也是全球科技资源唯一标识的贡献者与全球开放科学的实践者。除此之外，ISBN (International Standard Book Number)、arXiv 等都可以视作是PID的实现。
 DOI、ISBN等既被视作支持PID的
-\href{https://pub.orcid.org/v3.0/identifiers}{永久标识符}，实际上也在 URN Namespaces 中。\\
-因此，从这一关系看，上述概念可理解为：PID 和 URN 是更高层的面向唯一资源描述与访问的某些计划或目标实现的载体，只是前者主要面向科技资源，后者面向互联网资源，前者强调永久存取，后者强调统一命名。而 DOI 、CSTR、ISBN 等可以看做是支撑这些高层目标的底层实现。这种实现可能带有多功能性，比如既支持永久存取，也支持统一命名，使其可以作为不同计划的具体实现。}
+\href{https://pub.orcid.org/v3.0/identifiers}{永久标识符}，实际上也在 URN 的注册列表中。\\
+因此，从这一关系看，上述概念可理解为：PID 和 URN 是更高层的面向唯一资源描述与访问的某些计划或目标实现的载体，只是前者主要面向科技资源，后者面向互联网资源，前者强调永久存取，后者强调统一命名。而 DOI、CSTR、ISBN 等可以看做是支撑这些高层目标的底层实现。这种实现可能带有多功能性，比如既支持永久存取，也支持统一命名，使其可以作为不同计划的具体实现。}
 
 [来源： GB/T 4894-2024， 3.2.5.25，有修改]
 
@@ -466,9 +465,9 @@ DOI、ISBN等既被视作支持PID的
 在开展个人或团体活动时负责创造、积累和/或保管信息资源的任何实体（团体、家族或个人） 。
 
 
-\subsection{著者-出版年制 name and data system}
+\subsection{著者-出版年制 name and date system}
 %一种引文参考文献（\ref{sec:concept:citeref}），即
-引文采用著者-出版年标注，参考文献表按责任者字顺和出
+引文采用著者-出版年标注、参考文献表按责任者字顺和出
 版年排序的引文参考文献标注体系。
 
 }
@@ -480,7 +479,7 @@ DOI、ISBN等既被视作支持PID的
 \renewcommand\addcontentsline[3]{}
 \subsection{} 参考文献的著录信息源是被著录的信息资源本身。
 
-\subsection{} 图书、连续出版物、会议录、学位论文、报告、标准、专利、网站、网页、档案、地图、数据集、预印本可依据题名页、版权页、封面等主要信息源著录各个著录项目。
+\subsection{} 图书、连续出版物、会议录、学位论文、报告、标准、专利、网站、网页、档案、地图、数据集、预印本应依据题名页、版权页、封面等主要信息源著录各个著录项目。
 
 \subsection{}\label{sec:book:lianxu} 图书、连续出版物中的析出文献可依据参考文献本身著录析出文献的信息，并可依据主要信息源著录析出文献的出处。
 
@@ -531,15 +530,15 @@ DOI、ISBN等既被视作支持PID的
 %\end{refsection}
 
 
-\subsection{} 著录数字时，应保持信息资源原有的形式。但是，连续出版物卷期号、页码、出版年、创建或修改日期、引用日期、顺序编码制的参考文献序号等宜用阿拉伯数字著录，其中日期著录应遵循 GB/T 7408.1 中的有关
+\subsection{} 著录数字时，应保持信息资源原有的形式。但是，连续出版物卷期号、页码、出版年、创建或修改日期、引用日期、顺序编码制的参考文献序号等宜用阿拉伯数字著录，其中日期著录应符合 GB/T 7408.1 中的有关
 规定。
 
 \subsection{} 使用汉语拼音著录中国人姓名时，宜使用 GB/T 28039 给出的规则拼写。
 
-\subsection{} 作为集体责任者的机关团体名称（见 \ref{sec:author:group}， \ref{sec:ay:citename}）、出版信息中附在出版地之后的省名、州名、国名等（见 \ref{sec:addr:city}）
+\subsection{} 作为集体责任者的机关团体名称（见 \ref{sec:author:group}、\ref{sec:ay:citename}）、出版信息中附在出版地之后的省名、州名、国名等（见 \ref{sec:addr:city}）
 以及出版者（见 \ref{sec:pub:short}）可按国际公认的方法缩写。
 
-\subsection{} 西文期刊刊名的缩写可使用 ISO 4 的规定。
+\subsection{} 西文期刊刊名的缩写可使用 ISO 4 给出的规则。
 
 \subsection{} 著录西文文献时，大写字母的使用应符合信息资源本身文种的习惯用法。
 
@@ -551,15 +550,15 @@ DOI、ISBN等既被视作支持PID的
 
 {
 \renewcommand\addcontentsline[3]{}
-\subsection{} 本文件中的著录用符号为前置符。按著者-出版年制(见\ref{sec:ay:ay})组织的参考文献表中的第一个著录项目，如主要责任者、析出文献主要责任者、专利申请者/所有者前不应使用任何标识符号。按顺序编码制(见\ref{sec:ref:numeric})组织的参考文献表中的各篇文献序号应用方括号括起，如：[1]、[2]、.....
+\subsection{} 本文件中的著录用符号为前置符。按著者-出版年制（见\ref{sec:ay:ay}）组织的参考文献表中的第一个著录项目，如主要责任者、析出文献主要责任者、专利申请者/所有者前不应使用任何标识符号。按顺序编码制（见\ref{sec:ref:numeric}）组织的参考文献表中的各篇文献序号应用方括号括起，如：[1]、[2]、.....
 
 
-\subsection{} 参考文献使用下列规定的标识符号：\footnote{为方便标点切换，在实现上考虑三种实现，一种是全部半角，一种是全部全角，一种是全角半角混合。当前标准对应的就是最后这一种。三种方式通过选项 gbpunctwidth 来切换。gbpunctwidth=half，full，mixed 分别对应这三种方式。}
+\subsection{} 参考文献应使用下列规定的标识符号。\footnote{为方便标点切换，在实现上考虑三种实现，一种是全部半角，一种是全部全角，一种是全角半角混合。当前标准对应的就是最后这一种。三种方式通过选项 gbpunctwidth 来切换。gbpunctwidth=half，full，mixed 分别对应这三种方式。}
 
 ——“.” 用于题名（见\ref{sec:title:first}）、比例尺、其他责任者、析出文献其他责任者、版本、出版信息（见\ref{sec:pub:full}）、年卷期或其他标识、尺寸、获取
-和访问路径以及永久标识符前。每一条参考文献的结尾可用“.”号标识。
+和访问路径、永久标识符前。每一条参考文献的结尾可用“.”号标识。
 
-——“:” 用于其他题名信息（见\ref{sec:title:other}）、出版者、页码（见\ref{sec:items:pages}）、学位授予单位、报告编号、专利申请号、档号、收藏者前。
+——“:” 用于其他题名信息（见\ref{sec:title:other}）、出版者、页码（见\ref{sec:item:pages}）、学位授予单位、报告编号、专利申请号、档号、收藏者前。
 
 ——“,” 用于同一著作方式的责任者（见\ref{sec:author:second}）、“等”“译”字样或与之相应的词（见\ref{sec:author:second}）、出版年、连续出版物及其析出文献中的年和卷号、会议年份、学位授予年前。
 
@@ -569,11 +568,11 @@ DOI、ISBN等既被视作支持PID的
 
 ——“( )” 用于连续出版物及其析出文献中的期号/版次、创建/发布或修改日期、非公元纪年的出版年（见\ref{sec:pub:pubdate}）。
 
-——“[ ]” 用于文献序号、文献类型和文献载体标识、引用日期以及自拟的信息（见\ref{sec:title:first}、\ref{sec:place:no}、\ref{sec:normal:pages}、7.5.4.4）。
+——“[ ]” 用于文献序号、文献类型和文献载体标识、引用日期以及自拟的信息（见\ref{sec:title:first}、\ref{sec:place:no}、\ref{sec:pub:no-author}、\ref{sec:pub:date-estimated}\footnote{国标原文为 7.5.4.4，但并无此条，应当是写串了。}）。
 
 ——“/” 用于合期的期号或合卷的卷号间（见\ref{sec:inbook:c}）、文献载体标识前。
 
-——“-” 用于起讫页码（见\ref{sec:inbook:f}）和起讫序号（见\ref{sec:ref:ref}）间。
+——“-” 用于起讫页码（见\ref{sec:inbook:f}）、起讫序号（见\ref{sec:ref:ref}）间。
 
 %注： “.”“[ ]”用半角符号，其他标识符号用全角符号。\footnote{为方便考虑，在实现上考虑三种实现，一种是全部半角，一种是全部全角，一种是全角半角混合。当前标准对应的就是最后这一种。三种方式通过选项 gbpunctwidth 来切换。gbpunctwidth=half，full，mixed 分别对应这三种方式。}
 
@@ -589,11 +588,10 @@ DOI、ISBN等既被视作支持PID的
 \section{著录通则}
 \subsection{责任者}
 \subsubsection{}\label{sec:author:fisrt} 个人责任者应采用姓在前名在后的著录形式。欧美责任者的中译名可只著录其姓，其名可用缩写字母，缩写名后省略缩写点。
-同姓不同名的欧美责任者，其中译名不仅应著录其姓，还应著录其名的首字母。 用西文著录个人责任者，姓应全部著录，首字母应大写，名可缩写为首字母；如用首字母无法识别该人名时，可著录全名；用汉语拼音著录个人责任者，姓应全部著录，首字母应大写，名宜用全称。
+同姓不同名的欧美责任者，其中译名不仅应著录其姓，还应著录其名的首字母。 用西文著录个人责任者，姓应全部著录，首字母应大写，名可缩写为首字母，如用首字母无法识别该人名时，可著录全名；用汉语拼音著录个人责任者，姓应全部著录，首字母应大写，名宜用全称。
 \footnote{注意：下面示例中“昂温”文献的情况，姓名是中英文混合的情况是比较特殊的，因为存在中文，所以判定为中文，但为了输出的形式保持英文中姓和名之间的空格，因此bib文件中的输入以\{\}进行保护。特别注意：示例3中的结果是因为处理中文情况：“姓, 名”时，会去掉逗号合并姓和名导致的。}
 \footnote{由于拼音和英文不易区分，当考虑要著录拼音的名全称时，可以利用花括号直接保护。注意：保护的是包括姓和名全部的格式化内容，也就是让biblatex直接原样输出需要的格式。除此方式外，也可以利用nameformat=\{quanpin\}选择直接指定当前文献采用全拼而不缩写，
 如 \ref{sec:confer:biblieg} 所示。}
-。
 
 \begin{refsection}
 
@@ -643,7 +641,7 @@ DOI、ISBN等既被视作支持PID的
 
 \begin{refsection}
 \nocite{中国科学院物理研究所--}
-\nocite{贵州省土穰普查办公室--}
+\nocite{贵州省土壤普查办公室--}
 \nocite{AmericanChemicalSociety--}
 \nocite{StanfordUniversity--}
 
@@ -731,7 +729,7 @@ DOI、ISBN等既被视作支持PID的
 
 出版信息应按出版地、出版者、出版日期顺序著录。
 
-以下元素应按照出版项的要求著录：
+以下元素应按照出版信息的要求著录：
 
 %——会议录中的会议地点、会议名称、会议年份（见 \ref{sec:entrytype:proceed}）；
 
@@ -816,7 +814,7 @@ DOI、ISBN等既被视作支持PID的
 {\printbiblist[heading=none, env=exampleenv]{pubexample}}
 \end{refsection}
 
-\paragraph{} 无出版者的中文文献可著录“出版者不详”，外文文献可著录“ s.n.”，并置于“[ ]”内。无出版者的电子资源可省略此项。
+\paragraph{}\label{sec:pub:no-author} 无出版者的中文文献可著录“出版者不详”，外文文献可著录“ s.n.”，并置于“[ ]”内。无出版者的电子资源可省略此项。
 
 \begin{refsection}
 \toggletrue{bbx:gbpub}
@@ -841,7 +839,7 @@ DOI、ISBN等既被视作支持PID的
 
 %\paragraph{} 报纸的出版日期按照“ YYYY-MM-DD”格式，用阿拉伯数字著录。
 
-\paragraph{} 期刊的在线出版日期、报纸的出版日期、报告的发布日期、专利的公告日期、档案的形成日期应按照“YYYY-MM-DD"格式，用阿拉伯数字著录，
+\paragraph{} 期刊的在线出版日期、报纸的出版日期、报告的发布日期、专利\footnote{国标原文为“专刊”。}的公告日期、档案的形成日期应按照“YYYY-MM-DD"格式，用阿拉伯数字著录，
 
 
 \begin{refsection}
@@ -858,7 +856,7 @@ DOI、ISBN等既被视作支持PID的
 %{\printbiblist[heading=none, env=exampleenv]{dateexample}}
 %\end{refsection}
 
-\paragraph{} 出版年无法确定时，可依次选用版权年、印刷年、估计的出版年。估计的出版年应置于“[~]”
+\paragraph{}\label{sec:pub:date-estimated} 出版年无法确定时，可依次选用版权年、印刷年、估计的出版年。估计的出版年应置于“[~]”
 内。
 
 \begin{refsection}
@@ -897,7 +895,7 @@ DOI、ISBN等既被视作支持PID的
 \nocite{钱学森2001--}
 \nocite{冯友兰2008--}
 \nocite{李约瑟1991--}
-\nocite{DUBAR2013--}
+\nocite{DUNBAR2013--}
 \nocite{MAURYA2023}
 
 {\printbibliography[heading=none,env=exampleenv]}
@@ -914,7 +912,7 @@ DOI、ISBN等既被视作支持PID的
 {\printbibliography[heading=none,env=exampleenv]}
 \end{refsection}
 
-\subsection{永久识别符}
+\subsection{永久标识符}
 
 \subsubsection{} 获取和访问路径中含永久标识符时，可不重复著录永久标识符。
 
@@ -1041,7 +1039,7 @@ CHRISTOU2024}
 \nocite{张伯伟2002--,
 %陈登原2000-29-29,
 王夫之1865--,
-顾炎武1992--,
+顾炎武1980--,
 1962-50-50,
 gbt7714.8.2.2:5,
 %战德臣2019,
@@ -1353,7 +1351,7 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--
 
 
 %\nocite{杨洪升2013-56-75}
-\nocite{丁文祥2000--,gbt7714.8.5.3:2}
+\nocite{丁文详2000--,gbt7714.8.5.3:2}
 \nocite{于潇2012-1518-1523}
 %\nocite{李炳穆2008-6-12}
 %\nocite{陈建军2010-93-93,陈缮真2022--,李幼平2010-225-228}
@@ -2297,10 +2295,10 @@ IHME2021Disease
 
 \textbf{示例2：}
 
-……所谓移情，就是“说话人将自己认同于......他用句子所描述的时间或状态中的一个参与者”
+……所谓移情，就是“说话人将自己认同于……他用句子所描述的事件或状态中的一个参与者”
 \footfullcite{Sunstein1996-903-903}。《汉语大词典》和张相
 \footfullcite{Morri2010--}都认为“可”是“痊愈”，
-候精一认为是“减轻”\footfullcite{罗杰斯2011-15-16}。......另外，根据候精一，表示病痛程度减轻的形容词“可”和表示逆转否定的副词“可”
+侯精一认为是“减轻”\footfullcite{罗杰斯2011-15-16}。……另外，根据侯精一，表示病痛程度减轻的形容词“可”和表示逆转否定的副词“可”
 是兼类词\footfullcite{陈登原2000-29-29}，这也说明二者应该存在着源流关系。
 
 …………
@@ -2311,10 +2309,10 @@ IHME2021Disease
 \begin{refsection}
 \textbf{示例：}引用多篇文献
 
-裴伟提出\cite{Humphrey1971--,KENNEDY1975-311-386}......
+裴伟提出\cite{Humphrey1971--,KENNEDY1975-311-386}……
 
 莫拉德对稳定区的研究
-\cite{CRANE1972--,Weinstein1974-745-772,KENNEDY1975-311-386}......
+\cite{CRANE1972--,Weinstein1974-745-772,KENNEDY1975-311-386}……
 
 
 \end{refsection}
@@ -2348,6 +2346,7 @@ IHME2021Disease
 \footfullcite{Sunstein1996-903-903}。
 ……事实上，古希腊对轴心时代思想真正的贡献不是来自对民主的赞扬，而是来自对民主制度的批评，苏格拉底、柏拉图和亚里士多德3位贤圣
 都是民主制度的坚决反对者\footfullcite[260]{Morri2010--}。
+% 以下“影响力”在国标原文是“影像力”。
 ……柏拉图在西方世界的影响力是如此之大以至于有学者评论说，一切后世的思想都是一系列为柏拉图思想所作的脚注\footfullcite{罗杰斯2011-15-16}。
 ……据《唐会要》记载，当时拆毁的寺院有4 600余所，招提、兰若等佛教建筑4万余所，没收寺产，并强迫僧尼还俗达260 500人。
 佛教受到极大的打击\footfullcite[326-329]{Morri2010--}。
@@ -2370,7 +2369,7 @@ IHME2021Disease
 
 \subsection{著者-出版年制}\label{sec:ay:ay}
 \subsubsection{正文中的引用}\label{sec:ay:citation}
-\paragraph{}\label{sec:ay:citename} 正文引用的文献采用著者-出版年制时，各篇文献的标注内容应由责任者姓氏与出版年构成（见\ref{sec:pub:gene}、\ref{sec:pub:pubdate}），并置于“（~）”内。倘若只标注责任者姓氏无法识别该人名时，可标注责任者姓名（见\ref{sec:author:fisrt}）。集体责任者著述的文献可标注机关团体名称。倘若正文中已提及责任者姓名，则在其后的“（~）”内只著录出版年。
+\paragraph{}\label{sec:ay:citename} 正文引用的文献采用著者-出版年制时，各篇文献的标注内容应由责任者姓氏与出版年（见\ref{sec:pub:gene}、\ref{sec:pub:pubdate}）构成，并置于“（~）”内。倘若只标注责任者姓氏无法识别该人名时，可标注责任者姓名（见\ref{sec:author:fisrt}）。集体责任者著述的文献可标注机关团体名称。倘若正文中已提及责任者姓名，则在其后的“（~）”内只著录出版年。
 
 \textbf{示例：}
 
@@ -2391,7 +2390,8 @@ IHME2021Disease
 
 \noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=7]{tngbcitationaynew.pdf}
 
-\paragraph{} 著录同一责任者在同一年出版的多篇文献时，在正文中标注责任者与出版年，出版年后应用小写字母 a， b， c……区别，并置于“（~）”内。
+\paragraph{} 著录同一责任者在同一年出版的多篇文献时，在正文中标注责任者与出版年，出版年后应用小写字母 a，b，\mbox{c……}区别，并置于“（~）”内。
+% 用 \mbox 避免在“c”与省略号之间断行
 
 \textbf{示例：}
 
@@ -2576,7 +2576,7 @@ IHME2021Disease
 
 
 \newpage
-\section[顺序编码制参考文献著录格式示例]{（资料性）\\顺序编码制参考文献著录格式示例}
+\section[顺序编码制参考文献表著录格式示例]{（资料性）\\顺序编码制参考文献表著录格式示例}
 \label{sec:appdix:biblieg}
 
 
@@ -2586,7 +2586,7 @@ IHME2021Disease
 \nocite{张伯伟2002--,
 曹凌2011-19-,陈登原2000-29-29,
 王夫之1865--,
-顾炎武1992--,
+顾炎武1980--,
 钱学森2001--,
 冯友兰2008--,
 1962-50-50,
@@ -2655,7 +2655,7 @@ Publiclibrary1979,
 %\defbibentryset{wanglpdblan}{gbt7714.8.5.3:7,gbt7714.b.4:11}
 
 \nocite{杨洪升2013-56-75,
-丁文祥2000--,
+丁文详2000--,
 于潇2012-1518-1523,
 gbt7714.8.5.3:2,
 陈建军2010-93-93,
