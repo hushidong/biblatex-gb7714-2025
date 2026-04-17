@@ -789,17 +789,6 @@
     }
 
 
-%
-%   针对3.13<=biblatex版本的选项设置，因为内容有限，所以不再增加版本区分，而用时间直接判断
-%
-%   解决国标中“王临慧, 2010a.”和“王临慧, 等, 2010b.”的问题
-%   在没有这个选项之前无法加上a和b
-%   v1.0s，20190828
-\@ifpackagelater{biblatex}{2019/08/16}{%
-    \ExecuteBibliographyOptions{%
-        nohashothers=true}}{}
-
-
 %=====================================================================
 %设置本地化字符串
 %=====================================================================
@@ -981,11 +970,11 @@
         \step[fieldsource=address,final]
         \step[fieldset=location,origfieldval]
         }
-        \map{%eventtitle映射为booktitle
+        \map{%利用eventtitle设置booktitle便于后面采用booktitle统一输出
             \pertype{inproceedings}
-            \pertype{collection}
+            \pertype{incollection}
             \step[fieldsource=eventtitle,final]
-            \step[fieldsource=eventtitle, fieldtarget=booktitle]
+            \step[fieldset=booktitle, origfieldval]
         }
         \map{%eventtitle映射为publisher
             \pertype{proceedings}
@@ -3842,7 +3831,7 @@ test {\ifentrytype{conference}}
 %    {\iffieldequalstr{entrysubtype}{archive}{\usebibmacro{newsdate}}{\usebibmacro{modifydate}}}%
 %}%带括号的日期和不带括号的日期
 \iffieldundef{entrysubtype}{\usebibmacro{online:url+urldate}}
-    {\iffieldequalstr{entrysubtype}{report}{\newunit\usebibmacro{url}}{\usebibmacro{online:url+urldate}}}%
+    {\iffieldequalstr{entrysubtype}{report}{\usebibmacro{chapter+pages}\newunit\usebibmacro{url}}{\usebibmacro{online:url+urldate}}}%
   \newunit\newblock
   \usebibmacro{doi+cstr}%
   \newunit\newblock
@@ -4046,7 +4035,9 @@ test {\ifentrytype{conference}}
   \printfield{edition}%
   \newunit\newblock
   %\printfield{note}%
-  \ifentrytype{inproceedings}{\conferencedatdelim}{}%
+  %当存在eventtitle会议名，而不是会议录题名booktitle时，处理标点。
+  \ifboolexpr{(test {\ifentrytype{inproceedings}} or test {\ifentrytype{incollection}} )
+        and not test {\iffieldundef{eventtitle}}}{\conferencedatdelim}{}%
   \usebibmacro{publisher+location+date}}
 
 %

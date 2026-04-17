@@ -997,11 +997,11 @@
         \step[fieldsource=address,final]
         \step[fieldset=location,origfieldval]
         }
-        \map{%eventtitle映射为booktitle
+        \map{%利用eventtitle设置booktitle便于后面采用booktitle统一输出
             \pertype{inproceedings}
-            \pertype{collection}
+            \pertype{incollection}
             \step[fieldsource=eventtitle,final]
-            \step[fieldsource=eventtitle, fieldtarget=booktitle]
+            \step[fieldset=booktitle, origfieldval]
         }
         \map{%eventtitle映射为publisher
             \pertype{proceedings}
@@ -3627,7 +3627,8 @@ incollection,proceedings,inproceedings]{number}{%
         {\ifboolexpr{test {\iffieldequalstr{entrysubtype}{dataset}} or test {\iffieldequalstr{entrysubtype}{preprint}}}
           {\usebibmacro{modifydate}}{\newunit\usebibmacro{modifydate}}}}%
 \iffieldundef{entrysubtype}{\usebibmacro{online:url+urldate}}
-    {\iffieldequalstr{entrysubtype}{report}{\newunit\usebibmacro{url}}{\usebibmacro{online:url+urldate}}}%
+    {\iffieldequalstr{entrysubtype}{report}{\usebibmacro{chapter+pages}\newunit\usebibmacro{url}}
+        {\usebibmacro{online:url+urldate}}}%
   \newunit\newblock
   \usebibmacro{doi+cstr}%
   \newunit\newblock
@@ -3825,7 +3826,9 @@ incollection,proceedings,inproceedings]{number}{%
   \printfield{edition}%
   \newunit\newblock%
   %\printfield{note}%
-  \ifentrytype{inproceedings}{\conferencedatdelim}{}%
+  %当存在eventtitle会议名，而不是会议录题名booktitle时，处理标点。
+  \ifboolexpr{(test {\ifentrytype{inproceedings}} or test {\ifentrytype{incollection}} )
+        and not test {\iffieldundef{eventtitle}}}{\conferencedatdelim}{}%
   \usebibmacro{publisher+location+date}}
 
 %

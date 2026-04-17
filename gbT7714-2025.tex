@@ -4,7 +4,8 @@
 \documentclass[twoside]{article}%[twoside]
 \usepackage[fontset=windows,10pt]{ctex}
 \usepackage[russian,french,english]{babel}
-\setmainfont[BoldFont={cmunsx.otf}]{cmunrm.otf}
+\setmainfont[BoldFont={cmunsx.otf},ItalicFont={cmunti.otf},
+BoldItalicFont={cmunbi.otf}]{cmunrm.otf}
 \setmonofont{cmuntt.otf}
 \setsansfont{cmunsx.otf}
 \IfFontExistsTF{SourceHanSerifSC-Regular.otf}%\IfFileExists
@@ -16,6 +17,7 @@
 \usepackage{lipsum}
 \usepackage{tcolorbox}
 \usepackage{enumitem}
+\usepackage{amsmath}
 \usepackage{threeparttable}
 \usepackage[a4paper]{geometry}%,showframe
 \geometry{asymmetric,top=3cm,bottom=2.5cm,left=2.5cm,right=2cm}%twoside=false,
@@ -31,7 +33,8 @@
 % Renaming floats **with**caption
 \captionsetup{%
 figurename=图,
-tablename=表
+tablename=表,
+labelsep=quad
 }
 
 \setcounter{secnumdepth}{4}
@@ -590,8 +593,8 @@ DOI、ISBN等既被视作支持PID的
 \subsubsection{}\label{sec:author:fisrt} 个人责任者应采用姓在前名在后的著录形式。欧美责任者的中译名可只著录其姓，其名可用缩写字母，缩写名后省略缩写点。
 同姓不同名的欧美责任者，其中译名不仅应著录其姓，还应著录其名的首字母。 用西文著录个人责任者，姓应全部著录，首字母应大写，名可缩写为首字母，如用首字母无法识别该人名时，可著录全名；用汉语拼音著录个人责任者，姓应全部著录，首字母应大写，名宜用全称。
 \footnote{注意：下面示例中“昂温”文献的情况，姓名是中英文混合的情况是比较特殊的，因为存在中文，所以判定为中文，但为了输出的形式保持英文中姓和名之间的空格，因此bib文件中的输入以\{\}进行保护。特别注意：示例3中的结果是因为处理中文情况：“姓, 名”时，会去掉逗号合并姓和名导致的。}
-\footnote{由于拼音和英文不易区分，当考虑要著录拼音的名全称时，可以利用花括号直接保护。注意：保护的是包括姓和名全部的格式化内容，也就是让biblatex直接原样输出需要的格式。除此方式外，也可以利用nameformat=\{quanpin\}选择直接指定当前文献采用全拼而不缩写，
-如 \ref{sec:confer:biblieg} 所示。}
+\footnote{由于拼音和英文不易区分，当考虑要著录拼音的名全称时，可以利用花括号直接保护。注意：保护的是包括姓和名全部的格式化内容，也就是让biblatex直接原样输出需要的格式，如这里的示例10所示，在example2025.bib中的对应条目处可以看到其保护方式，而示例12就是不保护的默认情况。除此方式外，也可以利用nameformat=\{quanpin\}选择直接指定当前文献采用全拼而不缩写，
+其实现结果如 \ref{sec:confer:biblieg} 节文献 2 和文献 3 所示，nameformat选项写法见example2025.bib中的对应条目。}
 
 \begin{refsection}
 
@@ -1446,7 +1449,7 @@ FOURNEY1971-17-38}
 %永久标识符 电子资源可选。
 
 \subsubsection{著录格式}\label{sec:confer:biblieg}
-会议录应按以下格式著录：“主要责任者. 题名：其他题名信息[文献类型标识/文献载体标识]//会议名称，会议年份：引文页码. 获取和访问路径. 永久标识符.”\footnote{未正式出版的会议录使用了会议名称，由于其格式与publisher类似，可以直接将会议名称填入publisher，也可以填入eventitle，即用eventitle来描述会议名称。由于eventitle也可用来描述会议录名即booktitle，所以在实现中 eventitle 根据如下逻辑转化：当是inproceedings时，eventitle转为booktitle。当是proceedings时，eventitle转为publisher。}
+会议录应按以下格式著录：“主要责任者. 题名：其他题名信息[文献类型标识/文献载体标识]//会议名称，会议年份：引文页码. 获取和访问路径. 永久标识符.”\footnote{未正式出版的会议录使用了会议名称，由于其格式与publisher类似，可以直接将会议名称填入publisher，也可以填入eventtitle，即用eventtitle来描述会议名称。一般情况下，利用booktitle描述会议录即会议文集名，而eventtitle用来描述会议名。在样式实现中由于利用booktitle进行会议相关的输出，所以 eventtitle 根据如下逻辑处理：当是inproceedings时，eventtitle复制到booktitle。当是proceedings时，eventtitle直接转为publisher。}
 
 
 \begin{refsection}
@@ -2307,12 +2310,13 @@ IHME2021Disease
 \paragraph{}\label{sec:ref:ref} 同一处引用多篇文献时，应将各篇文献的序号在“[ ]”内全部列出，各序号间用“，”。如遇连续序号，起讫序号间用短横线连接。此规则不适用于用计算机自动编码的序号。
 
 \begin{refsection}
-\textbf{示例：}引用多篇文献
+\textbf{示例：}\footnote{\textbf{注意：}这里的引用标签数字只做示范，因此为实现方便未与标准原文保持完全一致。}
 
+\nocite{*}
 裴伟提出\cite{Humphrey1971--,KENNEDY1975-311-386}……
 
 莫拉德对稳定区的研究
-\cite{CRANE1972--,Weinstein1974-745-772,KENNEDY1975-311-386}……
+\cite{CRANE1972--,Weinstein1974-745-772,Roberson2011-1-36}……
 
 
 \end{refsection}
@@ -2467,6 +2471,8 @@ IHME2021Disease
 \newpage
 \appendix
 
+\numberwithin{table}{section}
+
 \titleformat{\section}[display]
 {\centering\zihao{5}\bfseries}{附录 \thesection}{0pt}{\centering}
 \titlespacing{\section}{0pt}{1.5ex plus 1pt minus 1pt}{1.5ex plus 1pt minus 1pt}
@@ -2583,6 +2589,8 @@ IHME2021Disease
 \subsection{图书}
 
 \begin{refsection}
+\toggletrue{bbx:gbpub}
+
 \nocite{张伯伟2002--,
 曹凌2011-19-,陈登原2000-29-29,
 王夫之1865--,
