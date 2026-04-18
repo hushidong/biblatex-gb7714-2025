@@ -1,7 +1,7 @@
 % !Mode:: "TeX:UTF-8"
 % 用于测试gb7714-2025ay样式，实现GB/T 7714-2025 标准说明中给出的著者年份制示例
 \documentclass{article}
-\usepackage[10pt]{ctex}
+\usepackage[zihao=5]{ctex}
 \setmainfont[BoldFont={cmunsx.otf}]{cmunrm.otf}
 \setmonofont{cmuntt.otf}
 \setsansfont{cmunsx.otf}
@@ -12,7 +12,7 @@
 \usepackage{toolbox}
 \usepackage[colorlinks]{hyperref}
 \usepackage{lipsum}
-\usepackage[paperwidth=21cm,paperheight=3.0cm,top=0cm,bottom=0cm,left=2.5cm,right=2cm]{geometry}%,showframe
+\usepackage[paperwidth=21cm,paperheight=2.8cm,top=0cm,bottom=0cm,left=2.5cm,right=2cm]{geometry}%,showframe
 \usepackage{xltxtra,mflogo,texnames}
 \usepackage[backend=biber,style=gb7714-2025ay,gbnoauthor,gbpunctwidth=mixed,
 sortcase=false,
@@ -37,8 +37,10 @@ sorting=none
 \pagestyle{empty}
 
 \begin{document}
+\small
+
 \setlength{\indentedpara}{\linewidth-2em}
-\newgeometry{layoutwidth=21cm,layoutheight=3.5cm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
+\newgeometry{layoutwidth=21cm,layoutheight=3.2cm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
 %\textbf{示例：}引用单篇文献
 The notion of an invisible college has been explored in thesciences\cite{CRANE1972--}.Its absence among historians was noted by Stieg\yearcite{STIEG1981-549-560} ...
@@ -50,8 +52,8 @@ The notion of an invisible college has been explored in thesciences\cite{CRANE19
 
 \eject
 
-\pdfpagewidth=21cm \pdfpageheight=1.7cm
-\newgeometry{layoutwidth=21cm,layoutheight=2.3cm,layoutvoffset=-2mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
+\pdfpagewidth=21cm \pdfpageheight=1.5cm
+\newgeometry{layoutwidth=21cm,layoutheight=2.0cm,layoutvoffset=-2mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
 %\textbf{示例 1：}引用同一著者同年出版的多篇中文文献
 \nocite{贾君枝2023编目,贾君枝2023短评}
@@ -62,8 +64,8 @@ The notion of an invisible college has been explored in thesciences\cite{CRANE19
 
 \eject
 
-\pdfpagewidth=21cm \pdfpageheight=2.2cm
-\newgeometry{layoutwidth=21cm,layoutheight=2.8cm,layoutvoffset=-1.5mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
+\pdfpagewidth=21cm \pdfpageheight=2.0cm
+\newgeometry{layoutwidth=21cm,layoutheight=2.5cm,layoutvoffset=-1.5mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
 %\textbf{示例 2：}引用同一著者同年出版的多篇英文文献
 \nocite{KENNEDY1975-311-386,KENNEDY1975-339-360}
@@ -74,8 +76,8 @@ The notion of an invisible college has been explored in thesciences\cite{CRANE19
 
 \eject
 
-\pdfpagewidth=21cm \pdfpageheight=9.8cm
-\newgeometry{layoutwidth=21cm,layoutheight=10cm,layoutvoffset=1.5mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
+\pdfpagewidth=21cm \pdfpageheight=9.15cm
+\newgeometry{layoutwidth=21cm,layoutheight=9.6cm,layoutvoffset=0mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
 %\textbf{示例：}多次引用同一著者的同一文献
 \nocite{裴丽生1981-2-10,刘彻东1998-38-39,张忠智1997-33-34,中国社会科学院语言研究所词典编辑室1996--}
@@ -100,8 +102,8 @@ The notion of an invisible college has been explored in thesciences\cite{CRANE19
 
 \eject
 
-\pdfpagewidth=21cm \pdfpageheight=4.9cm
-\newgeometry{layoutwidth=21cm,layoutheight=5.4cm,layoutvoffset=-2mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
+\pdfpagewidth=21cm \pdfpageheight=4.75cm
+\newgeometry{layoutwidth=21cm,layoutheight=5.1cm,layoutvoffset=-1mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
 %参考文献表采用著者-出版年制组织时，各篇文献首先按文种集中，可分为中文、日文、西文、俄文、其他文种 5 部分；然后按著者字顺和出版年排列。中文文献可以按著者汉语拼音字顺排列（参见 A.3.1），也可以按著者的笔画笔顺排列。
 %\textbf{示例：}
@@ -135,7 +137,7 @@ the converse, that teacher seem quite inspiring \cite{gbt7714.9.3.1.2:1} ...
 
 \textbf{参考文献：}
 
-\vspace{-2mm}
+%\vspace{-2mm}
 \parbox{2em}{}\parbox{\indentedpara}{\printbibliography[heading=none]}
 \end{refsection}
 
@@ -143,8 +145,8 @@ the converse, that teacher seem quite inspiring \cite{gbt7714.9.3.1.2:1} ...
 
 \eject
 
-\pdfpagewidth=21cm \pdfpageheight=9.3cm
-\newgeometry{layoutwidth=21cm,layoutheight=9.5cm,layoutvoffset=1.5mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
+\pdfpagewidth=21cm \pdfpageheight=8.4cm
+\newgeometry{layoutwidth=21cm,layoutheight=8.9cm,layoutvoffset=0mm,top=0cm,bottom=0cm,left=2.5cm,right=2cm}
 \begin{refsection}
 %\textbf{示例：}多次引用同一著者的同一文献
 

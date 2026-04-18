@@ -2,7 +2,7 @@
 % 用于测试gb7714-2025样式，实现GB/T 7714-2025 标准说明中给出的顺序编码制示例
 %测试实现GB/T 7714-2025 标准2-10节给出的顺序编码制示例
 \documentclass[twoside]{article}%[twoside]
-\usepackage[fontset=windows,10pt]{ctex}
+\usepackage[fontset=windows,zihao=5]{ctex} %10pt
 \usepackage[russian,french,english]{babel}
 \setmainfont[BoldFont={cmunsx.otf},ItalicFont={cmunti.otf},
 BoldItalicFont={cmunbi.otf}]{cmunrm.otf}
@@ -12,13 +12,13 @@ BoldItalicFont={cmunbi.otf}]{cmunrm.otf}
     {\setCJKmainfont[BoldFont={simhei.ttf}]{SourceHanSerifSC-Regular.otf}
 \setCJKsansfont{simhei.ttf}}{}
 \usepackage{xcolor}
-\usepackage{toolbox}
+\usepackage{etoolbox}
 \usepackage[colorlinks,CJKbookmarks,bookmarksnumbered=true,bookmarksopen=true]{hyperref}
 \usepackage{lipsum}
 \usepackage{tcolorbox}
 \usepackage{enumitem}
 \usepackage{amsmath}
-\usepackage{threeparttable}
+\usepackage{threeparttable,tabularx,longtable}
 \usepackage[a4paper]{geometry}%,showframe
 \geometry{asymmetric,top=3cm,bottom=2.5cm,left=2.5cm,right=2cm}%twoside=false,
 %\renewcommand{\figurename}{图}
@@ -34,6 +34,7 @@ BoldItalicFont={cmunbi.otf}]{cmunrm.otf}
 \captionsetup{%
 figurename=图,
 tablename=表,
+font=bf,
 labelsep=quad
 }
 
@@ -207,6 +208,23 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*,]{biblatex}%sorting=nyt,casec
       \setlength{\partopsep}{0ex}%
       \setlength{\parskip}{0ex}%
      \setlength{\labelwidth}{1.5em}%
+      \setlength{\leftmargin}{\labelwidth+2.4em}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}%
+      \renewcommand*{\makelabel}[1]{##1\hss}}}
+  {\endlist}
+  {\item}
+
+
+\defbibenvironment{indentegenvb}
+  {\list
+     {[\printfield{labelnumber}]}
+     {\setlength{\topsep}{0ex}%
+      \setlength{\partopsep}{0ex}%
+      \setlength{\parskip}{0ex}%
+     \setlength{\labelwidth}{1.5em}%
       \setlength{\leftmargin}{\labelwidth+20pt}%
       \setlength{\labelsep}{\biblabelsep}%
       \addtolength{\leftmargin}{\labelsep}%
@@ -371,7 +389,7 @@ and citations to information resources}
 \vspace{-1cm}%
 \titleformat{\subsection}[display]{\zihao{5}\bfseries}
 {\thesubsection}{1em}{\vspace{-2ex}\hspace{2em}}
-\titlespacing{\subsection}{0pt}{2pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
+\titlespacing{\subsection}{0pt}{5pt plus 1pt minus 1pt}{5pt plus 1pt minus 1pt}
 
 
 \section{范围}
@@ -423,14 +441,14 @@ GB/T 4894 界定的以及下列术语和定义适用于本文件。
 以连续的各个部分发行的、通常具有数字或年代标识的、计划无限期发行，不论周期长短的印刷文
 献或非印刷形式的出版物。
 
-\small{注：包括期刊、报纸等。}
+\mbox{}{\small 注：包括期刊、报纸等。\par}
 
 %[来源： GB/T 4894-2024， 3.4.1.28.1]
 
 \subsection{数据集 dataset}
 相似或相关数据合乎逻辑的集合或分组。
 
-\small{注：通常用作记录或用于研究。}
+\mbox{}{\small 注：通常用作记录或用于研究。\par}
 
 \subsection{顺序编码制 numeric system}
 %一种引文参考文献（\ref{sec:concept:citeref}）的标注体系，即引文采用序号标注，参考文献表按引文的序号排序。
@@ -441,7 +459,7 @@ GB/T 4894 界定的以及下列术语和定义适用于本文件。
 由某个责任者提供的、构成可能涉及多个责任者的主文献一部分的文献。
 %如（\ref{sec:concept:creator}）所示。
 
-\small{注：析出文献包括连续出版物中的论文，图书中具有独立作者、独立篇名的文献等。}
+\mbox{}{\small 注：析出文献包括连续出版物中的论文，图书中具有独立作者、独立篇名的文献等。\par}
 
 \subsection{引文参考文献 cited reference}\label{sec:concept:citeref}
 作者为撰写或编辑作品而引用的信息资源。
@@ -449,7 +467,7 @@ GB/T 4894 界定的以及下列术语和定义适用于本文件。
 \subsection{永久标识符 persistent identifier； PID}\label{sec:concept:pid}
 通过独立于数字对象物理位置或当前所有权提供访问以确保对数字对象永久存取的唯一标识符。
 
-\small{注：永久标识符包括数字对象标识符（DOI）、统一资源名称（URN）等。}
+\mbox{}{\small 注：永久标识符包括数字对象标识符（DOI）、统一资源名称（URN）等。
 \footnote{永久标识符 (PID) 用于对数字资源的长期引用。\href{https://doi.org}{DOI (Digital Object Identifier)} 是数字对象标识符。\href{https://rfc-editor.org/rfc/rfc8141}{URN (Uniform Resource Name)} 是统一资源名。这三个概念实际是从不同角度提出的概念。\newline
 PID 强调引用的持久不变性，不论这种持久不变性是什么形式，由什么组织或机构实现。PID 是联合国教科文组织（United Nations Educational, Scientific and Cultural Organization, UNESCO）\href{https://unesco.org/en/legal-affairs/recommendation-open-science}{《开放科学建议书》（RECOMMENDATION on OPEN SCIENCE）}的开放科学重要基础设施之一。\\
 URN 是从互联网资源角度强调资源名的统一性和唯一性，也就是同一资源无论放到哪里（访问网址是否相同，是否有效）都有相同的名称，也可以看做是一种身份证信息。URN 由NID (Namespace Identifier) 和 NSS (Namespace Specific String) 构成，NID 由参与URN计划的组织和单位在 IANA (Internet Assigned Numbers Authority) 注册，NSS 由这些单位自行决定命名方式。\newline
@@ -460,6 +478,7 @@ DOI 实际上也在URN的\href{https://www.iana.org/assignments/urn-namespaces/u
 DOI、ISBN等既被视作支持PID的
 \href{https://pub.orcid.org/v3.0/identifiers}{永久标识符}，实际上也在 URN 的注册列表中。\\
 因此，从这一关系看，上述概念可理解为：PID 和 URN 是更高层的面向唯一资源描述与访问的某些计划或目标实现的载体，只是前者主要面向科技资源，后者面向互联网资源，前者强调永久存取，后者强调统一命名。而 DOI、CSTR、ISBN 等可以看做是支撑这些高层目标的底层实现。这种实现可能带有多功能性，比如既支持永久存取，也支持统一命名，使其可以作为不同计划的具体实现。}
+\par}
 
 [来源： GB/T 4894-2024， 3.2.5.25，有修改]
 
@@ -636,7 +655,7 @@ DOI、ISBN等既被视作支持PID的
 \parbox{1.3cm}{\small\bfseries 示例1：\\示例2：}
 \parbox{15cm}{\includegraphics[viewport=3cm 0cm 17.5cm 1.0cm, clip=true,page=6]{tngbcitationaynew.pdf}\hfill}%width=15cm
 
-\small{注1：著者-出版年制。}
+\mbox{}{\small 注1：著者-出版年制。\par}
 
 \begin{refsection}
 \nocite{帛画2023,anon1981-628}
@@ -644,7 +663,8 @@ DOI、ISBN等既被视作支持PID的
 {\printbibliography[heading=none,env=exampleenv]}
 \end{refsection}
 
-\small{注2：顺序编码制。}
+\mbox{}{\small 注2：顺序编码制。\par}
+
 
 \subsubsection{}\label{sec:author:group} 凡是对文献负责的机关团体名称，通常根据著录信息源著录。机关团体名称应由上至下分级著录，上下级间用“ .”分隔，用汉字书写的机关团体名称除外。
 
@@ -672,7 +692,7 @@ DOI、ISBN等既被视作支持PID的
 
 {\printbiblist[heading=none, env=exampleenv]{titlexamplea}}
 
-\small{注：示例5为自拟题名}
+\mbox{}{\small 注：示例5为自拟题名。 \par}
 \end{refsection}
 
 \subsubsection{}\label{sec:author:many} 同一责任者的多个合订题名，应著录前 3 个合订题名。对于不同责任者的多个合订题名，可只著
@@ -875,13 +895,11 @@ DOI、ISBN等既被视作支持PID的
 \nocite{egbookpubdatef--}
 
 {\printbiblist[heading=none, env=exampleenv]{dateexample}}
-
-\small
-
-注1：示例1为版权年
-
-注2：示例3为估计的出版年
 \end{refsection}
+
+\mbox{}{\small 注1：示例1为版权年。\par}
+
+\mbox{}{\small 注2：示例3为估计的出版年。 \par}
 
 
 
@@ -930,12 +948,12 @@ DOI、ISBN等既被视作支持PID的
 \nocite{Deverell2013-21-22,GROSS2016LM}
 
 {\printbibliography[heading=none,env=exampleenv]}
-
-\small
-注1：示例1永久标识符为：DOI: 10.1002/9781444305036
-
-注2：示例2永久标识符为：URN:ISBN:978-951-51-2090-8
 \end{refsection}
+
+\mbox{}{\small 注1：示例1永久标识符为：DOI: 10.1002/9781444305036  \par}
+
+\mbox{}{\small 注2：示例2永久标识符为：URN:ISBN:978-951-51-2090-8   \par}  
+
 
 \subsubsection{} 获取和访问路径中不含永久标识符时，可按照原文如实著录永久标识符。
 
@@ -945,9 +963,10 @@ DOI、ISBN等既被视作支持PID的
 
 {\printbibliography[heading=none,env=exampleenv]}
 
-\small
-注1：该示例永久标识符为：DOI: 10.7666/d.y351065.
 \end{refsection}
+
+
+\mbox{}{\small 注1：该示例永久标识符为：DOI: 10.7666/d.y351065. \par}  
 
 
 \titleformat{\subsubsection}[hang]{\zihao{5}\bfseries}{\thesubsubsection}{1em}{}%\hspace{1em}
@@ -984,12 +1003,12 @@ CHRISTOU2024}
 \subsection{图书}\label{sec:entrytype:book}
 
 \subsubsection{著录项目}
-图书应按表 \ref{tab:book-items}的著录项目著录。
+图书应按表 \ref{tab:book-items} 的著录项目著录。
 \begin{table}[htbp]
 \centering
 \caption{图书著录项目}
 \label{tab:book-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -1019,7 +1038,7 @@ CHRISTOU2024}
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
@@ -1065,7 +1084,7 @@ PEEBLES2001--,
 Praetzellis2011-13-13,
 gbt7714.8.2.2:8}
 
-\textbf{示例：}
+\mbox{}{\small \textbf{示例：} \par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 \end{refsection}
@@ -1074,18 +1093,24 @@ gbt7714.8.2.2:8}
 \subsection{图书中的析出文献}\label{sec:entrytype:inbook}
 
 \subsubsection{著录项目}
-图书中的析出文献应按表 \ref{tab:inbook-items}的著录项目著录。
-\begin{table}[htbp]
-\centering
-\caption{图书中的析出文献著录项目}
-\label{tab:inbook-items}
-\begin{tabular}{|c|c|c|}
+图书中的析出文献应按表 \ref{tab:inbook-items} 的著录项目著录。
+
+\begin{longtable}{|>{\centering}p{0.305\linewidth}|>{\centering}p{0.305\linewidth}|>{\centering\arraybackslash}p{0.305\linewidth}|}
+\caption{图书中的析出文献著录项目} \label{tab:inbook-items} \\
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
-析出文献主要责任者 & 有则必备 & 7.1 \\
+\endfirsthead
+\caption[]{图书中的析出文献著录项目（续）}\\
 \hline
-析出文献题名 & 必备 & 7.2 \\
+元素 & 必备性 & 相关章条号 \\
+\hline
+\endhead
+\hline
+\endfoot
+析出文献主要责任者 & 有则必备 & 7.1 \\ %\pagebreak
+\hline
+析出文献题名 & 必备 & 7.2 \\ 
 \hline
 析出文献其他题名信息 & 有则必备 & 7.2.3 \\
 \hline
@@ -1114,9 +1139,51 @@ gbt7714.8.2.2:8}
 获取和访问路径 & 电子资源必备 & 7.8 \\
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
-\hline
-\end{tabular}
-\end{table}
+\end{longtable}
+
+
+%\begin{table}[htbp]
+%\centering
+%\caption{图书中的析出文献著录项目}
+%\label{tab:inbook-items}
+%\begin{tabular}{|c|c|c|}
+%\hline
+%元素 & 必备性 & 相关章条号 \\
+%\hline
+%析出文献主要责任者 & 有则必备 & 7.1 \\
+%\hline
+%析出文献题名 & 必备 & 7.2 \\
+%\hline
+%析出文献其他题名信息 & 有则必备 & 7.2.3 \\
+%\hline
+%文献类型标识 & 必备 & 7.3、A.1 \\
+%\hline
+%文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+%\hline
+%析出文献其他责任者 & 可选 & 7.1 \\
+%\hline
+%图书主要责任者 & 有则必备 & 7.1 \\
+%\hline
+%图书题名 & 必备 & 7.2 \\
+%\hline
+%其他题名信息 & 有则必备 & 7.2.3 \\
+%\hline
+%版本 & 有则必备 & 7.4 \\
+%\hline
+%出版地 & 有则必备 & 7.5.2 \\
+%\hline
+%出版者 & 有则必备 & 7.5.3 \\
+%\hline
+%出版年 & 有则必备 & 7.5.4 \\
+%\hline
+%析出文献页码 & 有则必备 & 7.7 \\
+%\hline
+%获取和访问路径 & 电子资源必备 & 7.8 \\
+%\hline
+%永久标识符 & 电子资源可选 & 7.9 \\
+%\hline
+%\end{tabular}
+%\end{table}
 
 
 %析出文献主要责任者 有则必备；
@@ -1153,7 +1220,7 @@ Weinstein1974-745-772,
 Roberson2011-1-36}
 
 
-\textbf{示例：}
+\mbox{}{\small \textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 \end{refsection}
@@ -1161,15 +1228,22 @@ Roberson2011-1-36}
 \subsection{连续出版物}
 
 \subsubsection{著录项目}
-连续出版物应按表 \ref{tab:serial-items}的著录项目著录。
-\begin{table}[htbp]
-\centering
-\caption{连续出版物著录项目}
-\label{tab:serial-items}
-\begin{tabular}{|c|c|c|}
+连续出版物应按表 \ref{tab:serial-items} 的著录项目著录。
+
+
+\begin{longtable}{|>{\centering}p{0.305\linewidth}|>{\centering}p{0.305\linewidth}|>{\centering\arraybackslash}p{0.305\linewidth}|}
+\caption{连续出版物著录项目} \label{tab:serial-items} \\
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
+\endfirsthead
+\caption[]{连续出版物著录项目（续）}\\
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+\endhead
+\hline
+\endfoot
 主要责任者 & 有则必备 & 7.1 \\
 \hline
 题名 & 必备 & 7.2 \\
@@ -1191,9 +1265,41 @@ Roberson2011-1-36}
 获取和访问路径 & 电子资源必备 & 7.8 \\
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
-\hline
-\end{tabular}
-\end{table}
+\end{longtable}
+
+
+%\begin{table}[htbp]
+%\centering
+%\caption{连续出版物著录项目}
+%\label{tab:serial-items}
+%\begin{tabular}{|c|c|c|}
+%\hline
+%元素 & 必备性 & 相关章条号 \\
+%\hline
+%主要责任者 & 有则必备 & 7.1 \\
+%\hline
+%题名 & 必备 & 7.2 \\
+%\hline
+%其他题名信息 & 有则必备 & 7.2.3 \\
+%\hline
+%文献类型标识 & 必备 & 7.3、A.1 \\
+%\hline
+%文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+%\hline
+%年卷期或其他标识 & 有则必备 & 8.5.1 \\
+%\hline
+%出版地 & 有则必备 & 7.5.2 \\
+%\hline
+%出版者 & 有则必备 & 7.5.3 \\
+%\hline
+%出版年 & 有则必备 & 7.5.4 \\
+%\hline
+%获取和访问路径 & 电子资源必备 & 7.8 \\
+%\hline
+%永久标识符 & 电子资源可选 & 7.9 \\
+%\hline
+%\end{tabular}
+%\end{table}
 
 
 %主要责任者 有则必备；
@@ -1222,7 +1328,7 @@ AAAS1883----,
 Publiclibrary1979}
 
 
-\textbf{示例：}
+\mbox{}{\small \textbf{示例：} \par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 \end{refsection}
@@ -1240,24 +1346,17 @@ Publiclibrary1979}
 egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--,egdatevolnumpageh--}
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
-
-\small
-注1：示例1中“2001”代表“年”。“2”代表“卷”。“1”代表“期”，“5-6”代表“页码”。
-
-注2：示例2中“2014”代表“年”，“510”代表“卷”，“356-363”代表“页码”。
-
-注3：示例3中“2010”代表“年”，“6”代表“期”。“23”代表“页码”。
-
-注4：示例4中“2012”代表“年"，“22”代表“卷”。“增刊2”代表“期”。“81-86”代表“页码”。
-
-注5：示例5中“2024”代表“年”。“12”代表“卷"，“S1”代表“期”，“7-11”代表“页码”。
-
-注6：示例6中“2023”代表“年”，“267”代表“卷”，“147370”代表“文章编号”。
-
-注7：示例7中“2024-05-09”代表“在线出版日期”。
-
-
 \end{refsection}
+
+\mbox{}{\small 注1：示例1中“2001”代表“年”。“2”代表“卷”。“1”代表“期”，“5-6”代表“页码”。
+\par}
+\mbox{}{\small 注2：示例2中“2014”代表“年”，“510”代表“卷”，“356-363”代表“页码”。\par}
+\mbox{}{\small 注3：示例3中“2010”代表“年”，“6”代表“期”。“23”代表“页码”。\par}
+\mbox{}{\small 注4：示例4中“2012”代表“年"，“22”代表“卷”。“增刊2”代表“期”。“81-86”代表“页码”。\par}
+\mbox{}{\small 注5：示例5中“2024”代表“年”。“12”代表“卷"，“S1”代表“期”，“7-11”代表“页码”。\par}
+\mbox{}{\small 注6：示例6中“2023”代表“年”，“267”代表“卷”，“147370”代表“文章编号”。\par}
+\mbox{}{\small 注7：示例7中“2024-05-09”代表“在线出版日期”。\par}
+
 
 \paragraph{}\label{sec:inbook:c} 对从合期、合卷中析出的文献，遵循上述规则著录，并在圆括号内注明合期号。
 
@@ -1265,10 +1364,9 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--
 \nocite{egdatevolnumpagee--}
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
-
-\small
-注：“2001”代表“年”，“8/9/10”代表“合期号”，“36-39”代表“页码”。
 \end{refsection}
+
+\mbox{}{\small 注：“2001”代表“年”，“8/9/10”代表“合期号”，“36-39”代表“页码”。\par}
 
 
 
@@ -1281,11 +1379,12 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
 
-\small
-注：“2011”代表“年”，“33”代表“卷”，“2”代表“期”，“20-25”代表“页码”；“2011”代表“年”，“33”代
-表“卷”，“3”代表“期”，“26-30”代表“页码”。
-
 \end{refsection}
+
+\mbox{}{\small 
+注：“2011”代表“年”，“33”代表“卷”，“2”代表“期”，“20-25”代表“页码”；“2011”代表“年”，“33”代
+表“卷”，“3”代表“期”，“26-30”代表“页码”。\par}
+
 
 
 \paragraph{} 凡是从报纸中析出的文献，应在报纸名后著录其出版日期与版次。
@@ -1296,19 +1395,19 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--
 \nocite{egdatevolnumpagei--}
 
 {\printbiblist[heading=none,env=exampleenv]{dvnpexample}}
-
-注：“2013-03-16”代表“出版日期”。“1”代表“版次”。
 \end{refsection}
+
+\mbox{}{\small 注：“2013-03-16”代表“出版日期”。“1”代表“版次”。\par}
 
 
 \subsubsection{著录项目}
 
-连续出版物中的析出文献应按表 \ref{tab:article-items}的著录项目著录。
+连续出版物中的析出文献应按表 \ref{tab:article-items} 的著录项目著录。
 \begin{table}[htbp]
 \centering
 \caption{连续出版物中的析出文献著录项目}
 \label{tab:article-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -1334,7 +1433,7 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 %析出文献主要责任者 有则必备；
@@ -1375,9 +1474,7 @@ Myburg2014-356-362,gbt7714.8.5.3:10
 %SANTER2025ANN,SHINOTSUKA2023SAMPLE
 }
 
-
-
-\textbf{示例：}
+\mbox{}{\small \textbf{示例：} \par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 \end{refsection}
@@ -1402,19 +1499,19 @@ FOURNEY1971-17-38}
  \hyphenpenalty=100 %断词阈值，值越大越不容易出现断词
  \tolerance=5000 %丑度，10000为最大无溢出盒子，参考the texbook 第6章
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：} \par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 }
 \end{refsection}
 
 \subsubsection{著录项目}
-会议录应按表 \ref{tab:proceed-items}的著录项目著录。
-\begin{table}[htbp]
-\centering
-\caption{会议录著录项目}
-\label{tab:proceed-items}
-\begin{tabular}{|c|c|c|}
+会议录应按表 \ref{tab:proceed-items} 的著录项目著录。
+
+
+\begin{table}[htb]
+\caption{会议录著录项目} \label{tab:proceed-items} 
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -1436,10 +1533,44 @@ FOURNEY1971-17-38}
 \hline
 获取和访问路径 & 电子资源必备 & 7.8 \\
 \hline
-永久标识符 & 电子资源可选 & 7.9 \\
-\hline
-\end{tabular}
+永久标识符 & 电子资源可选 & 7.9 \\ \hline
+\end{tabularx}
 \end{table}
+
+
+%\begin{longtable}{|>{\centering}p{0.305\linewidth}|>{\centering}p{0.305\linewidth}|>{\centering\arraybackslash}p{0.305\linewidth}|}
+%\caption{会议录著录项目} \label{tab:proceed-items} \\
+%\hline
+%元素 & 必备性 & 相关章条号 \\
+%\hline
+%\endfirsthead
+%\caption[]{会议录著录项目（续）}\\
+%\hline
+%元素 & 必备性 & 相关章条号 \\
+%\hline
+%\endhead
+%\hline
+%\endfoot
+%主要责任者 & 有则必备 & 7.1 \\
+%\hline
+%题名 & 必备 & 7.2 \\
+%\hline
+%其他题名信息 & 有则必备 & 7.2.3 \\
+%\hline
+%文献类型标识 & 必备 & 7.3、A.1 \\
+%\hline
+%文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+%\hline
+%会议名称 & 有则必备 & — \\
+%\hline
+%会议年份 & 有则必备 & — \\
+%\hline
+%引文页码 & 有则必备 & 7.7 \\
+%\hline
+%获取和访问路径 & 电子资源必备 & 7.8 \\
+%\hline
+%永久标识符 & 电子资源可选 & 7.9 \\
+%\end{longtable}
 
 
 %主要责任者 有则必备；
@@ -1470,7 +1601,7 @@ FOURNEY1971-17-38}
  \hyphenpenalty=100 %断词阈值，值越大越不容易出现断词
  \tolerance=5000 %丑度，10000为最大无溢出盒子，参考the texbook 第6章
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：} \par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 }
@@ -1480,15 +1611,21 @@ FOURNEY1971-17-38}
 \subsection{学位论文}\label{sec:entrytype:thesis}
 
 \subsubsection{著录项目}
-学位论文应按表 \ref{tab:thesis-items}的著录项目著录。
-\begin{table}[htbp]
-\centering
-\caption{学位论文著录项目}
-\label{tab:thesis-items}
-\begin{tabular}{|c|c|c|}
+学位论文应按表 \ref{tab:thesis-items} 的著录项目著录。
+
+\begin{longtable}{|>{\centering}p{0.305\linewidth}|>{\centering}p{0.305\linewidth}|>{\centering\arraybackslash}p{0.305\linewidth}|}
+\caption{学位论文著录项目} \label{tab:thesis-items} \\
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
+\endfirsthead
+\caption[]{学位论文著录项目（续）}\\
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+\endhead
+\hline
+\endfoot
 主要责任者 & 有则必备 & 7.1 \\
 \hline
 题名 & 必备 & 7.2 \\
@@ -1510,9 +1647,42 @@ FOURNEY1971-17-38}
 获取和访问路径 & 电子资源必备 & 7.8 \\
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
-\hline
-\end{tabular}
-\end{table}
+\end{longtable}
+
+
+%\begin{table}[htbp]
+%\centering
+%\caption{学位论文著录项目}
+%\label{tab:thesis-items}
+%\begin{tabular}{|c|c|c|}
+%\hline
+%元素 & 必备性 & 相关章条号 \\
+%\hline
+%主要责任者 & 有则必备 & 7.1 \\
+%\hline
+%题名 & 必备 & 7.2 \\
+%\hline
+%其他题名信息 & 有则必备 & 7.2.3 \\
+%\hline
+%文献类型标识 & 必备 & 7.3、A.1 \\
+%\hline
+%文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+%\hline
+%学位授予单位所在地 & 有则必备 & 7.5.1、7.5.2 \\
+%\hline
+%学位授予单位 & 必备 & 7.5.1、7.5.3 \\
+%\hline
+%学位授予年 & 有则必备 & 7.5.1、7.5.4 \\
+%\hline
+%引文页码 & 有则必备 & 7.7 \\
+%\hline
+%获取和访问路径 & 电子资源必备 & 7.8 \\
+%\hline
+%永久标识符 & 电子资源可选 & 7.9 \\
+%\hline
+%\end{tabular}
+%\end{table}
+
 
 %主要责任者 有则必备；
 %题名 必备；
@@ -1535,7 +1705,7 @@ FOURNEY1971-17-38}
 \nocite{王琦2022,gbt7714.8.7.2:2,gbt7714.8.7.2:3,CALMS1965--,CHRISTOU2024}%何筱梅2016,曲恩熙2023社交
 
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 \end{refsection}
@@ -1550,15 +1720,22 @@ FOURNEY1971-17-38}
 
 \subsubsection{著录项目}
 
-报告应按表 \ref{tab:report-items}的著录项目著录。
-\begin{table}[htbp]
-\centering
-\caption{报告著录项目}
-\label{tab:report-items}
-\begin{tabular}{|c|c|c|}
+报告应按表 \ref{tab:report-items} 的著录项目著录。
+
+
+\begin{longtable}{|>{\centering}p{0.305\linewidth}|>{\centering}p{0.305\linewidth}|>{\centering\arraybackslash}p{0.305\linewidth}|}
+\caption{报告著录项目} \label{tab:report-items} \\
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
+\endfirsthead
+\caption[]{报告著录项目（续）}\\
+\hline
+元素 & 必备性 & 相关章条号 \\
+\hline
+\endhead
+\hline
+\endfoot
 主要责任者 & 有则必备 & 7.1 \\
 \hline
 题名 & 必备 & 7.2 \\
@@ -1578,9 +1755,39 @@ FOURNEY1971-17-38}
 获取和访问路径 & 电子资源必备 & 7.8 \\
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
-\hline
-\end{tabular}
-\end{table}
+\end{longtable}
+
+
+%\begin{table}[htbp]
+%\centering
+%\caption{报告著录项目}
+%\label{tab:report-items}
+%\begin{tabular}{|c|c|c|}
+%\hline
+%元素 & 必备性 & 相关章条号 \\
+%\hline
+%主要责任者 & 有则必备 & 7.1 \\
+%\hline
+%题名 & 必备 & 7.2 \\
+%\hline
+%其他题名信息 & 有则必备 & 7.2.3 \\
+%\hline
+%报告编号 & 有则必备 & — \\
+%\hline
+%文献类型标识 & 必备 & 7.3、A.1 \\
+%\hline
+%文献载体标识 & 电子资源必备 & 7.3、A.2 \\
+%\hline
+%发布日期 & 有则必备 & 7.5.1、7.5.4 \\
+%\hline
+%引文页码 & 有则必备 & 7.7 \\
+%\hline
+%获取和访问路径 & 电子资源必备 & 7.8 \\
+%\hline
+%永久标识符 & 电子资源可选 & 7.9 \\
+%\hline
+%\end{tabular}
+%\end{table}
 
 
 %要责任者 有则必备；
@@ -1612,7 +1819,7 @@ FOURNEY1971-17-38}
 %\nocite{WHO1970--,UN2024DT}
 
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 \end{refsection}
@@ -1626,14 +1833,14 @@ FOURNEY1971-17-38}
 % 理。除此之外的标准根据本规则著录。
 
 \subsubsection{著录项目}
-标准应按表 \ref{tab:standard-items}的著录项目著录。
+标准应按表 \ref{tab:standard-items} 的著录项目著录。
 
 \begin{table}[htbp]
 \centering
 \begin{threeparttable}[b]
 \caption{标准著录项目}
 \label{tab:standard-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -1649,7 +1856,7 @@ FOURNEY1971-17-38}
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \begin{tablenotes}
 \footnotesize
 \item[a] 标准化文件中"文献类型标识"为可选项。
@@ -1710,7 +1917,7 @@ gbt7714.8.9.2:5
 }
 
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 \end{refsection}
@@ -1725,13 +1932,13 @@ gbt7714.8.9.2:5
 
 \subsubsection{著录项目}
 
-专利应按表 \ref{tab:patent-items}的著录项目著录。
+专利应按表 \ref{tab:patent-items} 的著录项目著录。
 
 \begin{table}[htbp]
 \centering
 \caption{专利著录项目}
 \label{tab:patent-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -1754,7 +1961,7 @@ gbt7714.8.9.2:5
 获取和访问路径 & 必备 & 7.8 \\
 \hline
 永久标识符 & 可选 & 7.9 \\ \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
@@ -1796,7 +2003,7 @@ TRISCO2022,
  \hyphenpenalty=100 %断词阈值，值越大越不容易出现断词
  \tolerance=5000 %丑度，10000为最大无溢出盒子，参考the texbook 第6章
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 }
@@ -1814,13 +2021,13 @@ TRISCO2022,
 \titleformat{\paragraph}[hang]{\zihao{5}\bfseries}{\theparagraph}{1em}{}
 \paragraph{著录项目}
 
-网站应按表 \ref{tab:website-items}的著录项目著录。
+网站应按表 \ref{tab:website-items} 的著录项目著录。
 
 \begin{table}[htb]
 \centering
 \caption{网站著录项目}
 \label{tab:website-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -1840,7 +2047,7 @@ TRISCO2022,
 \hline
 获取和访问路径 & 必备 & 7.8 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
@@ -1871,7 +2078,7 @@ gbt7714.8.11.2.2:2
  \tolerance=5000 %丑度，10000为最大无溢出盒子，参考the texbook 第6章
 
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 }
@@ -1885,13 +2092,13 @@ gbt7714.8.11.2.2:2
 \titleformat{\paragraph}[hang]{\zihao{5}\bfseries}{\theparagraph}{1em}{}
 \paragraph{著录项目}
 
-网页应按表 \ref{tab:webpage-items}的著录项目著录。
+网页应按表 \ref{tab:webpage-items} 的著录项目著录。
 
 \begin{table}[htb]
 \centering
 \caption{网页著录项目}
 \label{tab:webpage-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -1913,7 +2120,7 @@ gbt7714.8.11.2.2:2
 \hline
 永久标识符 & 可选 & 7.9 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
@@ -1947,7 +2154,7 @@ gbt7714.8.11.3.2:5}
  \tolerance=5000 %丑度，10000为最大无溢出盒子，参考the texbook 第6章
 
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 }
@@ -1964,13 +2171,13 @@ gbt7714.8.11.3.2:5}
 
 \subsubsection{著录项目}
 
-档案应按表 \ref{tab:archive-items}的著录项目著录。
+档案应按表 \ref{tab:archive-items} 的著录项目著录。
 
 \begin{table}[htbp]
 \centering
 \caption{档案著录项目}
 \label{tab:archive-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -1998,7 +2205,7 @@ gbt7714.8.11.3.2:5}
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
@@ -2031,7 +2238,7 @@ gbt7714.8.11.3.2:5}
 }
 
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 
@@ -2050,7 +2257,7 @@ gbt7714.8.11.3.2:5}
 \nocite{訾冬梅2006地图,谭其骧1982地图,CRIBB2015map,gbt7714.8.13.1:4}
 
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 
@@ -2059,12 +2266,12 @@ gbt7714.8.11.3.2:5}
 
 \subsubsection{著录项目}
 
-地图应按表 \ref{tab:map-items}的著录项目著录。
+地图应按表 \ref{tab:map-items} 的著录项目著录。
 \begin{table}[htbp]
 \centering
 \caption{地图著录项目}
 \label{tab:map-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -2094,7 +2301,7 @@ gbt7714.8.11.3.2:5}
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
@@ -2127,7 +2334,7 @@ gbt7714.8.11.3.2:5}
 }
 
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 
@@ -2143,12 +2350,12 @@ gbt7714.8.11.3.2:5}
 
 \subsubsection{著录项目}
 
-数据集应按表 \ref{tab:dataset-items}的著录项目著录。
-\begin{table}[htbp]
+数据集应按表 \ref{tab:dataset-items} 的著录项目著录。
+\begin{table}[htb]
 \centering
 \caption{数据集著录项目}
 \label{tab:dataset-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -2174,7 +2381,7 @@ gbt7714.8.11.3.2:5}
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
@@ -2201,7 +2408,7 @@ IHME2021Disease
 }
 
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 
@@ -2213,13 +2420,13 @@ IHME2021Disease
 
 \subsubsection{著录项目}
 
-预印本应按表 \ref{tab:preprint-items}的著录项目著录。
+预印本应按表 \ref{tab:preprint-items} 的著录项目著录。
 
-\begin{table}[htbp]
+\begin{table}[htb]
 \centering
 \caption{预印本著录项目}
 \label{tab:preprint-items}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
 \hline
@@ -2245,7 +2452,7 @@ IHME2021Disease
 \hline
 永久标识符 & 电子资源可选 & 7.9 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
@@ -2274,7 +2481,7 @@ IHME2021Disease
 
 \nocite{肖玲2024数据,方向明2023元宇宙,JENKINS2012light}
 
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 {\printbibliography[heading=none,env=indentegenv]}
 
@@ -2294,6 +2501,7 @@ IHME2021Disease
 \paragraph{} 顺序编码制应按正文中引用的文献出现的先后顺序连续编码，并将序号置于“[ ]”中，见示例1。如果顺序编码制用脚注方式时，序号可由计算机自动生成圈码，见示例2。
 
 \begin{refsection}
+\small
 \textbf{示例1：}
 
 ……德国学者 N.克罗斯研究了瑞士巴塞尔市附近侏罗山中老第三纪断裂对第三系摺皱的控制
@@ -2305,10 +2513,18 @@ IHME2021Disease
 \textbf{示例2：}
 
 ……所谓移情，就是“说话人将自己认同于……他用句子所描述的事件或状态中的一个参与者”
-\footfullcite{Sunstein1996-903-903}。《汉语大词典》和张相
-\footfullcite{Morri2010--}都认为“可”是“痊愈”，
-侯精一认为是“减轻”\footfullcite{罗杰斯2011-15-16}。……另外，根据侯精一，表示病痛程度减轻的形容词“可”和表示逆转否定的副词“可”
-是兼类词\footfullcite{陈登原2000-29-29}，这也说明二者应该存在着源流关系。
+%\footfullcite{Sunstein1996-903-903}
+\textsuperscript{\textcircled{1}}
+。《汉语大词典》和张相
+\textsuperscript{\textcircled{2}}
+%\footfullcite{Morri2010--}
+都认为“可”是“痊愈”，
+侯精一认为是“减轻”\textsuperscript{\textcircled{3}}
+%\footfullcite{罗杰斯2011-15-16}
+。……另外，根据侯精一，表示病痛程度减轻的形容词“可”和表示逆转否定的副词“可”
+是兼类词\textsuperscript{\textcircled{4}}
+%\footfullcite{陈登原2000-29-29}
+，这也说明二者应该存在着源流关系。
 
 …………
 \end{refsection}
@@ -2316,6 +2532,7 @@ IHME2021Disease
 \paragraph{}\label{sec:ref:ref} 同一处引用多篇文献时，应将各篇文献的序号在“[ ]”内全部列出，各序号间用“，”。如遇连续序号，起讫序号间用短横线连接。此规则不适用于用计算机自动编码的序号。
 
 \begin{refsection}
+\small
 \textbf{示例：}\footnote{\textbf{注意：}这里的引用标签数字只做示范，因此为实现方便未与标准原文保持完全一致。}
 
 \nocite{*}
@@ -2323,14 +2540,13 @@ IHME2021Disease
 
 莫拉德对稳定区的研究
 \cite{CRANE1972--,Weinstein1974-745-772,Roberson2011-1-36}……
-
-
 \end{refsection}
 
 
 \paragraph{}\label{sec:numeric:multic} 多次引用同一责任者的同一文献时，在正文中标注首次引用的文献序号，并在序号的“[ ]”外著录引文页码，见示例1。如果用计算机自动编序号时，应重复著录参考文献，但参考文献表中的著录项目可简化为文献序号及引文页码，见示例 2。
 
 \begin{refsection}
+\small
 \textbf{示例1：}
 
 ……改变社会规范也可能存在类似的“二阶囚徒困境”问题：尽管改变旧的规范对所有人都好，
@@ -2342,16 +2558,20 @@ IHME2021Disease
 佛教受到极大的打击\pagescite[326-329]{Morri2010--}。
 ……陈登原先生的考证是非常精确的，他印证了《春秋说题辞》“黍者绪也，故其立字，禾入米为黍，为酒以扶老，为酒以序尊卑，禾为柔物，亦宜养老”，指出：“以上谓等威之辨，尊卑之序，由于饮食荣辱。”\cite{陈登原2000-29-29}
 
-\textbf{参考文献：}
 
-\printbibliography[heading=none,env=indentegenv]
+\mbox{}{\small\textbf{参考文献：}\par}
+
+\printbibliography[heading=none,env=indentegenvb]
 \end{refsection}
 
 \begin{refsection}
+\small
 \textbf{示例2：}
 
 \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
 \smallskip\noindent\begin{minipage}{\textwidth}\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+\let\footnoterule\relax%
+\deflength{\footbibmargin}{3.6em}%
 \hspace{2em}……改变社会规范也可能存在类似的“二阶囚徒困境”问题：尽管改变旧的规范对所有人都好，但个人理性选择使得没有人愿意率先违反旧的规范
 \footfullcite{Sunstein1996-903-903}。
 ……事实上，古希腊对轴心时代思想真正的贡献不是来自对民主的赞扬，而是来自对民主制度的批评，苏格拉底、柏拉图和亚里士多德3位贤圣
@@ -2361,6 +2581,8 @@ IHME2021Disease
 ……据《唐会要》记载，当时拆毁的寺院有4 600余所，招提、兰若等佛教建筑4万余所，没收寺产，并强迫僧尼还俗达260 500人。
 佛教受到极大的打击\footfullcite[326-329]{Morri2010--}。
 ……陈登原先生的考证是非常精确的，他印证了《春秋说题辞》“黍者绪也，故其立字，禾入米为黍，为酒以扶老，为酒以序尊卑，禾为柔物，亦宜养老”，指出：“以上谓等威之辨，尊卑之序，由于饮食荣辱。”\footfullcite{陈登原2000-29-29}
+
+\hspace{2em}\textbf{参考文献：}\vspace{-2mm}
 \end{minipage}
 \end{refsection}
 
@@ -2369,7 +2591,7 @@ IHME2021Disease
 参考文献表采用顺序编码制组织时，各篇文献应按正文部分标注的序号依次列出（见 \ref{sec:numeric:cite}）。更多示例见附录 \ref{sec:appdix:biblieg}。
 
 \begin{refsection}
-\textbf{示例：}
+\mbox{}{\small\textbf{示例：}\par}
 
 \nocite{Baker1995--,Chernik1982--,尼葛洛庞帝1996--,汪冰1997-16-16,杨宗英1996-24-29,Dowler1995-5-26}
 
@@ -2381,7 +2603,7 @@ IHME2021Disease
 \subsubsection{正文中的引用}\label{sec:ay:citation}
 \paragraph{}\label{sec:ay:citename} 正文引用的文献采用著者-出版年制时，各篇文献的标注内容应由责任者姓氏与出版年（见\ref{sec:pub:gene}、\ref{sec:pub:pubdate}）构成，并置于“（~）”内。倘若只标注责任者姓氏无法识别该人名时，可标注责任者姓名（见\ref{sec:author:fisrt}）。集体责任者著述的文献可标注机关团体名称。倘若正文中已提及责任者姓名，则在其后的“（~）”内只著录出版年。
 
-\textbf{示例：}
+{\small\textbf{示例：}\par}
 
 \noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=1]{tngbcitationaynew.pdf}
 %\begin{refsection}
@@ -2396,14 +2618,14 @@ IHME2021Disease
 
 \paragraph{} 正文中引用多责任者文献时，对欧美责任者只需标注第一个责任者的姓，其后附“ et al.”；对于中国责任者应标注第一责任者的姓名，其后附“等”字。姓氏与“ et al.”“等”之间留适当空隙。
 
-\textbf{示例：}
+{\small\textbf{示例：}\par}
 
 \noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=7]{tngbcitationaynew.pdf}
 
 \paragraph{} 著录同一责任者在同一年出版的多篇文献时，在正文中标注责任者与出版年，出版年后应用小写字母 a，b，\mbox{c……}区别，并置于“（~）”内。
 % 用 \mbox 避免在“c”与省略号之间断行
 
-\textbf{示例：}
+{\small\textbf{示例：}\par}
 
 \noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=8]{tngbcitationaynew.pdf}
 
@@ -2432,7 +2654,7 @@ IHME2021Disease
 
 \paragraph{}\label{sec:ay:multicites} 多次引用同一责任者的同一文献，在正文中标注责任者与出版年，并在“（~）”外以角标的形式著录引文页码。
 
-\textbf{示例：}\footnote{注意：根据 \ref{sec:ay:biblio} 节，著者年份制文献表一般需要按拼音或笔画排序，但本节标准原文中没有按此排序，因此这里做了原样复现。}
+{\small\textbf{示例：}\footnote{注意：根据 \ref{sec:ay:biblio} 节，著者年份制文献表一般需要按拼音或笔画排序，但本节标准原文中没有按此排序，因此这里做了原样复现。}\par}
 
 \noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=4]{tngbcitationaynew.pdf}
 
@@ -2462,7 +2684,7 @@ IHME2021Disease
 
 参考文献表采用著者-出版年制组织时，各篇文献应首先按文种集中，可分为中文、日文、西文、俄文、其他文种 5 部分；然后按责任者字顺和出版年排列。中文文献可以按责任者汉语拼音字顺排列（见 \ref{sec:ay:citation}），也可按责任者的笔画笔顺排列。
 
-\textbf{示例：}
+{\small\textbf{示例：}\par}
 
 \noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=5]{tngbcitationaynew.pdf}
 %\begin{refsection}
@@ -2494,7 +2716,7 @@ IHME2021Disease
 \centering
 \caption{文献类型和标识代码}
 \label{tab:ref-type-id}
-\begin{tabular}{|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 参考文献类型 & 文献类型标识代码 \\
 \hline
@@ -2532,7 +2754,7 @@ IHME2021Disease
 \hline
 其他 & Z \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 %图书 M；
@@ -2568,7 +2790,7 @@ IHME2021Disease
 \centering
 \caption{电子资源载体和标识代码}
 \label{tab:medium-id}
-\begin{tabular}{|c|c|}
+\begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 电子资源的载体类型 & 载体类型标识代码 \\
 \hline
@@ -2582,7 +2804,7 @@ IHME2021Disease
 \hline
 缩微资料(microform materials) & MM \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
@@ -2901,6 +3123,7 @@ Inforanddocstd,
 \printbibliography[title={参\quad 考\quad 文\quad 献}]
 \end{refsection}
 
+\centerline{\rule[-5mm]{3.5cm}{1pt}}
 
 
 \end{document}
