@@ -225,7 +225,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*,]{biblatex}%sorting=nyt,casec
       \setlength{\partopsep}{0ex}%
       \setlength{\parskip}{0ex}%
      \setlength{\labelwidth}{1.5em}%
-      \setlength{\leftmargin}{\labelwidth+20pt}%
+      \setlength{\leftmargin}{\labelwidth+18pt}%
       \setlength{\labelsep}{\biblabelsep}%
       \addtolength{\leftmargin}{\labelsep}%
       \setlength{\itemsep}{\bibitemsep}%
@@ -952,7 +952,7 @@ DOI、ISBN等既被视作支持PID的
 
 \mbox{}{\small 注1：示例1永久标识符为：DOI: 10.1002/9781444305036  \par}
 
-\mbox{}{\small 注2：示例2永久标识符为：URN:ISBN:978-951-51-2090-8   \par}  
+\mbox{}{\small 注2：示例2永久标识符为：URN:ISBN:978-951-51-2090-8   \par}
 
 
 \subsubsection{} 获取和访问路径中不含永久标识符时，可按照原文如实著录永久标识符。
@@ -966,7 +966,7 @@ DOI、ISBN等既被视作支持PID的
 \end{refsection}
 
 
-\mbox{}{\small 注1：该示例永久标识符为：DOI: 10.7666/d.y351065. \par}  
+\mbox{}{\small 注1：该示例永久标识符为：DOI: 10.7666/d.y351065. \par}
 
 
 \titleformat{\subsubsection}[hang]{\zihao{5}\bfseries}{\thesubsubsection}{1em}{}%\hspace{1em}
@@ -1110,7 +1110,7 @@ gbt7714.8.2.2:8}
 \endfoot
 析出文献主要责任者 & 有则必备 & 7.1 \\ %\pagebreak
 \hline
-析出文献题名 & 必备 & 7.2 \\ 
+析出文献题名 & 必备 & 7.2 \\
 \hline
 析出文献其他题名信息 & 有则必备 & 7.2.3 \\
 \hline
@@ -1338,7 +1338,7 @@ Publiclibrary1979}
 \subsubsection{通用要求}\label{sec:article:request}
 
 \paragraph{}\label{sec:inbook:f} 凡是从期刊中析出的文章，应在刊名之后注明其年、卷、期、页码等。阅读型参考文献的页码可著录
-文章的起讫页或起始页，引文参考文献的页码应著录引用信息所在页。\footnote{注意：当前存在一些期刊文献的引用信息是提供文章编号而不是页码。由于编号的格式与页码类似(见 \ref{sec:item:pages} 节)，所以可以直接将文章编号放在 pages 域中或者 eid 域中。比如，下面的示例5，可以在bib中给出：pages=\{147370\} 或  eid =\{147370\}。}
+文章的起讫页或起始页，引文参考文献的页码应著录引用信息所在页。\footnote{注意：当前存在一些期刊文献的引用信息是提供文章编号而不是页码。由于编号的格式与页码类似(见 \ref{sec:item:pages} 节)，所以可以直接将文章编号放在 pages 域中或者 eid 域中。比如，下面的示例6，可以在bib中给出：pages=\{147370\} 或  eid =\{147370\}。}
 
 \begin{refsection}
 
@@ -1381,7 +1381,7 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--
 
 \end{refsection}
 
-\mbox{}{\small 
+\mbox{}{\small
 注：“2011”代表“年”，“33”代表“卷”，“2”代表“期”，“20-25”代表“页码”；“2011”代表“年”，“33”代
 表“卷”，“3”代表“期”，“26-30”代表“页码”。\par}
 
@@ -1449,7 +1449,7 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--
 
 \subsubsection{著录格式}
 
-连续出版物中的析出文献应按以下格式著录：“析出文献主要责任者. 析出文献题名[文献类型标识/文献载体标识]. 析出文献其他责任者. 连续出版物题名：其他题名信息，年，卷（期/版次）：页码. 获取和访问路径. 永久标识符.”\footnote{相比前版的关键差别是不输出urldate了，也没有修改或更新日期，同时示例中给出一个\textbf{在线文档}的要求，要求给出详细日期。因为其他文献也可能带有网址，所以只用网址无法区分。因此考虑利用url存在且卷期都不存在这一条件进行区分，比如示例中的第8条文献，比如 \ref{sec:article:request} 节中示例6。}
+连续出版物中的析出文献应按以下格式著录：“析出文献主要责任者. 析出文献题名[文献类型标识/文献载体标识]. 析出文献其他责任者. 连续出版物题名：其他题名信息，年，卷（期/版次）：页码. 获取和访问路径. 永久标识符.”\footnote{相比前版的关键差别是不输出urldate，也没有修改或更新日期，同时示例中给出一个\textbf{在线文档}的要求，要求给出详细日期。因为其他文献也可能带有网址，所以只用网址无法区分。因此考虑利用url存在且卷期都不存在这一条件进行区分，比如示例中的第4条文献，又比如 \ref{sec:article:request} 节中示例7。}
 
 \begin{refsection}
 
@@ -1470,7 +1470,7 @@ Saito2006-169-176,
 %DESMARAIS1992-605-609,
 %Park2010-696-715,
 %Frese2013-378-398,
-Myburg2014-356-362,gbt7714.8.5.3:10
+Myburg2014-356-362,gbt7714.8.5.3:10%
 %SANTER2025ANN,SHINOTSUKA2023SAMPLE
 }
 
@@ -1510,7 +1510,7 @@ FOURNEY1971-17-38}
 
 
 \begin{table}[htb]
-\caption{会议录著录项目} \label{tab:proceed-items} 
+\caption{会议录著录项目} \label{tab:proceed-items}
 \begin{tabularx}{\linewidth}{|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X|}
 \hline
 元素 & 必备性 & 相关章条号 \\
@@ -1848,7 +1848,7 @@ FOURNEY1971-17-38}
 \hline
 标准名称 & 必备 & 7.2 \\
 \hline
-文献类型标识\tnote{a} & 必备/可选 & 7.3、A.1 \\
+文献类型标识\tnote{*} & 必备/可选 & 7.3、A.1 \\
 \hline
 文献载体标识 & 电子资源必备 & 7.3、A.2 \\
 \hline
@@ -1859,7 +1859,7 @@ FOURNEY1971-17-38}
 \end{tabularx}
 \begin{tablenotes}
 \footnotesize
-\item[a] 标准化文件中"文献类型标识"为可选项。
+\item[*] 标准化文件中"文献类型标识"为可选项。
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -1913,7 +1913,7 @@ FOURNEY1971-17-38}
 gbt7714.8.9.2:2,
 先进音视频编码2016-04-25--,
 gbt7714.8.9.2:4,
-gbt7714.8.9.2:5
+gbt7714.8.9.2:5%
 }
 
 
@@ -1980,7 +1980,9 @@ gbt7714.8.9.2:5
 \subsubsection{著录格式}
 
 专利应按以下格式著录：“专利申请者/所有者. 题名：其他题名信息：专利申请号[文献类型标识/文献载体标识]. 公告
-（公开）日期：引文页码. 获取和访问路径. 永久标识符.”\footnote{非单个专利的汇编会按图书等类处理，但不容易区分，目前考虑利用publisher和url判断。当url不存在且publisher存在时，则输出publisher和到年份的日期。}
+（公开）日期：引文页码. 获取和访问路径. 永久标识符.”
+%正式版不像征求意见稿，不再区分专利汇编了。
+%\footnote{非单个专利的汇编会按图书等类处理，但不容易区分，目前考虑利用publisher和url判断。当url不存在且publisher存在时，则输出publisher和到年份的日期。}
 
 
 %\begin{tcolorbox}[colback=yellow!80,boxrule=0pt]
@@ -2066,7 +2068,7 @@ TRISCO2022,
 \begin{refsection}
 
 \nocite{gbt7714.8.11.2.2:1,
-gbt7714.8.11.2.2:2
+gbt7714.8.11.2.2:2%
 %鲁迅博物馆2023,
 %BBC2020a,
 %BBC2020b
@@ -2397,13 +2399,13 @@ gbt7714.8.11.3.2:5}
 %永久标识符 电子资源可选。
 
 \subsubsection{著录格式}\label{sec:dataset:biblieg}
-数据集应按以下格式著录：“主要责任者. 题名：其他题名信息[文献类型标识/文献载体标识]. 版本. 发布平台（发布或修改日期） [引
-用日期]. 获取和访问路径. 永久标识符.”\footnote{数据集若存在网址且来源不是期刊的转化为online处理，其他默认利用manual输出，根据来源按图书等类型输出，图书类与manual一致所以无需转换。但析出文献则需要转换，下面的示例中仅有第2条文献为期刊析出文献，所以目前仅实现了期刊析出文献的转换，考虑判断的方式是没有location且存在journal。}
+数据集应按以下格式著录：“主要责任者. 题名：其他题名信息[文献类型标识/文献载体标识]. 版本. 发布平台（发布或修改日期） [引用日期]. 获取和访问路径. 永久标识符.”\footnote{数据集若存在网址且来源不是期刊的转化为online处理，其他默认利用manual输出，根据来源按图书等类型输出，图书类与manual一致所以无需转换。但析出文献则需要转换，目前仅实现了期刊析出文献的转换，考虑判断的方式是没有location且存在journal。}
+%下面的示例中仅有第2条文献为期刊析出文献，所以
 
 \begin{refsection}
 
 \nocite{gbt7714.8.14.3:1,gbt7714.8.14.3:2,
-IHME2021Disease
+IHME2021Disease%
 %草地数据1994--,李皓2024语料库,彭守璋2024降水,刘时银2012水川,仲晓雅2022夜间灯光,仲晓雅2022夜间灯光en,郑涵2018生态
 }
 
@@ -2601,7 +2603,7 @@ IHME2021Disease
 
 \subsection{著者-出版年制}\label{sec:ay:ay}
 \subsubsection{正文中的引用}\label{sec:ay:citation}
-\paragraph{}\label{sec:ay:citename} 正文引用的文献采用著者-出版年制时，各篇文献的标注内容应由责任者姓氏与出版年（见\ref{sec:pub:gene}、\ref{sec:pub:pubdate}）构成，并置于“（~）”内。倘若只标注责任者姓氏无法识别该人名时，可标注责任者姓名（见\ref{sec:author:fisrt}）。集体责任者著述的文献可标注机关团体名称。倘若正文中已提及责任者姓名，则在其后的“（~）”内只著录出版年。
+\paragraph{}\label{sec:ay:citename} 正文引用的文献采用著者-出版年制时，各篇文献的标注内容应由责任者姓氏与出版年（见\ref{sec:pub:gene}、\ref{sec:pub:pubdate}）构成，并置于“（~）”内。倘若只标注责任者姓氏无法识别该人名时，可标注责任者姓名（见\ref{sec:author:fisrt}）。集体责任者著述的文献可标注机关团体名称。倘若正文中已提及责任者姓名，则在其后的“（~）”内只著录出版年\footnote{对于责任者姓名已经在正文中，而引用文献只添加年份信息的引用标签，可使用yearcite命令。}。
 
 {\small\textbf{示例：}\par}
 
@@ -2625,7 +2627,11 @@ IHME2021Disease
 \paragraph{} 著录同一责任者在同一年出版的多篇文献时，在正文中标注责任者与出版年，出版年后应用小写字母 a，b，\mbox{c……}区别，并置于“（~）”内。
 % 用 \mbox 避免在“c”与省略号之间断行
 
-{\small\textbf{示例：}\par}
+{\small\textbf{示例：}\footnote{著者-出版年制默认使用cite命令实现责任者与出版年在括号内的引用标注标签，若要实现责任者在括号外，而年份在括号内的标签可使用citet命令。}
+\footnote{著者-出版年制下更多实现不同引用标注标签格式的命令见
+\href{https://mirrors.ctan.org/macros/latex/contrib/biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf}
+{biblatex-gb7714-2015说明文档的表2。}}
+\par}
 
 \noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=8]{tngbcitationaynew.pdf}
 
@@ -2654,7 +2660,9 @@ IHME2021Disease
 
 \paragraph{}\label{sec:ay:multicites} 多次引用同一责任者的同一文献，在正文中标注责任者与出版年，并在“（~）”外以角标的形式著录引文页码。
 
-{\small\textbf{示例：}\footnote{注意：根据 \ref{sec:ay:biblio} 节，著者年份制文献表一般需要按拼音或笔画排序，但本节标准原文中没有按此排序，因此这里做了原样复现。}\par}
+{\small\textbf{示例：}\footnote{注意：在引用标注标签的括号外添加引文页面，可以手动或自动实现，手动则使用cite或pagescite命令给出可选项用于填写页码，
+比如\textbackslash cite[49]\{entrykey\}，若要自动给出则只能使用pagescite命令，它将自动读取bib条目中的页码信息用于显示，比如\textbackslash  pagescite\{entrykey\}。}
+\footnote{注意：根据 \ref{sec:ay:biblio} 节，著者年份制文献表一般需要按拼音或笔画排序，但本节标准原文中没有按此排序，因此这里做了原样复现。}\par}
 
 \noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=4]{tngbcitationaynew.pdf}
 
@@ -2684,9 +2692,9 @@ IHME2021Disease
 
 参考文献表采用著者-出版年制组织时，各篇文献应首先按文种集中，可分为中文、日文、西文、俄文、其他文种 5 部分；然后按责任者字顺和出版年排列。中文文献可以按责任者汉语拼音字顺排列（见 \ref{sec:ay:citation}），也可按责任者的笔画笔顺排列。
 
-{\small\textbf{示例：}\par}
+\mbox{}{\small\textbf{示例：}\par}
 
-\noindent\hspace{-2.5cm}\includegraphics[width=\paperwidth,page=5]{tngbcitationaynew.pdf}
+\noindent\hspace{-2.45cm}\includegraphics[width=\paperwidth,page=5]{tngbcitationaynew.pdf}
 %\begin{refsection}
 %\textbf{示例：}
 %
@@ -3092,7 +3100,7 @@ IHME2021Disease,
 \nocite{方向明2023元宇宙,
 肖玲2024数据,
 BLOSS2025trial,
-JENKINS2012light2
+JENKINS2012light2%
 }
 
 
@@ -3119,6 +3127,7 @@ Inforanddocstd,
 尚品2024,
 }
 
+\addtocontents{toc}{\protect\vspace{-2ex}}
 \addcontentsline{toc}{section}{参考文献}
 \printbibliography[title={参\quad 考\quad 文\quad 献}]
 \end{refsection}
