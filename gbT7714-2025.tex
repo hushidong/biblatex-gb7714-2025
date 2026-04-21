@@ -63,7 +63,7 @@ labelsep=quad
 \usepackage{xltxtra,mflogo,texnames}
 %%注意:这里使用other*来使得babel切换环境时忽略空白，使得条目集中各文献间的标点正确
 \usepackage[backend=biber,style=gb7714-2025,gbpunctwidth=mixed,%gbpub=true,
-gbfootbib=true,gbalign=gb7714-2015,autolang=other*,]{biblatex}%sorting=nyt,casechanger=latex2e
+gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt,casechanger=latex2e %,defernumbers=true
 \setlength{\bibitemsep}{1pt}
 \setlength{\bibnamesep}{0ex}
 \setlength{\bibinitsep}{0ex}
@@ -2535,13 +2535,13 @@ IHME2021Disease%
 
 \begin{refsection}
 \small
-\textbf{示例：}\footnote{\textbf{注意：}这里的引用标签数字只做示范，因此为实现方便未与标准原文保持完全一致。}
+\textbf{示例：}\footnote{\textbf{注意：}这里的引用标签数字只做示范，因此未与标准原文保持完全一致。要在局部实现特定的标签数字，需要采用特殊的技巧。一是利用nocite来引入bib中的所有文献，然后将当前引用文献放在特定位置上以获得需要的序号。二是利用shorthand域与labelnumber选项配合，直接指定文献序号。这里结合使用了这两种方式。}
 
 \nocite{*}
-裴伟提出\cite{Humphrey1971--,KENNEDY1975-311-386}……
+裴伟\cite{Humphrey1971--a,KENNEDY1975-311-386a}提出……
 
 莫拉德对稳定区的研究
-\cite{CRANE1972--,Weinstein1974-745-772,Roberson2011-1-36}……
+\cite{gbt7714.b.2:7,Weinstein1974-745-772,Roberson2011-1-36}……
 \end{refsection}
 
 
