@@ -159,6 +159,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt,casech
 \usebibmacro{chapter+pages}%
 \usebibmacro{doi+eprint+url}%从下面移动到上面来，因为gbt2015的url需直接放在页码后面。
 \renewcommand*{\finentrypunct}{}%
+\ifkeyword{egbookpubaddressg--}{\renewcommand*{\finentrypunct}{\addperiod}}{}%
 \usebibmacro{finentry}
 }
 
@@ -1063,7 +1064,7 @@ CHRISTOU2024}
 出版者，出版年：引文页码. 获取和访问路径. 永久标识符.”
 
 \begin{refsection}
-
+\toggletrue{bbx:gbpub}
 \nocite{张伯伟2002--,
 %陈登原2000-29-29,
 王夫之1865--,
@@ -1370,7 +1371,7 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--
 
 
 \paragraph{}\label{sec:normal:pages} 凡是在同一期刊上连载的文献，其后续部分不必另行著录，可在原参考文献后直接注明后续部分的
-年、卷、期、页码等。\footnote{这里这种复杂的年卷期形式不便于自动化处理，所以可以直接在year域中给出需要复杂信息形式，下面的示例中给出了半角符号和全角符号下的两种示例。}
+年、卷、期、页码等。\footnote{这里这种复杂的年卷期形式不便于自动化处理，所以可以直接在year域中给出需要的复杂信息形式，下面的示例中给出了半角符号和全角符号下的两种示例。}
 
 \begin{refsection}
 
@@ -1448,7 +1449,7 @@ egdatevolnumpagec--,egdatevolnumpaged--,egdatevolnumpageda--,egdatevolnumpageg--
 
 \subsubsection{著录格式}
 
-连续出版物中的析出文献应按以下格式著录：“析出文献主要责任者. 析出文献题名：析出文献其他题名信息[文献类型标识/文献载体标识]. 析出文献其他责任者. 连续出版物题名：其他题名信息，年，卷（期/版次）：页码. 获取和访问路径. 永久标识符.”\footnote{相比前版的关键差别是不输出urldate，也没有修改或更新日期，同时示例中给出一个\textbf{在线文档}的要求，要求给出详细日期。因为其他文献也可能带有网址，所以只用网址无法区分。因此考虑利用url存在且卷期都不存在这一条件进行区分，比如示例中的第4条文献，又比如 \ref{sec:article:request} 节中示例7。}
+连续出版物中的析出文献应按以下格式著录：“析出文献主要责任者. 析出文献题名：析出文献其他题名信息[文献类型标识/文献载体标识]. 析出文献其他责任者. 连续出版物题名：其他题名信息，年，卷（期/版次）：页码. 获取和访问路径. 永久标识符.”\footnote{相比GB/T 7714-2015的主要差别是不输出urldate，也没有修改或更新日期，同时示例中给出一个\textbf{在线文档}的要求，要求给出详细日期。因为其他文献也可能带有网址，所以只用网址无法区分。因此考虑利用url存在且卷期都不存在这一条件进行区分，比如示例中的第4条文献，又比如 \ref{sec:article:request} 节中示例7。}
 
 \begin{refsection}
 
