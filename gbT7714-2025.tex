@@ -3,13 +3,15 @@
 %测试实现GB/T 7714-2025 标准2-10节给出的顺序编码制示例
 \documentclass[twoside]{article}%[twoside]
 \usepackage[fontset=windows,zihao=5]{ctex} %10pt
+\usepackage{csquotes}
+\usepackage{microtype}
 \usepackage[russian,french,english]{babel}
 \setmainfont[BoldFont={cmunsx.otf},ItalicFont={cmunti.otf},
 BoldItalicFont={cmunbi.otf}]{cmunrm.otf}
 \setmonofont{cmuntt.otf}
 \setsansfont{cmunsx.otf}
 \IfFontExistsTF{SourceHanSerifSC-Regular.otf}%\IfFileExists
-    {\setCJKmainfont[BoldFont={simhei.ttf}]{SourceHanSerifSC-Regular.otf}
+    {\setCJKmainfont[BoldFont={simhei.ttf},ItalicFont={simkai.ttf}]{SourceHanSerifSC-Regular.otf}
 \setCJKsansfont{simhei.ttf}}{}
 \usepackage{xcolor}
 \usepackage{etoolbox}
@@ -287,7 +289,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt,casech
 }
 
 
-\title{信息与文献\ \ 参考文献著录规则\footnote{说明：本文档为GB/T 7714—2025的简单复现版本，作为GB/T 7714—2025 中的著录标准和顺序编码制示例，用于gb7714-2025样式更新后与GB/T 7714—2025标准文档的内容进行比较，以确定更新没有引入样式方面的BUG。对比文档stdgbT7714-2025.pdf经过多次比较，其示例应该与GB/T 7714—2025一致（个别已注明区别除外）。}}
+\title{信息与文献\ \ 参考文献著录规则\footnote{说明：本文档为 GB/T 7714—2025 标准原文的简单复现，作为引用标注和著录格式示例，在 gb7714-2025 参考文献样式更新后作比较，以确定更新没有引入样式方面的BUG。对比文档 stdgbT7714-2025.pdf 经过多次校对，与 GB/T 7714—2025 标准文档一致，除个别已注明区别外。}}
 \author{}
 \date{}
 
@@ -299,7 +301,7 @@ gbfootbib=true,gbalign=gb7714-2015,autolang=other*]{biblatex}%sorting=nyt,casech
 \name{信息与文献\ \ 参考文献著录规则}
 \enname{Information and documentation---Rules for bibliographic references
 and citations to information resources}
-\conformity{本文档为简单复现版本，用于更新参考文献样式后回归测试}
+\conformity{\textcolor{blue}{\kaishu 此为标准复现版本，仅作回归测试用途}}
 \department{\parbox{11\ccwd}{国家市场监督管理总局\\
 国家标准化管理委员会}}
 \fabudate{2025-12-02}
@@ -640,7 +642,7 @@ DOI、ISBN等既被视作支持PID的
 {\printbiblist[heading=none,env=exampleenv]{authorexample}}
 \end{refsection}
 
-\subsubsection{}\label{sec:author:second}  著作方式相同的责任者不超过 3 个时，应全部照录。超过 3 个时，可著录前 3 个责任者，其后加“，等”或与之相应的词。
+\subsubsection{}\label{sec:author:second}  著作方式相同的责任者不超过 3 个时，应全部照录。超过 3 个时，可著录前 3 个责任者，其后加“，等”或与之相应的词。\footnote{标准原文的示例4中各作者之间没有标点，与附录 \ref{sec:appdix:biblieg} 示例中多个英文作者的写法不符，应是笔误。}
 \begin{refsection}
 \nocite{钱学森--}
 \nocite{李四光--}
