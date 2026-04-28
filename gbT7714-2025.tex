@@ -321,6 +321,7 @@ and citations to information resources}
 
 
 \pagestyle{empty}
+\pdfbookmark[1]{封面}{sec:title:page} 
 \maketitlepage%
 
 \newpage
@@ -329,10 +330,12 @@ and citations to information resources}
 \newpage
 \thispagestyle{main}
 \pagenumbering{Roman}
+\pdfbookmark[1]{目录}{sec:tab:contents} 
 \tableofcontents%\listoffigures\listoftables%
 \pagestyle{main}
 \clearpage
 
+\phantomsection 
 \addcontentsline{toc}{section}{前言}
 \begin{preamble}{前\qquad{}言}
 \zihao{5}
@@ -344,26 +347,28 @@ and citations to information resources}
 
 \begin{enumerate}
   \item
-更改了“范围”的表述形式（见第 1 章， 2015 年版的第 1 章）；
+更改了“范围”的表述形式（见第 \ref{sec:def:scope} 章， 2015 年版的第 1 章）；
   \item 删除了术语“主要责任者”“专著”“数字对象唯一标识符”（见2015年版的第3章），增加了术语“会议录”“数据集”“永久标识
-符”“预印本”“责任者”及其定义（见第3章），更改了术语“连续出版物”“顺序编码制”“析出文献”“著者-出版年制”的英文对应词（见第3章， 2015年版的第3章），
-更改了术语“参考文献”“电子资源”“连续出版物”“析出文献”“引文参考文献”“阅读型参考文献”的定义（见第3章， 2015年版的第3章）；
-  \item 更改了“著录信息源”的表述形式（见第4章， 2015年版的第5章）；
-  \item 更改了著录语种、汉语拼音人名著录规定（见5.1、5.3， 2015年版的6.1、6.3）；
-  \item 更改了“著录用符号”的表述形式（见第6章， 2015年版的第7章）；
-  \item 将“著录细则”更名为“著录通则”（见第7章， 2015年版的第8章）；
-  \item 将“公告日期、更新日期、引用日期”更改为“创建/发布或修改日期、引用日期”（见7.6,2015年版的8.4.4）；
-  \item 将“数字对象唯一标识符”更改为“永久标识符”（见7.9， 2015年版的8.7）；
-  \item 将“专著”“专著中的析出文献”分别更改为“图书”“图书中的析出文献” （见8.2、 8.3，
+符”“预印本”“责任者”及其定义（见第 \ref{sec:def:terms} 章），更改了术语“连续出版物”“顺序编码制”“析出文献”“著者-出版年制”的英文对应词（见第 \ref{sec:def:terms} 章， 2015年版的第3章），
+更改了术语“参考文献”“电子资源”“连续出版物”“析出文献”“引文参考文献”“阅读型参考文献”的定义（见第 \ref{sec:def:terms} 章， 2015年版的第3章）；
+  \item 更改了“著录信息源”的表述形式（见第 \ref{sec:info:src} 章， 2015年版的第5章）；
+  \item 更改了著录语种、汉语拼音人名著录规定（见 \ref{sec:lan:infosrc}、 \ref{sec:chn:names}， 2015年版的6.1、6.3）；
+  \item 更改了“著录用符号”的表述形式（见第 \ref{sec:biblio:symbol} 章， 2015年版的第7章）；
+  \item 将“著录细则”更名为“著录通则”（见第 \ref{sec:biblio:rule} 章， 2015年版的第8章）；
+  \item 将“公告日期、更新日期、引用日期”更改为“创建/发布或修改日期、引用日期”（见 \ref{sec:date:pub}， 2015年版的8.4.4）；
+  \item 将“数字对象唯一标识符”更改为“永久标识符”（见 \ref{sec:identier:doi}， 2015 年版的8.7）；
+  \item 将“专著”“专著中的析出文献”分别更改为“图书”“图书中的析出文献” （见 \ref{sec:entrytype:book}、\ref{sec:entrytype:inbook}，
 2015年版的4.1、4.2）；
-  \item 增加了“ 会议录”“学位论文”“报告”“标准”“网站、网页”“档案”“地图”“数据集”
-“预印本” 的著录项目和著录格式（见8.6、 8.7、 8.8、
-8.9、 8.11、 8.12、 8.13、 8.14及8.15）；
-  \item 更改了“析出文献”表述形式，将相关内容拆分纳入“各文献类型著录项目与著录格式”（见8.3、8.5，2015 年版的8.8）；
-  \item 更改了“著录项目”的元素，增加了“著录项目”的必备性和相关章条号（见第8章，2015年版的第4章）；
-  \item 更改了“电子资源”表述形式，将相应内容拆分到各相关文献类型（见8.6、8.7、8.8、8.9、8.11、8.12、8.13、8.14 及 8.15，2015 年版的 4.6）；
-  \item 将“参考文献表”“参考文献标注法”合并为第9章“参考文献标引体系编制法”（见第9章，2015年版的第9章、第10章）；
-  \item 将文献类型“普通图书”“舆图”分别更改为“图书”“地图”，增加了文献类型“预印本”及其标识代码“PP”（见附录A，2015年版的附录B），增加了电子资源载体“缩微资料”及其标识代码“MM”（见附录A），将“EB”代表的文献类型更改为“网站、网页”（见附录A，2015年版的附录B）。
+  \item 增加了“会议录”“学位论文”“报告”“标准”“网站、网页”“档案”“地图”“数据集”
+“预印本” 的著录项目和著录格式（见 \ref{sec:entrytype:proceed}、 \ref{sec:entrytype:thesis}、 \ref{sec:entrytype:report}、
+\ref{sec:entrytype:standard}、\ref{sec:entrytype:web}、 \ref{sec:entrytype:archive}、 \ref{sec:entrytype:map}、 \ref{sec:entrytype:dataset} 及 \ref{sec:entrytype:preprint}）；
+  \item 更改了“析出文献”表述形式，将相关内容拆分纳入“各文献类型著录项目与著录格式”（见\ref{sec:entrytype:inbook}、\ref{sec:entrytype:article}，2015 年版的8.8）；
+  \item 更改了“著录项目”的元素，增加了“著录项目”的必备性和相关章条号（见第 
+  \ref{sec:biblio:fmt} 章，2015年版的第4章）；
+  \item 更改了“电子资源”表述形式，将相应内容拆分到各相关文献类型（见\ref{sec:entrytype:proceed}、 \ref{sec:entrytype:thesis}、 \ref{sec:entrytype:report}、
+\ref{sec:entrytype:standard}、\ref{sec:entrytype:web}、 \ref{sec:entrytype:archive}、 \ref{sec:entrytype:map}、 \ref{sec:entrytype:dataset} 及 \ref{sec:entrytype:preprint}，2015 年版的 4.6）；
+  \item 将“参考文献表”“参考文献标注法”合并为第 \ref{sec:citation:sys} 章“参考文献标引体系编制法”（见第 \ref{sec:citation:sys} 章，2015年版的第9章、第10章）；
+  \item 将文献类型“普通图书”“舆图”分别更改为“图书”“地图”，增加了文献类型“预印本”及其标识代码“PP”（见附录 \ref{sec:ids:mediums}，2015年版的附录B），增加了电子资源载体“缩微资料”及其标识代码“MM”（见附录 \ref{sec:ids:mediums}），将“EB”代表的文献类型更改为“网站、网页”（见附录 \ref{sec:ids:mediums}，2015年版的附录B）。
 \end{enumerate}
 
 请注意本文件的某些内容可能涉及专利。本文件的发布机构不承担识别专利的责任。
@@ -395,7 +400,7 @@ and citations to information resources}
 \titlespacing{\subsection}{0pt}{5pt plus 1pt minus 1pt}{5pt plus 1pt minus 1pt}
 
 
-\section{范围}
+\section{范围}\label{sec:def:scope}
 
 本文件规定了参考文献的著录信息源、著录用文字、著录用符号、著录通则、各文献类型著录项目与著录格式
 以及参考文献标引体系编制法。
@@ -418,7 +423,7 @@ GB/T 7408.1\quad 日期和时间\quad 信息交换表示法\quad 第 1 部分：
 %ISO 4 信息与文献 出版物题名和标题缩写规则（ Information and documentation—Rules for the
 %abbreviation of title words and titles of publications）
 
-\section{术语和定义}
+\section{术语和定义} \label{sec:def:terms}
 
 {
 \renewcommand\addcontentsline[3]{}
@@ -504,7 +509,7 @@ DOI、ISBN等既被视作支持PID的
 }
 
 \titleformat{\subsection}[runin]{\zihao{5}\bfseries}{\thesubsection}{1em}{\hspace{1em}}
-\section{著录信息源}
+\section{著录信息源}\label{sec:info:src}
 
 {
 \renewcommand\addcontentsline[3]{}
@@ -522,7 +527,7 @@ DOI、ISBN等既被视作支持PID的
 
 {
 \renewcommand\addcontentsline[3]{}
-\subsection{} 参考文献应用信息资源本身的语种著录。
+\subsection{} \label{sec:lan:infosrc} 参考文献应用信息资源本身的语种著录。
 
 %参考文献原则上要求用信息资源本身的语种著录。必要时，可采用双语著录。用双语著录参考文
 %献时，首先应用信息资源的原语种著录，然后用其他语种著录。
@@ -564,7 +569,7 @@ DOI、ISBN等既被视作支持PID的
 \subsection{} 著录数字时，应保持信息资源原有的形式。但是，连续出版物卷期号、页码、出版年、创建或修改日期、引用日期、顺序编码制的参考文献序号等宜用阿拉伯数字著录，其中日期著录应符合 GB/T 7408.1 中的有关
 规定。
 
-\subsection{} 使用汉语拼音著录中国人姓名时，宜使用 GB/T 28039 给出的规则拼写。
+\subsection{} \label{sec:chn:names}  使用汉语拼音著录中国人姓名时，宜使用 GB/T 28039 给出的规则拼写。
 
 \subsection{} 作为集体责任者的机关团体名称（见 \ref{sec:author:group}、\ref{sec:ay:citename}）、出版信息中附在出版地之后的省名、州名、国名等（见 \ref{sec:addr:city}）
 以及出版者（见 \ref{sec:pub:short}）可按国际公认的方法缩写。
@@ -576,7 +581,7 @@ DOI、ISBN等既被视作支持PID的
 
 }
 
-\section{著录用符号}
+\section{著录用符号}\label{sec:biblio:symbol}
 
 
 {
@@ -616,7 +621,7 @@ DOI、ISBN等既被视作支持PID的
 \titleformat{\subsection}[hang]{\zihao{5}\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}[runin]{\zihao{5}\bfseries}{\thesubsubsection}{1em}{}%\hspace{1em}
 \titlespacing{\subsubsection}{0pt}{2pt plus 1pt minus 1pt}{5pt plus 1pt minus 1pt}
-\section{著录通则}
+\section{著录通则}\label{sec:biblio:rule}
 \subsection{责任者}
 \subsubsection{}\label{sec:author:fisrt} 个人责任者应采用姓在前名在后的著录形式。欧美责任者的中译名可只著录其姓，其名可用缩写字母，缩写名后省略缩写点。
 同姓不同名的欧美责任者，其中译名不仅应著录其姓，还应著录其名的首字母。 用西文著录个人责任者，姓应全部著录，首字母应大写，名可缩写为首字母，如用首字母无法识别该人名时，可著录全名；用汉语拼音著录个人责任者，姓应全部著录，首字母应大写，名宜用全称。
@@ -725,7 +730,7 @@ DOI、ISBN等既被视作支持PID的
 
 \subsection{文献类型标识、文献载体标识}
 
-文献类型标识、文献载体标识应按照附录\ref{sec:ids:mediums}著录。电子资源既应著录文献类型标识，也应著录文献
+文献类型标识、文献载体标识应按照附录 \ref{sec:ids:mediums} 著录。电子资源既应著录文献类型标识，也应著录文献
 载体标识。
 
 \begin{refsection}
@@ -907,7 +912,7 @@ DOI、ISBN等既被视作支持PID的
 
 
 
-\subsection{创建/发布或修改日期、引用日期}
+\subsection{创建/发布或修改日期、引用日期}\label{sec:date:pub}
 
 电子资源的创建日期、发布日期、修改日期、引用日期应按照“ YYYY-MM-DD”格式，用阿拉伯数字著录。
 \begin{refsection}
@@ -942,7 +947,7 @@ DOI、ISBN等既被视作支持PID的
 {\printbibliography[heading=none,env=exampleenv]}
 \end{refsection}
 
-\subsection{永久标识符}
+\subsection{永久标识符}\label{sec:identier:doi}
 
 \subsubsection{} 获取和访问路径中含永久标识符时，可不重复著录永久标识符。
 
@@ -973,7 +978,7 @@ DOI、ISBN等既被视作支持PID的
 
 
 \titleformat{\subsubsection}[hang]{\zihao{5}\bfseries}{\thesubsubsection}{1em}{}%\hspace{1em}
-\section{各文献类型著录项目与著录格式}
+\section{各文献类型著录项目与著录格式}\label{sec:biblio:fmt}
 
 %\subsection{概述}
 %
@@ -1827,7 +1832,7 @@ FOURNEY1971-17-38}
 \end{refsection}
 
 
-\subsection{标准}
+\subsection{标准}\label{sec:entrytype:standard}
 
 % \subsubsection{通用要求}
 
@@ -2013,7 +2018,7 @@ TRISCO2022,
 }
 \end{refsection}
 
-\subsection{网站、网页}
+\subsection{网站、网页}\label{sec:entrytype:web}
 
 \subsubsection{通用要求}
 
@@ -2492,7 +2497,7 @@ IHME2021Disease%
 \end{refsection}
 
 
-\section{参考文献标引体系编制法}
+\section{参考文献标引体系编制法}\label{sec:citation:sys}
 
 \subsection{通用要求}
 
