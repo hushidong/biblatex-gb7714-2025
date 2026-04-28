@@ -788,6 +788,12 @@
       eventdate =gb7714-2015,%iso
     }
 
+    %增加一个选项用于去掉期刊名中缩写的点
+    \newcommand{\journalshortdot}{\adddot}
+    \DeclareBibliographyOption{gbrmabbrdot}[false]{%
+        \ifstrequal{#1}{false}{}{\renewcommand{\journalshortdot}{}}
+    }
+    \ExecuteBibliographyOptions{gbrmabbrdot}
 
 %=====================================================================
 %设置本地化字符串
@@ -1624,6 +1630,9 @@
             }
         \map[overwrite]{%&符号处理
             \step[fieldsource={howpublished}, match=\regexp{([^\\])\x26}, replace=\regexp{$1\\\x26}]
+            }
+        \map[overwrite,foreach={journal,journaltitle,shortjournal}]{%期刊名中的缩写点处理
+            \step[fieldsource=\regexp{$MAPLOOP}, match=\regexp{\.}, replace=\regexp{\\journalshortdot\{\} }]
             }
     }
 }
