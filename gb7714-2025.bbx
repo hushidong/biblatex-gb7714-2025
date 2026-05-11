@@ -876,6 +876,7 @@
         backrefpage = {\str@backrefpage:},
         backrefpages = {\str@backrefpages:},
         in={in\intitlepunct},
+        version={V},
         volumecn={\str@volumecn},
         numbercn={\str@numbercn},
         serialcn={\str@serialcn},
@@ -1158,8 +1159,6 @@
             \pertype{book}
             \pertype{inbook}
             \step[fieldset=usera, fieldvalue={M}]
-            \step[fieldsource=version] %有时会把version和edition混淆，处理后直接用edition
-            \step[fieldset=edition, origfieldval]
             }
         \map[overwrite]{%兼容老的standard类型，确定文献类型标识符
             \pertype{standard}
@@ -1239,8 +1238,6 @@
         \map{
             \pertype{manual}
             \step[fieldset=usera, fieldvalue={A}]
-            \step[fieldsource=edition]%有时会把version和edition混淆，处理后使用version
-            \step[fieldset=version, origfieldval]
             \step[fieldsource=publisher]%有时会把publisher和institution混淆，处理后使用institution
             \step[fieldset=institution, origfieldval]
             \step[fieldsource=organization]%有时会把organization和institution混淆，处理后使用institution，以增强兼容性
@@ -3049,12 +3046,12 @@ incollection,proceedings,inproceedings]{number}{%
 %
 %   对version的版本信息做出修改
 %
-\DeclareFieldFormat{version}{\bibtitlefont%源来自biblatex.DEF
-\testCJKfirst{userd}%
-\ifinteger{#1}%
-{\iftoggle{ifCJKforgbt}{\printtext{#1\str@edition}}%
-{\mkbibordedition{#1}~\bibstring{version}}}%
-{#1\isdot}}
+\DeclareFieldFormat{version}{\bibtitlefont\bibstring{version}#1}
+
+\newbibmacro*{edition/version}
+  {\iffieldundef{edition}
+     {\printfield{version}}
+     {\printfield{edition}}}
 
 %
 %   修改析出文献的文集的标题与附加标题间的符号
@@ -3681,7 +3678,7 @@ incollection,proceedings,inproceedings]{number}{%
 %  \setunit*{\innerspacedelim}%
 %  \printfield{number}%
 %  \newunit\newblock
-  \printfield{version}%
+  \usebibmacro{edition/version}%
   \newunit
   \printfield{note}%
   \newunit\newblock
@@ -3728,7 +3725,7 @@ incollection,proceedings,inproceedings]{number}{%
   \setunit*{\innerspacedelim}}{}%
   \printfield{number}%
   \newunit\newblock
-  \printfield{version}%
+  \usebibmacro{edition/version}%
   \newunit
   \printfield{note}%
   \newunit\newblock
