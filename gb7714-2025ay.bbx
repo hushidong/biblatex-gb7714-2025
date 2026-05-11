@@ -2192,12 +2192,12 @@
 \setcounter{biburlucpenalty}{100} %让url可以在大写字母后断行
 \setcounter{biburllcpenalty}{100} %让url可以在小写字母后断行
 \DeclareFieldFormat{doi}{%
-  \rmfamily{DOI}\addcolon\space
+  \rmfamily{DOI}\addcolon
   \ifhyperref
     {\href{https://doi.org/#1}{\nolinkurl{#1}}}
     {\nolinkurl{#1}}}
 \DeclareFieldFormat{cstr}{%
-  \rmfamily{CSTR}\addcolon\space
+  \rmfamily{CSTR}\addcolon
   \ifhyperref
     {\href{https://cstr.cn/#1}{\nolinkurl{#1}}}
     {\nolinkurl{#1}}}
