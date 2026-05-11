@@ -1110,14 +1110,19 @@
             \step[fieldsource=publisher] %有时会把publisher和institution混淆，处理后使用institution
             \step[fieldset=institution, origfieldval]
             }
-        \map{%根据archiveprefix域信息设置备选类型misc的类型标识符为PP
+        \map{%
+          \step[fieldsource=archiveprefix, fieldtarget=eprinttype]
+        }
+        \map{%根据eprinttype域信息设置备选类型misc的类型标识符为PP
             \pertype{misc}
-            \step[fieldsource=archiveprefix,final]%
+            \pertype{online}
+            \step[fieldsource=eprinttype,final]%
             \step[fieldset=usera, fieldvalue={PP}]%
             }
-        \map{%根据archiveprefix域信息处理备选类型misc
+        \map{%根据eprinttype域信息处理备选类型misc
             \pertype{misc}
-            \step[fieldsource=archiveprefix,match=\regexp{(a|A)(r|R)(x|X)(i|I)(v|V)},final]%
+            \pertype{online}
+            \step[fieldsource=eprinttype,match=\regexp{(a|A)(r|R)(x|X)(i|I)(v|V)},final]%
             \step[fieldset=entrysubtype,fieldvalue={preprint}]
             \step[notfield=urldate,final]%
             \step[fieldset=urldate, fieldvalue={\the\year-01-01}]%
@@ -1530,9 +1535,10 @@
             \step[typesource=map,typetarget=inbook]
             }
             \map{%
+            \pertype{online}
             \pertype{preprint}
             \pertype{misc}
-            \step[fieldsource=archiveprefix,final]%转变为online
+            \step[fieldsource=eprinttype,final]%转变为online
             \step[fieldset=institution,origfieldval]
             }
             \map{%因为misc类型本身就是没有类型，而不像其它文献有明确的类型，所以
