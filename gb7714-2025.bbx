@@ -1646,6 +1646,19 @@
             address,location,institution,organization}]{
                 \step[fieldsource=\regexp{$MAPLOOP}, match=\regexp{([^\\])\x26}, replace=\regexp{$1\\\x26}]
             }
+            % 7.9.1 获取和访问路径中含永久标识符时，可不重复著录永久标识符。
+            \map{
+                \step[fieldsource=cstr, match=\regexp{(.+)}, final]
+                \step[fieldsource=url, match=\regexp{$1}, final]
+                \step[fieldset=cstr, null]
+                \step[fieldset=doi, null]
+            }
+            \map{
+                \step[fieldsource=doi, match=\regexp{(.+)}, final]
+                \step[fieldsource=url, match=\regexp{$1}, final]
+                \step[fieldset=cstr, null]
+                \step[fieldset=doi, null]
+            }
         }
     }
 

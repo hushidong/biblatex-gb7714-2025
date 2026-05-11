@@ -1642,6 +1642,19 @@
         \map[overwrite,foreach={journal,journaltitle,shortjournal}]{%期刊名中的缩写点处理
             \step[fieldsource=\regexp{$MAPLOOP}, match=\regexp{\.}, replace=\regexp{\\journalshortdot\{\} }]
             }
+        % 7.9.1 获取和访问路径中含永久标识符时，可不重复著录永久标识符。
+        \map{
+            \step[fieldsource=cstr, match=\regexp{(.+)}, final]
+            \step[fieldsource=url, match=\regexp{$1}, final]
+            \step[fieldset=cstr, null]
+            \step[fieldset=doi, null]
+        }
+        \map{
+            \step[fieldsource=doi, match=\regexp{(.+)}, final]
+            \step[fieldsource=url, match=\regexp{$1}, final]
+            \step[fieldset=cstr, null]
+            \step[fieldset=doi, null]
+        }
     }
 }
 
