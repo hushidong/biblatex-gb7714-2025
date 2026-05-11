@@ -3490,8 +3490,6 @@ incollection,proceedings,inproceedings]{number}{%
 %  \usebibmacro{modifydate}}%带括号的修改或更新日期，
 \usebibmacro{doi+eprint+url}%从下面移动到上面来，因为gbt2015的url需直接放在页码后面。
   \newunit\newblock%
-  \printfield{pagetotal}%
-  \newunit\newblock%
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
     {}%
@@ -3709,8 +3707,6 @@ incollection,proceedings,inproceedings]{number}{%
   \usebibmacro{publisher+location+date}%
   \usebibmacro{chapter+pages}%
   \usebibmacro{doi+eprint+url}%
-  \newunit
-  \printfield{pagetotal}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isrn}}
@@ -3763,8 +3759,6 @@ incollection,proceedings,inproceedings]{number}{%
   \newunit\newblock
   \iffieldundef{cstr}{}
   {\usebibmacro{cstr}}%
-  %\newunit
-  %\printfield{pagetotal}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isrn}}
