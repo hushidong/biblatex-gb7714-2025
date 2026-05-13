@@ -76,7 +76,7 @@
     \DeclareDatamodelFields[type=field,datatype=integer]{refnumber}
     \DeclareDatamodelFields[type=field,datatype=literal]{scale}%表示地图比例
     \DeclareDatamodelFields[type=field,datatype=literal]{dimensions}%表示地图大小
-    \DeclareDatamodelFields[type=field,datatype=literal]{cstr}%表示cstr，类似于doi
+    \DeclareDatamodelFields[type=field,datatype=verbatim]{cstr}%表示cstr，类似于doi
 
 
     %因为biblatex更新3.14版本以后，biber对于为声明数据模型的条目类型
@@ -849,6 +849,7 @@
         backrefpage = {\str@backrefpage:},
         backrefpages = {\str@backrefpages:},
         in={in\intitlepunct},
+        version={V},
         volumecn={\str@volumecn},
         numbercn={\str@numbercn},
         serialcn={\str@serialcn},
@@ -1103,20 +1104,30 @@
             \step[typesource=legislation, typetarget=archive]
             \step[fieldset=entrysubtype, fieldvalue=legislation]%
             }
+        \map{
+            \pertype{letter}
+            \step[typesource=letter, typetarget=archive]
+            \step[fieldset=entrysubtype, fieldvalue=letter]%
+            }
         \map{%对应增加的一个档案类型archive确定文献类型标识符
             \pertype{archive}
             \step[fieldset=usera, fieldvalue={A}]
             \step[fieldsource=publisher] %有时会把publisher和institution混淆，处理后使用institution
             \step[fieldset=institution, origfieldval]
             }
-        \map{%根据archiveprefix域信息设置备选类型misc的类型标识符为PP
+        \map{%
+          \step[fieldsource=archiveprefix, fieldtarget=eprinttype]
+        }
+        \map{%根据eprinttype域信息设置备选类型misc的类型标识符为PP
             \pertype{misc}
-            \step[fieldsource=archiveprefix,final]%
+            \pertype{online}
+            \step[fieldsource=eprinttype,final]%
             \step[fieldset=usera, fieldvalue={PP}]%
             }
-        \map{%根据archiveprefix域信息处理备选类型misc
+        \map{%根据eprinttype域信息处理备选类型misc
             \pertype{misc}
-            \step[fieldsource=archiveprefix,match=\regexp{(a|A)(r|R)(x|X)(i|I)(v|V)},final]%
+            \pertype{online}
+            \step[fieldsource=eprinttype,match=\regexp{(a|A)(r|R)(x|X)(i|I)(v|V)},final]%
             \step[fieldset=entrysubtype,fieldvalue={preprint}]
             \step[notfield=urldate,final]%
             \step[fieldset=urldate, fieldvalue={\the\year-01-01}]%
@@ -1133,8 +1144,6 @@
             \pertype{book}
             \pertype{inbook}
             \step[fieldset=usera, fieldvalue={M}]
-            \step[fieldsource=version] %有时会把version和edition混淆，处理后直接用edition
-            \step[fieldset=edition, origfieldval]
             }
         \map[overwrite]{%兼容老的standard类型，确定文献类型标识符
             \pertype{standard}
@@ -1214,8 +1223,6 @@
         \map{
             \pertype{manual}
             \step[fieldset=usera, fieldvalue={A}]
-            \step[fieldsource=edition]%有时会把version和edition混淆，处理后使用version
-            \step[fieldset=version, origfieldval]
             \step[fieldsource=publisher]%有时会把publisher和institution混淆，处理后使用institution
             \step[fieldset=institution, origfieldval]
             \step[fieldsource=organization]%有时会把organization和institution混淆，处理后使用institution，以增强兼容性
@@ -1533,9 +1540,10 @@
             \step[typesource=map,typetarget=inbook]
             }
             \map{%
+            \pertype{online}
             \pertype{preprint}
             \pertype{misc}
-            \step[fieldsource=archiveprefix,final]%转变为online
+            \step[fieldsource=eprinttype,final]%转变为online
             \step[fieldset=institution,origfieldval]
             }
             \map{%因为misc类型本身就是没有类型，而不像其它文献有明确的类型，所以
@@ -1634,6 +1642,19 @@
         \map[overwrite,foreach={journal,journaltitle,shortjournal}]{%期刊名中的缩写点处理
             \step[fieldsource=\regexp{$MAPLOOP}, match=\regexp{\.}, replace=\regexp{\\journalshortdot\{\} }]
             }
+        % 7.9.1 获取和访问路径中含永久标识符时，可不重复著录永久标识符。
+        \map{
+            \step[fieldsource=cstr, match=\regexp{(.+)}, final]
+            \step[fieldsource=url, match=\regexp{$1}, final]
+            \step[fieldset=cstr, null]
+            \step[fieldset=doi, null]
+        }
+        \map{
+            \step[fieldsource=doi, match=\regexp{(.+)}, final]
+            \step[fieldsource=url, match=\regexp{$1}, final]
+            \step[fieldset=cstr, null]
+            \step[fieldset=doi, null]
+        }
     }
 }
 
@@ -2184,12 +2205,12 @@
 \setcounter{biburlucpenalty}{100} %让url可以在大写字母后断行
 \setcounter{biburllcpenalty}{100} %让url可以在小写字母后断行
 \DeclareFieldFormat{doi}{%
-  \rmfamily{DOI}\addcolon\space
+  DOI\addcolon
   \ifhyperref
     {\href{https://doi.org/#1}{\nolinkurl{#1}}}
     {\nolinkurl{#1}}}
 \DeclareFieldFormat{cstr}{%
-  \rmfamily{CSTR}\addcolon\space
+  CSTR\addcolon
   \ifhyperref
     {\href{https://cstr.cn/#1}{\nolinkurl{#1}}}
     {\nolinkurl{#1}}}
@@ -3058,14 +3079,12 @@ incollection,proceedings,inproceedings]{number}{%
 %
 %   对version的版本信息做出修改
 %
-\DeclareFieldFormat{version}{\bibtitlefont%源来自biblatex.DEF
-\testCJKfirst{userd}%
-  \ifinteger{#1}%
-    {\iftoggle{ifCJKforgbt}{\printtext{#1\str@edition}}%
-    {\mkbibordedition{#1}~\bibstring{version}}}%
-    {#1\isdot}}
+\DeclareFieldFormat{version}{\bibtitlefont\bibstring{version}#1}
 
-
+\newbibmacro*{edition/version}
+  {\iffieldundef{edition}
+     {\printfield{version}}
+     {\printfield{edition}}}
 
 %
 %   作者域的输出控制宏
@@ -3662,8 +3681,6 @@ test {\ifentrytype{conference}}
 \newunit%
 \usebibmacro{doi+eprint+url}%从下面移动到上面来，因为gbt2015的url需直接放在页码后面。
   \newunit\newblock%
-  \printfield{pagetotal}%
-  \newunit\newblock%
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
     {}%
@@ -3883,15 +3900,13 @@ test {\ifentrytype{conference}}
 %  \setunit*{\innerspacedelim}%
 %  \printfield{number}%
 %  \newunit\newblock
-  \printfield{version}%
+  \usebibmacro{edition/version}%
   \newunit
   \printfield{note}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \usebibmacro{chapter+pages}%
   \usebibmacro{doi+eprint+url}%
-  \newunit
-  \printfield{pagetotal}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isrn}}
@@ -3931,7 +3946,7 @@ test {\ifentrytype{conference}}
   }{}%
   \printfield{number}%
   \newunit\newblock
-  \printfield{version}%
+  \usebibmacro{edition/version}%
   \newunit
   \printfield{note}%
   \newunit\newblock
@@ -3945,8 +3960,6 @@ test {\ifentrytype{conference}}
   \newunit\newblock
   \iffieldundef{cstr}{}
   {\usebibmacro{cstr}}%
-  %\newunit
-  %\printfield{pagetotal}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isrn}}
