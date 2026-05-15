@@ -849,7 +849,6 @@
         backrefpage = {\str@backrefpage:},
         backrefpages = {\str@backrefpages:},
         in={in\intitlepunct},
-        version={V},
         volumecn={\str@volumecn},
         numbercn={\str@numbercn},
         serialcn={\str@serialcn},
@@ -1120,13 +1119,11 @@
         }
         \map{%根据eprinttype域信息设置备选类型misc的类型标识符为PP
             \pertype{misc}
-            \pertype{online}
             \step[fieldsource=eprinttype,final]%
             \step[fieldset=usera, fieldvalue={PP}]%
             }
         \map{%根据eprinttype域信息处理备选类型misc
             \pertype{misc}
-            \pertype{online}
             \step[fieldsource=eprinttype,match=\regexp{(a|A)(r|R)(x|X)(i|I)(v|V)},final]%
             \step[fieldset=entrysubtype,fieldvalue={preprint}]
             \step[notfield=urldate,final]%
@@ -1144,6 +1141,8 @@
             \pertype{book}
             \pertype{inbook}
             \step[fieldset=usera, fieldvalue={M}]
+            \step[fieldsource=version] %有时会把version和edition混淆，处理后直接用edition
+            \step[fieldset=edition, origfieldval]
             }
         \map[overwrite]{%兼容老的standard类型，确定文献类型标识符
             \pertype{standard}
@@ -1223,6 +1222,8 @@
         \map{
             \pertype{manual}
             \step[fieldset=usera, fieldvalue={A}]
+            \step[fieldsource=edition]%有时会把version和edition混淆，处理后使用version
+            \step[fieldset=version, origfieldval]
             \step[fieldsource=publisher]%有时会把publisher和institution混淆，处理后使用institution
             \step[fieldset=institution, origfieldval]
             \step[fieldsource=organization]%有时会把organization和institution混淆，处理后使用institution，以增强兼容性
@@ -1540,7 +1541,6 @@
             \step[typesource=map,typetarget=inbook]
             }
             \map{%
-            \pertype{online}
             \pertype{preprint}
             \pertype{misc}
             \step[fieldsource=eprinttype,final]%转变为online
@@ -2205,12 +2205,12 @@
 \setcounter{biburlucpenalty}{100} %让url可以在大写字母后断行
 \setcounter{biburllcpenalty}{100} %让url可以在小写字母后断行
 \DeclareFieldFormat{doi}{%
-  DOI\addcolon
+  DOI\addcolon\addthinspace%
   \ifhyperref
     {\href{https://doi.org/#1}{\nolinkurl{#1}}}
     {\nolinkurl{#1}}}
 \DeclareFieldFormat{cstr}{%
-  CSTR\addcolon
+  CSTR\addcolon\addthinspace%
   \ifhyperref
     {\href{https://cstr.cn/#1}{\nolinkurl{#1}}}
     {\nolinkurl{#1}}}
@@ -3079,12 +3079,14 @@ incollection,proceedings,inproceedings]{number}{%
 %
 %   对version的版本信息做出修改
 %
-\DeclareFieldFormat{version}{\bibtitlefont\bibstring{version}#1}
+\DeclareFieldFormat{version}{\bibtitlefont%源来自biblatex.DEF
+\testCJKfirst{userd}%
+  \ifinteger{#1}%
+    {\iftoggle{ifCJKforgbt}{\printtext{#1\str@edition}}%
+    {\mkbibordedition{#1}~\bibstring{version}}}%
+    {#1\isdot}}
 
-\newbibmacro*{edition/version}
-  {\iffieldundef{edition}
-     {\printfield{version}}
-     {\printfield{edition}}}
+
 
 %
 %   作者域的输出控制宏
@@ -3681,6 +3683,8 @@ test {\ifentrytype{conference}}
 \newunit%
 \usebibmacro{doi+eprint+url}%从下面移动到上面来，因为gbt2015的url需直接放在页码后面。
   \newunit\newblock%
+  %\printfield{pagetotal}%
+  %\newunit\newblock%
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
     {}%
@@ -3845,7 +3849,8 @@ test {\ifentrytype{conference}}
 % \printlist{organization}%
  \printlist{institution}%
 \iffieldundef{entrysubtype}{\newunit\usebibmacro{modifydate}}
-    {\ifboolexpr{test {\iffieldequalstr{entrysubtype}{archive}} or test {\iffieldequalstr{entrysubtype}{report}}}
+    {\ifboolexpr{test {\iffieldequalstr{entrysubtype}{archive}} or test {\iffieldequalstr{entrysubtype}{letter}} or
+    test {\iffieldequalstr{entrysubtype}{report}}}
         {\newunit\usebibmacro{newsdate}}
         {\ifboolexpr{test {\iffieldequalstr{entrysubtype}{dataset}} or test {\iffieldequalstr{entrysubtype}{preprint}}}
           {\usebibmacro{modifydate}}{\newunit\usebibmacro{modifydate}}}}%
@@ -3900,13 +3905,15 @@ test {\ifentrytype{conference}}
 %  \setunit*{\innerspacedelim}%
 %  \printfield{number}%
 %  \newunit\newblock
-  \usebibmacro{edition/version}%
+  \printfield{version}%
   \newunit
   \printfield{note}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \usebibmacro{chapter+pages}%
   \usebibmacro{doi+eprint+url}%
+  %\newunit
+  %\printfield{pagetotal}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isrn}}
@@ -3946,7 +3953,7 @@ test {\ifentrytype{conference}}
   }{}%
   \printfield{number}%
   \newunit\newblock
-  \usebibmacro{edition/version}%
+  \printfield{version}%
   \newunit
   \printfield{note}%
   \newunit\newblock
@@ -3960,6 +3967,8 @@ test {\ifentrytype{conference}}
   \newunit\newblock
   \iffieldundef{cstr}{}
   {\usebibmacro{cstr}}%
+  %\newunit
+  %\printfield{pagetotal}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isrn}}
