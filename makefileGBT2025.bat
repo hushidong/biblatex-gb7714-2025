@@ -21,16 +21,19 @@ xelatex.exe  gbT7714-2025.tex
 xelatex.exe  gbT7714-2025.tex
 
 
-xelatex.exe  testeg.tex
-
-biber testeg
-
-xelatex.exe  testeg.tex
+"D:\mingw64\diff-pdf-win-0.5.3\diff-pdf.exe" --verbose --view stdgbT7714-2025.pdf gbT7714-2025.pdf  
 
 
-xelatex.exe  eg-molc.tex
+rem xelatex.exe  testeg.tex
 
-biber eg-molc
+rem biber testeg
 
-xelatex.exe  eg-molc.tex
+rem xelatex.exe  testeg.tex
+
+
+rem xelatex.exe  eg-molc.tex
+
+rem biber eg-molc
+
+rem xelatex.exe  eg-molc.tex
 

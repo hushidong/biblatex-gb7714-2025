@@ -56,6 +56,7 @@ The style files (gb7714-2025.cbx/bbx,gb7714-2025ay.cbx/bbx,gb7714.cbx/bbx,gb7714
 
 ## Update history
 
++ 20260601 add back cover for the standard reproduction and a pdf comparing command (增加标准的封底，增加pdf比较命令)
 + 20260428 add an option gbrmabbrdot for 2025 styles to control the dot in abbreiated journal title (增加选项gbrmabbrdot来控制西文期刊名缩写中的点)
 + 20260411 refine 2025 styles to conforming to the formal stardard of GB/T 7714-2025 (修正样式使其符合将要实施的正式GB/T 7714-2025标准)
 + 20260410 modify the format for arXiv references (修改arXiv上文献的格式使其符合priprint类型的输出)

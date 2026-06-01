@@ -321,7 +321,7 @@ and citations to information resources}
 
 
 \pagestyle{empty}
-\pdfbookmark[1]{封面}{sec:title:page} 
+\pdfbookmark[1]{封面}{sec:title:page}
 \maketitlepage%
 
 \newpage
@@ -330,12 +330,12 @@ and citations to information resources}
 \newpage
 \thispagestyle{main}
 \pagenumbering{Roman}
-\pdfbookmark[1]{目录}{sec:tab:contents} 
+\pdfbookmark[1]{目录}{sec:tab:contents}
 \tableofcontents%\listoffigures\listoftables%
 \pagestyle{main}
 \clearpage
 
-\phantomsection 
+\phantomsection
 \addcontentsline{toc}{section}{前言}
 \begin{preamble}{前\qquad{}言}
 \zihao{5}
@@ -363,7 +363,7 @@ and citations to information resources}
 “预印本” 的著录项目和著录格式（见 \ref{sec:entrytype:proceed}、 \ref{sec:entrytype:thesis}、 \ref{sec:entrytype:report}、
 \ref{sec:entrytype:standard}、\ref{sec:entrytype:web}、 \ref{sec:entrytype:archive}、 \ref{sec:entrytype:map}、 \ref{sec:entrytype:dataset} 及 \ref{sec:entrytype:preprint}）；
   \item 更改了“析出文献”表述形式，将相关内容拆分纳入“各文献类型著录项目与著录格式”（见\ref{sec:entrytype:inbook}、\ref{sec:entrytype:article}，2015 年版的8.8）；
-  \item 更改了“著录项目”的元素，增加了“著录项目”的必备性和相关章条号（见第 
+  \item 更改了“著录项目”的元素，增加了“著录项目”的必备性和相关章条号（见第
   \ref{sec:biblio:fmt} 章，2015年版的第4章）；
   \item 更改了“电子资源”表述形式，将相应内容拆分到各相关文献类型（见\ref{sec:entrytype:proceed}、 \ref{sec:entrytype:thesis}、 \ref{sec:entrytype:report}、
 \ref{sec:entrytype:standard}、\ref{sec:entrytype:web}、 \ref{sec:entrytype:archive}、 \ref{sec:entrytype:map}、 \ref{sec:entrytype:dataset} 及 \ref{sec:entrytype:preprint}，2015 年版的 4.6）；
@@ -3140,6 +3140,44 @@ Inforanddocstd,
 \end{refsection}
 
 \centerline{\rule[-5mm]{3.5cm}{1pt}}
+
+\newgeometry{top=3cm,bottom=4mm,left=1cm,right=1.5cm}\thispagestyle{empty}
+\noindent\renewcommand{\fbox}[1]{#1}
+\tikz[remember picture,overlay]{%
+%\node [inner sep=0pt]
+%at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{lastpage.pdf}};
+\node [inner sep=0pt,yshift=-4.4cm,xshift=-0.9cm,rotate=90]
+at (current page.north east) {\large\bfseries GB/T 7714---2025}}
+\mbox{}
+\vfill
+\noindent\begin{minipage}{\linewidth}\parindent=0pt%
+\fbox{\parbox[t][12.42cm][b]{0.47\linewidth}{\rule{0pt}{5cm}\par\fbox{\includegraphics[width=5.4cm]{qrcode.png}}}}
+\fbox{\parbox[t][12.42cm][t]{0.5\linewidth}{\centering
+{\small 中\quad 华\quad 人\quad 民\quad 共\quad 和\quad 国\par}
+国\quad 家\quad 标\quad 准\\[-0.3mm]
+\textbf{信息与文献\quad 参考文献著录规则}\\[0.3mm]
+{\linespread{1.15}\small GB/T 7714---2025\\[1.4mm]
+*\\[0.4mm]
+\def\seplen{0.9mm}中\hspace{\seplen}国\hspace{\seplen}标\hspace{\seplen}准%
+\hspace{\seplen}出\hspace{\seplen}版\hspace{\seplen}社\hspace{\seplen}出\hspace{\seplen}%
+版\hspace{\seplen}发\hspace{\seplen}行\\[-0.3mm]
+北京市朝阳区和平里西街甲2号(100029)\\[1mm]
+网址\ www.spc.net.cn\\
+总编室:(010)68533533\quad 发行中心:(010)51780238\\[-0.2mm]
+读者服务部:(010)68523946\\[0.3mm]
+中国标准出版社秦皇岛印刷厂印刷\\
+各地新华书店经销\\[1mm]
+*\\[0.4mm]
+开本 880X1230\quad 1/16\quad 印张 3\quad 字数 77 千字\\[-0.2mm]
+2025年12月第1版\quad 2025年12月第1次印刷\\[1mm]
+*\\[-0.5mm]
+书号：155066 · 1-82551\quad 定价\quad 76.00 元\par}
+\vspace{5.4mm}
+\bfseries 如有印装差错\quad 由本社发行中心调换\\[-1.2mm]
+版权专有\quad 侵权必究\\[-1.2mm]
+举报电话:(010)68510107}}
+\end{minipage}
+
 
 
 \end{document}
