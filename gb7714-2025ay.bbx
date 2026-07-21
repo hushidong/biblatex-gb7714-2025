@@ -2131,7 +2131,7 @@
 %    2021.08.19，增加出版地和出版社之间的标点，hzz
 \newcommand{\publocpunct}{\addcolon\addspace}%出版项中：出版社地址后面的标点
 %\renewcommand{\relateddelim}{}%\par
-
+\DeclareDelimFormat[bib]{nonameyeardelim}{\addcomma\addspace} %标题内容和文献标识符之间的标点
 %=====================================================================
 %   修改域的格式，重定义域的输出宏
 %=====================================================================
@@ -3850,7 +3850,7 @@ test {\ifentrytype{conference}}
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others/translator+others}%
-\ifnameundef{namea}{}{\setunit{\labelnamepunct}\newblock}%这一段用于去除作者不存在时多出的标点
+    \ifnameundef{namea}{}{\setunit{\labelnamepunct}\newblock}%这一段用于去除作者不存在时多出的标点
   \usebibmacro{title}%
   \iftoggle{bbx:gbstrict}{}{%
   \newunit%
@@ -4190,6 +4190,8 @@ test {\ifentrytype{conference}}
     \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
 \DeclareDelimFormat{bibpagespunct}{%
     \iffieldequalstr{userd}{chinese}{\unspace\gbpunctcolon}{\unspace\gbpunctcolonlanen}}
+\DeclareDelimFormat[bib]{nonameyeardelim}{%
+    \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}} %标题内容和文献标识符之间的标点
 \renewcommand{\aftertransdelim}{\gbpunctcomma}
 \renewcommand{\beforetransdelim}{%
   \iffieldequalstr{userd}{chinese}{\gbpunctcomma}{\gbpunctcommalanen}}
